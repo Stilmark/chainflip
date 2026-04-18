@@ -10,7 +10,7 @@ final class TableBuilder
     {
         $outputDir = rtrim($outputDir, '/');
 
-        $subDirs = ['config', 'status', 'prediction', 'performance', 'distribution'];
+        $subDirs = ['config', 'status', 'prediction', 'performance', 'distribution', 'trades'];
         foreach ($subDirs as $sub) {
             ensure_dir($outputDir . '/' . $sub);
         }
@@ -27,6 +27,7 @@ final class TableBuilder
         $files['performance/scalp.md'] = $this->buildScalpPerformance($digest, $config);
         $files['performance/strategy.md'] = $this->buildStrategySummary($digest, $config);
         $files['distribution/bucketLatestDay.md'] = $this->buildBucketDistribution($dailyMetrics, $config);
+        $files['trades/latest.md'] = $this->buildLatestTrades($digest, $config);
 
         foreach ($files as $filename => $content) {
             file_put_contents($outputDir . '/' . $filename, $content);
@@ -401,12 +402,21 @@ final class TableBuilder
 
         $out = "# Bucket Distribution — Latest Day ({$day['date']})\n\n";
 
+        $states = [
+            'P' => 'participating',
+            'O' => 'out_of_range',
+            'S' => 'skipped',
+            'D' => 'depleted',
+        ];
+
         $header = "| Price Low | Price High | TRs | Volume |";
         $divider = "|----------:|-----------:|----:|-------:|";
 
-        foreach ($rungCodes as $code) {
-            $header .= " {$code} P | {$code} S | {$code} D | {$code} O |";
-            $divider .= "-----:|-----:|-----:|-----:|";
+        foreach ($states as $stateCode => $stateKey) {
+            foreach ($rungCodes as $code) {
+                $header .= " {$stateCode} {$code} |";
+                $divider .= "-----:|";
+            }
         }
 
         $out .= $header . "\n";
@@ -417,19 +427,52 @@ final class TableBuilder
         foreach ($buckets as $bucket) {
             $row = "| " . number_format($bucket['price_bucket_low'], 4) . " | " . number_format($bucket['price_bucket_high'], 4) . " | {$bucket['tr_count']} | " . $this->money($bucket['total_volume_usd']) . " |";
 
-            foreach ($rungCodes as $code) {
-                $counts = $bucket['rung_counts'][$code] ?? ['participating' => 0, 'skipped' => 0, 'depleted' => 0, 'out_of_range' => 0];
-                $p = $counts['participating'] ?: '';
-                $s = $counts['skipped'] ?: '';
-                $d = $counts['depleted'] ?: '';
-                $o = $counts['out_of_range'] ?: '';
-                $row .= " {$p} | {$s} | {$d} | {$o} |";
+            foreach ($states as $stateCode => $stateKey) {
+                foreach ($rungCodes as $code) {
+                    $counts = $bucket['rung_counts'][$code] ?? ['participating' => 0, 'skipped' => 0, 'depleted' => 0, 'out_of_range' => 0];
+                    $val = $counts[$stateKey] ?: '';
+                    $row .= " {$val} |";
+                }
             }
 
             $out .= $row . "\n";
         }
 
-        $out .= "\n_Legend: P=Participating, S=Skipped, D=Depleted, O=Out of Range_\n";
+        $out .= "\n_Legend: P=Participating, O=Out of Range, S=Skipped, D=Depleted_\n";
+
+        return $out;
+    }
+
+    private function buildLatestTrades(array $digest, array $config): string
+    {
+        $trades = $digest['recent_tr_examples'] ?? [];
+
+        if (empty($trades)) {
+            return "# Latest Trades\n\nNo recent trades available.\n";
+        }
+
+        $out = "# Latest Trades\n\n";
+        $out .= "| Timestamp | Price | Volume | Fees | Participating | Skipped | Out of Range | Depleted |\n";
+        $out .= "|-----------|------:|-------:|-----:|---------------|---------|--------------|----------|\n";
+
+        $trades = array_reverse($trades);
+
+        foreach ($trades as $trade) {
+            $ts = $trade['timestamp'] ?? '';
+            $tsFormatted = $ts ? substr($ts, 0, 16) : '—';
+            $tsFormatted = str_replace('T', ' ', $tsFormatted);
+
+            $price = number_format((float) ($trade['trade_price'] ?? 0), 4);
+            $volume = $this->money((float) ($trade['volume_usd'] ?? 0));
+            $fees = $this->money((float) ($trade['fees_usd'] ?? 0));
+
+            $participating = implode(', ', $trade['participating_rungs'] ?? []) ?: '—';
+            $skipped = implode(', ', $trade['skipped_rungs'] ?? []) ?: '—';
+            $outOfRange = implode(', ', $trade['out_of_range_rungs'] ?? []) ?: '—';
+            $depleted = implode(', ', $trade['depleted_rungs'] ?? []) ?: '—';
+
+            $out .= "| {$tsFormatted} | {$price} | {$volume} | {$fees} | {$participating} | {$skipped} | {$outOfRange} | {$depleted} |\n";
+        }
 
         return $out;
     }

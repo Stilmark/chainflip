@@ -5,7 +5,7 @@ declare(strict_types=1);
 final class DigestBuilder
 {
     private const MAX_RECENT_DAILY = 7;
-    private const MAX_TR_EXAMPLES = 10;
+    private const MAX_TR_EXAMPLES = 50;
 
     public function build(array $dailyMetrics, array $compactStore, array $config): array
     {
@@ -110,6 +110,8 @@ final class DigestBuilder
                 'timestamp' => $trade['timestamp'],
                 'trade_price' => $trade['trade_price'],
                 'price_source' => $trade['price_source']['method'] ?? null,
+                'volume_usd' => $trade['totals']['filled_volume_usd'] ?? 0,
+                'fees_usd' => $trade['totals']['fees_usd'] ?? 0,
                 'participating_rungs' => $trade['totals']['participating_rungs'] ?? [],
                 'skipped_rungs' => $trade['totals']['skipped_rungs'] ?? [],
                 'depleted_rungs' => $trade['totals']['depleted_rungs'] ?? [],

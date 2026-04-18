@@ -1,7 +1,7 @@
 # Bucket Distribution — Latest Day (2026-04-18)
 
-| Price Low | Price High | TRs | Volume | A P | A S | A D | A O | B P | B S | B D | B O | C P | C S | C D | C O | D P | D S | D D | D O | S1 P | S1 S | S1 D | S1 O | S2 P | S2 S | S2 D | S2 O | S3 P | S3 S | S3 D | S3 O |
+| Price Low | Price High | TRs | Volume | P A | P B | P C | P D | P S1 | P S2 | P S3 | O A | O B | O C | O D | O S1 | O S2 | O S3 | S A | S B | S C | S D | S S1 | S S2 | S S3 | D A | D B | D C | D D | D S1 | D S2 | D S3 |
 |----------:|-----------:|----:|-------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-| 1.0005 | 1.0010 | 4 | 1,681.58 | 4 |  |  |  | 4 |  |  |  | 4 |  |  |  | 2 | 2 |  |  |  |  |  | 4 |  |  |  | 4 | 1 |  |  | 3 |
+| 1.0005 | 1.0010 | 4 | 1,681.58 | 4 | 4 | 4 | 2 |  |  | 1 |  |  |  |  | 4 | 4 | 3 |  |  |  | 2 |  |  |  |  |  |  |  |  |  |  |
 
-_Legend: P=Participating, S=Skipped, D=Depleted, O=Out of Range_
+_Legend: P=Participating, O=Out of Range, S=Skipped, D=Depleted_
