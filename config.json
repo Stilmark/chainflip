@@ -1,0 +1,186 @@
+{
+  "version": 1,
+  "environment": "production",
+  "pair": {
+    "base": "USDT",
+    "quote": "USDC",
+    "symbol": "USDT/USDC",
+    "price_definition": "quote_per_base"
+  },
+  "paths": {
+    "input_dir": "./input",
+    "archive_dir": "./archive",
+    "trades_compact_file": "./data/trades_compact.json",
+    "trades_debug_file": "./data/trades_debug.json",
+    "daily_metrics_file": "./data/daily_metrics.json",
+    "digest_file": "./data/digest.json",
+    "run_lock_file": "./data/run.lock",
+    "tables_dir": "./tables"
+  },
+  "processing": {
+    "file_glob": "*.csv",
+    "ignore_types": ["LIMIT"],
+    "allowed_assets": ["USDT", "USDC"],
+    "analysis_window_start": "2026-04-15T00:00:00Z",
+    "emit_debug_trades": true,
+    "bucket_size": 0.0005,
+    "round_price_decimals": 8,
+    "round_money_decimals": 8,
+    "archive_on_success": true,
+    "include_archive_on_rebuild": true,
+    "dedupe_strategy": "fill_fingerprint",
+    "timezone": "UTC"
+  },
+  "portfolio": {
+    "borrowed": {
+      "USDT": 31466.55,
+      "USDC": 18895.51
+    },
+    "borrow_rates_annual": {
+      "USDT": 0.037,
+      "USDC": 0.037
+    }
+  },
+  "rungs": [
+    {
+      "rung": "A",
+      "name": "Core",
+      "active": true,
+      "tags": ["main"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-14T22:50:30Z",
+          "effective_to": null,
+          "range_lower": 0.9979023082300623,
+          "range_upper": 1.002904063656376,
+          "target_allocation_pct": 60.0,
+          "initial_value": {
+            "USDT": 9836.61,
+            "USDC": 14766.36,
+            "total_usd": 24602.97
+          }
+        }
+      ]
+    },
+    {
+      "rung": "B",
+      "name": "Buffer",
+      "active": true,
+      "tags": ["main"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-14T22:53:48Z",
+          "effective_to": null,
+          "range_lower": 0.997403506726374,
+          "range_upper": 1.00340561598864,
+          "target_allocation_pct": 25.0,
+          "initial_value": {
+            "USDT": 4391.44,
+            "USDC": 6152.64,
+            "total_usd": 10544.08
+          }
+        }
+      ]
+    },
+    {
+      "rung": "C",
+      "name": "Scalp",
+      "active": true,
+      "tags": ["main"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-14T22:56:54Z",
+          "effective_to": null,
+          "range_lower": 0.9989006597141001,
+          "range_upper": 1.0021021013305984,
+          "target_allocation_pct": 15.0,
+          "initial_value": {
+            "USDT": 2211.72,
+            "USDC": 3689.53,
+            "total_usd": 5901.25
+          }
+        }
+      ]
+    },
+    {
+      "rung": "D",
+      "name": "Catch-all",
+      "active": true,
+      "tags": ["signal"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-15T16:17:30Z",
+          "effective_to": null,
+          "range_lower": 0.996406651572219,
+          "range_upper": 1.0054143348356561,
+          "target_allocation_pct": 2.0,
+          "initial_value": {
+            "USDT": 430.88,
+            "USDC": 394.551217,
+            "total_usd": 825.431217
+          }
+        }
+      ]
+    },
+    {
+      "rung": "S1",
+      "name": "Tick",
+      "active": true,
+      "tags": ["scalp"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-16T19:58:48Z",
+          "effective_to": null,
+          "range_lower": 1.000400060004,
+          "range_upper": 1.0006001500200015,
+          "target_allocation_pct": 35.0,
+          "initial_value": {
+            "USDT": 1050.0,
+            "USDC": 1053.682495,
+            "total_usd": 2103.682495
+          }
+        }
+      ]
+    },
+    {
+      "rung": "S2",
+      "name": "Flow",
+      "active": true,
+      "tags": ["scalp"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-16T20:02:48Z",
+          "effective_to": null,
+          "range_lower": 1.0003000300009999,
+          "range_upper": 1.0007002100350033,
+          "target_allocation_pct": 35.0,
+          "initial_value": {
+            "USDT": 1050.0,
+            "USDC": 1052.102654,
+            "total_usd": 2102.102654
+          }
+        }
+      ]
+    },
+    {
+      "rung": "S3",
+      "name": "Sweep",
+      "active": true,
+      "tags": ["scalp"],
+      "revisions": [
+        {
+          "effective_from": "2026-04-16T20:05:24Z",
+          "effective_to": null,
+          "range_lower": 1.00020001,
+          "range_upper": 1.000800280056007,
+          "target_allocation_pct": 30.0,
+          "initial_value": {
+            "USDT": 900.0,
+            "USDC": 901.351344,
+            "total_usd": 1801.351344
+          }
+        }
+      ]
+    }
+  ]
+}

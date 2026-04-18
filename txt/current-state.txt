@@ -1,0 +1,100 @@
+Current pair
+USDT / USDC
+
+Terminology
+- PI = Project Instructions
+- CS = Current State
+- TR = Trade = set of transactions with the same timestamp and pair
+
+Borrow rates
+- USDT: 3.7%
+- USDC: 3.7%
+
+Current borrowed
+- 31,466.55 USDT
+- 18,895.51 USDC
+
+Current active rungs
+
+A
+- Name: Core
+- Created: 14/04/2026, 22:50:30
+- Range: 0.9979023082300623 - 1.002904063656376
+- Target allocation: 60%
+- Ratio reference: 1000 USDT / 1501.163154 USDC
+- Initial value: 9,836.61 USDT / 14,766.36 USDC
+- Total value: 24,602.97
+
+B
+- Name: Buffer
+- Created: 14/04/2026, 22:53:48
+- Range: 0.997403506726374 - 1.00340561598864
+- Target allocation: 25%
+- Ratio reference: 1000 USDT / 1401.054591 USDC
+- Initial value: 4,391.44 USDT / 6,152.64 USDC
+- Total value: 10,544.08
+
+C
+- Name: Scalp
+- Created: 14/04/2026, 22:56:54
+- Range: 0.9989006597141001 - 1.0021021013305984
+- Target allocation: 15%
+- Ratio reference: 1000 USDT / 1668.167567 USDC
+- Initial value: 2,211.72 USDT / 3,689.53 USDC
+- Total value: 5,901.25
+
+D
+- Name: Signal
+- Created: 15/04/2026, 16:17:30
+- Range: 0.996406651572219 - 1.0054143348356561
+- Target allocation: ~2%
+- Ratio reference: 1000 USDT / 915.687006 USDC
+- Initial value: 430.88 USDT / 394.551217 USDC
+- Total value: 825.43
+
+S1
+- Name: Tick
+- Created: 16/04/2026, 19:58:48
+- Range: 1.000400060004 - 1.0006001500200015
+- Target allocation: 35%
+- Ratio reference: 1000 USDT / 1,003.507138 USDC
+- Initial value: 1,050.00 USDT / 1,053.682495 USDC
+- Total value: 2,103.682495
+
+S2
+- Name: Flow
+- Created: 16/04/2026, 20:02:48
+- Range: 1.0003000300009999 - 1.0007002100350033
+- Target allocation: 35%
+- Ratio reference: 1000 USDT / 1,002.002528 USDC
+- Initial value: 1,050.00 USDT / 1,052.102654 USDC
+- Total value: 2,102.102654
+
+S3
+- Name: Sweep
+- Created: 16/04/2026, 20:05:24
+- Range: 1.00020001 - 1.000800280056007
+- Target allocation: 30%
+- Ratio reference: 1000 USDT / 1,001.501493 USDC
+- Initial value: 900.00 USDT / 901.351344 USDC
+- Total value: 1,801.351344
+
+Current ladder design
+- Main ladder:
+  - 60% in A (Core)
+  - 25% in B (Buffer)
+  - 15% in C (Scalp)
+  - ~2% in D (Signal layer / Catch-all)
+- Tight scalp ladder:
+  - 35% in S1 (Ultra-tight)
+  - 35% in S2 (Core)
+  - 30% in S3 (Coverage)
+
+Portfolio notes
+- Legacy LP1-LP7 block removed from CS.
+- CSV files for 2026-04-12 and 2026-04-13 removed from active scope.
+- Current active strategy consists of the active rungs listed above.
+- For current performance analysis, only use active-rung CSV data from 2026-04-15 onward unless legacy comparison is explicitly requested.
+- Treat CS as the source of truth for active rungs, borrow balances, deployed capital, rung creation times, target allocations, and rung values.
+- Rung D is a low-allocation catch-all layer used for signal and coverage, not for yield optimization.
+- For active-rung analysis, each TR should use inferred trade price from executed fill amounts to distinguish true out-of-range events from depleted/inactive while still in range.
