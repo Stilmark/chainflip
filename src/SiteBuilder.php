@@ -34,7 +34,9 @@ final class SiteBuilder
 
         $html = file_get_contents($htmlPath);
 
-        $timestamp = date('Y-m-d H:i:s') . ' UTC';
+        $tz = new DateTimeZone('Europe/Paris');
+        $dt = new DateTime('now', $tz);
+        $timestamp = $dt->format('Y-m-d H:i:s') . ' CET';
         $newHtml = preg_replace(
             '/<footer>.*?<\/footer>/s',
             '<footer>LP Parser &copy; 2026 &mdash; Updated ' . $timestamp . '</footer>',

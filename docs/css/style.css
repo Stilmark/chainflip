@@ -200,7 +200,7 @@ table tfoot td:not(:first-child) {
 }
 
 .status-bar-title {
-  font-weight: 600;
+  font-weight: normal;
   color: var(--text-primary);
   padding-right: 15px;
   border-right: 1px solid var(--border-color);
@@ -238,9 +238,9 @@ table tfoot td {
 .card > h3,
 .table-container h3 {
   font-size: 1.1rem;
-  margin: 25px 0 12px 0;
+  font-weight: normal;
+  margin: 20px 0 12px 12px;
   padding-top: 15px;
-  border-top: 1px solid var(--border-color);
   color: var(--text-primary);
 }
 
