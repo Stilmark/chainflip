@@ -1,0 +1,1063 @@
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/Helpers.php';
+
+final class TableDataBuilder
+{
+    public function generateAll(array $digest, array $dailyMetrics, array $config, string $outputDir, array $compactStore = []): array
+    {
+        $outputDir = rtrim($outputDir, '/') . '/tables';
+        ensure_dir($outputDir);
+
+        $files = [];
+
+        // Status tables
+        $files['status-current.json'] = $this->buildStatusCurrent($digest, $config);
+        $files['status-latest-day.json'] = $this->buildStatusLatestDay($dailyMetrics, $config);
+        $files['status-by-day.json'] = $this->buildStatusByDay($dailyMetrics, $config);
+
+        // Prediction tables
+        $files['prediction-current.json'] = $this->buildPredictionCurrent($digest, $config);
+        $files['prediction-latest-day.json'] = $this->buildPredictionLatestDay($dailyMetrics, $config);
+        $files['prediction-by-day.json'] = $this->buildPredictionByDay($dailyMetrics, $config);
+
+        // Performance tables
+        $files['performance-rungs.json'] = $this->buildRungPerformance($digest, $config);
+        $files['performance-scalp.json'] = $this->buildScalpPerformance($digest, $config);
+        $files['performance-strategy.json'] = $this->buildStrategySummary($digest, $config);
+
+        // Distribution tables
+        $files['distribution-bucket.json'] = $this->buildBucketDistribution($dailyMetrics, $config);
+
+        // Trades tables
+        $files['trades-latest.json'] = $this->buildLatestTrades($digest, $config);
+        $files['trades-by-day.json'] = $this->buildTradesByDay($compactStore, $config);
+
+        // Config tables
+        $files['config-rungs.json'] = $this->buildRungs($config);
+
+        foreach ($files as $filename => $data) {
+            file_put_contents(
+                $outputDir . '/' . $filename,
+                json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+            );
+        }
+
+        return array_keys($files);
+    }
+
+    private function buildStatusCurrent(array $digest, array $config): array
+    {
+        $meta = $digest['meta'] ?? [];
+        $portfolio = $digest['portfolio'] ?? [];
+        $rungs = $digest['active_rungs'] ?? [];
+
+        $summary = [
+            ['label' => 'Portfolio Value', 'value' => $this->money($portfolio['portfolio_value'] ?? 0)],
+            ['label' => 'Total Fees', 'value' => $this->money($portfolio['total_fees_to_date'] ?? 0)],
+            ['label' => 'Total TRs', 'value' => (string) ($meta['total_trs_in_scope'] ?? 0)],
+            ['label' => 'Analysis Window Start', 'value' => $meta['analysis_window_start'] ?? ''],
+            ['label' => 'As Of Date', 'value' => $meta['as_of_date'] ?? ''],
+        ];
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'fee_share', 'title' => 'Fee Share', 'className' => 'dt-right'],
+            ['data' => 'eligible_trs', 'title' => 'Eligible TRs', 'className' => 'dt-right'],
+            ['data' => 'trades', 'title' => 'Trades', 'className' => 'dt-right'],
+            ['data' => 'skipped', 'title' => 'Skipped', 'className' => 'dt-right'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range', 'className' => 'dt-right'],
+            ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
+            ['data' => 'utilization', 'title' => 'Utilization', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        $totals = [
+            'value' => 0, 'fees' => 0, 'eligible_trs' => 0, 'trades' => 0,
+            'skipped' => 0, 'out_of_range' => 0, 'depleted' => 0
+        ];
+
+        foreach ($rungs as $r) {
+            $data[] = [
+                'rung' => $r['rung'],
+                'name' => $r['name'],
+                'value' => $this->money($r['rung_value']),
+                'value_raw' => (float) $r['rung_value'],
+                'fees' => $this->money($r['fees_to_date']),
+                'fees_raw' => (float) $r['fees_to_date'],
+                'fee_share' => $this->pct($r['fee_share_pct']),
+                'eligible_trs' => (int) $r['eligible_trs'],
+                'trades' => (int) $r['trades'],
+                'skipped' => (int) $r['skipped_count'],
+                'out_of_range' => (int) $r['out_of_range_count'],
+                'depleted' => (int) $r['depleted_count'],
+                'utilization' => $this->pct($r['utilization_pct']),
+            ];
+
+            $totals['value'] += $r['rung_value'];
+            $totals['fees'] += $r['fees_to_date'];
+            $totals['eligible_trs'] += $r['eligible_trs'];
+            $totals['trades'] += $r['trades'];
+            $totals['skipped'] += $r['skipped_count'];
+            $totals['out_of_range'] += $r['out_of_range_count'];
+            $totals['depleted'] += $r['depleted_count'];
+        }
+
+        $totalUtil = $totals['eligible_trs'] > 0 ? ($totals['trades'] / $totals['eligible_trs']) * 100 : 0;
+
+        $footer = [
+            'rung' => 'Total',
+            'name' => '',
+            'value' => $this->money($totals['value']),
+            'fees' => $this->money($totals['fees']),
+            'fee_share' => '100.00%',
+            'eligible_trs' => $totals['eligible_trs'],
+            'trades' => $totals['trades'],
+            'skipped' => $totals['skipped'],
+            'out_of_range' => $totals['out_of_range'],
+            'depleted' => $totals['depleted'],
+            'utilization' => $this->pct($totalUtil),
+        ];
+
+        return [
+            'title' => 'LP Status — Current Window',
+            'summary' => $summary,
+            'columns' => $columns,
+            'data' => $data,
+            'footer' => $footer,
+        ];
+    }
+
+    private function buildStatusLatestDay(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'LP Status — Latest Day', 'summary' => [], 'columns' => [], 'data' => [], 'error' => 'No data available'];
+        }
+
+        $day = end($days);
+        return $this->buildDayStatusData($day, 'LP Status — Latest Day');
+    }
+
+    private function buildStatusByDay(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'LP Status — By Day', 'days' => [], 'error' => 'No data available'];
+        }
+
+        $daysData = [];
+        foreach ($days as $day) {
+            $daysData[] = $this->buildDayStatusData($day, "Date: {$day['date']}");
+        }
+
+        return [
+            'title' => 'LP Status — By Day',
+            'days' => $daysData,
+        ];
+    }
+
+    private function buildDayStatusData(array $day, string $title): array
+    {
+        $meta = $day['meta'] ?? [];
+        $portfolio = $day['portfolio'] ?? [];
+        $rungs = $day['rung_metrics'] ?? [];
+
+        $summary = [
+            ['label' => 'Date', 'value' => $day['date'] ?? ''],
+            ['label' => 'Portfolio Value', 'value' => $this->money($portfolio['portfolio_value'] ?? 0)],
+            ['label' => 'Total Fees', 'value' => $this->money($portfolio['total_fees'] ?? 0)],
+            ['label' => 'TRs', 'value' => (string) ($meta['trs'] ?? 0)],
+        ];
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'fee_share', 'title' => 'Fee Share', 'className' => 'dt-right'],
+            ['data' => 'eligible_trs', 'title' => 'Eligible TRs', 'className' => 'dt-right'],
+            ['data' => 'trades', 'title' => 'Trades', 'className' => 'dt-right'],
+            ['data' => 'skipped', 'title' => 'Skipped', 'className' => 'dt-right'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range', 'className' => 'dt-right'],
+            ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
+            ['data' => 'utilization', 'title' => 'Utilization', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        $totals = [
+            'value' => 0, 'fees' => 0, 'eligible_trs' => 0, 'trades' => 0,
+            'skipped' => 0, 'out_of_range' => 0, 'depleted' => 0
+        ];
+
+        foreach ($rungs as $r) {
+            $data[] = [
+                'rung' => $r['rung'],
+                'name' => $r['name'],
+                'value' => $this->money($r['rung_value']),
+                'value_raw' => (float) $r['rung_value'],
+                'fees' => $this->money($r['fees']),
+                'fees_raw' => (float) $r['fees'],
+                'fee_share' => $this->pct($r['fee_share_pct']),
+                'eligible_trs' => (int) $r['eligible_trs'],
+                'trades' => (int) $r['trades'],
+                'skipped' => (int) $r['skipped_count'],
+                'out_of_range' => (int) $r['out_of_range_count'],
+                'depleted' => (int) $r['depleted_count'],
+                'utilization' => $this->pct($r['utilization_pct']),
+            ];
+
+            $totals['value'] += $r['rung_value'];
+            $totals['fees'] += $r['fees'];
+            $totals['eligible_trs'] += $r['eligible_trs'];
+            $totals['trades'] += $r['trades'];
+            $totals['skipped'] += $r['skipped_count'];
+            $totals['out_of_range'] += $r['out_of_range_count'];
+            $totals['depleted'] += $r['depleted_count'];
+        }
+
+        $totalUtil = $totals['eligible_trs'] > 0 ? ($totals['trades'] / $totals['eligible_trs']) * 100 : 0;
+
+        $footer = [
+            'rung' => 'Total',
+            'name' => '',
+            'value' => $this->money($totals['value']),
+            'fees' => $this->money($totals['fees']),
+            'fee_share' => '100.00%',
+            'eligible_trs' => $totals['eligible_trs'],
+            'trades' => $totals['trades'],
+            'skipped' => $totals['skipped'],
+            'out_of_range' => $totals['out_of_range'],
+            'depleted' => $totals['depleted'],
+            'utilization' => $this->pct($totalUtil),
+        ];
+
+        return [
+            'title' => $title,
+            'summary' => $summary,
+            'columns' => $columns,
+            'data' => $data,
+            'footer' => $footer,
+            'hide_summary_title' => true,
+        ];
+    }
+
+    private function buildPredictionCurrent(array $digest, array $config): array
+    {
+        $meta = $digest['meta'] ?? [];
+        $portfolio = $digest['portfolio'] ?? [];
+        $rungs = $digest['active_rungs'] ?? [];
+        $analysisStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
+        $asOfDate = $meta['as_of_date'] ?? date('Y-m-d');
+
+        $startDate = new DateTime(substr($analysisStart, 0, 10));
+        $endDate = new DateTime($asOfDate);
+        $windowDays = max(1, (int) $endDate->diff($startDate)->days + 1);
+
+        $totalFees = (float) ($portfolio['total_fees_to_date'] ?? 0);
+        $portfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
+        $avgDaily = $totalFees / $windowDays;
+        $weekly = $avgDaily * 7;
+        $monthly = $avgDaily * 30;
+        $yearly = $avgDaily * 365;
+        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+
+        $summary = [
+            ['label' => 'Window Days', 'value' => (string) $windowDays],
+            ['label' => 'Total Fees', 'value' => $this->money($totalFees)],
+            ['label' => 'Avg Daily Income', 'value' => $this->money($avgDaily)],
+            ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
+            ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
+            ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
+            ['label' => 'APY', 'value' => $this->pct($apy)],
+        ];
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'days_active', 'title' => 'Days Active', 'className' => 'dt-right'],
+            ['data' => 'fees_to_date', 'title' => 'Fees to Date', 'className' => 'dt-right'],
+            ['data' => 'daily_income', 'title' => 'Daily Income', 'className' => 'dt-right'],
+            ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
+            ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
+            ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
+            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+        ];
+
+        $configRungs = [];
+        foreach ($config['rungs'] ?? [] as $cr) {
+            $configRungs[$cr['rung']] = $cr;
+        }
+
+        $data = [];
+        foreach ($rungs as $r) {
+            $code = $r['rung'];
+            $createdAt = $configRungs[$code]['created_at'] ?? $analysisStart;
+            $rungStart = new DateTime(substr($createdAt, 0, 10));
+            $effectiveStart = $rungStart > $startDate ? $rungStart : $startDate;
+            $daysActive = max(1, (int) $endDate->diff($effectiveStart)->days + 1);
+
+            $fees = (float) $r['fees_to_date'];
+            $value = (float) $r['rung_value'];
+            $daily = $fees / $daysActive;
+            $wk = $daily * 7;
+            $mo = $daily * 30;
+            $yr = $daily * 365;
+            $rungApy = $value > 0 ? ($yr / $value) * 100 : 0;
+
+            $data[] = [
+                'rung' => $code,
+                'name' => $r['name'],
+                'value' => $this->money($value),
+                'value_raw' => $value,
+                'days_active' => $daysActive,
+                'fees_to_date' => $this->money($fees),
+                'fees_raw' => $fees,
+                'daily_income' => $this->money($daily),
+                'weekly_income' => $this->money($wk),
+                'monthly_income' => $this->money($mo),
+                'yearly_income' => $this->money($yr),
+                'apy' => $this->pct($rungApy),
+                'apy_raw' => $rungApy,
+            ];
+        }
+
+        return [
+            'title' => 'LP Prediction — Current Window',
+            'subtitle' => 'Portfolio Forecast',
+            'summary' => $summary,
+            'table_title' => 'Rung Forecast',
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    private function buildPredictionLatestDay(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'LP Prediction — Latest Day', 'summary' => [], 'columns' => [], 'data' => [], 'error' => 'No data available'];
+        }
+
+        $day = end($days);
+        $portfolio = $day['portfolio'] ?? [];
+        $rungs = $day['rung_metrics'] ?? [];
+
+        $totalFees = (float) ($portfolio['total_fees'] ?? 0);
+        $portfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
+        $weekly = $totalFees * 7;
+        $monthly = $totalFees * 30;
+        $yearly = $totalFees * 365;
+        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+
+        $summary = [
+            ['label' => 'Date', 'value' => $day['date'] ?? ''],
+            ['label' => 'Daily Income', 'value' => $this->money($totalFees)],
+            ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
+            ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
+            ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
+            ['label' => 'APY', 'value' => $this->pct($apy)],
+        ];
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'fees_today', 'title' => 'Fees Today', 'className' => 'dt-right'],
+            ['data' => 'daily_income', 'title' => 'Daily Income', 'className' => 'dt-right'],
+            ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
+            ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
+            ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
+            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        $totals = ['value' => 0, 'fees' => 0, 'weekly' => 0, 'monthly' => 0, 'yearly' => 0];
+
+        foreach ($rungs as $r) {
+            $fees = (float) $r['fees'];
+            $value = (float) $r['rung_value'];
+            $wk = $fees * 7;
+            $mo = $fees * 30;
+            $yr = $fees * 365;
+            $rungApy = $value > 0 ? ($yr / $value) * 100 : 0;
+
+            $data[] = [
+                'rung' => $r['rung'],
+                'name' => $r['name'],
+                'value' => $this->money($value),
+                'value_raw' => $value,
+                'fees_today' => $this->money($fees),
+                'fees_raw' => $fees,
+                'daily_income' => $this->money($fees),
+                'weekly_income' => $this->money($wk),
+                'monthly_income' => $this->money($mo),
+                'yearly_income' => $this->money($yr),
+                'apy' => $this->pct($rungApy),
+                'apy_raw' => $rungApy,
+            ];
+
+            $totals['value'] += $value;
+            $totals['fees'] += $fees;
+            $totals['weekly'] += $wk;
+            $totals['monthly'] += $mo;
+            $totals['yearly'] += $yr;
+        }
+
+        $totalApy = $totals['value'] > 0 ? ($totals['yearly'] / $totals['value']) * 100 : 0;
+
+        $footer = [
+            'rung' => 'Total',
+            'name' => '',
+            'value' => $this->money($totals['value']),
+            'fees_today' => $this->money($totals['fees']),
+            'daily_income' => $this->money($totals['fees']),
+            'weekly_income' => $this->money($totals['weekly']),
+            'monthly_income' => $this->money($totals['monthly']),
+            'yearly_income' => $this->money($totals['yearly']),
+            'apy' => $this->pct($totalApy),
+        ];
+
+        return [
+            'title' => 'LP Prediction — Latest Day',
+            'subtitle' => 'Portfolio Forecast',
+            'summary' => $summary,
+            'table_title' => 'Rung Forecast',
+            'columns' => $columns,
+            'data' => $data,
+            'footer' => $footer,
+        ];
+    }
+
+    private function buildPredictionByDay(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'LP Prediction — By Day', 'summary' => [], 'columns' => [], 'data' => [], 'error' => 'No data available'];
+        }
+
+        $totalDailyFees = 0;
+        $portfolioValue = 0;
+        $dayCount = count($days);
+
+        foreach ($days as $day) {
+            $portfolio = $day['portfolio'] ?? [];
+            $totalDailyFees += (float) ($portfolio['total_fees'] ?? 0);
+            $portfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
+        }
+
+        $avgDaily = $dayCount > 0 ? $totalDailyFees / $dayCount : 0;
+        $weekly = $avgDaily * 7;
+        $monthly = $avgDaily * 30;
+        $yearly = $avgDaily * 365;
+        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+
+        $summary = [
+            ['label' => 'Days Analyzed', 'value' => (string) $dayCount],
+            ['label' => 'Total Fees', 'value' => $this->money($totalDailyFees)],
+            ['label' => 'Avg Daily Income', 'value' => $this->money($avgDaily)],
+            ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
+            ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
+            ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
+            ['label' => 'APY', 'value' => $this->pct($apy)],
+        ];
+
+        $columns = [
+            ['data' => 'date', 'title' => 'Date'],
+            ['data' => 'daily_income', 'title' => 'Daily Income', 'className' => 'dt-right'],
+            ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
+            ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
+            ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
+            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        foreach ($days as $day) {
+            $portfolio = $day['portfolio'] ?? [];
+            $totalFees = (float) ($portfolio['total_fees'] ?? 0);
+            $pv = (float) ($portfolio['portfolio_value'] ?? 0);
+            $wk = $totalFees * 7;
+            $mo = $totalFees * 30;
+            $yr = $totalFees * 365;
+            $dayApy = $pv > 0 ? ($yr / $pv) * 100 : 0;
+
+            $data[] = [
+                'date' => $day['date'],
+                'daily_income' => $this->money($totalFees),
+                'daily_raw' => $totalFees,
+                'weekly_income' => $this->money($wk),
+                'monthly_income' => $this->money($mo),
+                'yearly_income' => $this->money($yr),
+                'apy' => $this->pct($dayApy),
+                'apy_raw' => $dayApy,
+            ];
+        }
+
+        return [
+            'title' => 'Daily Breakdown',
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    private function buildScalpPerformance(array $digest, array $config): array
+    {
+        $rungs = $digest['active_rungs'] ?? [];
+        $scalpRungs = array_filter($rungs, fn($r) => str_starts_with($r['rung'], 'S'));
+
+        if (empty($scalpRungs)) {
+            return ['title' => 'Scalp Performance', 'columns' => [], 'data' => [], 'error' => 'No scalp rungs found'];
+        }
+
+        $configRungs = [];
+        foreach ($config['rungs'] ?? [] as $cr) {
+            $configRungs[$cr['rung']] = $cr;
+        }
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'range_lower', 'title' => 'Range Lower', 'className' => 'dt-right'],
+            ['data' => 'range_upper', 'title' => 'Range Upper', 'className' => 'dt-right'],
+            ['data' => 'range_width', 'title' => 'Range Width', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'fee_share', 'title' => 'Fee Share', 'className' => 'dt-right'],
+            ['data' => 'eligible_trs', 'title' => 'Eligible TRs', 'className' => 'dt-right'],
+            ['data' => 'trades', 'title' => 'Trades', 'className' => 'dt-right'],
+            ['data' => 'skipped', 'title' => 'Skipped', 'className' => 'dt-right'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range', 'className' => 'dt-right'],
+            ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
+            ['data' => 'utilization', 'title' => 'Utilization', 'className' => 'dt-right'],
+            ['data' => 'cap_efficiency', 'title' => 'Cap Efficiency', 'className' => 'dt-right'],
+            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        foreach ($scalpRungs as $r) {
+            $code = $r['rung'];
+            $cr = $configRungs[$code] ?? [];
+            $lower = (float) ($cr['range_lower'] ?? $r['range_lower']);
+            $upper = (float) ($cr['range_upper'] ?? $r['range_upper']);
+            $width = $upper - $lower;
+            $value = (float) $r['rung_value'];
+            $fees = (float) $r['fees_to_date'];
+            $capEff = $value > 0 ? $fees / $value : 0;
+
+            $data[] = [
+                'rung' => $code,
+                'value' => $this->money($value),
+                'value_raw' => $value,
+                'range_lower' => number_format($lower, 4),
+                'range_upper' => number_format($upper, 4),
+                'range_width' => number_format($width, 4),
+                'fees' => $this->money($fees),
+                'fees_raw' => $fees,
+                'fee_share' => $this->pct($r['fee_share_pct']),
+                'eligible_trs' => (int) $r['eligible_trs'],
+                'trades' => (int) $r['trades'],
+                'skipped' => (int) $r['skipped_count'],
+                'out_of_range' => (int) $r['out_of_range_count'],
+                'depleted' => (int) $r['depleted_count'],
+                'utilization' => $this->pct($r['utilization_pct']),
+                'cap_efficiency' => number_format($capEff, 6),
+                'apy' => $this->pct($r['apy_gross'] * 100),
+            ];
+        }
+
+        return [
+            'title' => 'Scalp Performance',
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    private function buildStrategySummary(array $digest, array $config): array
+    {
+        $rungs = $digest['active_rungs'] ?? [];
+
+        $groups = [
+            'Core' => ['A', 'B', 'C'],
+            'Signal' => ['D'],
+            'Scalp' => ['S1', 'S2', 'S3'],
+        ];
+
+        $columns = [
+            ['data' => 'group', 'title' => 'Group'],
+            ['data' => 'total_value', 'title' => 'Total Value', 'className' => 'dt-right'],
+            ['data' => 'total_fees', 'title' => 'Total Fees', 'className' => 'dt-right'],
+            ['data' => 'fee_share', 'title' => 'Fee Share', 'className' => 'dt-right'],
+            ['data' => 'eligible_trs', 'title' => 'Eligible TRs', 'className' => 'dt-right'],
+            ['data' => 'trades', 'title' => 'Trades', 'className' => 'dt-right'],
+            ['data' => 'skipped', 'title' => 'Skipped', 'className' => 'dt-right'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range', 'className' => 'dt-right'],
+            ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
+            ['data' => 'avg_utilization', 'title' => 'Avg Utilization', 'className' => 'dt-right'],
+            ['data' => 'cap_efficiency', 'title' => 'Cap Efficiency', 'className' => 'dt-right'],
+            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+        ];
+
+        $rungMap = [];
+        foreach ($rungs as $r) {
+            $rungMap[$r['rung']] = $r;
+        }
+
+        $totalFees = array_sum(array_column($rungs, 'fees_to_date'));
+
+        $data = [];
+        foreach ($groups as $groupName => $codes) {
+            $value = 0;
+            $fees = 0;
+            $eligible = 0;
+            $trades = 0;
+            $skipped = 0;
+            $oor = 0;
+            $depleted = 0;
+
+            foreach ($codes as $code) {
+                if (isset($rungMap[$code])) {
+                    $r = $rungMap[$code];
+                    $value += (float) $r['rung_value'];
+                    $fees += (float) $r['fees_to_date'];
+                    $eligible += (int) $r['eligible_trs'];
+                    $trades += (int) $r['trades'];
+                    $skipped += (int) $r['skipped_count'];
+                    $oor += (int) $r['out_of_range_count'];
+                    $depleted += (int) $r['depleted_count'];
+                }
+            }
+
+            $feeShare = $totalFees > 0 ? ($fees / $totalFees) * 100 : 0;
+            $avgUtil = $eligible > 0 ? ($trades / $eligible) * 100 : 0;
+            $capEff = $value > 0 ? $fees / $value : 0;
+            $apy = $capEff * 365 * 100;
+
+            $data[] = [
+                'group' => $groupName,
+                'total_value' => $this->money($value),
+                'value_raw' => $value,
+                'total_fees' => $this->money($fees),
+                'fees_raw' => $fees,
+                'fee_share' => $this->pct($feeShare),
+                'eligible_trs' => $eligible,
+                'trades' => $trades,
+                'skipped' => $skipped,
+                'out_of_range' => $oor,
+                'depleted' => $depleted,
+                'avg_utilization' => $this->pct($avgUtil),
+                'cap_efficiency' => number_format($capEff, 6),
+                'apy' => $this->pct($apy),
+            ];
+        }
+
+        return [
+            'title' => 'Core vs Signal vs Scalp Summary',
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    private function buildBucketDistribution(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'Bucket Distribution — Latest Day', 'columns' => [], 'data' => [], 'error' => 'No data available'];
+        }
+
+        $day = end($days);
+        $buckets = $day['trade_buckets'] ?? [];
+
+        if (empty($buckets)) {
+            return ['title' => 'Bucket Distribution — Latest Day', 'columns' => [], 'data' => [], 'error' => "No bucket data for {$day['date']}"];
+        }
+
+        $activeRungs = array_values(array_filter($config['rungs'] ?? [], fn($r) => !empty($r['active'])));
+        $rungCodes = array_column($activeRungs, 'rung');
+
+        $states = [
+            'P' => 'participating',
+            'O' => 'out_of_range',
+            'S' => 'skipped',
+            'D' => 'depleted',
+        ];
+
+        $columns = [
+            ['data' => 'price_low', 'title' => 'Price Low', 'className' => 'dt-right'],
+            ['data' => 'price_high', 'title' => 'Price High', 'className' => 'dt-right'],
+            ['data' => 'trs', 'title' => 'TRs', 'className' => 'dt-right'],
+            ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
+        ];
+
+        foreach ($states as $stateCode => $stateKey) {
+            foreach ($rungCodes as $code) {
+                $columns[] = ['data' => "{$stateCode}_{$code}", 'title' => "{$stateCode} {$code}", 'className' => 'dt-right'];
+            }
+        }
+
+        usort($buckets, fn($a, $b) => $a['price_bucket_low'] <=> $b['price_bucket_low']);
+
+        $data = [];
+        foreach ($buckets as $bucket) {
+            $row = [
+                'price_low' => number_format($bucket['price_bucket_low'], 4),
+                'price_high' => number_format($bucket['price_bucket_high'], 4),
+                'trs' => (int) $bucket['tr_count'],
+                'volume' => $this->money($bucket['total_volume_usd']),
+                'volume_raw' => (float) $bucket['total_volume_usd'],
+            ];
+
+            foreach ($states as $stateCode => $stateKey) {
+                foreach ($rungCodes as $code) {
+                    $counts = $bucket['rung_counts'][$code] ?? ['participating' => 0, 'skipped' => 0, 'depleted' => 0, 'out_of_range' => 0];
+                    $row["{$stateCode}_{$code}"] = $counts[$stateKey] ?: '';
+                }
+            }
+
+            $data[] = $row;
+        }
+
+        return [
+            'title' => "Bucket Distribution — Latest Day ({$day['date']})",
+            'columns' => $columns,
+            'data' => $data,
+            'legend' => 'P=Participating, O=Out of Range, S=Skipped, D=Depleted',
+        ];
+    }
+
+    private function buildLatestTrades(array $digest, array $config): array
+    {
+        $trades = $digest['recent_tr_examples'] ?? [];
+
+        if (empty($trades)) {
+            return ['title' => 'Latest Trades', 'columns' => [], 'data' => [], 'error' => 'No recent trades available'];
+        }
+
+        $columns = [
+            ['data' => 'timestamp', 'title' => 'Timestamp'],
+            ['data' => 'price', 'title' => 'Price', 'className' => 'dt-right'],
+            ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'participating', 'title' => 'Participating'],
+            ['data' => 'skipped', 'title' => 'Skipped'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range'],
+            ['data' => 'depleted', 'title' => 'Depleted'],
+        ];
+
+        $trades = array_reverse($trades);
+
+        $data = [];
+        foreach ($trades as $trade) {
+            $ts = $trade['timestamp'] ?? '';
+            $tsFormatted = $ts ? str_replace('T', ' ', substr($ts, 0, 19)) : '—';
+
+            $data[] = [
+                'timestamp' => $tsFormatted,
+                'price' => number_format((float) ($trade['trade_price'] ?? 0), 4),
+                'price_raw' => (float) ($trade['trade_price'] ?? 0),
+                'volume' => $this->money((float) ($trade['volume_usd'] ?? 0)),
+                'volume_raw' => (float) ($trade['volume_usd'] ?? 0),
+                'fees' => $this->money((float) ($trade['fees_usd'] ?? 0)),
+                'fees_raw' => (float) ($trade['fees_usd'] ?? 0),
+                'participating' => implode(', ', $trade['participating_rungs'] ?? []) ?: '—',
+                'skipped' => implode(', ', $trade['skipped_rungs'] ?? []) ?: '—',
+                'out_of_range' => implode(', ', $trade['out_of_range_rungs'] ?? []) ?: '—',
+                'depleted' => implode(', ', $trade['depleted_rungs'] ?? []) ?: '—',
+            ];
+        }
+
+        return [
+            'title' => 'Latest Trades',
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    private function buildTradesByDay(array $compactStore, array $config): array
+    {
+        $trades = $compactStore['trades'] ?? [];
+
+        if (empty($trades)) {
+            return ['title' => 'Trades by Day', 'days' => [], 'error' => 'No trades available'];
+        }
+
+        $analysisWindowStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
+        $analysisWindowStartDate = substr($analysisWindowStart, 0, 10);
+
+        $trades = array_filter($trades, fn($t) => ($t['date'] ?? '') >= $analysisWindowStartDate);
+
+        $tradesByDate = [];
+        foreach ($trades as $trade) {
+            $date = $trade['date'] ?? '';
+            if ($date) {
+                $tradesByDate[$date][] = $trade;
+            }
+        }
+
+        krsort($tradesByDate);
+
+        $columns = [
+            ['data' => 'timestamp', 'title' => 'Timestamp'],
+            ['data' => 'price', 'title' => 'Price', 'className' => 'dt-right'],
+            ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'participating', 'title' => 'Participating'],
+            ['data' => 'skipped', 'title' => 'Skipped'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range'],
+            ['data' => 'depleted', 'title' => 'Depleted'],
+        ];
+
+        $daysData = [];
+        foreach ($tradesByDate as $date => $dayTrades) {
+            usort($dayTrades, fn($a, $b) => ($b['timestamp'] ?? '') <=> ($a['timestamp'] ?? ''));
+
+            $totalVolume = 0;
+            $totalFees = 0;
+            $data = [];
+
+            foreach ($dayTrades as $trade) {
+                $ts = $trade['timestamp'] ?? '';
+                $tsFormatted = $ts ? substr($ts, 11, 8) : '—';
+
+                $volume = (float) ($trade['totals']['filled_volume_usd'] ?? 0);
+                $fees = (float) ($trade['totals']['fees_usd'] ?? 0);
+
+                $totalVolume += $volume;
+                $totalFees += $fees;
+
+                $data[] = [
+                    'timestamp' => $tsFormatted,
+                    'price' => number_format((float) ($trade['trade_price'] ?? 0), 4),
+                    'price_raw' => (float) ($trade['trade_price'] ?? 0),
+                    'volume' => $this->money($volume),
+                    'volume_raw' => $volume,
+                    'fees' => $this->money($fees),
+                    'fees_raw' => $fees,
+                    'participating' => implode(', ', $trade['totals']['participating_rungs'] ?? []) ?: '—',
+                    'skipped' => implode(', ', $trade['totals']['skipped_rungs'] ?? []) ?: '—',
+                    'out_of_range' => implode(', ', $trade['totals']['out_of_range_rungs'] ?? []) ?: '—',
+                    'depleted' => implode(', ', $trade['totals']['depleted_rungs'] ?? []) ?: '—',
+                ];
+            }
+
+            $daysData[] = [
+                'title' => "Date: {$date}",
+                'date' => $date,
+                'summary' => [
+                    ['label' => 'Date', 'value' => $date],
+                    ['label' => 'Trades', 'value' => (string) count($dayTrades)],
+                    ['label' => 'Volume', 'value' => $this->money($totalVolume)],
+                    ['label' => 'Fees', 'value' => $this->money($totalFees)],
+                ],
+                'hide_summary_title' => true,
+                'trade_count' => count($dayTrades),
+                'total_volume' => $this->money($totalVolume),
+                'total_fees' => $this->money($totalFees),
+                'columns' => $columns,
+                'data' => $data,
+            ];
+        }
+
+        return [
+            'title' => 'Trades by Day',
+            'days' => $daysData,
+        ];
+    }
+
+    private function buildRungPerformance(array $digest, array $config): array
+    {
+        $rungs = $digest['active_rungs'] ?? [];
+        $configRungs = [];
+        foreach ($config['rungs'] ?? [] as $cr) {
+            $configRungs[$cr['rung']] = $cr;
+        }
+
+        if (empty($rungs)) {
+            return ['title' => 'Rung Performance', 'columns' => [], 'data' => [], 'error' => 'No active rungs found'];
+        }
+
+        $totalValue = 0;
+        $totalFees = 0;
+        foreach ($rungs as $r) {
+            $totalValue += (float) $r['rung_value'];
+            $totalFees += (float) $r['fees_to_date'];
+        }
+
+        $now = time();
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'value_pct', 'title' => 'Value %', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'fee_pct', 'title' => 'Fee %', 'className' => 'dt-right'],
+            ['data' => 'cap_eff', 'title' => 'Cap Eff', 'className' => 'dt-right'],
+            ['data' => 'days', 'title' => 'Days', 'className' => 'dt-right'],
+            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'utilization', 'title' => 'Util %', 'className' => 'dt-right'],
+            ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
+            ['data' => 'vol_per_day', 'title' => 'Vol/Day', 'className' => 'dt-right'],
+        ];
+
+        $rows = [];
+        foreach ($rungs as $r) {
+            $code = $r['rung'];
+            $cr = $configRungs[$code] ?? [];
+            $value = (float) $r['rung_value'];
+            $fees = (float) $r['fees_to_date'];
+            $volume = (float) $r['filled_volume_usd'];
+
+            $valueShare = $totalValue > 0 ? ($value / $totalValue) * 100 : 0;
+            $feeShare = $totalFees > 0 ? ($fees / $totalFees) * 100 : 0;
+            $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
+
+            $createdAt = $r['created_at'] ?? null;
+            $activeDays = 0;
+            if ($createdAt) {
+                $createdTs = strtotime($createdAt);
+                if ($createdTs !== false) {
+                    $activeDays = max(1, ($now - $createdTs) / 86400);
+                }
+            }
+
+            $annualizedFees = $activeDays > 0 ? ($fees / $activeDays) * 365 : 0;
+            $apy = $value > 0 ? ($annualizedFees / $value) * 100 : 0;
+
+            $utilization = (float) ($r['utilization_pct'] ?? 0);
+            $volPerDay = $activeDays > 0 ? $volume / $activeDays : 0;
+
+            $rows[] = [
+                'rung' => $code,
+                'name' => $r['name'] ?? '',
+                'value' => $this->money($value),
+                'value_raw' => $value,
+                'value_pct' => $this->pct($valueShare),
+                'fees' => $this->money($fees),
+                'fees_raw' => $fees,
+                'fee_pct' => $this->pct($feeShare),
+                'cap_eff' => $this->pct($capEff),
+                'days' => number_format($activeDays, 1),
+                'days_raw' => $activeDays,
+                'apy' => $this->pct($apy),
+                'apy_raw' => $apy,
+                'utilization' => $this->pct($utilization),
+                'volume' => $this->money($volume),
+                'volume_raw' => $volume,
+                'vol_per_day' => $this->money($volPerDay),
+            ];
+        }
+
+        usort($rows, fn($a, $b) => $b['apy_raw'] <=> $a['apy_raw']);
+
+        $totalCapEff = $totalValue > 0 ? ($totalFees / $totalValue) * 100 : 0;
+
+        $footer = [
+            'rung' => 'Total',
+            'name' => '',
+            'value' => $this->money($totalValue),
+            'value_pct' => '100.00%',
+            'fees' => $this->money($totalFees),
+            'fee_pct' => '100.00%',
+            'cap_eff' => $this->pct($totalCapEff),
+            'days' => '',
+            'apy' => '',
+            'utilization' => '',
+            'volume' => '',
+            'vol_per_day' => '',
+        ];
+
+        return [
+            'title' => 'Rung Performance',
+            'columns' => $columns,
+            'data' => $rows,
+            'footer' => $footer,
+            'note' => 'Sorted by APY descending. Cap Eff = Fees/Value %. APY based on actual active days.',
+        ];
+    }
+
+    private function buildRungs(array $config): array
+    {
+        $rungs = $config['rungs'] ?? [];
+        $activeRungs = array_filter($rungs, fn($r) => !empty($r['active']));
+
+        if (empty($activeRungs)) {
+            return ['title' => 'Rungs', 'columns' => [], 'data' => [], 'error' => 'No active rungs configured'];
+        }
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'created', 'title' => 'Created'],
+            ['data' => 'range_lower', 'title' => 'Range Lower', 'className' => 'dt-right'],
+            ['data' => 'range_upper', 'title' => 'Range Upper', 'className' => 'dt-right'],
+            ['data' => 'range_width', 'title' => 'Range Width', 'className' => 'dt-right'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'allocation', 'title' => 'Allocation', 'className' => 'dt-right'],
+            ['data' => 'tags', 'title' => 'Tags'],
+        ];
+
+        $data = [];
+        $totalValue = 0;
+
+        foreach ($activeRungs as $r) {
+            $rev = get_current_revision($r);
+            $createdAt = get_rung_created_at($r);
+            $lower = $rev !== null ? (float) $rev['range_lower'] : 0.0;
+            $upper = $rev !== null ? (float) $rev['range_upper'] : 0.0;
+            $width = $upper - $lower;
+            $value = $rev !== null ? (float) ($rev['initial_value']['total_usd'] ?? 0) : 0.0;
+            $allocation = $rev !== null ? (float) ($rev['target_allocation_pct'] ?? 0) : 0.0;
+            $created = $createdAt !== null ? substr($createdAt, 0, 10) : '';
+            $tags = implode(', ', $r['tags'] ?? []);
+
+            $data[] = [
+                'rung' => $r['rung'],
+                'name' => $r['name'],
+                'created' => $created,
+                'range_lower' => number_format($lower, 4),
+                'range_upper' => number_format($upper, 4),
+                'range_width' => number_format($width, 4),
+                'value' => $this->money($value),
+                'value_raw' => $value,
+                'allocation' => $this->pct($allocation),
+                'tags' => $tags,
+            ];
+
+            $totalValue += $value;
+        }
+
+        $footer = [
+            'rung' => 'Total',
+            'name' => '',
+            'created' => '',
+            'range_lower' => '',
+            'range_upper' => '',
+            'range_width' => '',
+            'value' => $this->money($totalValue),
+            'allocation' => '',
+            'tags' => '',
+        ];
+
+        return [
+            'title' => 'Rungs',
+            'columns' => $columns,
+            'data' => $data,
+            'footer' => $footer,
+        ];
+    }
+
+    private function money(float $value): string
+    {
+        return number_format($value, 2, '.', ',');
+    }
+
+    private function pct(float $value): string
+    {
+        return number_format($value, 2, '.', ',') . '%';
+    }
+}

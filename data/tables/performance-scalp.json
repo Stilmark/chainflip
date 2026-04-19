@@ -1,0 +1,138 @@
+{
+    "title": "Scalp Performance",
+    "columns": [
+        {
+            "data": "rung",
+            "title": "Rung"
+        },
+        {
+            "data": "value",
+            "title": "Value",
+            "className": "dt-right"
+        },
+        {
+            "data": "range_lower",
+            "title": "Range Lower",
+            "className": "dt-right"
+        },
+        {
+            "data": "range_upper",
+            "title": "Range Upper",
+            "className": "dt-right"
+        },
+        {
+            "data": "range_width",
+            "title": "Range Width",
+            "className": "dt-right"
+        },
+        {
+            "data": "fees",
+            "title": "Fees",
+            "className": "dt-right"
+        },
+        {
+            "data": "fee_share",
+            "title": "Fee Share",
+            "className": "dt-right"
+        },
+        {
+            "data": "eligible_trs",
+            "title": "Eligible TRs",
+            "className": "dt-right"
+        },
+        {
+            "data": "trades",
+            "title": "Trades",
+            "className": "dt-right"
+        },
+        {
+            "data": "skipped",
+            "title": "Skipped",
+            "className": "dt-right"
+        },
+        {
+            "data": "out_of_range",
+            "title": "Out of Range",
+            "className": "dt-right"
+        },
+        {
+            "data": "depleted",
+            "title": "Depleted",
+            "className": "dt-right"
+        },
+        {
+            "data": "utilization",
+            "title": "Utilization",
+            "className": "dt-right"
+        },
+        {
+            "data": "cap_efficiency",
+            "title": "Cap Efficiency",
+            "className": "dt-right"
+        },
+        {
+            "data": "apy",
+            "title": "APY",
+            "className": "dt-right"
+        }
+    ],
+    "data": [
+        {
+            "rung": "S1",
+            "value": "2,002.30",
+            "value_raw": 2002.303159,
+            "range_lower": "1.0006",
+            "range_upper": "1.0010",
+            "range_width": "0.0004",
+            "fees": "3.55",
+            "fees_raw": 3.548311,
+            "fee_share": "2.12%",
+            "eligible_trs": 142,
+            "trades": 12,
+            "skipped": 0,
+            "out_of_range": 130,
+            "depleted": 0,
+            "utilization": "8.45%",
+            "cap_efficiency": "0.001772",
+            "apy": "64.68%"
+        },
+        {
+            "rung": "S2",
+            "value": "2,001.55",
+            "value_raw": 2001.551475,
+            "range_lower": "1.0004",
+            "range_upper": "1.0012",
+            "range_width": "0.0008",
+            "fees": "4.69",
+            "fees_raw": 4.687513,
+            "fee_share": "2.80%",
+            "eligible_trs": 142,
+            "trades": 21,
+            "skipped": 1,
+            "out_of_range": 120,
+            "depleted": 0,
+            "utilization": "14.79%",
+            "cap_efficiency": "0.002342",
+            "apy": "85.48%"
+        },
+        {
+            "rung": "S3",
+            "value": "2,002.83",
+            "value_raw": 2002.831798,
+            "range_lower": "1.0002",
+            "range_upper": "1.0014",
+            "range_width": "0.0012",
+            "fees": "5.24",
+            "fees_raw": 5.235514,
+            "fee_share": "3.13%",
+            "eligible_trs": 142,
+            "trades": 30,
+            "skipped": 1,
+            "out_of_range": 111,
+            "depleted": 0,
+            "utilization": "21.13%",
+            "cap_efficiency": "0.002614",
+            "apy": "95.41%"
+        }
+    ]
+}

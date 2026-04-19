@@ -1,0 +1,143 @@
+{
+    "title": "Rungs",
+    "columns": [
+        {
+            "data": "rung",
+            "title": "Rung"
+        },
+        {
+            "data": "name",
+            "title": "Name"
+        },
+        {
+            "data": "created",
+            "title": "Created"
+        },
+        {
+            "data": "range_lower",
+            "title": "Range Lower",
+            "className": "dt-right"
+        },
+        {
+            "data": "range_upper",
+            "title": "Range Upper",
+            "className": "dt-right"
+        },
+        {
+            "data": "range_width",
+            "title": "Range Width",
+            "className": "dt-right"
+        },
+        {
+            "data": "value",
+            "title": "Value",
+            "className": "dt-right"
+        },
+        {
+            "data": "allocation",
+            "title": "Allocation",
+            "className": "dt-right"
+        },
+        {
+            "data": "tags",
+            "title": "Tags"
+        }
+    ],
+    "data": [
+        {
+            "rung": "A",
+            "name": "Core",
+            "created": "2026-04-14",
+            "range_lower": "0.9979",
+            "range_upper": "1.0029",
+            "range_width": "0.0050",
+            "value": "24,602.97",
+            "value_raw": 24602.97,
+            "allocation": "54.89%",
+            "tags": "main"
+        },
+        {
+            "rung": "B",
+            "name": "Buffer",
+            "created": "2026-04-14",
+            "range_lower": "0.9974",
+            "range_upper": "1.0034",
+            "range_width": "0.0060",
+            "value": "10,544.08",
+            "value_raw": 10544.08,
+            "allocation": "23.52%",
+            "tags": "main"
+        },
+        {
+            "rung": "C",
+            "name": "Scalp",
+            "created": "2026-04-14",
+            "range_lower": "0.9988",
+            "range_upper": "1.0021",
+            "range_width": "0.0033",
+            "value": "8,852.01",
+            "value_raw": 8852.006261,
+            "allocation": "19.75%",
+            "tags": "main"
+        },
+        {
+            "rung": "D",
+            "name": "Catch-all",
+            "created": "2026-04-15",
+            "range_lower": "0.9964",
+            "range_upper": "1.0054",
+            "range_width": "0.0090",
+            "value": "825.43",
+            "value_raw": 825.431217,
+            "allocation": "1.84%",
+            "tags": "signal"
+        },
+        {
+            "rung": "S1",
+            "name": "Tick",
+            "created": "2026-04-16",
+            "range_lower": "1.0006",
+            "range_upper": "1.0010",
+            "range_width": "0.0004",
+            "value": "2,002.30",
+            "value_raw": 2002.303159,
+            "allocation": "33.30%",
+            "tags": "scalp"
+        },
+        {
+            "rung": "S2",
+            "name": "Flow",
+            "created": "2026-04-16",
+            "range_lower": "1.0004",
+            "range_upper": "1.0012",
+            "range_width": "0.0008",
+            "value": "2,001.55",
+            "value_raw": 2001.551475,
+            "allocation": "33.30%",
+            "tags": "scalp"
+        },
+        {
+            "rung": "S3",
+            "name": "Sweep",
+            "created": "2026-04-16",
+            "range_lower": "1.0002",
+            "range_upper": "1.0014",
+            "range_width": "0.0012",
+            "value": "2,002.83",
+            "value_raw": 2002.831798,
+            "allocation": "33.30%",
+            "tags": "scalp"
+        }
+    ],
+    "footer": {
+        "rung": "Total",
+        "name": "",
+        "created": "",
+        "range_lower": "",
+        "range_upper": "",
+        "range_width": "",
+        "value": "50,831.17",
+        "allocation": "",
+        "tags": ""
+    }
+}

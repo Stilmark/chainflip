@@ -234,7 +234,8 @@ table tfoot td {
 }
 
 
-/* Section headings within tables */
+/* Section headings within cards/tables */
+.card > h3,
 .table-container h3 {
   font-size: 1.1rem;
   margin: 25px 0 12px 0;
@@ -249,9 +250,22 @@ table tfoot td {
   border-top: none;
 }
 
+/* Table notes/captions */
+.table-note,
+.table-legend {
+  margin-top: 12px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
 /* DataTables overrides */
 .dataTables_wrapper {
   color: var(--text-secondary);
+  width: 100%;
+}
+
+table.dataTable {
+  width: 100% !important;
 }
 
 .dataTables_wrapper .dataTables_length,
@@ -370,6 +384,36 @@ table.dataTable thead .sorting_desc::after {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: #fff;
+}
+
+/* Day selector dropdown */
+.day-selector {
+  margin-bottom: 15px;
+}
+
+.day-selector label {
+  color: var(--text-secondary);
+  margin-right: 8px;
+}
+
+.date-dropdown {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.date-dropdown:hover {
+  border-color: var(--accent-color);
+}
+
+.date-dropdown:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
 }
 
 /* Footer */

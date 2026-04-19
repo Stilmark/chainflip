@@ -1,0 +1,114 @@
+{
+    "title": "Core vs Signal vs Scalp Summary",
+    "columns": [
+        {
+            "data": "group",
+            "title": "Group"
+        },
+        {
+            "data": "total_value",
+            "title": "Total Value",
+            "className": "dt-right"
+        },
+        {
+            "data": "total_fees",
+            "title": "Total Fees",
+            "className": "dt-right"
+        },
+        {
+            "data": "fee_share",
+            "title": "Fee Share",
+            "className": "dt-right"
+        },
+        {
+            "data": "eligible_trs",
+            "title": "Eligible TRs",
+            "className": "dt-right"
+        },
+        {
+            "data": "trades",
+            "title": "Trades",
+            "className": "dt-right"
+        },
+        {
+            "data": "skipped",
+            "title": "Skipped",
+            "className": "dt-right"
+        },
+        {
+            "data": "out_of_range",
+            "title": "Out of Range",
+            "className": "dt-right"
+        },
+        {
+            "data": "depleted",
+            "title": "Depleted",
+            "className": "dt-right"
+        },
+        {
+            "data": "avg_utilization",
+            "title": "Avg Utilization",
+            "className": "dt-right"
+        },
+        {
+            "data": "cap_efficiency",
+            "title": "Cap Efficiency",
+            "className": "dt-right"
+        },
+        {
+            "data": "apy",
+            "title": "APY",
+            "className": "dt-right"
+        }
+    ],
+    "data": [
+        {
+            "group": "Core",
+            "total_value": "43,999.06",
+            "value_raw": 43999.056261000005,
+            "total_fees": "151.46",
+            "fees_raw": 151.45738500000002,
+            "fee_share": "90.46%",
+            "eligible_trs": 630,
+            "trades": 439,
+            "skipped": 18,
+            "out_of_range": 173,
+            "depleted": 0,
+            "avg_utilization": "69.68%",
+            "cap_efficiency": "0.003442",
+            "apy": "125.64%"
+        },
+        {
+            "group": "Signal",
+            "total_value": "825.43",
+            "value_raw": 825.431217,
+            "total_fees": "2.50",
+            "fees_raw": 2.4980409999999993,
+            "fee_share": "1.49%",
+            "eligible_trs": 166,
+            "trades": 156,
+            "skipped": 10,
+            "out_of_range": 0,
+            "depleted": 0,
+            "avg_utilization": "93.98%",
+            "cap_efficiency": "0.003026",
+            "apy": "110.46%"
+        },
+        {
+            "group": "Scalp",
+            "total_value": "6,006.69",
+            "value_raw": 6006.686432,
+            "total_fees": "13.47",
+            "fees_raw": 13.471338000000001,
+            "fee_share": "8.05%",
+            "eligible_trs": 426,
+            "trades": 63,
+            "skipped": 2,
+            "out_of_range": 361,
+            "depleted": 0,
+            "avg_utilization": "14.79%",
+            "cap_efficiency": "0.002243",
+            "apy": "81.86%"
+        }
+    ]
+}

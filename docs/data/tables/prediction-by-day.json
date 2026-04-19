@@ -1,0 +1,86 @@
+{
+    "title": "Daily Breakdown",
+    "columns": [
+        {
+            "data": "date",
+            "title": "Date"
+        },
+        {
+            "data": "daily_income",
+            "title": "Daily Income",
+            "className": "dt-right"
+        },
+        {
+            "data": "weekly_income",
+            "title": "Weekly Income",
+            "className": "dt-right"
+        },
+        {
+            "data": "monthly_income",
+            "title": "Monthly Income",
+            "className": "dt-right"
+        },
+        {
+            "data": "yearly_income",
+            "title": "Yearly Income",
+            "className": "dt-right"
+        },
+        {
+            "data": "apy",
+            "title": "APY",
+            "className": "dt-right"
+        }
+    ],
+    "data": [
+        {
+            "date": "2026-04-15",
+            "daily_income": "29.44",
+            "daily_raw": 29.443199000000007,
+            "weekly_income": "206.10",
+            "monthly_income": "883.30",
+            "yearly_income": "10,746.77",
+            "apy": "21.14%",
+            "apy_raw": 21.14208035806506
+        },
+        {
+            "date": "2026-04-16",
+            "daily_income": "1.29",
+            "daily_raw": 1.292999,
+            "weekly_income": "9.05",
+            "monthly_income": "38.79",
+            "yearly_income": "471.94",
+            "apy": "0.93%",
+            "apy_raw": 0.9284551166093656
+        },
+        {
+            "date": "2026-04-17",
+            "daily_income": "83.52",
+            "daily_raw": 83.52266100000001,
+            "weekly_income": "584.66",
+            "monthly_income": "2,505.68",
+            "yearly_income": "30,485.77",
+            "apy": "59.97%",
+            "apy_raw": 59.97455679260351
+        },
+        {
+            "date": "2026-04-18",
+            "daily_income": "0.95",
+            "daily_raw": 0.949456,
+            "weekly_income": "6.65",
+            "monthly_income": "28.48",
+            "yearly_income": "346.55",
+            "apy": "0.68%",
+            "apy_raw": 0.6817694995862038
+        },
+        {
+            "date": "2026-04-19",
+            "daily_income": "52.22",
+            "daily_raw": 52.21844899999996,
+            "weekly_income": "365.53",
+            "monthly_income": "1,566.55",
+            "yearly_income": "19,059.73",
+            "apy": "37.50%",
+            "apy_raw": 37.4961513160143
+        }
+    ]
+}
