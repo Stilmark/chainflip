@@ -69,12 +69,9 @@ final class SiteBuilder
             $mdContent = file_get_contents($mdPath);
             $tableHtml = $this->markdownTableToHtml($mdContent);
 
-            $pattern = '/<div class="table-container" id="' . preg_quote($containerId, '/') . '"><\/div>/';
             $replacement = '<div class="table-container" id="' . $containerId . '">' . "\n" . $tableHtml . "\n" . '</div>';
-            $html = preg_replace($pattern, $replacement, $html);
 
-            $patternWithContent = '/<div class="table-container" id="' . preg_quote($containerId, '/') . '">[\s\S]*?<\/div>/';
-            $html = preg_replace($patternWithContent, $replacement, $html);
+            $html = $this->replaceContainerContent($html, $containerId, $replacement);
         }
 
         file_put_contents($htmlPath, $html);
@@ -234,5 +231,47 @@ final class SiteBuilder
     private function escapeHtml(string $text): string
     {
         return htmlspecialchars($text, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+
+    private function replaceContainerContent(string $html, string $containerId, string $replacement): string
+    {
+        $startTag = '<div class="table-container" id="' . $containerId . '">';
+        $startPos = strpos($html, $startTag);
+
+        if ($startPos === false) {
+            return $html;
+        }
+
+        $searchStart = $startPos + strlen($startTag);
+        $depth = 1;
+        $endPos = $searchStart;
+        $len = strlen($html);
+
+        while ($endPos < $len && $depth > 0) {
+            $nextOpen = strpos($html, '<div', $endPos);
+            $nextClose = strpos($html, '</div>', $endPos);
+
+            if ($nextClose === false) {
+                break;
+            }
+
+            if ($nextOpen !== false && $nextOpen < $nextClose) {
+                $depth++;
+                $endPos = $nextOpen + 4;
+            } else {
+                $depth--;
+                if ($depth === 0) {
+                    $endPos = $nextClose + 6;
+                } else {
+                    $endPos = $nextClose + 6;
+                }
+            }
+        }
+
+        if ($depth !== 0) {
+            return $html;
+        }
+
+        return substr($html, 0, $startPos) . $replacement . substr($html, $endPos);
     }
 }
