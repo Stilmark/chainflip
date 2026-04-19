@@ -216,7 +216,7 @@ $tablesDir = resolve_project_path($projectRoot, (string) ($paths['tables_dir'] ?
 $tableBuilder = new TableBuilder();
 $generatedTables = $tableBuilder->generateAll($digest, $dailyMetrics, $config, $tablesDir, $compactStore);
 
-$siteDir = resolve_project_path($projectRoot, (string) ($paths['site_dir'] ?? './site'));
+$siteDir = resolve_project_path($projectRoot, (string) ($paths['site_dir'] ?? './docs'));
 if (is_dir($siteDir)) {
     $siteBuilder = new SiteBuilder($tablesDir, $siteDir);
     $builtPages = $siteBuilder->build();
