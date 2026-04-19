@@ -416,6 +416,13 @@ table.dataTable thead .sorting_desc::after {
   box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
 }
 
+/* Complex table headers */
+.header-group {
+  text-align: center !important;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+}
+
 /* Percentage bar visualization */
 .pct-bar {
   display: flex;

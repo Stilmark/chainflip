@@ -1,5 +1,19 @@
 {
-    "title": "Bucket Distribution — Latest Day (2026-04-19)",
+    "title": "Bucket Distribution",
+    "summary": [
+        {
+            "label": "Date",
+            "value": "2026-04-19"
+        },
+        {
+            "label": "Volume",
+            "value": "104,388.66"
+        },
+        {
+            "label": "TRs",
+            "value": "52"
+        }
+    ],
     "columns": [
         {
             "data": "price_low",
@@ -23,143 +37,165 @@
         },
         {
             "data": "P_A",
-            "title": "P A",
+            "title": "A",
             "className": "dt-right"
         },
         {
             "data": "P_B",
-            "title": "P B",
+            "title": "B",
             "className": "dt-right"
         },
         {
             "data": "P_C",
-            "title": "P C",
+            "title": "C",
             "className": "dt-right"
         },
         {
             "data": "P_D",
-            "title": "P D",
+            "title": "D",
             "className": "dt-right"
         },
         {
             "data": "P_S1",
-            "title": "P S1",
+            "title": "S1",
             "className": "dt-right"
         },
         {
             "data": "P_S2",
-            "title": "P S2",
+            "title": "S2",
             "className": "dt-right"
         },
         {
             "data": "P_S3",
-            "title": "P S3",
+            "title": "S3",
             "className": "dt-right"
         },
         {
             "data": "O_A",
-            "title": "O A",
+            "title": "A",
             "className": "dt-right"
         },
         {
             "data": "O_B",
-            "title": "O B",
+            "title": "B",
             "className": "dt-right"
         },
         {
             "data": "O_C",
-            "title": "O C",
+            "title": "C",
             "className": "dt-right"
         },
         {
             "data": "O_D",
-            "title": "O D",
+            "title": "D",
             "className": "dt-right"
         },
         {
             "data": "O_S1",
-            "title": "O S1",
+            "title": "S1",
             "className": "dt-right"
         },
         {
             "data": "O_S2",
-            "title": "O S2",
+            "title": "S2",
             "className": "dt-right"
         },
         {
             "data": "O_S3",
-            "title": "O S3",
+            "title": "S3",
             "className": "dt-right"
         },
         {
             "data": "S_A",
-            "title": "S A",
+            "title": "A",
             "className": "dt-right"
         },
         {
             "data": "S_B",
-            "title": "S B",
+            "title": "B",
             "className": "dt-right"
         },
         {
             "data": "S_C",
-            "title": "S C",
+            "title": "C",
             "className": "dt-right"
         },
         {
             "data": "S_D",
-            "title": "S D",
+            "title": "D",
             "className": "dt-right"
         },
         {
             "data": "S_S1",
-            "title": "S S1",
+            "title": "S1",
             "className": "dt-right"
         },
         {
             "data": "S_S2",
-            "title": "S S2",
+            "title": "S2",
             "className": "dt-right"
         },
         {
             "data": "S_S3",
-            "title": "S S3",
+            "title": "S3",
             "className": "dt-right"
         },
         {
             "data": "D_A",
-            "title": "D A",
+            "title": "A",
             "className": "dt-right"
         },
         {
             "data": "D_B",
-            "title": "D B",
+            "title": "B",
             "className": "dt-right"
         },
         {
             "data": "D_C",
-            "title": "D C",
+            "title": "C",
             "className": "dt-right"
         },
         {
             "data": "D_D",
-            "title": "D D",
+            "title": "D",
             "className": "dt-right"
         },
         {
             "data": "D_S1",
-            "title": "D S1",
+            "title": "S1",
             "className": "dt-right"
         },
         {
             "data": "D_S2",
-            "title": "D S2",
+            "title": "S2",
             "className": "dt-right"
         },
         {
             "data": "D_S3",
-            "title": "D S3",
+            "title": "S3",
             "className": "dt-right"
+        }
+    ],
+    "header_groups": [
+        {
+            "title": "",
+            "colspan": 4
+        },
+        {
+            "title": "Participated",
+            "colspan": 7
+        },
+        {
+            "title": "Out of Range",
+            "colspan": 7
+        },
+        {
+            "title": "Skipped",
+            "colspan": 7
+        },
+        {
+            "title": "Depleted",
+            "colspan": 7
         }
     ],
     "data": [
@@ -373,6 +409,5 @@
             "D_S2": "",
             "D_S3": ""
         }
-    ],
-    "legend": "P=Participating, O=Out of Range, S=Skipped, D=Depleted"
+    ]
 }

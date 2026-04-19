@@ -836,15 +836,31 @@ final class TableDataBuilder
             return ['title' => 'Bucket Distribution — Latest Day', 'columns' => [], 'data' => [], 'error' => "No bucket data for {$day['date']}"];
         }
 
+        // Calculate totals for summary
+        $totalVolume = 0;
+        $totalTrs = 0;
+        foreach ($buckets as $bucket) {
+            $totalVolume += (float) ($bucket['total_volume_usd'] ?? 0);
+            $totalTrs += (int) ($bucket['tr_count'] ?? 0);
+        }
+
+        $summary = [
+            ['label' => 'Date', 'value' => $day['date']],
+            ['label' => 'Volume', 'value' => $this->money($totalVolume)],
+            ['label' => 'TRs', 'value' => (string) $totalTrs],
+        ];
+
         $activeRungs = array_values(array_filter($config['rungs'] ?? [], fn($r) => !empty($r['active'])));
         $rungCodes = array_column($activeRungs, 'rung');
 
         $states = [
-            'P' => 'participating',
-            'O' => 'out_of_range',
-            'S' => 'skipped',
-            'D' => 'depleted',
+            'P' => ['key' => 'participating', 'label' => 'Participated'],
+            'O' => ['key' => 'out_of_range', 'label' => 'Out of Range'],
+            'S' => ['key' => 'skipped', 'label' => 'Skipped'],
+            'D' => ['key' => 'depleted', 'label' => 'Depleted'],
         ];
+
+        $rungCount = count($rungCodes);
 
         $columns = [
             ['data' => 'price_low', 'title' => 'Price Low', 'className' => 'dt-right'],
@@ -853,10 +869,18 @@ final class TableDataBuilder
             ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
         ];
 
-        foreach ($states as $stateCode => $stateKey) {
+        foreach ($states as $stateCode => $state) {
             foreach ($rungCodes as $code) {
-                $columns[] = ['data' => "{$stateCode}_{$code}", 'title' => "{$stateCode} {$code}", 'className' => 'dt-right'];
+                $columns[] = ['data' => "{$stateCode}_{$code}", 'title' => $code, 'className' => 'dt-right'];
             }
+        }
+
+        // Build complex header structure for two-row header
+        $headerGroups = [
+            ['title' => '', 'colspan' => 4], // Price Low, Price High, TRs, Volume
+        ];
+        foreach ($states as $stateCode => $state) {
+            $headerGroups[] = ['title' => $state['label'], 'colspan' => $rungCount];
         }
 
         usort($buckets, fn($a, $b) => $a['price_bucket_low'] <=> $b['price_bucket_low']);
@@ -871,10 +895,10 @@ final class TableDataBuilder
                 'volume_raw' => (float) $bucket['total_volume_usd'],
             ];
 
-            foreach ($states as $stateCode => $stateKey) {
+            foreach ($states as $stateCode => $state) {
                 foreach ($rungCodes as $code) {
                     $counts = $bucket['rung_counts'][$code] ?? ['participating' => 0, 'skipped' => 0, 'depleted' => 0, 'out_of_range' => 0];
-                    $row["{$stateCode}_{$code}"] = $counts[$stateKey] ?: '';
+                    $row["{$stateCode}_{$code}"] = $counts[$state['key']] ?: '';
                 }
             }
 
@@ -882,10 +906,11 @@ final class TableDataBuilder
         }
 
         return [
-            'title' => "Bucket Distribution — Latest Day ({$day['date']})",
+            'title' => 'Bucket Distribution',
+            'summary' => $summary,
             'columns' => $columns,
+            'header_groups' => $headerGroups,
             'data' => $data,
-            'legend' => 'P=Participating, O=Out of Range, S=Skipped, D=Depleted',
         ];
     }
 

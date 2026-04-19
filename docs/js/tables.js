@@ -77,12 +77,39 @@ const LPTables = {
 
     // Create table element
     const tableId = container.id + '-table';
-    html += `<table id="${tableId}" class="data-table display"><thead><tr>`;
+    html += `<table id="${tableId}" class="data-table display"><thead>`;
     
-    data.columns.forEach(col => {
-      html += `<th>${this.escapeHtml(col.title)}</th>`;
-    });
-    html += '</tr></thead><tbody></tbody>';
+    // Check for header groups (two-row header with colspan)
+    if (data.header_groups && data.header_groups.length > 0) {
+      // First row: group headers with colspan
+      html += '<tr>';
+      data.header_groups.forEach(group => {
+        if (group.title) {
+          html += `<th colspan="${group.colspan}" class="header-group">${this.escapeHtml(group.title)}</th>`;
+        } else {
+          // Empty group - output individual cells for first columns
+          for (let i = 0; i < group.colspan; i++) {
+            html += `<th rowspan="2">${this.escapeHtml(data.columns[i].title)}</th>`;
+          }
+        }
+      });
+      html += '</tr>';
+      // Second row: individual column headers (skip first N that have rowspan)
+      html += '<tr>';
+      const skipCount = data.header_groups[0]?.colspan || 0;
+      data.columns.slice(skipCount).forEach(col => {
+        html += `<th>${this.escapeHtml(col.title)}</th>`;
+      });
+      html += '</tr>';
+    } else {
+      // Single row header
+      html += '<tr>';
+      data.columns.forEach(col => {
+        html += `<th>${this.escapeHtml(col.title)}</th>`;
+      });
+      html += '</tr>';
+    }
+    html += '</thead><tbody></tbody>';
 
     // Add footer if present
     if (data.footer) {
