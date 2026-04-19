@@ -6,7 +6,7 @@ require_once __DIR__ . '/Helpers.php';
 
 final class TableBuilder
 {
-    public function generateAll(array $digest, array $dailyMetrics, array $config, string $outputDir): array
+    public function generateAll(array $digest, array $dailyMetrics, array $config, string $outputDir, array $compactStore = []): array
     {
         $outputDir = rtrim($outputDir, '/');
 
@@ -28,6 +28,7 @@ final class TableBuilder
         $files['performance/strategy.md'] = $this->buildStrategySummary($digest, $config);
         $files['distribution/bucketLatestDay.md'] = $this->buildBucketDistribution($dailyMetrics, $config);
         $files['trades/latest.md'] = $this->buildLatestTrades($digest, $config);
+        $files['trades/byDay.md'] = $this->buildTradesByDay($compactStore, $config);
 
         foreach ($files as $filename => $content) {
             file_put_contents($outputDir . '/' . $filename, $content);
@@ -459,7 +460,7 @@ final class TableBuilder
 
         foreach ($trades as $trade) {
             $ts = $trade['timestamp'] ?? '';
-            $tsFormatted = $ts ? substr($ts, 0, 16) : '—';
+            $tsFormatted = $ts ? substr($ts, 0, 19) : '—';
             $tsFormatted = str_replace('T', ' ', $tsFormatted);
 
             $price = number_format((float) ($trade['trade_price'] ?? 0), 4);
@@ -472,6 +473,68 @@ final class TableBuilder
             $depleted = implode(', ', $trade['depleted_rungs'] ?? []) ?: '—';
 
             $out .= "| {$tsFormatted} | {$price} | {$volume} | {$fees} | {$participating} | {$skipped} | {$outOfRange} | {$depleted} |\n";
+        }
+
+        return $out;
+    }
+
+    private function buildTradesByDay(array $compactStore, array $config): string
+    {
+        $trades = $compactStore['trades'] ?? [];
+
+        if (empty($trades)) {
+            return "# Trades by Day\n\nNo trades available.\n";
+        }
+
+        $analysisWindowStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
+        $analysisWindowStartDate = substr($analysisWindowStart, 0, 10);
+
+        $trades = array_filter($trades, fn($t) => ($t['date'] ?? '') >= $analysisWindowStartDate);
+
+        $tradesByDate = [];
+        foreach ($trades as $trade) {
+            $date = $trade['date'] ?? '';
+            if ($date) {
+                $tradesByDate[$date][] = $trade;
+            }
+        }
+
+        krsort($tradesByDate);
+
+        $out = "# Trades by Day\n\n";
+
+        foreach ($tradesByDate as $date => $dayTrades) {
+            $out .= "## {$date}\n\n";
+            $out .= "| Timestamp | Price | Volume | Fees | Participating | Skipped | Out of Range | Depleted |\n";
+            $out .= "|-----------|------:|-------:|-----:|---------------|---------|--------------|----------|\n";
+
+            usort($dayTrades, fn($a, $b) => ($b['timestamp'] ?? '') <=> ($a['timestamp'] ?? ''));
+
+            $totalVolume = 0;
+            $totalFees = 0;
+
+            foreach ($dayTrades as $trade) {
+                $ts = $trade['timestamp'] ?? '';
+                $tsFormatted = $ts ? substr($ts, 11, 8) : '—';
+
+                $price = number_format((float) ($trade['trade_price'] ?? 0), 4);
+                $volume = (float) ($trade['totals']['filled_volume_usd'] ?? 0);
+                $fees = (float) ($trade['totals']['fees_usd'] ?? 0);
+
+                $totalVolume += $volume;
+                $totalFees += $fees;
+
+                $participating = implode(', ', $trade['totals']['participating_rungs'] ?? []) ?: '—';
+                $skipped = implode(', ', $trade['totals']['skipped_rungs'] ?? []) ?: '—';
+                $outOfRange = implode(', ', $trade['totals']['out_of_range_rungs'] ?? []) ?: '—';
+                $depleted = implode(', ', $trade['totals']['depleted_rungs'] ?? []) ?: '—';
+
+                $out .= "| {$tsFormatted} | {$price} | " . $this->money($volume) . " | " . $this->money($fees) . " | {$participating} | {$skipped} | {$outOfRange} | {$depleted} |\n";
+            }
+
+            $tradeCount = count($dayTrades);
+            $out .= "| **Total ({$tradeCount})** | | " . $this->money($totalVolume) . " | " . $this->money($totalFees) . " | | | | |\n";
+            $out .= "\n";
         }
 
         return $out;

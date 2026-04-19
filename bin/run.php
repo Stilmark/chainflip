@@ -213,7 +213,7 @@ save_json_file($digestFile, $digest);
 
 $tablesDir = resolve_project_path($projectRoot, (string) ($paths['tables_dir'] ?? './tables'));
 $tableBuilder = new TableBuilder();
-$generatedTables = $tableBuilder->generateAll($digest, $dailyMetrics, $config, $tablesDir);
+$generatedTables = $tableBuilder->generateAll($digest, $dailyMetrics, $config, $tablesDir, $compactStore);
 
 flock($lockHandle, LOCK_UN);
 fclose($lockHandle);

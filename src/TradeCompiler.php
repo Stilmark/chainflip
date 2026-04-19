@@ -25,10 +25,13 @@ final class TradeCompiler
         }
 
         $freshFills = [];
+        $seenFillIds = [];
         foreach ($newFills as $fill) {
-            if (!isset($existingFillIds[$fill['fill_id']])) {
+            $fillId = $fill['fill_id'];
+            if (!isset($existingFillIds[$fillId]) && !isset($seenFillIds[$fillId])) {
                 $fill['matched_rung'] = $this->matchRungTolerant($fill, $activeRungs);
                 $freshFills[] = $fill;
+                $seenFillIds[$fillId] = true;
             }
         }
 
