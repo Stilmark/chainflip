@@ -22,6 +22,7 @@ final class TableDataBuilder
         $files['prediction-current.json'] = $this->buildPredictionCurrent($digest, $config);
         $files['prediction-latest-day.json'] = $this->buildPredictionLatestDay($dailyMetrics, $config);
         $files['prediction-by-day.json'] = $this->buildPredictionByDay($dailyMetrics, $config);
+        $files['status-daily-breakdown.json'] = $this->buildStatusDailyBreakdown($dailyMetrics, $config);
 
         // Performance tables
         $files['performance-rungs.json'] = $this->buildRungPerformance($digest, $config);
@@ -504,6 +505,126 @@ final class TableDataBuilder
             'columns' => $columns,
             'data' => $data,
         ];
+    }
+
+    private function buildStatusDailyBreakdown(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'Daily Breakdown', 'columns' => [], 'data' => [], 'error' => 'No data available'];
+        }
+
+        // Build revision timeline from config
+        $rungs = $config['rungs'] ?? [];
+
+        $columns = [
+            ['data' => 'date', 'title' => 'Date'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+            ['data' => 'fees_pct', 'title' => 'Fees %', 'className' => 'dt-right'],
+            ['data' => 'eligible_trs', 'title' => 'Eligible TRs', 'className' => 'dt-right'],
+            ['data' => 'trs', 'title' => 'TRs', 'className' => 'dt-right'],
+            ['data' => 'skipped', 'title' => 'Skipped', 'className' => 'dt-right'],
+            ['data' => 'out_of_range', 'title' => 'Out of Range', 'className' => 'dt-right'],
+            ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
+            ['data' => 'utilization', 'title' => 'Utilization', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        foreach ($days as $day) {
+            $portfolio = $day['portfolio'] ?? [];
+            $meta = $day['meta'] ?? [];
+            $rungMetrics = $day['rung_metrics'] ?? [];
+            
+            $totalFees = (float) ($portfolio['total_fees'] ?? 0);
+            $trs = (int) ($meta['trs'] ?? 0);
+            
+            // Sum up rung metrics (use max eligible_trs since it's per-rung)
+            $maxEligibleTrs = 0;
+            $totalSkipped = 0;
+            $totalOutOfRange = 0;
+            $totalDepleted = 0;
+            
+            foreach ($rungMetrics as $rm) {
+                $maxEligibleTrs = max($maxEligibleTrs, (int) ($rm['eligible_trs'] ?? 0));
+                $totalSkipped += (int) ($rm['skipped_count'] ?? 0);
+                $totalOutOfRange += (int) ($rm['out_of_range_count'] ?? 0);
+                $totalDepleted += (int) ($rm['depleted_count'] ?? 0);
+            }
+            
+            // Calculate utilization based on participating vs eligible
+            $rungCount = count($rungMetrics);
+            $totalEligible = $maxEligibleTrs * $rungCount;
+            $totalNonParticipating = $totalSkipped + $totalOutOfRange + $totalDepleted;
+            $utilization = $totalEligible > 0 ? (($totalEligible - $totalNonParticipating) / $totalEligible) * 100 : 0;
+
+            // Calculate portfolio value from config revisions active on this date
+            $dayDate = $day['date'];
+            $dayEnd = $dayDate . 'T23:59:59Z'; // End of day
+            $portfolioValue = $this->getPortfolioValueAtDate($rungs, $dayEnd);
+            
+            $feesPct = $portfolioValue > 0 ? ($totalFees / $portfolioValue) * 100 : 0;
+            
+            $data[] = [
+                'date' => $day['date'],
+                'value' => $this->money($portfolioValue),
+                'value_raw' => $portfolioValue,
+                'fees' => $this->money($totalFees),
+                'fees_raw' => $totalFees,
+                'fees_pct' => number_format($feesPct, 4) . '%',
+                'fees_pct_raw' => $feesPct,
+                'eligible_trs' => (string) $maxEligibleTrs,
+                'trs' => (string) $trs,
+                'skipped' => (string) $totalSkipped,
+                'out_of_range' => (string) $totalOutOfRange,
+                'depleted' => (string) $totalDepleted,
+                'utilization' => $this->pct($utilization),
+                'utilization_raw' => $utilization,
+            ];
+        }
+
+        return [
+            'title' => 'Daily Breakdown',
+            'columns' => $columns,
+            'data' => $data,
+        ];
+    }
+
+    private function getPortfolioValueAtDate(array $rungs, string $dateTime): float
+    {
+        $totalValue = 0;
+        
+        foreach ($rungs as $rung) {
+            if (empty($rung['active'])) {
+                continue;
+            }
+            
+            $revisions = $rung['revisions'] ?? [];
+            $activeRevision = null;
+            
+            // Find the revision that was active at the given date/time
+            foreach ($revisions as $revision) {
+                $effectiveFrom = $revision['effective_from'] ?? null;
+                $effectiveTo = $revision['effective_to'] ?? null;
+                
+                if ($effectiveFrom === null) {
+                    continue;
+                }
+                
+                // Check if this revision was active at the given time
+                if ($dateTime >= $effectiveFrom) {
+                    if ($effectiveTo === null || $dateTime < $effectiveTo) {
+                        $activeRevision = $revision;
+                    }
+                }
+            }
+            
+            if ($activeRevision !== null) {
+                $totalValue += (float) ($activeRevision['initial_value']['total_usd'] ?? 0);
+            }
+        }
+        
+        return $totalValue;
     }
 
     private function buildScalpPerformance(array $digest, array $config): array

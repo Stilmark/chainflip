@@ -26,7 +26,6 @@
   <div class="container">
     <div class="sub-nav">
       <a href="#current" class="active">Current</a>
-      <a href="#latest-day">Latest Day</a>
       <a href="#by-day">By Day</a>
     </div>
 
@@ -34,10 +33,8 @@
       <div class="table-container" id="status-current">
         <p>Loading...</p>
       </div>
-    </section>
-
-    <section id="latest-day" class="card">
-      <div class="table-container" id="status-latest-day">
+      <h3>Daily Breakdown</h3>
+      <div class="table-container" id="status-daily-breakdown">
         <p>Loading...</p>
       </div>
     </section>
@@ -49,7 +46,7 @@
     </section>
   </div>
 
-  <footer>LP Parser &copy; 2026 &mdash; Updated 2026-04-19 18:03:20 UTC</footer>
+  <footer>LP Parser &copy; 2026 &mdash; Updated 2026-04-19 18:50:19 UTC</footer>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
@@ -58,7 +55,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       LPTables.loadTable('status-current', 'status-current.json');
-      LPTables.loadTable('status-latest-day', 'status-latest-day.json');
+      LPTables.loadTable('status-daily-breakdown', 'status-daily-breakdown.json', { order: [[0, 'desc']] });
       LPTables.loadDaySelector('status-by-day', 'status-by-day.json');
     });
   </script>
