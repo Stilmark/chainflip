@@ -26,6 +26,7 @@ final class TableBuilder
         $files['prediction/byDay.md'] = $this->buildPredictionByDay($dailyMetrics, $config);
         $files['performance/scalp.md'] = $this->buildScalpPerformance($digest, $config);
         $files['performance/strategy.md'] = $this->buildStrategySummary($digest, $config);
+        $files['performance/rungs.md'] = $this->buildRungPerformance($digest, $config);
         $files['distribution/bucketLatestDay.md'] = $this->buildBucketDistribution($dailyMetrics, $config);
         $files['trades/latest.md'] = $this->buildLatestTrades($digest, $config);
         $files['trades/byDay.md'] = $this->buildTradesByDay($compactStore, $config);
@@ -536,6 +537,88 @@ final class TableBuilder
             $out .= "| **Total ({$tradeCount})** | | " . $this->money($totalVolume) . " | " . $this->money($totalFees) . " | | | | |\n";
             $out .= "\n";
         }
+
+        return $out;
+    }
+
+    private function buildRungPerformance(array $digest, array $config): string
+    {
+        $rungs = $digest['active_rungs'] ?? [];
+        $configRungs = [];
+        foreach ($config['rungs'] ?? [] as $cr) {
+            $configRungs[$cr['rung']] = $cr;
+        }
+
+        if (empty($rungs)) {
+            return "# Rung Performance\n\nNo active rungs found.\n";
+        }
+
+        $totalValue = 0;
+        $totalFees = 0;
+        foreach ($rungs as $r) {
+            $totalValue += (float) $r['rung_value'];
+            $totalFees += (float) $r['fees_to_date'];
+        }
+
+        $now = time();
+
+        $out = "# Rung Performance\n\n";
+        $out .= "| Rung | Name | Value | Value % | Fees | Fee % | Cap Eff | Days | APY | Util % | Volume | Vol/Day |\n";
+        $out .= "|------|------|------:|--------:|-----:|------:|--------:|-----:|----:|-------:|-------:|--------:|\n";
+
+        $rows = [];
+        foreach ($rungs as $r) {
+            $code = $r['rung'];
+            $cr = $configRungs[$code] ?? [];
+            $value = (float) $r['rung_value'];
+            $fees = (float) $r['fees_to_date'];
+            $volume = (float) $r['filled_volume_usd'];
+
+            $valueShare = $totalValue > 0 ? ($value / $totalValue) * 100 : 0;
+            $feeShare = $totalFees > 0 ? ($fees / $totalFees) * 100 : 0;
+            $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
+
+            $createdAt = $r['created_at'] ?? null;
+            $activeDays = 0;
+            if ($createdAt) {
+                $createdTs = strtotime($createdAt);
+                if ($createdTs !== false) {
+                    $activeDays = max(1, ($now - $createdTs) / 86400);
+                }
+            }
+
+            $annualizedFees = $activeDays > 0 ? ($fees / $activeDays) * 365 : 0;
+            $apy = $value > 0 ? ($annualizedFees / $value) * 100 : 0;
+
+            $utilization = (float) ($r['utilization_pct'] ?? 0);
+            $volPerDay = $activeDays > 0 ? $volume / $activeDays : 0;
+
+            $rows[] = [
+                'code' => $code,
+                'name' => $r['name'] ?? '',
+                'value' => $value,
+                'value_share' => $valueShare,
+                'fees' => $fees,
+                'fee_share' => $feeShare,
+                'cap_eff' => $capEff,
+                'days' => $activeDays,
+                'apy' => $apy,
+                'utilization' => $utilization,
+                'volume' => $volume,
+                'vol_per_day' => $volPerDay,
+            ];
+        }
+
+        usort($rows, fn($a, $b) => $b['apy'] <=> $a['apy']);
+
+        foreach ($rows as $row) {
+            $out .= "| {$row['code']} | {$row['name']} | " . $this->money($row['value']) . " | " . $this->pct($row['value_share']) . " | " . $this->money($row['fees']) . " | " . $this->pct($row['fee_share']) . " | " . $this->pct($row['cap_eff']) . " | " . number_format($row['days'], 1) . " | " . $this->pct($row['apy']) . " | " . $this->pct($row['utilization']) . " | " . $this->money($row['volume']) . " | " . $this->money($row['vol_per_day']) . " |\n";
+        }
+
+        $totalCapEff = $totalValue > 0 ? ($totalFees / $totalValue) * 100 : 0;
+        $out .= "| **Total** | | " . $this->money($totalValue) . " | 100.00% | " . $this->money($totalFees) . " | 100.00% | " . $this->pct($totalCapEff) . " | | | | | |\n";
+
+        $out .= "\n_Sorted by APY descending. Cap Eff = Fees/Value %. APY based on actual active days._\n";
 
         return $out;
     }
