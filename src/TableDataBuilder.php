@@ -59,7 +59,7 @@ final class TableDataBuilder
             ['label' => 'Portfolio Value', 'value' => $this->money($portfolio['portfolio_value'] ?? 0)],
             ['label' => 'Total Fees', 'value' => $this->money($portfolio['total_fees_to_date'] ?? 0)],
             ['label' => 'Total TRs', 'value' => (string) ($meta['total_trs_in_scope'] ?? 0)],
-            ['label' => 'Analysis Window Start', 'value' => $meta['analysis_window_start'] ?? ''],
+            ['label' => 'Window Start', 'value' => substr($meta['analysis_window_start'] ?? '', 0, 10)],
             ['label' => 'As Of Date', 'value' => $meta['as_of_date'] ?? ''],
         ];
 
@@ -117,12 +117,12 @@ final class TableDataBuilder
             'value' => $this->money($totals['value']),
             'fees' => $this->money($totals['fees']),
             'fee_share' => '100.00%',
-            'eligible_trs' => $totals['eligible_trs'],
-            'trades' => $totals['trades'],
-            'skipped' => $totals['skipped'],
-            'out_of_range' => $totals['out_of_range'],
-            'depleted' => $totals['depleted'],
-            'utilization' => $this->pct($totalUtil),
+            'eligible_trs' => '',
+            'trades' => '',
+            'skipped' => '',
+            'out_of_range' => '',
+            'depleted' => '',
+            'utilization' => '',
         ];
 
         return [
@@ -152,9 +152,11 @@ final class TableDataBuilder
             return ['title' => 'LP Status — By Day', 'days' => [], 'error' => 'No data available'];
         }
 
+        $configRungs = $config['rungs'] ?? [];
+
         $daysData = [];
         foreach ($days as $day) {
-            $daysData[] = $this->buildDayStatusData($day, "Date: {$day['date']}");
+            $daysData[] = $this->buildDayStatusData($day, "Date: {$day['date']}", $configRungs);
         }
 
         return [
@@ -163,15 +165,23 @@ final class TableDataBuilder
         ];
     }
 
-    private function buildDayStatusData(array $day, string $title): array
+    private function buildDayStatusData(array $day, string $title, array $configRungs = []): array
     {
         $meta = $day['meta'] ?? [];
         $portfolio = $day['portfolio'] ?? [];
         $rungs = $day['rung_metrics'] ?? [];
+        $dayDate = $day['date'] ?? '';
+        $dayEnd = $dayDate . 'T23:59:59Z';
+
+        // Calculate historical portfolio value from config revisions
+        $historicalPortfolioValue = $this->getPortfolioValueAtDate($configRungs, $dayEnd);
+        if ($historicalPortfolioValue == 0) {
+            $historicalPortfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
+        }
 
         $summary = [
             ['label' => 'Date', 'value' => $day['date'] ?? ''],
-            ['label' => 'Portfolio Value', 'value' => $this->money($portfolio['portfolio_value'] ?? 0)],
+            ['label' => 'Portfolio Value', 'value' => $this->money($historicalPortfolioValue)],
             ['label' => 'Total Fees', 'value' => $this->money($portfolio['total_fees'] ?? 0)],
             ['label' => 'TRs', 'value' => (string) ($meta['trs'] ?? 0)],
         ];
@@ -190,6 +200,21 @@ final class TableDataBuilder
             ['data' => 'utilization', 'title' => 'Utilization', 'className' => 'dt-right'],
         ];
 
+        // Build lookup for historical rung values from config
+        $rungValueLookup = [];
+        foreach ($configRungs as $cr) {
+            $rungId = $cr['rung'] ?? '';
+            foreach ($cr['revisions'] ?? [] as $rev) {
+                $effectiveFrom = $rev['effective_from'] ?? null;
+                $effectiveTo = $rev['effective_to'] ?? null;
+                if ($effectiveFrom && $dayEnd >= $effectiveFrom) {
+                    if ($effectiveTo === null || $dayEnd < $effectiveTo) {
+                        $rungValueLookup[$rungId] = (float) ($rev['initial_value']['total_usd'] ?? 0);
+                    }
+                }
+            }
+        }
+
         $data = [];
         $totals = [
             'value' => 0, 'fees' => 0, 'eligible_trs' => 0, 'trades' => 0,
@@ -197,11 +222,15 @@ final class TableDataBuilder
         ];
 
         foreach ($rungs as $r) {
+            $rungId = $r['rung'];
+            // Use historical value from config if available, otherwise fall back to rung_value
+            $rungValue = $rungValueLookup[$rungId] ?? (float) $r['rung_value'];
+            
             $data[] = [
-                'rung' => $r['rung'],
+                'rung' => $rungId,
                 'name' => $r['name'],
-                'value' => $this->money($r['rung_value']),
-                'value_raw' => (float) $r['rung_value'],
+                'value' => $this->money($rungValue),
+                'value_raw' => $rungValue,
                 'fees' => $this->money($r['fees']),
                 'fees_raw' => (float) $r['fees'],
                 'fee_share' => $this->pct($r['fee_share_pct']),
@@ -213,7 +242,7 @@ final class TableDataBuilder
                 'utilization' => $this->pct($r['utilization_pct']),
             ];
 
-            $totals['value'] += $r['rung_value'];
+            $totals['value'] += $rungValue;
             $totals['fees'] += $r['fees'];
             $totals['eligible_trs'] += $r['eligible_trs'];
             $totals['trades'] += $r['trades'];
@@ -701,6 +730,14 @@ final class TableDataBuilder
     private function buildStrategySummary(array $digest, array $config): array
     {
         $rungs = $digest['active_rungs'] ?? [];
+        $meta = $digest['meta'] ?? [];
+        
+        // Calculate window days for proper APY
+        $analysisStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
+        $asOfDate = $meta['as_of_date'] ?? date('Y-m-d');
+        $startDate = new DateTime(substr($analysisStart, 0, 10));
+        $endDate = new DateTime($asOfDate);
+        $windowDays = max(1, (int) $endDate->diff($startDate)->days + 1);
 
         $groups = [
             'Core' => ['A', 'B', 'C'],
@@ -755,8 +792,10 @@ final class TableDataBuilder
 
             $feeShare = $totalFees > 0 ? ($fees / $totalFees) * 100 : 0;
             $avgUtil = $eligible > 0 ? ($trades / $eligible) * 100 : 0;
-            $capEff = $value > 0 ? $fees / $value : 0;
-            $apy = $capEff * 365 * 100;
+            $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
+            // APY = (fees / value / windowDays) * 365 * 100
+            $dailyReturn = $value > 0 ? ($fees / $value) / $windowDays : 0;
+            $apy = $dailyReturn * 365 * 100;
 
             $data[] = [
                 'group' => $groupName,
@@ -771,7 +810,7 @@ final class TableDataBuilder
                 'out_of_range' => $oor,
                 'depleted' => $depleted,
                 'avg_utilization' => $this->pct($avgUtil),
-                'cap_efficiency' => number_format($capEff, 6),
+                'cap_efficiency' => $this->pct($capEff),
                 'apy' => $this->pct($apy),
             ];
         }
@@ -938,6 +977,9 @@ final class TableDataBuilder
 
             $totalVolume = 0;
             $totalFees = 0;
+            $minPrice = null;
+            $maxPrice = null;
+            $volumeWeightedPriceSum = 0;
             $data = [];
 
             foreach ($dayTrades as $trade) {
@@ -946,14 +988,25 @@ final class TableDataBuilder
 
                 $volume = (float) ($trade['totals']['filled_volume_usd'] ?? 0);
                 $fees = (float) ($trade['totals']['fees_usd'] ?? 0);
+                $price = (float) ($trade['trade_price'] ?? 0);
 
                 $totalVolume += $volume;
                 $totalFees += $fees;
+                $volumeWeightedPriceSum += $price * $volume;
+                
+                if ($price > 0) {
+                    if ($minPrice === null || $price < $minPrice) {
+                        $minPrice = $price;
+                    }
+                    if ($maxPrice === null || $price > $maxPrice) {
+                        $maxPrice = $price;
+                    }
+                }
 
                 $data[] = [
                     'timestamp' => $tsFormatted,
-                    'price' => number_format((float) ($trade['trade_price'] ?? 0), 4),
-                    'price_raw' => (float) ($trade['trade_price'] ?? 0),
+                    'price' => number_format($price, 4),
+                    'price_raw' => $price,
                     'volume' => $this->money($volume),
                     'volume_raw' => $volume,
                     'fees' => $this->money($fees),
@@ -965,6 +1018,54 @@ final class TableDataBuilder
                 ];
             }
 
+            $vwap = $totalVolume > 0 ? $volumeWeightedPriceSum / $totalVolume : 0;
+            $priceRange = ($minPrice !== null && $maxPrice !== null) 
+                ? number_format($minPrice, 4) . ' – ' . number_format($maxPrice, 4) 
+                : '—';
+
+            // Build price distribution table
+            $priceDistribution = [];
+            foreach ($dayTrades as $trade) {
+                $price = number_format((float) ($trade['trade_price'] ?? 0), 4);
+                $volume = (float) ($trade['totals']['filled_volume_usd'] ?? 0);
+                $fees = (float) ($trade['totals']['fees_usd'] ?? 0);
+                
+                if (!isset($priceDistribution[$price])) {
+                    $priceDistribution[$price] = ['volume' => 0, 'fees' => 0];
+                }
+                $priceDistribution[$price]['volume'] += $volume;
+                $priceDistribution[$price]['fees'] += $fees;
+            }
+            
+            // Sort by price descending
+            krsort($priceDistribution);
+            
+            $distributionColumns = [
+                ['data' => 'price', 'title' => 'Price'],
+                ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
+                ['data' => 'volume_pct', 'title' => '% Volume', 'className' => 'dt-right'],
+                ['data' => 'fees', 'title' => 'Fees', 'className' => 'dt-right'],
+                ['data' => 'fees_pct', 'title' => '% Fees', 'className' => 'dt-right'],
+            ];
+            
+            $distributionData = [];
+            foreach ($priceDistribution as $price => $values) {
+                $volPct = $totalVolume > 0 ? ($values['volume'] / $totalVolume) * 100 : 0;
+                $feesPct = $totalFees > 0 ? ($values['fees'] / $totalFees) * 100 : 0;
+                
+                $distributionData[] = [
+                    'price' => $price,
+                    'volume' => $this->money($values['volume']),
+                    'volume_raw' => $values['volume'],
+                    'volume_pct' => '<div class="pct-bar"><div class="pct-bar-fill volume" style="width: ' . number_format($volPct * 4, 1) . 'px;"></div><span class="pct-bar-value">' . $this->pct($volPct) . '</span></div>',
+                    'volume_pct_raw' => $volPct,
+                    'fees' => $this->money($values['fees']),
+                    'fees_raw' => $values['fees'],
+                    'fees_pct' => '<div class="pct-bar"><div class="pct-bar-fill fees" style="width: ' . number_format($feesPct * 4, 1) . 'px;"></div><span class="pct-bar-value">' . $this->pct($feesPct) . '</span></div>',
+                    'fees_pct_raw' => $feesPct,
+                ];
+            }
+
             $daysData[] = [
                 'title' => "Date: {$date}",
                 'date' => $date,
@@ -973,6 +1074,8 @@ final class TableDataBuilder
                     ['label' => 'Trades', 'value' => (string) count($dayTrades)],
                     ['label' => 'Volume', 'value' => $this->money($totalVolume)],
                     ['label' => 'Fees', 'value' => $this->money($totalFees)],
+                    ['label' => 'Price Range', 'value' => $priceRange],
+                    ['label' => 'VWAP', 'value' => number_format($vwap, 4)],
                 ],
                 'hide_summary_title' => true,
                 'trade_count' => count($dayTrades),
@@ -980,6 +1083,8 @@ final class TableDataBuilder
                 'total_fees' => $this->money($totalFees),
                 'columns' => $columns,
                 'data' => $data,
+                'distribution_columns' => $distributionColumns,
+                'distribution_data' => $distributionData,
             ];
         }
 

@@ -416,6 +416,33 @@ table.dataTable thead .sorting_desc::after {
   box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.2);
 }
 
+/* Percentage bar visualization */
+.pct-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pct-bar-fill {
+  height: 12px;
+  border-radius: 2px;
+  min-width: 2px;
+}
+
+.pct-bar-fill.volume {
+  background-color: #58a6ff;
+}
+
+.pct-bar-fill.fees {
+  background-color: #3fb950;
+}
+
+.pct-bar-value {
+  font-size: 0.85rem;
+  min-width: 50px;
+  text-align: right;
+}
+
 /* Footer */
 footer {
   margin-top: 40px;

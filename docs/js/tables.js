@@ -106,6 +106,17 @@ const LPTables = {
       html += `<p class="table-legend"><em>${this.escapeHtml(data.legend)}</em></p>`;
     }
 
+    // Add distribution table if present
+    if (data.distribution_columns && data.distribution_data && data.distribution_data.length > 0) {
+      const distTableId = container.id + '-distribution-table';
+      html += '<h3>Price Distribution</h3>';
+      html += `<table id="${distTableId}" class="data-table display"><thead><tr>`;
+      data.distribution_columns.forEach(col => {
+        html += `<th>${this.escapeHtml(col.title)}</th>`;
+      });
+      html += '</tr></thead><tbody></tbody></table>';
+    }
+
     container.innerHTML = html;
 
     // Initialize DataTable
@@ -123,6 +134,33 @@ const LPTables = {
           { targets: '_all', orderable: true }
         ]
       });
+    }
+
+    // Initialize distribution DataTable if present
+    if (data.distribution_columns && data.distribution_data && data.distribution_data.length > 0) {
+      const distTableId = container.id + '-distribution-table';
+      const distTableEl = document.getElementById(distTableId);
+      if (distTableEl) {
+        // Mark columns with HTML content to not escape
+        const distColumns = data.distribution_columns.map(col => {
+          if (col.data === 'volume_pct' || col.data === 'fees_pct') {
+            return { ...col, render: (data) => data };
+          }
+          return col;
+        });
+        new DataTable(distTableEl, {
+          data: data.distribution_data,
+          columns: distColumns,
+          paging: false,
+          searching: false,
+          info: false,
+          order: [[0, 'desc']],
+          ordering: true,
+          columnDefs: [
+            { targets: '_all', orderable: true }
+          ]
+        });
+      }
     }
   },
 
