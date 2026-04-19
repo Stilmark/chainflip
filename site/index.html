@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LP Parser Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">LP Parser</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="status.html">Status</a></li>
+        <li><a href="performance.html">Performance</a></li>
+        <li><a href="prediction.html">Prediction</a></li>
+        <li><a href="trades.html">Trades</a></li>
+        <li><a href="distribution.html">Distribution</a></li>
+        <li><a href="config.html">Config</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>LP Parser Dashboard</h1>
+      <p class="subtitle">USDT/USDC Liquidity Provider Analytics</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>Quick Links</h2>
+        <div class="sub-nav">
+          <a href="status.html">Current Status</a>
+          <a href="performance.html">Rung Performance</a>
+          <a href="prediction.html">Income Prediction</a>
+          <a href="trades.html">Recent Trades</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Reports</h2>
+        <div class="sub-nav">
+          <a href="performance.html#strategy">Strategy Summary</a>
+          <a href="performance.html#scalp">Scalp Performance</a>
+          <a href="distribution.html">Bucket Distribution</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Overview</h2>
+      <p>Select a section from the navigation above to view detailed analytics and reports.</p>
+      <br>
+      <p><strong>Available Reports:</strong></p>
+      <ul style="margin-left: 20px; margin-top: 10px; color: var(--text-secondary);">
+        <li><strong>Status</strong> — Current portfolio status, latest day summary, daily breakdown</li>
+        <li><strong>Performance</strong> — Rung performance comparison, scalp analysis, strategy summary</li>
+        <li><strong>Prediction</strong> — Income projections based on current and historical data</li>
+        <li><strong>Trades</strong> — Recent trade activity and daily trade breakdown</li>
+        <li><strong>Distribution</strong> — Price bucket distribution analysis</li>
+        <li><strong>Config</strong> — Active rung configuration</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    LP Parser &copy; 2026
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

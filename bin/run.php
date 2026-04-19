@@ -8,6 +8,7 @@ require_once __DIR__ . '/../src/TradeCompiler.php';
 require_once __DIR__ . '/../src/DailyMetricsBuilder.php';
 require_once __DIR__ . '/../src/DigestBuilder.php';
 require_once __DIR__ . '/../src/TableBuilder.php';
+require_once __DIR__ . '/../src/SiteBuilder.php';
 
 $projectRoot = realpath(__DIR__ . '/..');
 if ($projectRoot === false) {
@@ -215,6 +216,12 @@ $tablesDir = resolve_project_path($projectRoot, (string) ($paths['tables_dir'] ?
 $tableBuilder = new TableBuilder();
 $generatedTables = $tableBuilder->generateAll($digest, $dailyMetrics, $config, $tablesDir, $compactStore);
 
+$siteDir = resolve_project_path($projectRoot, (string) ($paths['site_dir'] ?? './site'));
+if (is_dir($siteDir)) {
+    $siteBuilder = new SiteBuilder($tablesDir, $siteDir);
+    $builtPages = $siteBuilder->build();
+}
+
 flock($lockHandle, LOCK_UN);
 fclose($lockHandle);
 
@@ -227,3 +234,6 @@ if ($emitDebugTrades) {
 echo "Daily metrics: {$dailyMetricsFile}\n";
 echo "Digest: {$digestFile}\n";
 echo "Tables generated: " . count($generatedTables) . " files in {$tablesDir}\n";
+if (isset($builtPages)) {
+    echo "Site pages built: " . count($builtPages) . " files in {$siteDir}\n";
+}

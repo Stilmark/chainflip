@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Config — LP Parser</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <a href="index.html" class="logo">LP Parser</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="status.html">Status</a></li>
+        <li><a href="performance.html">Performance</a></li>
+        <li><a href="prediction.html">Prediction</a></li>
+        <li><a href="trades.html">Trades</a></li>
+        <li><a href="distribution.html">Distribution</a></li>
+        <li><a href="config.html">Config</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="card">
+      <div class="table-container" id="config-rungs">
+<h3>Rungs</h3>
+<table class="data-table"><thead><tr><th>Rung</th><th>Name</th><th>Created</th><th>Range Lower</th><th>Range Upper</th><th>Range Width</th><th>Value</th><th>Allocation</th><th>Tags</th></tr></thead><tbody><tr><td>A</td><td>Core</td><td>2026-04-14</td><td>0.9979</td><td>1.0029</td><td>0.0050</td><td>24,602.97</td><td>60.00%</td><td>main</td></tr><tr><td>B</td><td>Buffer</td><td>2026-04-14</td><td>0.9974</td><td>1.0034</td><td>0.0060</td><td>10,544.08</td><td>25.00%</td><td>main</td></tr><tr><td>C</td><td>Scalp</td><td>2026-04-14</td><td>0.9989</td><td>1.0021</td><td>0.0032</td><td>5,901.25</td><td>15.00%</td><td>main</td></tr><tr><td>D</td><td>Catch-all</td><td>2026-04-15</td><td>0.9964</td><td>1.0054</td><td>0.0090</td><td>825.43</td><td>2.00%</td><td>signal</td></tr><tr><td>S1</td><td>Tick</td><td>2026-04-16</td><td>1.0006</td><td>1.0010</td><td>0.0004</td><td>2,002.30</td><td>33.30%</td><td>scalp</td></tr><tr><td>S2</td><td>Flow</td><td>2026-04-16</td><td>1.0004</td><td>1.0012</td><td>0.0008</td><td>2,001.55</td><td>33.30%</td><td>scalp</td></tr><tr><td>S3</td><td>Sweep</td><td>2026-04-16</td><td>1.0002</td><td>1.0014</td><td>0.0012</td><td>2,002.83</td><td>33.30%</td><td>scalp</td></tr></tbody><tfoot><tr><td><strong>Total</strong></td><td><strong></strong></td><td><strong></strong></td><td><strong></strong></td><td><strong></strong></td><td><strong></strong></td><td><strong>47,880.42</strong></td><td><strong></strong></td><td><strong></strong></td></tr></tfoot></table>
+
+</div>
+    </section>
+  </div>
+
+  <footer>
+    LP Parser &copy; 2026
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
