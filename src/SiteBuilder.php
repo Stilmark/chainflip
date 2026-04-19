@@ -74,6 +74,13 @@ final class SiteBuilder
             $html = $this->replaceContainerContent($html, $containerId, $replacement);
         }
 
+        $timestamp = date('Y-m-d H:i:s') . ' UTC';
+        $html = preg_replace(
+            '/<footer>.*?<\/footer>/s',
+            '<footer>LP Parser &copy; 2026 &mdash; Updated ' . $timestamp . '</footer>',
+            $html
+        );
+
         file_put_contents($htmlPath, $html);
 
         return $htmlFile;

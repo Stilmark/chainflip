@@ -278,20 +278,49 @@ final class TableBuilder
             return "# LP Prediction — By Day\n\nNo data available.\n";
         }
 
+        $totalDailyFees = 0;
+        $portfolioValue = 0;
+        $dayCount = count($days);
+
+        foreach ($days as $day) {
+            $portfolio = $day['portfolio'] ?? [];
+            $totalDailyFees += (float) ($portfolio['total_fees'] ?? 0);
+            $portfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
+        }
+
+        $avgDaily = $dayCount > 0 ? $totalDailyFees / $dayCount : 0;
+        $weekly = $avgDaily * 7;
+        $monthly = $avgDaily * 30;
+        $yearly = $avgDaily * 365;
+        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+
         $out = "# LP Prediction — By Day\n\n";
+        $out .= "## Portfolio Forecast\n\n";
+        $out .= "| Field | Value |\n";
+        $out .= "|-------|------:|\n";
+        $out .= "| Days Analyzed | {$dayCount} |\n";
+        $out .= "| Total Fees | " . $this->money($totalDailyFees) . " |\n";
+        $out .= "| Avg Daily Income | " . $this->money($avgDaily) . " |\n";
+        $out .= "| Weekly Income | " . $this->money($weekly) . " |\n";
+        $out .= "| Monthly Income | " . $this->money($monthly) . " |\n";
+        $out .= "| Yearly Income | " . $this->money($yearly) . " |\n";
+        $out .= "| APY | " . $this->pct($apy) . " |\n";
+        $out .= "\n";
+
+        $out .= "## Daily Breakdown\n\n";
         $out .= "| Date | Daily Income | Weekly Income | Monthly Income | Yearly Income | APY |\n";
         $out .= "|------|-------------:|--------------:|---------------:|--------------:|----:|\n";
 
         foreach ($days as $day) {
             $portfolio = $day['portfolio'] ?? [];
             $totalFees = (float) ($portfolio['total_fees'] ?? 0);
-            $portfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
-            $weekly = $totalFees * 7;
-            $monthly = $totalFees * 30;
-            $yearly = $totalFees * 365;
-            $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+            $pv = (float) ($portfolio['portfolio_value'] ?? 0);
+            $wk = $totalFees * 7;
+            $mo = $totalFees * 30;
+            $yr = $totalFees * 365;
+            $dayApy = $pv > 0 ? ($yr / $pv) * 100 : 0;
 
-            $out .= "| {$day['date']} | " . $this->money($totalFees) . " | " . $this->money($weekly) . " | " . $this->money($monthly) . " | " . $this->money($yearly) . " | " . $this->pct($apy) . " |\n";
+            $out .= "| {$day['date']} | " . $this->money($totalFees) . " | " . $this->money($wk) . " | " . $this->money($mo) . " | " . $this->money($yr) . " | " . $this->pct($dayApy) . " |\n";
         }
 
         return $out;
