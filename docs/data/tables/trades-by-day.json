@@ -2,6 +2,168 @@
     "title": "Trades by Day",
     "days": [
         {
+            "title": "Date: 2026-04-20",
+            "date": "2026-04-20",
+            "summary": [
+                {
+                    "label": "Date",
+                    "value": "2026-04-20"
+                },
+                {
+                    "label": "Trades",
+                    "value": "3"
+                },
+                {
+                    "label": "Volume",
+                    "value": "7,771.92"
+                },
+                {
+                    "label": "Fees",
+                    "value": "3.89"
+                },
+                {
+                    "label": "Price Range",
+                    "value": "1.0012 – 1.0015"
+                },
+                {
+                    "label": "VWAP",
+                    "value": "1.0012"
+                }
+            ],
+            "hide_summary_title": true,
+            "trade_count": 3,
+            "total_volume": "7,771.92",
+            "total_fees": "3.89",
+            "columns": [
+                {
+                    "data": "timestamp",
+                    "title": "Timestamp"
+                },
+                {
+                    "data": "price",
+                    "title": "Price",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "participating",
+                    "title": "Participating"
+                },
+                {
+                    "data": "skipped",
+                    "title": "Skipped"
+                },
+                {
+                    "data": "out_of_range",
+                    "title": "Out of Range"
+                },
+                {
+                    "data": "depleted",
+                    "title": "Depleted"
+                }
+            ],
+            "data": [
+                {
+                    "timestamp": "15:26:24",
+                    "price": "1.0015",
+                    "price_raw": 1.0015007503751876,
+                    "volume": "0.65",
+                    "volume_raw": 0.6525907189,
+                    "fees": "0.00",
+                    "fees_raw": 0.00032599999999999996,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "15:24:06",
+                    "price": "1.0015",
+                    "price_raw": 1.0015007503751876,
+                    "volume": "17.50",
+                    "volume_raw": 17.495800028399998,
+                    "fees": "0.01",
+                    "fees_raw": 0.008740000000000001,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "15:23:54",
+                    "price": "1.0012",
+                    "price_raw": 1.0012006825904332,
+                    "volume": "7,753.77",
+                    "volume_raw": 7753.771172983899,
+                    "fees": "3.88",
+                    "fees_raw": 3.882146,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                }
+            ],
+            "distribution_columns": [
+                {
+                    "data": "price",
+                    "title": "Price"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume_pct",
+                    "title": "% Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees_pct",
+                    "title": "% Fees",
+                    "className": "dt-right"
+                }
+            ],
+            "distribution_data": [
+                {
+                    "price": "1.0015",
+                    "volume": "18.15",
+                    "volume_raw": 18.1483907473,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.9px;\"><\/div><span class=\"pct-bar-value\">0.23%<\/span><\/div>",
+                    "volume_pct_raw": 0.23351233370957827,
+                    "fees": "0.01",
+                    "fees_raw": 0.009066000000000001,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.9px;\"><\/div><span class=\"pct-bar-value\">0.23%<\/span><\/div>",
+                    "fees_pct_raw": 0.23298653478659095
+                },
+                {
+                    "price": "1.0012",
+                    "volume": "7,753.77",
+                    "volume_raw": 7753.771172983899,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 399.1px;\"><\/div><span class=\"pct-bar-value\">99.77%<\/span><\/div>",
+                    "volume_pct_raw": 99.76648766629042,
+                    "fees": "3.88",
+                    "fees_raw": 3.882146,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 399.1px;\"><\/div><span class=\"pct-bar-value\">99.77%<\/span><\/div>",
+                    "fees_pct_raw": 99.76701346521341
+                }
+            ]
+        },
+        {
             "title": "Date: 2026-04-19",
             "date": "2026-04-19",
             "summary": [
