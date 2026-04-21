@@ -39,6 +39,32 @@
     ],
     "data": [
         {
+            "timestamp": "2026-04-21 08:03:42",
+            "price": "1.0002",
+            "price_raw": 1.0002498608011752,
+            "volume": "1,112.45",
+            "volume_raw": 1112.4483058411001,
+            "fees": "0.56",
+            "fees_raw": 0.556539,
+            "participating": "A, B, C, D, S3",
+            "skipped": "—",
+            "out_of_range": "S1, S2",
+            "depleted": "—"
+        },
+        {
+            "timestamp": "2026-04-21 06:06:24",
+            "price": "1.0002",
+            "price_raw": 1.0001601826136746,
+            "volume": "750.06",
+            "volume_raw": 750.0612921358,
+            "fees": "0.38",
+            "fees_raw": 0.375185,
+            "participating": "A, B, C, D",
+            "skipped": "—",
+            "out_of_range": "S1, S2, S3",
+            "depleted": "—"
+        },
+        {
             "timestamp": "2026-04-21 04:18:30",
             "price": "1.0003",
             "price_raw": 1.000260390299503,
@@ -660,32 +686,6 @@
             "participating": "D",
             "skipped": "—",
             "out_of_range": "A, B, C, S1, S2, S3",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-04-20 23:13:18",
-            "price": "1.0036",
-            "price_raw": 1.003611058109539,
-            "volume": "988.71",
-            "volume_raw": 988.7113458309,
-            "fees": "0.50",
-            "fees_raw": 0.49627899999999997,
-            "participating": "B, D",
-            "skipped": "—",
-            "out_of_range": "A, C, S1, S2, S3",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-04-20 23:12:24",
-            "price": "1.0030",
-            "price_raw": 1.0030015007503752,
-            "volume": "0.07",
-            "volume_raw": 0.07418026380000001,
-            "fees": "0.00",
-            "fees_raw": 3.7e-5,
-            "participating": "B, D",
-            "skipped": "—",
-            "out_of_range": "A, C, S1, S2, S3",
             "depleted": "—"
         }
     ]
