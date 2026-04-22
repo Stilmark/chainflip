@@ -1,7 +1,7 @@
 {
     "version": 2,
     "pair": "USDT/USDC",
-    "updated_at": "2026-04-21T10:10:32+00:00",
+    "updated_at": "2026-04-22T07:58:11+00:00",
     "analysis_window_start": "2026-04-15T00:00:00Z",
     "source_files": [
         {
@@ -45,6 +45,12 @@
             "sha1": "9c0013db58734e98201fc1250ec56df424a73bf4",
             "processed_at": "2026-04-21T10:10:32+00:00",
             "archived_to": "/Users/christianlund/www/cli/lp-parser/./archive/2026-04-15-2026-04-21-cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF-order-fills-data.csv"
+        },
+        {
+            "file_name": "2026-04-16-2026-04-22-cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF-order-fills-data.csv",
+            "sha1": "27be515efe423fa02ad1a0afea6f5883bf10fc21",
+            "processed_at": "2026-04-22T07:58:11+00:00",
+            "archived_to": "/Users/christianlund/www/cli/lp-parser/./archive/2026-04-16-2026-04-22-cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF-order-fills-data.csv"
         }
     ],
     "trades": [
@@ -23933,6 +23939,80 @@
                 "skipped_rungs": [],
                 "depleted_rungs": [],
                 "out_of_range_rungs": []
+            }
+        },
+        {
+            "tr_id": "2026-04-22T04:54:24.000Z|USDT/USDC",
+            "timestamp": "2026-04-22T04:54:24.000Z",
+            "date": "2026-04-22",
+            "pair": "USDT/USDC",
+            "trade_price": 1.000413938824366,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 6,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.067622,
+                    "filled_volume_usd": 135.1354185394
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.024154,
+                    "filled_volume_usd": 48.269216063
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.036855,
+                    "filled_volume_usd": 73.6508212576
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.001261,
+                    "filled_volume_usd": 2.5199752046
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.034367,
+                    "filled_volume_usd": 68.6788163765
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.022927,
+                    "filled_volume_usd": 45.8171863866
+                }
+            },
+            "totals": {
+                "fees_usd": 0.18718600000000002,
+                "filled_volume_usd": 374.07143382769993,
+                "fills_count": 6,
+                "participating_rungs": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "S2",
+                    "S3"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": [
+                    "S1"
+                ]
             }
         }
     ]
