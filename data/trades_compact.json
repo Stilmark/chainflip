@@ -1,7 +1,7 @@
 {
     "version": 2,
     "pair": "USDT/USDC",
-    "updated_at": "2026-04-22T21:15:07+00:00",
+    "updated_at": "2026-04-23T13:15:33+00:00",
     "analysis_window_start": "2026-04-15T00:00:00Z",
     "source_files": [
         {
@@ -69,6 +69,12 @@
             "sha1": "5b7bb90502c940ff90b5edcf3fe6ff577772c572",
             "processed_at": "2026-04-22T21:15:07+00:00",
             "archived_to": "/Users/christianlund/www/cli/lp-parser/./archive/2026-04-16-2026-04-22-cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF-order-fills-data.csv"
+        },
+        {
+            "file_name": "2026-04-17-2026-04-23-cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF-order-fills-data.csv",
+            "sha1": "f3cd516fc4deae792dd79cf3288effcd129c5e21",
+            "processed_at": "2026-04-23T13:15:33+00:00",
+            "archived_to": "/Users/christianlund/www/cli/lp-parser/./archive/2026-04-17-2026-04-23-cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF-order-fills-data.csv"
         }
     ],
     "trades": [
@@ -25568,6 +25574,447 @@
             "totals": {
                 "fees_usd": 0.000661,
                 "filled_volume_usd": 1.3222801661,
+                "fills_count": 7,
+                "participating_rungs": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "S1",
+                    "S2",
+                    "S3"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": []
+            }
+        },
+        {
+            "tr_id": "2026-04-23T12:18:54.000Z|USDT/USDC",
+            "timestamp": "2026-04-23T12:18:54.000Z",
+            "date": "2026-04-23",
+            "pair": "USDT/USDC",
+            "trade_price": 1.0023029863999782,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 7,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 4.9303,
+                    "filled_volume_usd": 9835.7534690179
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 2.20161,
+                    "filled_volume_usd": 4392.124859606
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 1.611879,
+                    "filled_volume_usd": 3215.6348432102
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.128749,
+                    "filled_volume_usd": 256.849162219
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.250345,
+                    "filled_volume_usd": 499.4283719942
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.375614,
+                    "filled_volume_usd": 749.3350719075
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.417702,
+                    "filled_volume_usd": 833.2989671348
+                }
+            },
+            "totals": {
+                "fees_usd": 9.916198999999999,
+                "filled_volume_usd": 19782.4247450896,
+                "fills_count": 7,
+                "participating_rungs": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "S1",
+                    "S2",
+                    "S3"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": []
+            }
+        },
+        {
+            "tr_id": "2026-04-23T12:19:06.000Z|USDT/USDC",
+            "timestamp": "2026-04-23T12:19:06.000Z",
+            "date": "2026-04-23",
+            "pair": "USDT/USDC",
+            "trade_price": 1.0037087509271878,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 1,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 5.8e-5,
+                    "filled_volume_usd": 0.1163571784
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                }
+            },
+            "totals": {
+                "fees_usd": 5.8e-5,
+                "filled_volume_usd": 0.1163571784,
+                "fills_count": 1,
+                "participating_rungs": [
+                    "D"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": [
+                    "A",
+                    "B",
+                    "C",
+                    "S1",
+                    "S2",
+                    "S3"
+                ]
+            }
+        },
+        {
+            "tr_id": "2026-04-23T12:29:48.000Z|USDT/USDC",
+            "timestamp": "2026-04-23T12:29:48.000Z",
+            "date": "2026-04-23",
+            "pair": "USDT/USDC",
+            "trade_price": 1.0034882067432829,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 2,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.117666,
+                    "filled_volume_usd": 235.9960430401
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.019834,
+                    "filled_volume_usd": 39.7799322005
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                }
+            },
+            "totals": {
+                "fees_usd": 0.1375,
+                "filled_volume_usd": 275.7759752406,
+                "fills_count": 2,
+                "participating_rungs": [
+                    "B",
+                    "D"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": [
+                    "A",
+                    "C",
+                    "S1",
+                    "S2",
+                    "S3"
+                ]
+            }
+        },
+        {
+            "tr_id": "2026-04-23T12:30:18.000Z|USDT/USDC",
+            "timestamp": "2026-04-23T12:30:18.000Z",
+            "date": "2026-04-23",
+            "pair": "USDT/USDC",
+            "trade_price": 1.0033016508254127,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 2,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 9.4e-5,
+                    "filled_volume_usd": 0.1884884484
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 5.0e-6,
+                    "filled_volume_usd": 0.0100262685
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "out_of_range",
+                    "fees_usd": 0,
+                    "filled_volume_usd": 0
+                }
+            },
+            "totals": {
+                "fees_usd": 9.9e-5,
+                "filled_volume_usd": 0.1985147169,
+                "fills_count": 2,
+                "participating_rungs": [
+                    "B",
+                    "D"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": [
+                    "A",
+                    "C",
+                    "S1",
+                    "S2",
+                    "S3"
+                ]
+            }
+        },
+        {
+            "tr_id": "2026-04-23T12:37:24.000Z|USDT/USDC",
+            "timestamp": "2026-04-23T12:37:24.000Z",
+            "date": "2026-04-23",
+            "pair": "USDT/USDC",
+            "trade_price": 1.0020854531067362,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 7,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 4.920767,
+                    "filled_volume_usd": 9855.0334531006
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 2.079061,
+                    "filled_volume_usd": 4163.8256206476
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 1.609368,
+                    "filled_volume_usd": 3223.151081308
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.108553,
+                    "filled_volume_usd": 217.4038007162
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.249931,
+                    "filled_volume_usd": 500.5476519123
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.375131,
+                    "filled_volume_usd": 751.2911210996
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.417162,
+                    "filled_volume_usd": 835.4684268521
+                }
+            },
+            "totals": {
+                "fees_usd": 9.759972999999999,
+                "filled_volume_usd": 19546.7211556364,
+                "fills_count": 7,
+                "participating_rungs": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "S1",
+                    "S2",
+                    "S3"
+                ],
+                "skipped_rungs": [],
+                "depleted_rungs": [],
+                "out_of_range_rungs": []
+            }
+        },
+        {
+            "tr_id": "2026-04-23T13:13:54.001Z|USDT/USDC",
+            "timestamp": "2026-04-23T13:13:54.001Z",
+            "date": "2026-04-23",
+            "pair": "USDT/USDC",
+            "trade_price": 1.0008504579015711,
+            "price_source": {
+                "method": "widest_matching_rung_fill",
+                "rung": "D"
+            },
+            "fills_count": 7,
+            "rungs": {
+                "A": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.246186,
+                    "filled_volume_usd": 492.4416394591
+                },
+                "B": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.087935,
+                    "filled_volume_usd": 175.8948741816
+                },
+                "C": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.134174,
+                    "filled_volume_usd": 268.3859545679
+                },
+                "D": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.004591,
+                    "filled_volume_usd": 9.183298565
+                },
+                "S1": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.250319,
+                    "filled_volume_usd": 500.7088091086
+                },
+                "S2": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.125119,
+                    "filled_volume_usd": 250.2733924516
+                },
+                "S3": {
+                    "eligible": true,
+                    "status": "participating",
+                    "fees_usd": 0.083471,
+                    "filled_volume_usd": 166.9656116302
+                }
+            },
+            "totals": {
+                "fees_usd": 0.931795,
+                "filled_volume_usd": 1863.853579964,
                 "fills_count": 7,
                 "participating_rungs": [
                     "A",
