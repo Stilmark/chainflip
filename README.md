@@ -23,7 +23,7 @@ CLI PHP parser for Chainflip USDT/USDC LP fill CSVs with static site generation.
 ### Static Site
 - Generates a static site in `docs/` for GitHub Pages
 - Interactive DataTables with sorting
-- Pages: Dashboard, Status, Performance, Prediction, Trades, Distribution, Config
+- Pages: Dashboard, Status, Performance, Prediction, Trades, Config
 
 ## Usage
 
@@ -62,4 +62,3 @@ Edit `config.json` to configure:
 - Rebuild reads both `input/` and `archive/` when enabled in config
 - Dedupe is based on fill fingerprints, so overlapping CSV coverage is safe
 - Static site is served from `docs/` directory for GitHub Pages
-

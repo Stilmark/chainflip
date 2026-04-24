@@ -328,7 +328,7 @@ final class TableDataBuilder
         $data = [];
         foreach ($rungs as $r) {
             $code = $r['rung'];
-            $createdAt = $configRungs[$code]['created_at'] ?? $analysisStart;
+            $createdAt = $r['created_at'] ?? get_rung_created_at($configRungs[$code] ?? []) ?? $analysisStart;
             $rungStart = new DateTime(substr($createdAt, 0, 10));
             $effectiveStart = $rungStart > $startDate ? $rungStart : $startDate;
             $daysActive = max(1, (int) $endDate->diff($effectiveStart)->days + 1);
@@ -568,24 +568,21 @@ final class TableDataBuilder
             $totalFees = (float) ($portfolio['total_fees'] ?? 0);
             $trs = (int) ($meta['trs'] ?? 0);
             
-            // Sum up rung metrics (use max eligible_trs since it's per-rung)
-            $maxEligibleTrs = 0;
+            $totalEligible = 0;
+            $totalTrades = 0;
             $totalSkipped = 0;
             $totalOutOfRange = 0;
             $totalDepleted = 0;
             
             foreach ($rungMetrics as $rm) {
-                $maxEligibleTrs = max($maxEligibleTrs, (int) ($rm['eligible_trs'] ?? 0));
+                $totalEligible += (int) ($rm['eligible_trs'] ?? 0);
+                $totalTrades += (int) ($rm['trades'] ?? 0);
                 $totalSkipped += (int) ($rm['skipped_count'] ?? 0);
                 $totalOutOfRange += (int) ($rm['out_of_range_count'] ?? 0);
                 $totalDepleted += (int) ($rm['depleted_count'] ?? 0);
             }
             
-            // Calculate utilization based on participating vs eligible
-            $rungCount = count($rungMetrics);
-            $totalEligible = $maxEligibleTrs * $rungCount;
-            $totalNonParticipating = $totalSkipped + $totalOutOfRange + $totalDepleted;
-            $utilization = $totalEligible > 0 ? (($totalEligible - $totalNonParticipating) / $totalEligible) * 100 : 0;
+            $utilization = $totalEligible > 0 ? ($totalTrades / $totalEligible) * 100 : 0;
 
             // Calculate portfolio value from config revisions active on this date
             $dayDate = $day['date'];
@@ -602,7 +599,7 @@ final class TableDataBuilder
                 'fees_raw' => $totalFees,
                 'fees_pct' => number_format($feesPct, 4) . '%',
                 'fees_pct_raw' => $feesPct,
-                'eligible_trs' => (string) $maxEligibleTrs,
+                'eligible_trs' => (string) $totalEligible,
                 'trs' => (string) $trs,
                 'skipped' => (string) $totalSkipped,
                 'out_of_range' => (string) $totalOutOfRange,
@@ -1138,7 +1135,11 @@ final class TableDataBuilder
             $totalFees += (float) $r['fees_to_date'];
         }
 
-        $now = time();
+        $asOfTimestamp = strtotime($digest['meta']['source_window']['end'] ?? '');
+        if ($asOfTimestamp === false) {
+            $asOfDate = $digest['meta']['as_of_date'] ?? null;
+            $asOfTimestamp = $asOfDate !== null ? strtotime($asOfDate . 'T23:59:59Z') : time();
+        }
 
         $columns = [
             ['data' => 'rung', 'title' => 'Rung'],
@@ -1172,7 +1173,7 @@ final class TableDataBuilder
             if ($createdAt) {
                 $createdTs = strtotime($createdAt);
                 if ($createdTs !== false) {
-                    $activeDays = max(1, ($now - $createdTs) / 86400);
+                    $activeDays = max(1, ($asOfTimestamp - $createdTs) / 86400);
                 }
             }
 
