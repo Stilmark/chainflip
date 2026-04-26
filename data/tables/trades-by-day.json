@@ -11,29 +11,29 @@
                 },
                 {
                     "label": "Trades",
-                    "value": "8"
+                    "value": "17"
                 },
                 {
                     "label": "Volume",
-                    "value": "29,651.13"
+                    "value": "56,880.16"
                 },
                 {
                     "label": "Fees",
-                    "value": "14.85"
+                    "value": "28.46"
                 },
                 {
                     "label": "Price Range",
-                    "value": "1.0017 – 1.0030"
+                    "value": "1.0005 – 1.0030"
                 },
                 {
                     "label": "VWAP",
-                    "value": "1.0017"
+                    "value": "1.0015"
                 }
             ],
             "hide_summary_title": true,
-            "trade_count": 8,
-            "total_volume": "29,651.13",
-            "total_fees": "14.85",
+            "trade_count": 17,
+            "total_volume": "56,880.16",
+            "total_fees": "28.46",
             "columns": [
                 {
                     "data": "timestamp",
@@ -72,6 +72,123 @@
                 }
             ],
             "data": [
+                {
+                    "timestamp": "14:04:24",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "5,703.21",
+                    "volume_raw": 5703.2067684484,
+                    "fees": "2.85",
+                    "fees_raw": 2.852139,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:59:12",
+                    "price": "1.0008",
+                    "price_raw": 1.0007841846579646,
+                    "volume": "3,123.70",
+                    "volume_raw": 3123.6973198048,
+                    "fees": "1.56",
+                    "fees_raw": 1.5616020000000002,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:59:06",
+                    "price": "1.0009",
+                    "price_raw": 1.000884256769083,
+                    "volume": "604.23",
+                    "volume_raw": 604.2298324382,
+                    "fees": "0.30",
+                    "fees_raw": 0.30203699999999994,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:59:00",
+                    "price": "1.0011",
+                    "price_raw": 1.0010582426961339,
+                    "volume": "4,758.59",
+                    "volume_raw": 4758.5859178441,
+                    "fees": "2.38",
+                    "fees_raw": 2.378266,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:51:48",
+                    "price": "1.0014",
+                    "price_raw": 1.0013945904249832,
+                    "volume": "3,683.95",
+                    "volume_raw": 3683.9479586856,
+                    "fees": "1.84",
+                    "fees_raw": 1.840727,
+                    "participating": "A, B, C, D, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:29:18",
+                    "price": "1.0016",
+                    "price_raw": 1.0015563337224167,
+                    "volume": "1.72",
+                    "volume_raw": 1.7196287567000001,
+                    "fees": "0.00",
+                    "fees_raw": 0.000859,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:20:06",
+                    "price": "1.0016",
+                    "price_raw": 1.0016258129064533,
+                    "volume": "0.91",
+                    "volume_raw": 0.9107764368,
+                    "fees": "0.00",
+                    "fees_raw": 0.000455,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:13:42",
+                    "price": "1.0018",
+                    "price_raw": 1.0018369378582486,
+                    "volume": "4,977.75",
+                    "volume_raw": 4977.7475428485,
+                    "fees": "2.49",
+                    "fees_raw": 2.485997,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:13:36",
+                    "price": "1.0024",
+                    "price_raw": 1.0024234106298642,
+                    "volume": "4,374.99",
+                    "volume_raw": 4374.991518541599,
+                    "fees": "2.18",
+                    "fees_raw": 2.183689,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
                 {
                     "timestamp": "13:04:12",
                     "price": "1.0028",
@@ -209,55 +326,143 @@
                     "volume": "0.26",
                     "volume_raw": 0.2645733422,
                     "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
-                    "volume_pct_raw": 0.0008922876570010882,
+                    "volume_pct_raw": 0.0004651416672310366,
                     "fees": "0.00",
                     "fees_raw": 0.00013199999999999998,
                     "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
-                    "fees_pct_raw": 0.0008886856581484799
+                    "fees_pct_raw": 0.0004638224302208142
                 },
                 {
                     "price": "1.0029",
                     "volume": "954.04",
                     "volume_raw": 954.0433700212,
-                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 12.9px;\"><\/div><span class=\"pct-bar-value\">3.22%<\/span><\/div>",
-                    "volume_pct_raw": 3.2175619668822355,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 6.7px;\"><\/div><span class=\"pct-bar-value\">1.68%<\/span><\/div>",
+                    "volume_pct_raw": 1.6772866081380198,
                     "fees": "0.48",
                     "fees_raw": 0.47596,
-                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 12.8px;\"><\/div><span class=\"pct-bar-value\">3.20%<\/span><\/div>",
-                    "fees_pct_raw": 3.204385044335989
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 6.7px;\"><\/div><span class=\"pct-bar-value\">1.67%<\/span><\/div>",
+                    "fees_pct_raw": 1.6724312415749905
                 },
                 {
                     "price": "1.0028",
                     "volume": "296.39",
                     "volume_raw": 296.39168506939995,
-                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 4.0px;\"><\/div><span class=\"pct-bar-value\">1.00%<\/span><\/div>",
-                    "volume_pct_raw": 0.9995967092756455,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 2.1px;\"><\/div><span class=\"pct-bar-value\">0.52%<\/span><\/div>",
+                    "volume_pct_raw": 0.5210809275047099,
                     "fees": "0.15",
                     "fees_raw": 0.14789100000000002,
-                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 4.0px;\"><\/div><span class=\"pct-bar-value\">1.00%<\/span><\/div>",
-                    "fees_pct_raw": 0.9956712929487642
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 2.1px;\"><\/div><span class=\"pct-bar-value\">0.52%<\/span><\/div>",
+                    "fees_pct_raw": 0.5196603259680792
                 },
                 {
                     "price": "1.0025",
                     "volume": "0.19",
                     "volume_raw": 0.1943791675,
                     "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
-                    "volume_pct_raw": 0.0006555540724404738,
+                    "volume_pct_raw": 0.0003417345424679407,
                     "fees": "0.00",
                     "fees_raw": 9.7e-5,
                     "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
-                    "fees_pct_raw": 0.0006530493093969891
+                    "fees_pct_raw": 0.00034083921008650744
+                },
+                {
+                    "price": "1.0024",
+                    "volume": "4,374.99",
+                    "volume_raw": 4374.991518541599,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 30.8px;\"><\/div><span class=\"pct-bar-value\">7.69%<\/span><\/div>",
+                    "volume_pct_raw": 7.691594444604948,
+                    "fees": "2.18",
+                    "fees_raw": 2.183689,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 30.7px;\"><\/div><span class=\"pct-bar-value\">7.67%<\/span><\/div>",
+                    "fees_pct_raw": 7.673060142624695
+                },
+                {
+                    "price": "1.0018",
+                    "volume": "4,977.75",
+                    "volume_raw": 4977.7475428485,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 35.0px;\"><\/div><span class=\"pct-bar-value\">8.75%<\/span><\/div>",
+                    "volume_pct_raw": 8.751289044780215,
+                    "fees": "2.49",
+                    "fees_raw": 2.485997,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 34.9px;\"><\/div><span class=\"pct-bar-value\">8.74%<\/span><\/div>",
+                    "fees_pct_raw": 8.735311894406465
                 },
                 {
                     "price": "1.0017",
                     "volume": "28,400.23",
                     "volume_raw": 28400.232523636405,
-                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 383.1px;\"><\/div><span class=\"pct-bar-value\">95.78%<\/span><\/div>",
-                    "volume_pct_raw": 95.78129348211269,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 199.7px;\"><\/div><span class=\"pct-bar-value\">49.93%<\/span><\/div>",
+                    "volume_pct_raw": 49.92994152754572,
                     "fees": "14.23",
                     "fees_raw": 14.229316,
-                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 383.2px;\"><\/div><span class=\"pct-bar-value\">95.80%<\/span><\/div>",
-                    "fees_pct_raw": 95.7984019277477
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 200.0px;\"><\/div><span class=\"pct-bar-value\">50.00%<\/span><\/div>",
+                    "fees_pct_raw": 49.99906005681755
+                },
+                {
+                    "price": "1.0016",
+                    "volume": "2.63",
+                    "volume_raw": 2.6304051935,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "volume_pct_raw": 0.004624468387570481,
+                    "fees": "0.00",
+                    "fees_raw": 0.001314,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "fees_pct_raw": 0.004617141464470832
+                },
+                {
+                    "price": "1.0014",
+                    "volume": "3,683.95",
+                    "volume_raw": 3683.9479586856,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 25.9px;\"><\/div><span class=\"pct-bar-value\">6.48%<\/span><\/div>",
+                    "volume_pct_raw": 6.4766831051333105,
+                    "fees": "1.84",
+                    "fees_raw": 1.840727,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 25.9px;\"><\/div><span class=\"pct-bar-value\">6.47%<\/span><\/div>",
+                    "fees_pct_raw": 6.46795810994749
+                },
+                {
+                    "price": "1.0011",
+                    "volume": "4,758.59",
+                    "volume_raw": 4758.5859178441,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 33.5px;\"><\/div><span class=\"pct-bar-value\">8.37%<\/span><\/div>",
+                    "volume_pct_raw": 8.365984906426966,
+                    "fees": "2.38",
+                    "fees_raw": 2.378266,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 33.4px;\"><\/div><span class=\"pct-bar-value\">8.36%<\/span><\/div>",
+                    "fees_pct_raw": 8.35676602902678
+                },
+                {
+                    "price": "1.0009",
+                    "volume": "604.23",
+                    "volume_raw": 604.2298324382,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 4.2px;\"><\/div><span class=\"pct-bar-value\">1.06%<\/span><\/div>",
+                    "volume_pct_raw": 1.0622856759264019,
+                    "fees": "0.30",
+                    "fees_raw": 0.30203699999999994,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 4.2px;\"><\/div><span class=\"pct-bar-value\">1.06%<\/span><\/div>",
+                    "fees_pct_raw": 1.0612995102773033
+                },
+                {
+                    "price": "1.0008",
+                    "volume": "3,123.70",
+                    "volume_raw": 3123.6973198048,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 22.0px;\"><\/div><span class=\"pct-bar-value\">5.49%<\/span><\/div>",
+                    "volume_pct_raw": 5.491716463863475,
+                    "fees": "1.56",
+                    "fees_raw": 1.5616020000000002,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 21.9px;\"><\/div><span class=\"pct-bar-value\">5.49%<\/span><\/div>",
+                    "fees_pct_raw": 5.487166929376394
+                },
+                {
+                    "price": "1.0005",
+                    "volume": "5,703.21",
+                    "volume_raw": 5703.2067684484,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 40.1px;\"><\/div><span class=\"pct-bar-value\">10.03%<\/span><\/div>",
+                    "volume_pct_raw": 10.026705951478966,
+                    "fees": "2.85",
+                    "fees_raw": 2.852139,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 40.1px;\"><\/div><span class=\"pct-bar-value\">10.02%<\/span><\/div>",
+                    "fees_pct_raw": 10.021863956875478
                 }
             ]
         },
