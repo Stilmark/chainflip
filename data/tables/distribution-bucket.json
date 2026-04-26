@@ -3,15 +3,15 @@
     "summary": [
         {
             "label": "Date",
-            "value": "2026-04-24"
+            "value": "2026-04-26"
         },
         {
             "label": "Volume",
-            "value": "148.12"
+            "value": "29,651.13"
         },
         {
             "label": "TRs",
-            "value": "1"
+            "value": "8"
         }
     ],
     "columns": [
@@ -36,203 +36,90 @@
             "className": "dt-right"
         },
         {
-            "data": "P_A",
+            "data": "rung_A",
             "title": "A",
-            "className": "dt-right"
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         },
         {
-            "data": "P_B",
+            "data": "rung_B",
             "title": "B",
-            "className": "dt-right"
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         },
         {
-            "data": "P_C",
+            "data": "rung_C",
             "title": "C",
-            "className": "dt-right"
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         },
         {
-            "data": "P_D",
+            "data": "rung_D",
             "title": "D",
-            "className": "dt-right"
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         },
         {
-            "data": "P_S1",
+            "data": "rung_S1",
             "title": "S1",
-            "className": "dt-right"
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         },
         {
-            "data": "P_S2",
+            "data": "rung_S2",
             "title": "S2",
-            "className": "dt-right"
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         },
         {
-            "data": "P_S3",
+            "data": "rung_S3",
             "title": "S3",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_A",
-            "title": "A",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_B",
-            "title": "B",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_C",
-            "title": "C",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_D",
-            "title": "D",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_S1",
-            "title": "S1",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_S2",
-            "title": "S2",
-            "className": "dt-right"
-        },
-        {
-            "data": "O_S3",
-            "title": "S3",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_A",
-            "title": "A",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_B",
-            "title": "B",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_C",
-            "title": "C",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_D",
-            "title": "D",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_S1",
-            "title": "S1",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_S2",
-            "title": "S2",
-            "className": "dt-right"
-        },
-        {
-            "data": "S_S3",
-            "title": "S3",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_A",
-            "title": "A",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_B",
-            "title": "B",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_C",
-            "title": "C",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_D",
-            "title": "D",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_S1",
-            "title": "S1",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_S2",
-            "title": "S2",
-            "className": "dt-right"
-        },
-        {
-            "data": "D_S3",
-            "title": "S3",
-            "className": "dt-right"
-        }
-    ],
-    "header_groups": [
-        {
-            "title": "",
-            "colspan": 4
-        },
-        {
-            "title": "Participated",
-            "colspan": 7
-        },
-        {
-            "title": "Out of Range",
-            "colspan": 7
-        },
-        {
-            "title": "Skipped",
-            "colspan": 7
-        },
-        {
-            "title": "Depleted",
-            "colspan": 7
+            "className": "dt-center rung-status-cell",
+            "render_as_html": true
         }
     ],
     "data": [
         {
-            "price_low": "1.0000",
-            "price_high": "1.0005",
+            "price_low": "1.0015",
+            "price_high": "1.0020",
             "trs": 1,
-            "volume": "148.12",
-            "volume_raw": 148.1200054641,
-            "P_A": 1,
-            "P_B": 1,
-            "P_C": 1,
-            "P_D": 1,
-            "P_S1": "",
-            "P_S2": "",
-            "P_S3": 1,
-            "O_A": "",
-            "O_B": "",
-            "O_C": "",
-            "O_D": "",
-            "O_S1": 1,
-            "O_S2": 1,
-            "O_S3": "",
-            "S_A": "",
-            "S_B": "",
-            "S_C": "",
-            "S_D": "",
-            "S_S1": "",
-            "S_S2": "",
-            "S_S3": "",
-            "D_A": "",
-            "D_B": "",
-            "D_C": "",
-            "D_D": "",
-            "D_S1": "",
-            "D_S2": "",
-            "D_S3": ""
+            "volume": "28,400.23",
+            "volume_raw": 28400.232523636405,
+            "rung_A": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_B": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_C": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_D": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_S1": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_S2": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_S3": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>"
+        },
+        {
+            "price_low": "1.0025",
+            "price_high": "1.0030",
+            "trs": 4,
+            "volume": "1,250.63",
+            "volume_raw": 1250.6294342581,
+            "rung_A": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 4\">4<\/span><\/div>",
+            "rung_B": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 4\">4<\/span><\/div>",
+            "rung_C": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 4\">4<\/span><\/div>",
+            "rung_D": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 4\">4<\/span><\/div>",
+            "rung_S1": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 4\">4<\/span><\/div>",
+            "rung_S2": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 4\">4<\/span><\/div>",
+            "rung_S3": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 4\">4<\/span><\/div>"
+        },
+        {
+            "price_low": "1.0030",
+            "price_high": "1.0035",
+            "trs": 3,
+            "volume": "0.26",
+            "volume_raw": 0.2645733422,
+            "rung_A": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 1\">1<\/span><\/div>",
+            "rung_B": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 3\">3<\/span><\/div>",
+            "rung_C": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 3\">3<\/span><\/div>",
+            "rung_D": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 3\">3<\/span><\/div>",
+            "rung_S1": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 3\">3<\/span><\/div>",
+            "rung_S2": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 3\">3<\/span><\/div>",
+            "rung_S3": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 3\">3<\/span><\/div>"
         }
     ]
 }

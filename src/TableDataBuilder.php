@@ -851,13 +851,10 @@ final class TableDataBuilder
         $rungCodes = array_column($activeRungs, 'rung');
 
         $states = [
-            'P' => ['key' => 'participating', 'label' => 'Participated'],
-            'O' => ['key' => 'out_of_range', 'label' => 'Out of Range'],
-            'S' => ['key' => 'skipped', 'label' => 'Skipped'],
-            'D' => ['key' => 'depleted', 'label' => 'Depleted'],
+            ['key' => 'participating', 'label' => 'Participated', 'short' => 'P', 'class' => 'participating'],
+            ['key' => 'out_of_range', 'label' => 'Out of range', 'short' => 'O', 'class' => 'out-of-range'],
+            ['key' => 'skipped', 'label' => 'Skipped', 'short' => 'S', 'class' => 'skipped'],
         ];
-
-        $rungCount = count($rungCodes);
 
         $columns = [
             ['data' => 'price_low', 'title' => 'Price Low', 'className' => 'dt-right'],
@@ -866,18 +863,13 @@ final class TableDataBuilder
             ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
         ];
 
-        foreach ($states as $stateCode => $state) {
-            foreach ($rungCodes as $code) {
-                $columns[] = ['data' => "{$stateCode}_{$code}", 'title' => $code, 'className' => 'dt-right'];
-            }
-        }
-
-        // Build complex header structure for two-row header
-        $headerGroups = [
-            ['title' => '', 'colspan' => 4], // Price Low, Price High, TRs, Volume
-        ];
-        foreach ($states as $stateCode => $state) {
-            $headerGroups[] = ['title' => $state['label'], 'colspan' => $rungCount];
+        foreach ($rungCodes as $code) {
+            $columns[] = [
+                'data' => "rung_{$code}",
+                'title' => $code,
+                'className' => 'dt-center rung-status-cell',
+                'render_as_html' => true,
+            ];
         }
 
         usort($buckets, fn($a, $b) => $a['price_bucket_low'] <=> $b['price_bucket_low']);
@@ -892,11 +884,9 @@ final class TableDataBuilder
                 'volume_raw' => (float) $bucket['total_volume_usd'],
             ];
 
-            foreach ($states as $stateCode => $state) {
-                foreach ($rungCodes as $code) {
-                    $counts = $bucket['rung_counts'][$code] ?? ['participating' => 0, 'skipped' => 0, 'depleted' => 0, 'out_of_range' => 0];
-                    $row["{$stateCode}_{$code}"] = $counts[$state['key']] ?: '';
-                }
+            foreach ($rungCodes as $code) {
+                $counts = $bucket['rung_counts'][$code] ?? ['participating' => 0, 'skipped' => 0, 'out_of_range' => 0];
+                $row["rung_{$code}"] = $this->rungStatusBadges($counts, $states);
             }
 
             $data[] = $row;
@@ -906,9 +896,37 @@ final class TableDataBuilder
             'title' => 'Bucket Distribution',
             'summary' => $summary,
             'columns' => $columns,
-            'header_groups' => $headerGroups,
             'data' => $data,
         ];
+    }
+
+    private function rungStatusBadges(array $counts, array $states): string
+    {
+        $badges = [];
+
+        foreach ($states as $state) {
+            $count = (int) ($counts[$state['key']] ?? 0);
+            if ($count <= 0) {
+                continue;
+            }
+
+            $label = htmlspecialchars($state['label'], ENT_QUOTES, 'UTF-8');
+            $class = htmlspecialchars($state['class'], ENT_QUOTES, 'UTF-8');
+            $badges[] = sprintf(
+                '<span class="rung-status-badge rung-status-badge--%s" title="%s" aria-label="%s %d">%d</span>',
+                $class,
+                $label,
+                $label,
+                $count,
+                $count
+            );
+        }
+
+        if ($badges === []) {
+            return '';
+        }
+
+        return '<div class="rung-status-badges">' . implode('', $badges) . '</div>';
     }
 
     private function buildLatestTrades(array $digest, array $config): array

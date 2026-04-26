@@ -149,9 +149,16 @@ const LPTables = {
     // Initialize DataTable
     const tableEl = document.getElementById(tableId);
     if (tableEl && data.data.length > 0) {
+      const columns = data.columns.map(col => {
+        if (col.render_as_html) {
+          return { ...col, render: (data) => data };
+        }
+        return col;
+      });
+
       new DataTable(tableEl, {
         data: data.data,
-        columns: data.columns,
+        columns: columns,
         paging: options.paging ?? false,
         searching: options.searching ?? false,
         info: options.info ?? false,

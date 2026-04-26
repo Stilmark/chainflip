@@ -7,11 +7,11 @@
         },
         {
             "label": "Total Fees",
-            "value": "303.84"
+            "value": "318.72"
         },
         {
             "label": "Total TRs",
-            "value": "366"
+            "value": "375"
         },
         {
             "label": "Window Start",
@@ -19,7 +19,7 @@
         },
         {
             "label": "As Of Date",
-            "value": "2026-04-24"
+            "value": "2026-04-26"
         }
     ],
     "columns": [
@@ -83,112 +83,112 @@
             "name": "Core",
             "value": "24,602.97",
             "value_raw": 24602.97,
-            "fees": "150.69",
-            "fees_raw": 150.68893,
-            "fee_share": "49.59%",
-            "eligible_trs": 366,
-            "trades": 250,
+            "fees": "157.48",
+            "fees_raw": 157.484504,
+            "fee_share": "49.41%",
+            "eligible_trs": 375,
+            "trades": 258,
             "skipped": 6,
-            "out_of_range": 110,
+            "out_of_range": 111,
             "depleted": 0,
-            "utilization": "68.31%"
+            "utilization": "68.80%"
         },
         {
             "rung": "B",
             "name": "Buffer",
             "value": "10,544.08",
             "value_raw": 10544.08,
-            "fees": "68.76",
-            "fees_raw": 68.76203699999999,
-            "fee_share": "22.63%",
-            "eligible_trs": 366,
-            "trades": 302,
+            "fees": "71.37",
+            "fees_raw": 71.36502899999998,
+            "fee_share": "22.39%",
+            "eligible_trs": 375,
+            "trades": 311,
             "skipped": 6,
             "out_of_range": 58,
             "depleted": 0,
-            "utilization": "82.51%"
+            "utilization": "82.93%"
         },
         {
             "rung": "C",
             "name": "Scalp",
             "value": "8,852.01",
             "value_raw": 8852.006261,
-            "fees": "44.66",
-            "fees_raw": 44.66493000000001,
-            "fee_share": "14.70%",
-            "eligible_trs": 366,
-            "trades": 208,
+            "fees": "47.08",
+            "fees_raw": 47.08274700000001,
+            "fee_share": "14.77%",
+            "eligible_trs": 375,
+            "trades": 210,
             "skipped": 12,
-            "out_of_range": 146,
+            "out_of_range": 153,
             "depleted": 0,
-            "utilization": "56.83%"
+            "utilization": "56.00%"
         },
         {
             "rung": "D",
             "name": "Catch-all",
             "value": "825.43",
             "value_raw": 825.431217,
-            "fees": "4.68",
-            "fees_raw": 4.680826,
-            "fee_share": "1.54%",
-            "eligible_trs": 322,
-            "trades": 306,
+            "fees": "4.82",
+            "fees_raw": 4.816733999999999,
+            "fee_share": "1.51%",
+            "eligible_trs": 331,
+            "trades": 315,
             "skipped": 16,
             "out_of_range": 0,
             "depleted": 0,
-            "utilization": "95.03%"
+            "utilization": "95.17%"
         },
         {
             "rung": "S1",
             "name": "Tick",
             "value": "2,002.30",
             "value_raw": 2002.303159,
-            "fees": "10.22",
-            "fees_raw": 10.217502,
-            "fee_share": "3.36%",
-            "eligible_trs": 298,
-            "trades": 40,
+            "fees": "11.22",
+            "fees_raw": 11.219605,
+            "fee_share": "3.52%",
+            "eligible_trs": 307,
+            "trades": 41,
             "skipped": 0,
-            "out_of_range": 258,
+            "out_of_range": 266,
             "depleted": 0,
-            "utilization": "13.42%"
+            "utilization": "13.36%"
         },
         {
             "rung": "S2",
             "name": "Flow",
             "value": "2,001.55",
             "value_raw": 2001.551475,
-            "fees": "12.28",
-            "fees_raw": 12.276062,
-            "fee_share": "4.04%",
-            "eligible_trs": 298,
-            "trades": 69,
+            "fees": "13.28",
+            "fees_raw": 13.277839,
+            "fee_share": "4.17%",
+            "eligible_trs": 307,
+            "trades": 70,
             "skipped": 2,
-            "out_of_range": 227,
+            "out_of_range": 235,
             "depleted": 0,
-            "utilization": "23.15%"
+            "utilization": "22.80%"
         },
         {
             "rung": "S3",
             "name": "Sweep",
             "value": "2,002.83",
             "value_raw": 2002.831798,
-            "fees": "12.55",
-            "fees_raw": 12.552331000000002,
-            "fee_share": "4.13%",
-            "eligible_trs": 298,
-            "trades": 83,
+            "fees": "13.47",
+            "fees_raw": 13.471409000000001,
+            "fee_share": "4.23%",
+            "eligible_trs": 307,
+            "trades": 85,
             "skipped": 3,
-            "out_of_range": 212,
+            "out_of_range": 219,
             "depleted": 0,
-            "utilization": "27.85%"
+            "utilization": "27.69%"
         }
     ],
     "footer": {
         "rung": "Total",
         "name": "",
         "value": "50,831.17",
-        "fees": "303.84",
+        "fees": "318.72",
         "fee_share": "100.00%",
         "eligible_trs": "",
         "trades": "",

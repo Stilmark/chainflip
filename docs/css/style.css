@@ -423,6 +423,45 @@ table.dataTable thead .sorting_desc::after {
   background-color: var(--bg-tertiary);
 }
 
+.rung-status-cell {
+  min-width: 72px;
+}
+
+.rung-status-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.rung-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rung-status-badge--participating {
+  background-color: #3fb950;
+  color: #ffffff;
+}
+
+.rung-status-badge--out-of-range {
+  background-color: #f85149;
+  color: #ffffff;
+}
+
+.rung-status-badge--skipped {
+  background-color: #d29922;
+  color: #ffffff;
+}
+
 /* Percentage bar visualization */
 .pct-bar {
   display: flex;
