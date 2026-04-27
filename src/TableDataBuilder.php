@@ -1388,12 +1388,10 @@ final class TableDataBuilder
         $columns = [
             ['data' => 'rung',          'title' => 'Rung'],
             ['data' => 'name',          'title' => 'Name'],
-            ['data' => 'orig_usdt',     'title' => 'Orig USDT',     'className' => 'dt-right'],
-            ['data' => 'orig_usdc',     'title' => 'Orig USDC',     'className' => 'dt-right'],
-            ['data' => 'cur_usdt',      'title' => 'Cur USDT',      'className' => 'dt-right'],
-            ['data' => 'cur_usdc',      'title' => 'Cur USDC',      'className' => 'dt-right'],
+            ['data' => 'cur_usdt',      'title' => 'Cur USDT',      'className' => 'dt-right', 'render_as_html' => true],
+            ['data' => 'cur_usdc',      'title' => 'Cur USDC',      'className' => 'dt-right', 'render_as_html' => true],
             ['data' => 'current_total', 'title' => 'Current Total', 'className' => 'dt-right'],
-            ['data' => 'current_ratio', 'title' => 'USDT/USDC',    'className' => 'dt-right'],
+            ['data' => 'current_ratio', 'title' => 'USDT/USDC',     'className' => 'dt-right'],
             ['data' => 'share_pct',     'title' => '% of Total',    'className' => 'dt-right'],
         ];
 
@@ -1447,16 +1445,22 @@ final class TableDataBuilder
         // Second pass: compute share and build output rows
         $data = [];
         foreach ($rows as $row) {
-            $share    = $totalCurrent > 0 ? ($row['currentTotal'] / $totalCurrent) * 100 : 0.0;
-            $curRatio = $row['curUsdc'] > 0 ? number_format($row['curUsdt'] / $row['curUsdc'], 4) : 'N/A';
+            $share     = $totalCurrent > 0 ? ($row['currentTotal'] / $totalCurrent) * 100 : 0.0;
+            $curRatio  = $row['curUsdc'] > 0 ? number_format($row['curUsdt'] / $row['curUsdc'], 4) : 'N/A';
+            $usdtDiff  = $row['curUsdt'] - $row['origUsdt'];
+            $usdcDiff  = $row['curUsdc'] - $row['origUsdc'];
+            $usdtClass = $usdtDiff > 0 ? 'delta-pos' : ($usdtDiff < 0 ? 'delta-neg' : 'delta-flat');
+            $usdcClass = $usdcDiff > 0 ? 'delta-pos' : ($usdcDiff < 0 ? 'delta-neg' : 'delta-flat');
+            $usdtSign  = $usdtDiff > 0 ? '+' : '';
+            $usdcSign  = $usdcDiff > 0 ? '+' : '';
+            $usdtText  = number_format($usdtDiff, 2, '.', ',');
+            $usdcText  = number_format($usdcDiff, 2, '.', ',');
 
             $data[] = [
                 'rung'          => $row['rung'],
                 'name'          => $row['name'],
-                'orig_usdt'     => $this->money($row['origUsdt']),
-                'orig_usdc'     => $this->money($row['origUsdc']),
-                'cur_usdt'      => $this->money($row['curUsdt']),
-                'cur_usdc'      => $this->money($row['curUsdc']),
+                'cur_usdt'      => $this->money($row['curUsdt']) . ' <span class="delta-tail ' . $usdtClass . '">(' . $usdtSign . $usdtText . ')</span>',
+                'cur_usdc'      => $this->money($row['curUsdc']) . ' <span class="delta-tail ' . $usdcClass . '">(' . $usdcSign . $usdcText . ')</span>',
                 'current_total' => $this->money($row['currentTotal']),
                 'share_pct'     => $this->pct($share),
                 'share_pct_raw' => $share,
@@ -1467,8 +1471,6 @@ final class TableDataBuilder
         $footer = [
             'rung'          => 'Total',
             'name'          => '',
-            'orig_usdt'     => $this->money($totalOrigUsdt),
-            'orig_usdc'     => $this->money($totalOrigUsdc),
             'cur_usdt'      => $this->money($totalCurUsdt),
             'cur_usdc'      => $this->money($totalCurUsdc),
             'current_total' => $this->money($totalCurrent),

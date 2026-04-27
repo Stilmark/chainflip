@@ -258,6 +258,25 @@ table tfoot td {
   font-size: 0.85rem;
 }
 
+/* Small trailing delta next to current balance values */
+.delta-tail {
+  font-size: 0.78em;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+.delta-tail.delta-pos {
+  color: var(--success-color);
+}
+
+.delta-tail.delta-neg {
+  color: var(--danger-color);
+}
+
+.delta-tail.delta-flat {
+  color: var(--text-secondary);
+}
+
 /* DataTables overrides */
 .dataTables_wrapper {
   color: var(--text-secondary);
