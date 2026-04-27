@@ -1,4 +1,24 @@
+function updateFooterDate() {
+  fetch('data/digest.json')
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(function(d) {
+      if (!d.generated_at) return;
+      var dt = new Date(d.generated_at);
+      var pad = function(n) { return String(n).padStart(2, '0'); };
+      var formatted = dt.getFullYear() + '-' +
+        pad(dt.getMonth() + 1) + '-' +
+        pad(dt.getDate()) + ' ' +
+        pad(dt.getHours()) + ':' +
+        pad(dt.getMinutes()) + ':' +
+        pad(dt.getSeconds());
+      var el = document.getElementById('footer-updated');
+      if (el) el.textContent = formatted;
+    })
+    .catch(function() { /* digest not available — footer stays static */ });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+  updateFooterDate();
   // Initialize DataTables on all tables with class 'data-table'
   const tables = document.querySelectorAll('table.data-table');
   tables.forEach(function(table) {

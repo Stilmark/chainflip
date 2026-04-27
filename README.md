@@ -9,8 +9,9 @@ CLI PHP parser for Chainflip USDT/USDC LP fill CSVs with static site generation.
 - Excludes `LIMIT` fills
 - Groups fills into Trade Requests (TRs) by identical timestamp and pair
 - Infers TR trade price from participating fills
-- Classifies each active rung as: `participating`, `out_of_range`, `skipped`, or `depleted`
-- Tracks historical portfolio value using config revisions
+- Determines rung eligibility from config revision windows (not a static active flag)
+- Classifies each eligible rung as: `participating`, `out_of_range`, `skipped`, `depleted`, `not_started`, or `inactive_for_period`
+- Tracks historical portfolio value using config revisions (revision-aware per-day snapshots)
 - Rebuild mode can reconstruct state from archived CSVs
 
 ### Data Output

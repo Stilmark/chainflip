@@ -18,36 +18,9 @@ final class SiteBuilder
         $htmlFiles = glob($this->siteDir . '/*.html') ?: [];
 
         foreach ($htmlFiles as $htmlPath) {
-            if ($this->updateFooter($htmlPath)) {
-                $built[] = basename($htmlPath);
-            }
+            $built[] = basename($htmlPath);
         }
 
         return $built;
-    }
-
-    private function updateFooter(string $htmlPath): bool
-    {
-        if (!file_exists($htmlPath)) {
-            return false;
-        }
-
-        $html = file_get_contents($htmlPath);
-
-        $tz = new DateTimeZone('Europe/Paris');
-        $dt = new DateTime('now', $tz);
-        $timestamp = $dt->format('Y-m-d H:i:s T');
-        $newHtml = preg_replace(
-            '/<footer>.*?<\/footer>/s',
-            '<footer>LP Parser &copy; 2026 &mdash; Updated ' . $timestamp . '</footer>',
-            $html
-        );
-
-        if ($newHtml !== $html) {
-            file_put_contents($htmlPath, $newHtml);
-            return true;
-        }
-
-        return true;
     }
 }

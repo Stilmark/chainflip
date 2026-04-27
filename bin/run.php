@@ -9,6 +9,7 @@ require_once __DIR__ . '/../src/DailyMetricsBuilder.php';
 require_once __DIR__ . '/../src/DigestBuilder.php';
 require_once __DIR__ . '/../src/TableDataBuilder.php';
 require_once __DIR__ . '/../src/SiteBuilder.php';
+require_once __DIR__ . '/../src/BalancesOrdersExtractor.php';
 
 $projectRoot = realpath(__DIR__ . '/..');
 if ($projectRoot === false) {
@@ -38,6 +39,8 @@ $tradesCompactFile = resolve_project_path($projectRoot, (string) ($paths['trades
 $tradesDebugFile = resolve_project_path($projectRoot, (string) ($paths['trades_debug_file'] ?? './data/trades_debug.json'));
 $dailyMetricsFile = resolve_project_path($projectRoot, (string) ($paths['daily_metrics_file'] ?? './data/daily_metrics.json'));
 $digestFile = resolve_project_path($projectRoot, (string) ($paths['digest_file'] ?? './data/digest.json'));
+$balancesOrdersInputFile = resolve_project_path($projectRoot, (string) ($paths['balances_orders_input_file'] ?? './data/balances-orders.json'));
+$balancesOrdersSummaryFile = resolve_project_path($projectRoot, (string) ($paths['balances_orders_summary_file'] ?? './data/balances_orders_summary.json'));
 $lockFile = resolve_project_path($projectRoot, (string) ($paths['run_lock_file'] ?? './data/run.lock'));
 $fileGlob = (string) ($processing['file_glob'] ?? '*.csv');
 $archiveOnSuccess = (bool) ($processing['archive_on_success'] ?? true);
@@ -212,6 +215,21 @@ if ($emitDebugTrades) {
 save_json_file($dailyMetricsFile, $dailyMetrics);
 save_json_file($digestFile, $digest);
 
+$balancesOrdersSummaryWritten = false;
+if (is_file($balancesOrdersInputFile)) {
+    try {
+        $balancesOrdersPayload = load_json_file($balancesOrdersInputFile);
+        if ($balancesOrdersPayload !== []) {
+            $balancesOrdersExtractor = new BalancesOrdersExtractor();
+            $balancesOrdersSummary = $balancesOrdersExtractor->extract($balancesOrdersPayload);
+            save_json_file($balancesOrdersSummaryFile, $balancesOrdersSummary);
+            $balancesOrdersSummaryWritten = true;
+        }
+    } catch (Throwable $e) {
+        fwrite(STDERR, "Warning: balances/orders extraction failed: {$e->getMessage()}\n");
+    }
+}
+
 $dataDir = resolve_project_path($projectRoot, (string) ($paths['data_dir'] ?? './data'));
 $siteDir = resolve_project_path($projectRoot, (string) ($paths['site_dir'] ?? './docs'));
 
@@ -228,6 +246,9 @@ foreach ($generatedJsonTables as $jsonFile) {
         copy($src, $dst);
     }
 }
+
+// Copy digest.json to docs/data so the JS footer can read generated_at
+copy($digestFile, $siteDir . '/data/digest.json');
 if (is_dir($siteDir)) {
     $siteBuilder = new SiteBuilder('', $siteDir);
     $builtPages = $siteBuilder->build();
@@ -244,6 +265,9 @@ if ($emitDebugTrades) {
 }
 echo "Daily metrics: {$dailyMetricsFile}\n";
 echo "Digest: {$digestFile}\n";
+if ($balancesOrdersSummaryWritten) {
+    echo "Balances/orders summary: {$balancesOrdersSummaryFile}\n";
+}
 echo "JSON tables generated: " . count($generatedJsonTables) . " files in {$dataDir}/tables\n";
 if (isset($builtPages)) {
     echo "Site pages built: " . count($builtPages) . " files in {$siteDir}\n";
