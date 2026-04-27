@@ -6,6 +6,7 @@
   <title>Trades — LP Parser</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
   <nav>
@@ -23,10 +24,19 @@
   </nav>
 
   <div class="container">
-    <div class="sub-nav">
-      <a href="#latest" class="active">Latest</a>
-      <a href="#by-day">By Day</a>
-      <a href="#distribution">Distribution</a>
+    <div class="trades-toolbar">
+      <div class="sub-nav">
+        <a href="#latest" class="active">Latest</a>
+        <a href="#by-day">By Day</a>
+        <a href="#distribution">Distribution</a>
+      </div>
+
+      <label class="icon-toggle" for="hide-small-fees-toggle" title="Hide small fees">
+        <input id="hide-small-fees-toggle" type="checkbox" checked />
+        <i class="fa-solid fa-toggle-off" aria-hidden="true"></i>
+        <i class="fa-solid fa-toggle-on" aria-hidden="true"></i>
+        <span>Hide small fees</span>
+      </label>
     </div>
 
     <section id="latest" class="card">
@@ -56,8 +66,29 @@
   <script src="js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      LPTables.loadTable('trades-latest', 'trades-latest.json');
-      LPTables.loadDaySelector('trades-by-day', 'trades-by-day.json');
+      const toggle = document.getElementById('hide-small-fees-toggle');
+
+      function getTradeOptions() {
+        const hideSmallFees = toggle && toggle.checked;
+        return {
+          filterFn: function(row) {
+            if (!hideSmallFees) return true;
+            return Number(row.fees_raw || 0) >= 0.01;
+          }
+        };
+      }
+
+      function renderTrades() {
+        const options = getTradeOptions();
+        LPTables.loadTable('trades-latest', 'trades-latest.json', options);
+        LPTables.loadDaySelector('trades-by-day', 'trades-by-day.json', options);
+      }
+
+      renderTrades();
+      if (toggle) {
+        toggle.addEventListener('change', renderTrades);
+      }
+
       LPTables.loadTable('distribution-bucket', 'distribution-bucket.json');
     });
   </script>

@@ -17,8 +17,28 @@ function updateFooterDate() {
     .catch(function() { /* digest not available — footer stays static */ });
 }
 
+function copySelectedTextToClipboard() {
+  try {
+    var selection = window.getSelection();
+    if (!selection) return;
+    var text = selection.toString().trim();
+    if (!text) return;
+    if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+    navigator.clipboard.writeText(text).catch(function() { /* ignore permission failures */ });
+  } catch (e) {
+    // no-op
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   updateFooterDate();
+
+  // Global UX helper: any selected text is copied to clipboard.
+  document.addEventListener('mouseup', copySelectedTextToClipboard);
+  document.addEventListener('keyup', function() {
+    copySelectedTextToClipboard();
+  });
+
   // Initialize DataTables on all tables with class 'data-table'
   const tables = document.querySelectorAll('table.data-table');
   tables.forEach(function(table) {

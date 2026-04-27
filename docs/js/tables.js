@@ -50,6 +50,10 @@ const LPTables = {
    */
   renderTable(container, data, options = {}) {
     let html = '';
+    const sourceRows = Array.isArray(data.data) ? data.data : [];
+    const filteredRows = typeof options.filterFn === 'function'
+      ? sourceRows.filter((row) => options.filterFn(row, data))
+      : sourceRows;
 
     // Render summary/status bar if present
     if (data.summary) {
@@ -69,7 +73,7 @@ const LPTables = {
     }
 
     // Check for data
-    if (!data.data || data.data.length === 0) {
+    if (filteredRows.length === 0) {
       html += '<p>No data available</p>';
       container.innerHTML = html;
       return;
@@ -148,7 +152,7 @@ const LPTables = {
 
     // Initialize DataTable
     const tableEl = document.getElementById(tableId);
-    if (tableEl && data.data.length > 0) {
+    if (tableEl && filteredRows.length > 0) {
       const columns = data.columns.map(col => {
         if (col.render_as_html) {
           return { ...col, render: (data) => data };
@@ -157,7 +161,7 @@ const LPTables = {
       });
 
       new DataTable(tableEl, {
-        data: data.data,
+        data: filteredRows,
         columns: columns,
         paging: options.paging ?? false,
         searching: options.searching ?? false,
@@ -357,6 +361,9 @@ const LPTables = {
       baseUsdc: Number(r.current_usdc || 0)
     }));
 
+    const baseTotalUsdt = rows.reduce((sum, row) => sum + row.baseUsdt, 0);
+    const baseTotalUsdc = rows.reduce((sum, row) => sum + row.baseUsdc, 0);
+
     const defaultTotal = Number(payload.total_current || rows.reduce((s, r) => s + r.usdt + r.usdc, 0));
 
     let html = '';
@@ -408,6 +415,11 @@ const LPTables = {
     const totalInput = container.querySelector('#rebalance-total-input');
     const modeInput = container.querySelector('#rebalance-ratio-mode');
     const pctInputs = container.querySelectorAll('input[data-role="pct-input"]');
+
+    // Range curve should always be the default mode on initial load.
+    if (modeInput) {
+      modeInput.value = 'curve';
+    }
 
     const ratioFromPriceAndRange = (price, row) => {
       const p = Number(price || 0);
@@ -492,8 +504,8 @@ const LPTables = {
       const totalUsdtEl = container.querySelector('#rebalance-total-usdt strong');
       const totalUsdcEl = container.querySelector('#rebalance-total-usdc strong');
       const totalPctEl = container.querySelector('#rebalance-total-pct strong');
-      if (totalUsdtEl) totalUsdtEl.textContent = fmtMoney(sumUsdt);
-      if (totalUsdcEl) totalUsdcEl.textContent = fmtMoney(sumUsdc);
+      if (totalUsdtEl) totalUsdtEl.innerHTML = formatAssetWithDiff(sumUsdt, baseTotalUsdt);
+      if (totalUsdcEl) totalUsdcEl.innerHTML = formatAssetWithDiff(sumUsdc, baseTotalUsdc);
       if (totalPctEl) totalPctEl.textContent = fmtPct(sumPct);
     };
 

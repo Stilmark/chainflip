@@ -441,6 +441,62 @@ table.dataTable thead .sorting_desc::after {
   color: #fff;
 }
 
+.trades-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.trades-toolbar .sub-nav {
+  margin-bottom: 0;
+}
+
+.icon-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.icon-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.icon-toggle .fa-toggle-off,
+.icon-toggle .fa-toggle-on {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.icon-toggle .fa-toggle-off {
+  color: var(--text-secondary);
+  display: inline-block;
+}
+
+.icon-toggle .fa-toggle-on {
+  color: var(--success-color);
+  display: none;
+}
+
+.icon-toggle input:checked ~ .fa-toggle-off {
+  display: none;
+}
+
+.icon-toggle input:checked ~ .fa-toggle-on {
+  display: inline-block;
+}
+
+.icon-toggle input:checked ~ span {
+  color: var(--success-color);
+}
+
 /* Day selector dropdown */
 .day-selector {
   margin-bottom: 15px;
