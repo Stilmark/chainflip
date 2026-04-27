@@ -23,8 +23,19 @@
   </nav>
 
   <div class="container">
-    <section class="card">
+    <div class="sub-nav">
+      <a href="#rungs" class="active">Rungs</a>
+      <a href="#balances">Balances</a>
+    </div>
+
+    <section id="rungs" class="card">
       <div class="table-container" id="config-rungs">
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <section id="balances" class="card">
+      <div class="table-container" id="config-balances">
         <p>Loading...</p>
       </div>
     </section>
@@ -39,6 +50,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       LPTables.loadTable('config-rungs', 'config-rungs.json');
+      LPTables.loadTable('config-balances', 'config-balances.json');
     });
   </script>
 </body>

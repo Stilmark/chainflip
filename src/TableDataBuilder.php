@@ -38,6 +38,7 @@ final class TableDataBuilder
 
         // Config tables
         $files['config-rungs.json'] = $this->buildRungs($config);
+        $files['config-balances.json'] = $this->buildConfigBalances($digest, $config);
 
         foreach ($files as $filename => $data) {
             file_put_contents(
@@ -1321,6 +1322,166 @@ final class TableDataBuilder
             'columns' => $columns,
             'data' => $data,
             'footer' => $footer,
+        ];
+    }
+
+    private function buildConfigBalances(array $digest, array $config): array
+    {
+        $activeRungs = array_filter($config['rungs'] ?? [], fn($r) => !empty($r['active']));
+
+        // Load live balances/orders summary if available
+        $summaryFile = $config['paths']['balances_orders_summary_file'] ?? null;
+        $summary = null;
+        if ($summaryFile !== null && file_exists($summaryFile)) {
+            $decoded = json_decode(file_get_contents($summaryFile), true);
+            if (is_array($decoded)) {
+                $summary = $decoded;
+            }
+        }
+
+        // Index USDT/USDC range orders by [tick_start, tick_end] from the first LP in the summary
+        // Computes per-order USDT/USDC amounts using concentrated liquidity (Uniswap v3) math
+        $ordersByTick = [];   // key: "t_lower:t_upper" => ['usdt' => float, 'usdc' => float]
+        $poolPrice    = null;
+        if ($summary !== null) {
+            $lp = $summary['lps'][0] ?? null;
+            if ($lp !== null) {
+                $poolPrice = (float) ($lp['open_orders']['current_usdt_usdc_pool_ratio'] ?? 0);
+                if ($poolPrice > 0) {
+                    $sqrtPc = sqrt($poolPrice);
+                    foreach ($lp['open_orders']['pairs'] ?? [] as $pair) {
+                        if (($pair['base_asset'] ?? '') !== 'Usdt') {
+                            continue;
+                        }
+                        foreach ($pair['range_orders'] ?? [] as $order) {
+                            $tl = (int) $order['range_start_tick'];
+                            $tu = (int) $order['range_end_tick'];
+                            $L  = (float) $order['liquidity'];
+                            // Price at tick t = 1.0001^t
+                            $pLower = pow(1.0001, $tl);
+                            $pUpper = pow(1.0001, $tu);
+                            $sqrtPl = sqrt($pLower);
+                            $sqrtPu = sqrt($pUpper);
+                            // Concentrated liquidity split (amounts in raw units, divide by 1e6 for USD)
+                            if ($poolPrice >= $pUpper) {
+                                $usdt = 0.0;
+                                $usdc = $L * ($sqrtPu - $sqrtPl) / 1e6;
+                            } elseif ($poolPrice <= $pLower) {
+                                $usdt = $L * (1.0 / $sqrtPl - 1.0 / $sqrtPu) / 1e6;
+                                $usdc = 0.0;
+                            } else {
+                                $usdt = $L * (1.0 / $sqrtPc - 1.0 / $sqrtPu) / 1e6;
+                                $usdc = $L * ($sqrtPc - $sqrtPl) / 1e6;
+                            }
+                            $ordersByTick[$tl . ':' . $tu] = ['usdt' => $usdt, 'usdc' => $usdc];
+                        }
+                    }
+                }
+            }
+        }
+
+        $hasFeed = !empty($ordersByTick);
+        $footnote = $hasFeed
+            ? 'Current USDT/USDC amounts computed from on-chain liquidity at pool price ' . number_format((float) $poolPrice, 6) . '. Orig = inception values from config revisions.'
+            : 'Current USDT/USDC amounts not available (balances feed missing). Showing inception values as fallback.';
+
+        $columns = [
+            ['data' => 'rung',          'title' => 'Rung'],
+            ['data' => 'name',          'title' => 'Name'],
+            ['data' => 'orig_usdt',     'title' => 'Orig USDT',     'className' => 'dt-right'],
+            ['data' => 'orig_usdc',     'title' => 'Orig USDC',     'className' => 'dt-right'],
+            ['data' => 'cur_usdt',      'title' => 'Cur USDT',      'className' => 'dt-right'],
+            ['data' => 'cur_usdc',      'title' => 'Cur USDC',      'className' => 'dt-right'],
+            ['data' => 'current_total', 'title' => 'Current Total', 'className' => 'dt-right'],
+            ['data' => 'current_ratio', 'title' => 'USDT/USDC',    'className' => 'dt-right'],
+            ['data' => 'share_pct',     'title' => '% of Total',    'className' => 'dt-right'],
+        ];
+
+        // First pass: collect raw values
+        $rows = [];
+        $totalOrigUsdt = 0.0;
+        $totalOrigUsdc = 0.0;
+        $totalCurUsdt  = 0.0;
+        $totalCurUsdc  = 0.0;
+        $totalCurrent  = 0.0;
+
+        foreach ($activeRungs as $r) {
+            $rev = get_current_revision($r);
+            $origUsdt = $rev !== null ? (float) ($rev['initial_value']['USDT'] ?? 0) : 0.0;
+            $origUsdc = $rev !== null ? (float) ($rev['initial_value']['USDC'] ?? 0) : 0.0;
+
+            $curUsdt = $origUsdt;
+            $curUsdc = $origUsdc;
+            if ($hasFeed && $rev !== null) {
+                $rangeLower = (float) ($rev['range_lower'] ?? 0);
+                $rangeUpper = (float) ($rev['range_upper'] ?? 0);
+                if ($rangeLower > 0 && $rangeUpper > 0) {
+                    $tl  = (int) round(log($rangeLower) / log(1.0001));
+                    $tu  = (int) round(log($rangeUpper) / log(1.0001));
+                    $key = $tl . ':' . $tu;
+                    if (isset($ordersByTick[$key])) {
+                        $curUsdt = $ordersByTick[$key]['usdt'];
+                        $curUsdc = $ordersByTick[$key]['usdc'];
+                    }
+                }
+            }
+
+            $currentTotal = $curUsdt + $curUsdc;
+            $totalOrigUsdt += $origUsdt;
+            $totalOrigUsdc += $origUsdc;
+            $totalCurUsdt  += $curUsdt;
+            $totalCurUsdc  += $curUsdc;
+            $totalCurrent  += $currentTotal;
+
+            $rows[] = [
+                'rung'         => $r['rung'],
+                'name'         => $r['name'],
+                'origUsdt'     => $origUsdt,
+                'origUsdc'     => $origUsdc,
+                'curUsdt'      => $curUsdt,
+                'curUsdc'      => $curUsdc,
+                'currentTotal' => $currentTotal,
+            ];
+        }
+
+        // Second pass: compute share and build output rows
+        $data = [];
+        foreach ($rows as $row) {
+            $share    = $totalCurrent > 0 ? ($row['currentTotal'] / $totalCurrent) * 100 : 0.0;
+            $curRatio = $row['curUsdc'] > 0 ? number_format($row['curUsdt'] / $row['curUsdc'], 4) : 'N/A';
+
+            $data[] = [
+                'rung'          => $row['rung'],
+                'name'          => $row['name'],
+                'orig_usdt'     => $this->money($row['origUsdt']),
+                'orig_usdc'     => $this->money($row['origUsdc']),
+                'cur_usdt'      => $this->money($row['curUsdt']),
+                'cur_usdc'      => $this->money($row['curUsdc']),
+                'current_total' => $this->money($row['currentTotal']),
+                'share_pct'     => $this->pct($share),
+                'share_pct_raw' => $share,
+                'current_ratio' => $curRatio,
+            ];
+        }
+
+        $footer = [
+            'rung'          => 'Total',
+            'name'          => '',
+            'orig_usdt'     => $this->money($totalOrigUsdt),
+            'orig_usdc'     => $this->money($totalOrigUsdc),
+            'cur_usdt'      => $this->money($totalCurUsdt),
+            'cur_usdc'      => $this->money($totalCurUsdc),
+            'current_total' => $this->money($totalCurrent),
+            'current_ratio' => '',
+            'share_pct'     => '100.00%',
+        ];
+
+        return [
+            'title'    => 'Balances',
+            'footnote' => $footnote,
+            'columns'  => $columns,
+            'data'     => $data,
+            'footer'   => $footer,
         ];
     }
 

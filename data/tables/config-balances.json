@@ -1,0 +1,146 @@
+{
+    "title": "Balances",
+    "footnote": "Current USDT\/USDC amounts computed from on-chain liquidity at pool price 1.001000. Orig = inception values from config revisions.",
+    "columns": [
+        {
+            "data": "rung",
+            "title": "Rung"
+        },
+        {
+            "data": "name",
+            "title": "Name"
+        },
+        {
+            "data": "orig_usdt",
+            "title": "Orig USDT",
+            "className": "dt-right"
+        },
+        {
+            "data": "orig_usdc",
+            "title": "Orig USDC",
+            "className": "dt-right"
+        },
+        {
+            "data": "cur_usdt",
+            "title": "Cur USDT",
+            "className": "dt-right"
+        },
+        {
+            "data": "cur_usdc",
+            "title": "Cur USDC",
+            "className": "dt-right"
+        },
+        {
+            "data": "current_total",
+            "title": "Current Total",
+            "className": "dt-right"
+        },
+        {
+            "data": "current_ratio",
+            "title": "USDT\/USDC",
+            "className": "dt-right"
+        },
+        {
+            "data": "share_pct",
+            "title": "% of Total",
+            "className": "dt-right"
+        }
+    ],
+    "data": [
+        {
+            "rung": "A",
+            "name": "Core",
+            "orig_usdt": "9,836.61",
+            "orig_usdc": "14,766.36",
+            "cur_usdt": "9,346.06",
+            "cur_usdc": "15,257.37",
+            "current_total": "24,603.44",
+            "share_pct": "48.40%",
+            "share_pct_raw": 48.3998124267996,
+            "current_ratio": "0.6126"
+        },
+        {
+            "rung": "B",
+            "name": "Buffer",
+            "orig_usdt": "4,391.44",
+            "orig_usdc": "6,152.64",
+            "cur_usdt": "4,216.22",
+            "cur_usdc": "6,328.04",
+            "current_total": "10,544.26",
+            "share_pct": "20.74%",
+            "share_pct_raw": 20.742634601955633,
+            "current_ratio": "0.6663"
+        },
+        {
+            "rung": "C",
+            "name": "Scalp",
+            "orig_usdt": "3,217.13",
+            "orig_usdc": "5,634.88",
+            "cur_usdt": "2,949.77",
+            "cur_usdc": "5,902.49",
+            "current_total": "8,852.26",
+            "share_pct": "17.41%",
+            "share_pct_raw": 17.41414070316176,
+            "current_ratio": "0.4998"
+        },
+        {
+            "rung": "D",
+            "name": "Catch-all",
+            "orig_usdt": "430.88",
+            "orig_usdc": "394.55",
+            "cur_usdt": "403.37",
+            "cur_usdc": "422.08",
+            "current_total": "825.45",
+            "share_pct": "1.62%",
+            "share_pct_raw": 1.6238318863195327,
+            "current_ratio": "0.9557"
+        },
+        {
+            "rung": "S1",
+            "name": "Tick",
+            "orig_usdt": "1,000.00",
+            "orig_usdc": "1,002.30",
+            "cur_usdt": "0.83",
+            "cur_usdc": "2,002.37",
+            "current_total": "2,003.20",
+            "share_pct": "3.94%",
+            "share_pct_raw": 3.9406946273923102,
+            "current_ratio": "0.0004"
+        },
+        {
+            "rung": "S2",
+            "name": "Flow",
+            "orig_usdt": "1,000.00",
+            "orig_usdc": "1,001.55",
+            "cur_usdt": "500.58",
+            "cur_usdc": "1,501.42",
+            "current_total": "2,002.00",
+            "share_pct": "3.94%",
+            "share_pct_raw": 3.9383307774746066,
+            "current_ratio": "0.3334"
+        },
+        {
+            "rung": "S3",
+            "name": "Sweep",
+            "orig_usdt": "1,000.76",
+            "orig_usdc": "1,002.07",
+            "cur_usdt": "667.59",
+            "cur_usdc": "1,335.55",
+            "current_total": "2,003.13",
+            "share_pct": "3.94%",
+            "share_pct_raw": 3.940554976896559,
+            "current_ratio": "0.4999"
+        }
+    ],
+    "footer": {
+        "rung": "Total",
+        "name": "",
+        "orig_usdt": "20,876.82",
+        "orig_usdc": "29,954.35",
+        "cur_usdt": "18,084.42",
+        "cur_usdc": "32,749.32",
+        "current_total": "50,833.75",
+        "current_ratio": "",
+        "share_pct": "100.00%"
+    }
+}
