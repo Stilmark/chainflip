@@ -1347,7 +1347,16 @@ final class TableDataBuilder
         if ($summary !== null) {
             $lp = $summary['lps'][0] ?? null;
             if ($lp !== null) {
-                $poolPrice = (float) ($lp['open_orders']['current_usdt_usdc_pool_ratio'] ?? 0);
+                $poolPrice = 0.0;
+                foreach ($lp['open_orders']['pairs'] ?? [] as $pair) {
+                    if (($pair['base_asset'] ?? '') === 'Usdt' && ($pair['quote_asset'] ?? '') === 'Usdc') {
+                        $poolPrice = (float) ($pair['pool_range_order_price'] ?? 0);
+                        break;
+                    }
+                }
+                if ($poolPrice <= 0) {
+                    $poolPrice = (float) ($lp['open_orders']['current_usdt_usdc_pool_ratio'] ?? 0);
+                }
                 if ($poolPrice > 0) {
                     $sqrtPc = sqrt($poolPrice);
                     foreach ($lp['open_orders']['pairs'] ?? [] as $pair) {
@@ -1571,6 +1580,13 @@ final class TableDataBuilder
             $currentTotal = $curUsdt + $curUsdc;
             $totalCurrent += $currentTotal;
 
+            $rangeRatio = $this->calculateRangeUsdtUsdcRatio(
+                $poolPrice,
+                (float) ($rev['range_lower'] ?? 0),
+                (float) ($rev['range_upper'] ?? 0),
+                (string) ($config['pair']['price_definition'] ?? 'quote_per_base')
+            );
+
             $rows[] = [
                 'rung' => (string) ($r['rung'] ?? ''),
                 'name' => (string) ($r['name'] ?? ''),
@@ -1578,7 +1594,8 @@ final class TableDataBuilder
                 'range_upper' => $this->precise((float) ($rev['range_upper'] ?? 0)),
                 'current_usdt' => $curUsdt,
                 'current_usdc' => $curUsdc,
-                'current_ratio' => $curUsdc > 0 ? ($curUsdt / $curUsdc) : 0.0,
+                'current_ratio' => $rangeRatio,
+                'live_ratio' => $curUsdc > 0 ? ($curUsdt / $curUsdc) : 1.0,
                 'current_total' => $currentTotal,
             ];
         }
@@ -1607,6 +1624,47 @@ final class TableDataBuilder
             return '0';
         }
         return rtrim(rtrim(sprintf('%.16F', $value), '0'), '.');
+    }
+
+    private function calculateRangeUsdtUsdcRatio(?float $poolPrice, float $rangeLower, float $rangeUpper, string $priceDefinition): float
+    {
+        if ($poolPrice === null || $poolPrice <= 0 || $rangeLower <= 0 || $rangeUpper <= 0) {
+            return 1.0;
+        }
+
+        $p = $poolPrice;
+        $lower = min($rangeLower, $rangeUpper);
+        $upper = max($rangeLower, $rangeUpper);
+
+        // Rebalance expectations are in USDT/USDC. For quote_per_base configs,
+        // convert into base_per_quote space for stable and intuitive range composition.
+        if ($priceDefinition === 'quote_per_base') {
+            $p = 1.0 / $poolPrice;
+            $lower = 1.0 / max($rangeLower, $rangeUpper);
+            $upper = 1.0 / min($rangeLower, $rangeUpper);
+        }
+
+        $sqrtP = sqrt($p);
+        $sqrtL = sqrt($lower);
+        $sqrtU = sqrt($upper);
+
+        // token0 = USDC, token1 = USDT in this space
+        if ($p <= $lower) {
+            $usdt = 0.0;
+            $usdc = max(0.0, (1.0 / $sqrtL) - (1.0 / $sqrtU));
+        } elseif ($p >= $upper) {
+            $usdt = max(0.0, $sqrtU - $sqrtL);
+            $usdc = 0.0;
+        } else {
+            $usdt = max(0.0, $sqrtP - $sqrtL);
+            $usdc = max(0.0, (1.0 / $sqrtP) - (1.0 / $sqrtU));
+        }
+
+        if ($usdc <= 0.0) {
+            return 1.0;
+        }
+
+        return $usdt / $usdc;
     }
 
     private function money(float $value): string

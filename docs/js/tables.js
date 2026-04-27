@@ -349,6 +349,7 @@ const LPTables = {
       rangeLower: r.range_lower,
       rangeUpper: r.range_upper,
       ratio: Number(r.current_ratio || 0),
+      liveRatio: Number(r.live_ratio || 0),
       sharePct: Number(r.share_pct || 0),
       usdt: Number(r.current_usdt || 0),
       usdc: Number(r.current_usdc || 0),
@@ -362,6 +363,13 @@ const LPTables = {
     html += '<div class="rebalance-controls">';
     html += '<label for="rebalance-total-input">Total Amount</label>';
     html += `<input id="rebalance-total-input" type="number" step="0.01" value="${defaultTotal.toFixed(2)}" />`;
+    html += '<label for="rebalance-ratio-mode">Ratio Mode</label>';
+    html += '<select id="rebalance-ratio-mode">';
+    html += '<option value="curve" selected>Range Curve (pool price + bounds)</option>';
+    html += '<option value="gui">GUI Match (ref price 1.000500250125)</option>';
+    html += '<option value="live">Live Split (current holdings)</option>';
+    html += '<option value="linear">Linear Range Distance (experimental)</option>';
+    html += '</select>';
     html += '</div>';
 
     html += '<table class="data-table display rebalance-table">';
@@ -398,7 +406,62 @@ const LPTables = {
     container.innerHTML = html;
 
     const totalInput = container.querySelector('#rebalance-total-input');
+    const modeInput = container.querySelector('#rebalance-ratio-mode');
     const pctInputs = container.querySelectorAll('input[data-role="pct-input"]');
+
+    const ratioFromPriceAndRange = (price, row) => {
+      const p = Number(price || 0);
+      const lo = Number(row.rangeLower || 0);
+      const hi = Number(row.rangeUpper || 0);
+      if (!(p > 0 && lo > 0 && hi > 0)) {
+        return row.ratio > 0 ? row.ratio : 1;
+      }
+
+      const lower = Math.min(lo, hi);
+      const upper = Math.max(lo, hi);
+      const sp = Math.sqrt(p);
+      const sl = Math.sqrt(lower);
+      const su = Math.sqrt(upper);
+
+      let usdt;
+      let usdc;
+      if (p <= lower) {
+        usdt = (1 / sl) - (1 / su);
+        usdc = 0;
+      } else if (p >= upper) {
+        usdt = 0;
+        usdc = su - sl;
+      } else {
+        usdt = (1 / sp) - (1 / su);
+        usdc = sp - sl;
+      }
+
+      if (!(usdc > 0)) {
+        return 1000000;
+      }
+      return usdt / usdc;
+    };
+
+    const getModeRatio = (row) => {
+      const mode = modeInput?.value || 'curve';
+      if (mode === 'gui') {
+        return ratioFromPriceAndRange(1.000500250125, row);
+      }
+      if (mode === 'live') {
+        return row.liveRatio > 0 ? row.liveRatio : (row.ratio > 0 ? row.ratio : 1);
+      }
+      if (mode === 'linear') {
+        const p = Number(payload.pool_ratio || 0);
+        const lo = Number(row.rangeLower || 0);
+        const hi = Number(row.rangeUpper || 0);
+        if (p > 0 && lo > 0 && hi > 0 && hi > lo) {
+          if (p <= lo) return 0.000001;
+          if (p >= hi) return 1000000;
+          return (p - lo) / (hi - p);
+        }
+      }
+      return row.ratio > 0 ? row.ratio : 1;
+    };
 
     const recalc = () => {
       const total = Number(totalInput.value || 0);
@@ -413,7 +476,7 @@ const LPTables = {
         sumPct += pct;
 
         const target = total * (pct / 100);
-        const ratio = row.ratio > 0 ? row.ratio : 1;
+        const ratio = getModeRatio(row);
         const usdt = target * (ratio / (1 + ratio));
         const usdc = target / (1 + ratio);
 
@@ -435,6 +498,7 @@ const LPTables = {
     };
 
     totalInput.addEventListener('input', recalc);
+    modeInput.addEventListener('change', recalc);
     pctInputs.forEach((input) => input.addEventListener('input', recalc));
 
     recalc();

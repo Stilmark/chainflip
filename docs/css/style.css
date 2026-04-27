@@ -272,6 +272,7 @@ table tfoot td {
 }
 
 .rebalance-controls input,
+.rebalance-controls select,
 .rebalance-pct-input {
   background-color: var(--bg-tertiary);
   border: 1px solid var(--border-color);
@@ -282,6 +283,10 @@ table tfoot td {
 
 .rebalance-controls input {
   width: 180px;
+}
+
+.rebalance-controls select {
+  min-width: 280px;
 }
 
 .rebalance-pct-input {
