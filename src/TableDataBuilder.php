@@ -39,6 +39,7 @@ final class TableDataBuilder
         // Config tables
         $files['config-rungs.json'] = $this->buildRungs($config);
         $files['config-balances.json'] = $this->buildConfigBalances($digest, $config);
+        $files['config-rebalance.json'] = $this->buildConfigRebalance($config);
 
         foreach ($files as $filename => $data) {
             file_put_contents(
@@ -1485,6 +1486,127 @@ final class TableDataBuilder
             'data'     => $data,
             'footer'   => $footer,
         ];
+    }
+
+    private function buildConfigRebalance(array $config): array
+    {
+        $activeRungs = array_filter($config['rungs'] ?? [], fn($r) => !empty($r['active']));
+
+        $summaryFile = $config['paths']['balances_orders_summary_file'] ?? null;
+        $summary = null;
+        if ($summaryFile !== null && file_exists($summaryFile)) {
+            $decoded = json_decode(file_get_contents($summaryFile), true);
+            if (is_array($decoded)) {
+                $summary = $decoded;
+            }
+        }
+
+        $ordersByTick = [];
+        $poolPrice = null;
+        if ($summary !== null) {
+            $lp = $summary['lps'][0] ?? null;
+            if ($lp !== null) {
+                $poolPrice = (float) ($lp['open_orders']['current_usdt_usdc_pool_ratio'] ?? 0);
+                if ($poolPrice > 0) {
+                    $sqrtPc = sqrt($poolPrice);
+                    foreach ($lp['open_orders']['pairs'] ?? [] as $pair) {
+                        if (($pair['base_asset'] ?? '') !== 'Usdt') {
+                            continue;
+                        }
+                        foreach ($pair['range_orders'] ?? [] as $order) {
+                            $tl = (int) $order['range_start_tick'];
+                            $tu = (int) $order['range_end_tick'];
+                            $L = (float) $order['liquidity'];
+
+                            $pLower = pow(1.0001, $tl);
+                            $pUpper = pow(1.0001, $tu);
+                            $sqrtPl = sqrt($pLower);
+                            $sqrtPu = sqrt($pUpper);
+
+                            if ($poolPrice >= $pUpper) {
+                                $usdt = 0.0;
+                                $usdc = $L * ($sqrtPu - $sqrtPl) / 1e6;
+                            } elseif ($poolPrice <= $pLower) {
+                                $usdt = $L * (1.0 / $sqrtPl - 1.0 / $sqrtPu) / 1e6;
+                                $usdc = 0.0;
+                            } else {
+                                $usdt = $L * (1.0 / $sqrtPc - 1.0 / $sqrtPu) / 1e6;
+                                $usdc = $L * ($sqrtPc - $sqrtPl) / 1e6;
+                            }
+
+                            $ordersByTick[$tl . ':' . $tu] = ['usdt' => $usdt, 'usdc' => $usdc];
+                        }
+                    }
+                }
+            }
+        }
+
+        $rows = [];
+        $totalCurrent = 0.0;
+
+        foreach ($activeRungs as $r) {
+            $rev = get_current_revision($r);
+            if ($rev === null) {
+                continue;
+            }
+
+            $origUsdt = (float) ($rev['initial_value']['USDT'] ?? 0);
+            $origUsdc = (float) ($rev['initial_value']['USDC'] ?? 0);
+
+            $curUsdt = $origUsdt;
+            $curUsdc = $origUsdc;
+
+            $rangeLower = (float) ($rev['range_lower'] ?? 0);
+            $rangeUpper = (float) ($rev['range_upper'] ?? 0);
+            if (!empty($ordersByTick) && $rangeLower > 0 && $rangeUpper > 0) {
+                $tl = (int) round(log($rangeLower) / log(1.0001));
+                $tu = (int) round(log($rangeUpper) / log(1.0001));
+                $key = $tl . ':' . $tu;
+                if (isset($ordersByTick[$key])) {
+                    $curUsdt = (float) $ordersByTick[$key]['usdt'];
+                    $curUsdc = (float) $ordersByTick[$key]['usdc'];
+                }
+            }
+
+            $currentTotal = $curUsdt + $curUsdc;
+            $totalCurrent += $currentTotal;
+
+            $rows[] = [
+                'rung' => (string) ($r['rung'] ?? ''),
+                'name' => (string) ($r['name'] ?? ''),
+                'range_lower' => $this->precise((float) ($rev['range_lower'] ?? 0)),
+                'range_upper' => $this->precise((float) ($rev['range_upper'] ?? 0)),
+                'current_usdt' => $curUsdt,
+                'current_usdc' => $curUsdc,
+                'current_ratio' => $curUsdc > 0 ? ($curUsdt / $curUsdc) : 0.0,
+                'current_total' => $currentTotal,
+            ];
+        }
+
+        foreach ($rows as &$row) {
+            $row['share_pct'] = $totalCurrent > 0 ? ($row['current_total'] / $totalCurrent) * 100 : 0.0;
+        }
+        unset($row);
+
+        $footnote = $poolPrice !== null && $poolPrice > 0
+            ? 'Re-balance uses current range ratio derived from live liquidity at pool price ' . number_format($poolPrice, 6) . '.'
+            : 'Re-balance uses current values from config revisions because balances feed is unavailable.';
+
+        return [
+            'title' => 'Re-balance Calculator',
+            'footnote' => $footnote,
+            'pool_ratio' => $poolPrice,
+            'total_current' => $totalCurrent,
+            'rows' => $rows,
+        ];
+    }
+
+    private function precise(float $value): string
+    {
+        if ($value === 0.0) {
+            return '0';
+        }
+        return rtrim(rtrim(sprintf('%.16F', $value), '0'), '.');
     }
 
     private function money(float $value): string

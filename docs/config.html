@@ -26,6 +26,7 @@
     <div class="sub-nav">
       <a href="#rungs" class="active">Rungs</a>
       <a href="#balances">Balances</a>
+      <a href="#rebalance">Re-balance</a>
     </div>
 
     <section id="rungs" class="card">
@@ -36,6 +37,12 @@
 
     <section id="balances" class="card">
       <div class="table-container" id="config-balances">
+        <p>Loading...</p>
+      </div>
+    </section>
+
+    <section id="rebalance" class="card">
+      <div class="table-container" id="config-rebalance">
         <p>Loading...</p>
       </div>
     </section>
@@ -51,6 +58,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       LPTables.loadTable('config-rungs', 'config-rungs.json');
       LPTables.loadTable('config-balances', 'config-balances.json');
+      LPTables.loadRebalanceCalculator('config-rebalance', 'config-rebalance.json');
     });
   </script>
 </body>

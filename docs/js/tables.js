@@ -309,6 +309,138 @@ const LPTables = {
   },
 
   /**
+   * Load and render the re-balance calculator.
+   */
+  async loadRebalanceCalculator(containerId, jsonFile) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    try {
+      const response = await fetch(this.dataPath + jsonFile);
+      if (!response.ok) throw new Error(`Failed to load ${jsonFile}`);
+
+      const payload = await response.json();
+      this.renderRebalanceCalculator(container, payload);
+    } catch (error) {
+      console.error(`Error loading rebalance calculator ${jsonFile}:`, error);
+      container.innerHTML = '<p class="error">Failed to load data</p>';
+    }
+  },
+
+  renderRebalanceCalculator(container, payload) {
+    if (!payload || !Array.isArray(payload.rows) || payload.rows.length === 0) {
+      container.innerHTML = '<p>No data available</p>';
+      return;
+    }
+
+    const fmtMoney = (v) => Number(v || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const fmtPct = (v) => `${Number(v || 0).toFixed(2)}%`;
+    const deltaClass = (d) => (d > 0 ? 'delta-pos' : (d < 0 ? 'delta-neg' : 'delta-flat'));
+    const formatAssetWithDiff = (value, baseline) => {
+      let diff = Number(value || 0) - Number(baseline || 0);
+      if (Math.abs(diff) < 0.005) diff = 0;
+      const sign = diff > 0 ? '+' : '';
+      return `${fmtMoney(value)} <span class="delta-tail ${deltaClass(diff)}">(${sign}${fmtMoney(diff)})</span>`;
+    };
+
+    const rows = payload.rows.map((r) => ({
+      rung: r.rung,
+      name: r.name,
+      rangeLower: r.range_lower,
+      rangeUpper: r.range_upper,
+      ratio: Number(r.current_ratio || 0),
+      sharePct: Number(r.share_pct || 0),
+      usdt: Number(r.current_usdt || 0),
+      usdc: Number(r.current_usdc || 0),
+      baseUsdt: Number(r.current_usdt || 0),
+      baseUsdc: Number(r.current_usdc || 0)
+    }));
+
+    const defaultTotal = Number(payload.total_current || rows.reduce((s, r) => s + r.usdt + r.usdc, 0));
+
+    let html = '';
+    html += '<div class="rebalance-controls">';
+    html += '<label for="rebalance-total-input">Total Amount</label>';
+    html += `<input id="rebalance-total-input" type="number" step="0.01" value="${defaultTotal.toFixed(2)}" />`;
+    html += '</div>';
+
+    html += '<table class="data-table display rebalance-table">';
+    html += '<thead><tr>';
+    html += '<th>Rung</th><th>Name</th><th>USDT</th><th>USDC</th><th>Range</th><th>% of total</th>';
+    html += '</tr></thead><tbody>';
+
+    rows.forEach((row, index) => {
+      html += '<tr>';
+      html += `<td>${this.escapeHtml(row.rung)}</td>`;
+      html += `<td>${this.escapeHtml(row.name)}</td>`;
+      html += `<td data-role="usdt" data-index="${index}">${formatAssetWithDiff(row.usdt, row.baseUsdt)}</td>`;
+      html += `<td data-role="usdc" data-index="${index}">${formatAssetWithDiff(row.usdc, row.baseUsdc)}</td>`;
+      html += `<td>${this.escapeHtml(row.rangeLower)} to ${this.escapeHtml(row.rangeUpper)}</td>`;
+      html += '<td>';
+      html += `<input data-role="pct-input" data-index="${index}" type="number" step="0.0001" value="${row.sharePct.toFixed(4)}" class="rebalance-pct-input" />`;
+      html += '</td>';
+      html += '</tr>';
+    });
+
+    html += '</tbody><tfoot><tr>';
+    html += '<td><strong>Total</strong></td>';
+    html += '<td></td>';
+    html += '<td id="rebalance-total-usdt"><strong>0.00</strong></td>';
+    html += '<td id="rebalance-total-usdc"><strong>0.00</strong></td>';
+    html += '<td></td>';
+    html += '<td id="rebalance-total-pct"><strong>100.00%</strong></td>';
+    html += '</tr></tfoot></table>';
+
+    if (payload.footnote) {
+      html += `<p class="table-note"><em>${this.escapeHtml(payload.footnote)}</em></p>`;
+    }
+
+    container.innerHTML = html;
+
+    const totalInput = container.querySelector('#rebalance-total-input');
+    const pctInputs = container.querySelectorAll('input[data-role="pct-input"]');
+
+    const recalc = () => {
+      const total = Number(totalInput.value || 0);
+
+      let sumUsdt = 0;
+      let sumUsdc = 0;
+      let sumPct = 0;
+
+      rows.forEach((row, idx) => {
+        const pctInput = container.querySelector(`input[data-role="pct-input"][data-index="${idx}"]`);
+        const pct = Number(pctInput?.value || 0);
+        sumPct += pct;
+
+        const target = total * (pct / 100);
+        const ratio = row.ratio > 0 ? row.ratio : 1;
+        const usdt = target * (ratio / (1 + ratio));
+        const usdc = target / (1 + ratio);
+
+        sumUsdt += usdt;
+        sumUsdc += usdc;
+
+        const usdtCell = container.querySelector(`td[data-role="usdt"][data-index="${idx}"]`);
+        const usdcCell = container.querySelector(`td[data-role="usdc"][data-index="${idx}"]`);
+        if (usdtCell) usdtCell.innerHTML = formatAssetWithDiff(usdt, row.baseUsdt);
+        if (usdcCell) usdcCell.innerHTML = formatAssetWithDiff(usdc, row.baseUsdc);
+      });
+
+      const totalUsdtEl = container.querySelector('#rebalance-total-usdt strong');
+      const totalUsdcEl = container.querySelector('#rebalance-total-usdc strong');
+      const totalPctEl = container.querySelector('#rebalance-total-pct strong');
+      if (totalUsdtEl) totalUsdtEl.textContent = fmtMoney(sumUsdt);
+      if (totalUsdcEl) totalUsdcEl.textContent = fmtMoney(sumUsdc);
+      if (totalPctEl) totalPctEl.textContent = fmtPct(sumPct);
+    };
+
+    totalInput.addEventListener('input', recalc);
+    pctInputs.forEach((input) => input.addEventListener('input', recalc));
+
+    recalc();
+  },
+
+  /**
    * Escape HTML entities
    */
   escapeHtml(text) {
