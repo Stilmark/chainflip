@@ -295,7 +295,7 @@ final class TableDataBuilder
         $weekly = $avgDaily * 7;
         $monthly = $avgDaily * 30;
         $yearly = $avgDaily * 365;
-        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+        $apr = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
 
         $summary = [
             ['label' => 'Window Days', 'value' => (string) $windowDays],
@@ -304,7 +304,7 @@ final class TableDataBuilder
             ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
             ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
             ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
-            ['label' => 'APY', 'value' => $this->pct($apy)],
+            ['label' => 'APR', 'value' => $this->pct($apr)],
         ];
 
         $columns = [
@@ -317,7 +317,7 @@ final class TableDataBuilder
             ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
             ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
             ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
-            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
         ];
 
         $configRungs = [];
@@ -339,7 +339,7 @@ final class TableDataBuilder
             $wk = $daily * 7;
             $mo = $daily * 30;
             $yr = $daily * 365;
-            $rungApy = $value > 0 ? ($yr / $value) * 100 : 0;
+            $rungApr = $value > 0 ? ($yr / $value) * 100 : 0;
 
             $data[] = [
                 'rung' => $code,
@@ -353,8 +353,8 @@ final class TableDataBuilder
                 'weekly_income' => $this->money($wk),
                 'monthly_income' => $this->money($mo),
                 'yearly_income' => $this->money($yr),
-                'apy' => $this->pct($rungApy),
-                'apy_raw' => $rungApy,
+                'apr' => $this->pct($rungApr),
+                'apr_raw' => $rungApr,
             ];
         }
 
@@ -384,7 +384,7 @@ final class TableDataBuilder
         $weekly = $totalFees * 7;
         $monthly = $totalFees * 30;
         $yearly = $totalFees * 365;
-        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+        $apr = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
 
         $summary = [
             ['label' => 'Date', 'value' => $day['date'] ?? ''],
@@ -392,7 +392,7 @@ final class TableDataBuilder
             ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
             ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
             ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
-            ['label' => 'APY', 'value' => $this->pct($apy)],
+            ['label' => 'APR', 'value' => $this->pct($apr)],
         ];
 
         $columns = [
@@ -404,7 +404,7 @@ final class TableDataBuilder
             ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
             ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
             ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
-            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
         ];
 
         $data = [];
@@ -416,7 +416,7 @@ final class TableDataBuilder
             $wk = $fees * 7;
             $mo = $fees * 30;
             $yr = $fees * 365;
-            $rungApy = $value > 0 ? ($yr / $value) * 100 : 0;
+            $rungApr = $value > 0 ? ($yr / $value) * 100 : 0;
 
             $data[] = [
                 'rung' => $r['rung'],
@@ -429,8 +429,8 @@ final class TableDataBuilder
                 'weekly_income' => $this->money($wk),
                 'monthly_income' => $this->money($mo),
                 'yearly_income' => $this->money($yr),
-                'apy' => $this->pct($rungApy),
-                'apy_raw' => $rungApy,
+                'apr' => $this->pct($rungApr),
+                'apr_raw' => $rungApr,
             ];
 
             $totals['value'] += $value;
@@ -440,7 +440,7 @@ final class TableDataBuilder
             $totals['yearly'] += $yr;
         }
 
-        $totalApy = $totals['value'] > 0 ? ($totals['yearly'] / $totals['value']) * 100 : 0;
+        $totalApr = $totals['value'] > 0 ? ($totals['yearly'] / $totals['value']) * 100 : 0;
 
         $footer = [
             'rung' => 'Total',
@@ -451,7 +451,7 @@ final class TableDataBuilder
             'weekly_income' => $this->money($totals['weekly']),
             'monthly_income' => $this->money($totals['monthly']),
             'yearly_income' => $this->money($totals['yearly']),
-            'apy' => $this->pct($totalApy),
+            'apr' => $this->pct($totalApr),
         ];
 
         return [
@@ -486,7 +486,7 @@ final class TableDataBuilder
         $weekly = $avgDaily * 7;
         $monthly = $avgDaily * 30;
         $yearly = $avgDaily * 365;
-        $apy = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+        $apr = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
 
         $summary = [
             ['label' => 'Days Analyzed', 'value' => (string) $dayCount],
@@ -495,7 +495,7 @@ final class TableDataBuilder
             ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
             ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
             ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
-            ['label' => 'APY', 'value' => $this->pct($apy)],
+            ['label' => 'APR', 'value' => $this->pct($apr)],
         ];
 
         $columns = [
@@ -504,7 +504,7 @@ final class TableDataBuilder
             ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
             ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
             ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
-            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
         ];
 
         $data = [];
@@ -515,7 +515,7 @@ final class TableDataBuilder
             $wk = $totalFees * 7;
             $mo = $totalFees * 30;
             $yr = $totalFees * 365;
-            $dayApy = $pv > 0 ? ($yr / $pv) * 100 : 0;
+            $dayApr = $pv > 0 ? ($yr / $pv) * 100 : 0;
 
             $data[] = [
                 'date' => $day['date'],
@@ -524,8 +524,8 @@ final class TableDataBuilder
                 'weekly_income' => $this->money($wk),
                 'monthly_income' => $this->money($mo),
                 'yearly_income' => $this->money($yr),
-                'apy' => $this->pct($dayApy),
-                'apy_raw' => $dayApy,
+                'apr' => $this->pct($dayApr),
+                'apr_raw' => $dayApr,
             ];
         }
 
@@ -621,10 +621,6 @@ final class TableDataBuilder
         $totalValue = 0;
         
         foreach ($rungs as $rung) {
-            if (empty($rung['active'])) {
-                continue;
-            }
-            
             $revisions = $rung['revisions'] ?? [];
             $activeRevision = null;
             
@@ -667,6 +663,11 @@ final class TableDataBuilder
             $configRungs[$cr['rung']] = $cr;
         }
 
+        $asOfTimestamp = $digest['meta']['source_window']['end']
+            ?? (($digest['meta']['as_of_date'] ?? null) !== null
+                ? $digest['meta']['as_of_date'] . 'T23:59:59Z'
+                : gmdate('Y-m-d\\TH:i:s\\Z'));
+
         $columns = [
             ['data' => 'rung', 'title' => 'Rung'],
             ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
@@ -682,19 +683,21 @@ final class TableDataBuilder
             ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
             ['data' => 'utilization', 'title' => 'Utilization', 'className' => 'dt-right'],
             ['data' => 'cap_efficiency', 'title' => 'Cap Efficiency', 'className' => 'dt-right'],
-            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
         ];
 
         $data = [];
         foreach ($scalpRungs as $r) {
             $code = $r['rung'];
             $cr = $configRungs[$code] ?? [];
-            $lower = (float) ($cr['range_lower'] ?? $r['range_lower']);
-            $upper = (float) ($cr['range_upper'] ?? $r['range_upper']);
+            $rev = get_rung_revision_at($cr, $asOfTimestamp);
+            $lower = (float) ($rev['range_lower'] ?? $r['range_lower']);
+            $upper = (float) ($rev['range_upper'] ?? $r['range_upper']);
             $width = $upper - $lower;
             $value = (float) $r['rung_value'];
             $fees = (float) $r['fees_to_date'];
             $capEff = $value > 0 ? $fees / $value : 0;
+            $apr = (float) ($r['apr_gross'] ?? 0.0);
 
             $data[] = [
                 'rung' => $code,
@@ -713,7 +716,7 @@ final class TableDataBuilder
                 'depleted' => (int) $r['depleted_count'],
                 'utilization' => $this->pct($r['utilization_pct']),
                 'cap_efficiency' => number_format($capEff, 6),
-                'apy' => $this->pct($r['apy_gross'] * 100),
+                'apr' => $this->pct($apr * 100),
             ];
         }
 
@@ -729,7 +732,7 @@ final class TableDataBuilder
         $rungs = $digest['active_rungs'] ?? [];
         $meta = $digest['meta'] ?? [];
         
-        // Calculate window days for proper APY
+        // Calculate window days for proper APR annualization
         $analysisStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
         $asOfDate = $meta['as_of_date'] ?? date('Y-m-d');
         $startDate = new DateTime(substr($analysisStart, 0, 10));
@@ -754,7 +757,7 @@ final class TableDataBuilder
             ['data' => 'depleted', 'title' => 'Depleted', 'className' => 'dt-right'],
             ['data' => 'avg_utilization', 'title' => 'Avg Utilization', 'className' => 'dt-right'],
             ['data' => 'cap_efficiency', 'title' => 'Cap Efficiency', 'className' => 'dt-right'],
-            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
         ];
 
         $rungMap = [];
@@ -790,9 +793,9 @@ final class TableDataBuilder
             $feeShare = $totalFees > 0 ? ($fees / $totalFees) * 100 : 0;
             $avgUtil = $eligible > 0 ? ($trades / $eligible) * 100 : 0;
             $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
-            // APY = (fees / value / windowDays) * 365 * 100
+            // APR = (fees / value / windowDays) * 365 * 100
             $dailyReturn = $value > 0 ? ($fees / $value) / $windowDays : 0;
-            $apy = $dailyReturn * 365 * 100;
+            $apr = $dailyReturn * 365 * 100;
 
             $data[] = [
                 'group' => $groupName,
@@ -808,7 +811,7 @@ final class TableDataBuilder
                 'depleted' => $depleted,
                 'avg_utilization' => $this->pct($avgUtil),
                 'cap_efficiency' => $this->pct($capEff),
-                'apy' => $this->pct($apy),
+                'apr' => $this->pct($apr),
             ];
         }
 
@@ -1168,7 +1171,7 @@ final class TableDataBuilder
             ['data' => 'fee_pct', 'title' => 'Fee %', 'className' => 'dt-right'],
             ['data' => 'cap_eff', 'title' => 'Cap Eff', 'className' => 'dt-right'],
             ['data' => 'days', 'title' => 'Days', 'className' => 'dt-right'],
-            ['data' => 'apy', 'title' => 'APY', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
             ['data' => 'utilization', 'title' => 'Util %', 'className' => 'dt-right'],
             ['data' => 'volume', 'title' => 'Volume', 'className' => 'dt-right'],
             ['data' => 'vol_per_day', 'title' => 'Vol/Day', 'className' => 'dt-right'],
@@ -1187,8 +1190,8 @@ final class TableDataBuilder
             $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
 
             $createdAt = $r['created_at'] ?? null;
-            $activeDays = 0;
-            if ($createdAt) {
+            $activeDays = (float) ($r['active_days'] ?? 0);
+            if ($activeDays <= 0 && $createdAt) {
                 $createdTs = strtotime($createdAt);
                 if ($createdTs !== false) {
                     $activeDays = max(1, ($asOfTimestamp - $createdTs) / 86400);
@@ -1196,7 +1199,7 @@ final class TableDataBuilder
             }
 
             $annualizedFees = $activeDays > 0 ? ($fees / $activeDays) * 365 : 0;
-            $apy = $value > 0 ? ($annualizedFees / $value) * 100 : 0;
+            $apr = $value > 0 ? ($annualizedFees / $value) * 100 : 0;
 
             $utilization = (float) ($r['utilization_pct'] ?? 0);
             $volPerDay = $activeDays > 0 ? $volume / $activeDays : 0;
@@ -1213,8 +1216,8 @@ final class TableDataBuilder
                 'cap_eff' => $this->pct($capEff),
                 'days' => number_format($activeDays, 1),
                 'days_raw' => $activeDays,
-                'apy' => $this->pct($apy),
-                'apy_raw' => $apy,
+                'apr' => $this->pct($apr),
+                'apr_raw' => $apr,
                 'utilization' => $this->pct($utilization),
                 'volume' => $this->money($volume),
                 'volume_raw' => $volume,
@@ -1222,7 +1225,7 @@ final class TableDataBuilder
             ];
         }
 
-        usort($rows, fn($a, $b) => $b['apy_raw'] <=> $a['apy_raw']);
+        usort($rows, fn($a, $b) => $b['apr_raw'] <=> $a['apr_raw']);
 
         $totalCapEff = $totalValue > 0 ? ($totalFees / $totalValue) * 100 : 0;
 
@@ -1235,7 +1238,7 @@ final class TableDataBuilder
             'fee_pct' => '100.00%',
             'cap_eff' => $this->pct($totalCapEff),
             'days' => '',
-            'apy' => '',
+            'apr' => '',
             'utilization' => '',
             'volume' => '',
             'vol_per_day' => '',
@@ -1246,7 +1249,7 @@ final class TableDataBuilder
             'columns' => $columns,
             'data' => $rows,
             'footer' => $footer,
-            'note' => 'Sorted by APY descending. Cap Eff = Fees/Value %. APY based on actual active days.',
+            'note' => 'Sorted by APR descending. Cap Eff = Fees/Value %. APR based on actual active days.',
         ];
     }
 

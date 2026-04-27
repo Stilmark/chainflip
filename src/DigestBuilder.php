@@ -18,6 +18,8 @@ final class DigestBuilder
 
         $latestDay = $inScopeDays !== [] ? end($inScopeDays) : null;
         $activeRungs = array_values(array_filter($config['rungs'], fn(array $r) => !empty($r['active'])));
+        $asOfTimestamp = $latestDay['meta']['source_window']['end']
+            ?? (($latestDay['date'] ?? null) !== null ? $latestDay['date'] . 'T23:59:59Z' : gmdate('Y-m-d\\TH:i:s\\Z'));
 
         $feesToDateByRung = [];
         $eligibleToDateByRung = [];
@@ -44,7 +46,7 @@ final class DigestBuilder
 
         foreach ($activeRungs as $rung) {
             $code = $rung['rung'];
-            $rev = get_current_revision($rung);
+            $rev = get_rung_revision_at($rung, $asOfTimestamp) ?? get_current_revision($rung);
             $createdAt = get_rung_created_at($rung);
             $rungValue = $rev !== null ? (float) ($rev['initial_value']['total_usd'] ?? 0) : 0.0;
             $fees = (float) ($feesToDateByRung[$code] ?? 0);
@@ -53,8 +55,23 @@ final class DigestBuilder
             $skipped = (int) ($skippedToDateByRung[$code] ?? 0);
             $oor = (int) ($oorToDateByRung[$code] ?? 0);
             $depleted = (int) ($depletedToDateByRung[$code] ?? 0);
-            $apy = $rungValue > 0 ? ($fees / $rungValue) * 365 : 0.0;
-            $yearly = $rungValue * $apy;
+
+            $capitalDays = 0.0;
+            $activeDays = 0;
+            foreach ($inScopeDays as $day) {
+                $dayEnd = $day['date'] . 'T23:59:59Z';
+                $dayRev = get_rung_revision_at($rung, $dayEnd);
+                if ($dayRev === null) {
+                    continue;
+                }
+
+                $capitalDays += (float) ($dayRev['initial_value']['total_usd'] ?? 0.0);
+                $activeDays++;
+            }
+
+            $avgActiveCapital = $activeDays > 0 ? $capitalDays / $activeDays : $rungValue;
+            $apr = annualized_return_from_capital_days($fees, $capitalDays);
+            $yearlyIncome = annualized_simple_income($fees, (float) max(1, $activeDays));
             $targetAlloc = $rev !== null ? (float) ($rev['target_allocation_pct'] ?? 0) : 0.0;
 
             $rungPayload[] = [
@@ -80,10 +97,13 @@ final class DigestBuilder
                 'out_of_range_pct' => $eligible > 0 ? ($oor / $eligible) * 100 : 0.0,
                 'depleted_pct' => $eligible > 0 ? ($depleted / $eligible) * 100 : 0.0,
                 'filled_volume_usd' => (float) ($volumeToDateByRung[$code] ?? 0),
-                'apy_gross' => $apy,
-                'predicted_daily_income' => $yearly / 365,
-                'predicted_monthly_income' => $yearly / 12,
-                'predicted_yearly_income' => $yearly,
+                'active_days' => $activeDays,
+                'average_active_capital' => $avgActiveCapital,
+                'capital_days' => $capitalDays,
+                'apr_gross' => $apr,
+                'predicted_daily_income' => $yearlyIncome / 365,
+                'predicted_monthly_income' => $yearlyIncome / 12,
+                'predicted_yearly_income' => $yearlyIncome,
                 'stability_label' => $eligible < 50 ? 'early' : 'normal',
             ];
         }
@@ -134,10 +154,10 @@ final class DigestBuilder
                 'total_trs_in_scope' => count($inScopeTrades),
             ],
             'portfolio' => [
-                'portfolio_value' => array_sum(array_map(function(array $r) {
-                    $rev = get_current_revision($r);
-                    return $rev !== null ? (float) ($rev['initial_value']['total_usd'] ?? 0) : 0.0;
-                }, $activeRungs)),
+                'portfolio_value' => array_sum(array_map(
+                    fn(array $r) => get_rung_value_at($r, $asOfTimestamp),
+                    $activeRungs
+                )),
                 'borrowed' => $config['portfolio']['borrowed'],
                 'borrow_rates_annual' => $config['portfolio']['borrow_rates_annual'],
                 'total_fees_to_date' => $totalFeesToDate,

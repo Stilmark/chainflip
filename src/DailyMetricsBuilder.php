@@ -8,10 +8,6 @@ final class DailyMetricsBuilder
     {
         $days = [];
         $rungs = array_values(array_filter($config['rungs'], fn(array $r) => !empty($r['active'])));
-        $portfolioValue = array_sum(array_map(function(array $r) {
-            $rev = get_current_revision($r);
-            return $rev !== null ? (float) ($rev['initial_value']['total_usd'] ?? 0) : 0.0;
-        }, $rungs));
         $analysisWindowStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
         $analysisWindowStartDate = substr($analysisWindowStart, 0, 10);
 
@@ -23,6 +19,9 @@ final class DailyMetricsBuilder
             }
 
             if (!isset($days[$date])) {
+                $dayEnd = $date . 'T23:59:59Z';
+                $portfolioValue = $this->getPortfolioValueAtTimestamp($rungs, $dayEnd);
+
                 $days[$date] = [
                     'date' => $date,
                     'meta' => [
@@ -46,7 +45,7 @@ final class DailyMetricsBuilder
                 ];
 
                 foreach ($rungs as $rung) {
-                    $rev = get_current_revision($rung);
+                    $rev = get_rung_revision_at($rung, $dayEnd);
                     $days[$date]['rung_metrics'][$rung['rung']] = [
                         'rung' => $rung['rung'],
                         'name' => $rung['name'],
@@ -64,7 +63,7 @@ final class DailyMetricsBuilder
                         'filled_volume_usd' => 0.0,
                         'rung_value' => $rev !== null ? (float) ($rev['initial_value']['total_usd'] ?? 0) : 0.0,
                         'capital_efficiency' => 0.0,
-                        'apy_gross' => 0.0,
+                        'apr_gross' => 0.0,
                         'target_allocation_pct' => $rev !== null ? (float) ($rev['target_allocation_pct'] ?? 0) : 0.0,
                     ];
                 }
@@ -158,7 +157,7 @@ final class DailyMetricsBuilder
                 $rm['depleted_pct'] = $eligible > 0 ? ((float) $rm['depleted_count'] / $eligible) * 100 : 0.0;
                 $rm['fee_share_pct'] = $feesTotal > 0 ? ((float) $rm['fees'] / $feesTotal) * 100 : 0.0;
                 $rm['capital_efficiency'] = (float) $rm['rung_value'] > 0 ? ((float) $rm['fees'] / (float) $rm['rung_value']) : 0.0;
-                $rm['apy_gross'] = $rm['capital_efficiency'] * 365;
+                $rm['apr_gross'] = annualized_simple_return((float) $rm['fees'], (float) $rm['rung_value'], 1.0);
             }
             unset($rm);
 
@@ -185,5 +184,16 @@ final class DailyMetricsBuilder
             'analysis_window_start' => $analysisWindowStart,
             'days' => array_values($days),
         ];
+    }
+
+    private function getPortfolioValueAtTimestamp(array $rungs, string $timestamp): float
+    {
+        $total = 0.0;
+
+        foreach ($rungs as $rung) {
+            $total += get_rung_value_at($rung, $timestamp);
+        }
+
+        return $total;
     }
 }

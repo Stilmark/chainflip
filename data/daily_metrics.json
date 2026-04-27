@@ -1,7 +1,7 @@
 {
     "version": 2,
     "pair": "USDT/USDC",
-    "updated_at": "2026-04-27T13:38:03+00:00",
+    "updated_at": "2026-04-27T14:19:06+00:00",
     "analysis_window_start": "2026-04-15T00:00:00Z",
     "days": [
         {
@@ -14,7 +14,7 @@
                 }
             },
             "portfolio": {
-                "portfolio_value": 50831.173910000005,
+                "portfolio_value": 41873.731217,
                 "total_fees": 29.443199000000007,
                 "borrowed_usdt": 34426.1,
                 "borrowed_usdc": 18856.04,
@@ -39,7 +39,7 @@
                     "filled_volume_usd": 34252.788438123906,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0006964906675901326,
-                    "apy_gross": 0.2542190936703984,
+                    "apr_gross": 0.2542190936703984,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -59,7 +59,7 @@
                     "filled_volume_usd": 13994.154870339898,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0006639212714622802,
-                    "apy_gross": 0.2423312640837323,
+                    "apr_gross": 0.2423312640837323,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -77,9 +77,9 @@
                     "fees": 4.944042,
                     "fee_share_pct": 16.79179629903666,
                     "filled_volume_usd": 9881.158199642203,
-                    "rung_value": 8852.006261,
-                    "capital_efficiency": 0.0005585221987226065,
-                    "apy_gross": 0.20386060253375138,
+                    "rung_value": 5901.25,
+                    "capital_efficiency": 0.0008377957212454988,
+                    "apr_gross": 0.30579543825460703,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -99,7 +99,7 @@
                     "filled_volume_usd": 725.6016718972,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0004397446964984366,
-                    "apy_gross": 0.16050681422192936,
+                    "apr_gross": 0.16050681422192936,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -117,10 +117,10 @@
                     "fees": 0,
                     "fee_share_pct": 0,
                     "filled_volume_usd": 0,
-                    "rung_value": 2002.303159,
+                    "rung_value": 0,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
-                    "target_allocation_pct": 33.3
+                    "apr_gross": 0,
+                    "target_allocation_pct": 0
                 },
                 {
                     "rung": "S2",
@@ -137,10 +137,10 @@
                     "fees": 0,
                     "fee_share_pct": 0,
                     "filled_volume_usd": 0,
-                    "rung_value": 2001.551475,
+                    "rung_value": 0,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
-                    "target_allocation_pct": 33.3
+                    "apr_gross": 0,
+                    "target_allocation_pct": 0
                 },
                 {
                     "rung": "S3",
@@ -157,10 +157,10 @@
                     "fees": 0,
                     "fee_share_pct": 0,
                     "filled_volume_usd": 0,
-                    "rung_value": 2002.831798,
+                    "rung_value": 0,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
-                    "target_allocation_pct": 33.3
+                    "apr_gross": 0,
+                    "target_allocation_pct": 0
                 }
             ],
             "trade_buckets": [
@@ -395,7 +395,7 @@
                 "skipped_count_sum": 5,
                 "out_of_range_count_sum": 33,
                 "depleted_count_sum": 0,
-                "rung_value_sum": 50831.173910000005,
+                "rung_value_sum": 41873.731217,
                 "fees_sum": 29.443199000000003
             }
         },
@@ -409,7 +409,7 @@
                 }
             },
             "portfolio": {
-                "portfolio_value": 50831.173910000005,
+                "portfolio_value": 47880.867710000006,
                 "total_fees": 1.292999,
                 "borrowed_usdt": 34426.1,
                 "borrowed_usdc": 18856.04,
@@ -434,7 +434,7 @@
                     "filled_volume_usd": 1477.1835552907,
                     "rung_value": 24602.97,
                     "capital_efficiency": 3.0022107087071197e-5,
-                    "apy_gross": 0.010958069086780986,
+                    "apr_gross": 0.010958069086780986,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -454,7 +454,7 @@
                     "filled_volume_usd": 527.636551413,
                     "rung_value": 10544.08,
                     "capital_efficiency": 2.5021908028011925e-5,
-                    "apy_gross": 0.009132996430224354,
+                    "apr_gross": 0.009132996430224354,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -472,9 +472,9 @@
                     "fees": 0.276757,
                     "fee_share_pct": 21.40427022758718,
                     "filled_volume_usd": 553.4831086240999,
-                    "rung_value": 8852.006261,
-                    "capital_efficiency": 3.1264889770732615e-5,
-                    "apy_gross": 0.011411684766317404,
+                    "rung_value": 5901.25,
+                    "capital_efficiency": 4.689803007837322e-5,
+                    "apr_gross": 0.017117780978606226,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -494,7 +494,7 @@
                     "filled_volume_usd": 27.550463447400006,
                     "rung_value": 825.431217,
                     "capital_efficiency": 1.6689458450660947e-5,
-                    "apy_gross": 0.006091652334491246,
+                    "apr_gross": 0.006091652334491246,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -512,10 +512,10 @@
                     "fees": 0,
                     "fee_share_pct": 0,
                     "filled_volume_usd": 0,
-                    "rung_value": 2002.303159,
+                    "rung_value": 2103.682495,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
-                    "target_allocation_pct": 33.3
+                    "apr_gross": 0,
+                    "target_allocation_pct": 35
                 },
                 {
                     "rung": "S2",
@@ -532,10 +532,10 @@
                     "fees": 0,
                     "fee_share_pct": 0,
                     "filled_volume_usd": 0,
-                    "rung_value": 2001.551475,
+                    "rung_value": 2102.102654,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
-                    "target_allocation_pct": 33.3
+                    "apr_gross": 0,
+                    "target_allocation_pct": 35
                 },
                 {
                     "rung": "S3",
@@ -552,10 +552,10 @@
                     "fees": 0,
                     "fee_share_pct": 0,
                     "filled_volume_usd": 0,
-                    "rung_value": 2002.831798,
+                    "rung_value": 1801.351344,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
-                    "target_allocation_pct": 33.3
+                    "apr_gross": 0,
+                    "target_allocation_pct": 30
                 }
             ],
             "trade_buckets": [
@@ -630,7 +630,7 @@
                 "skipped_count_sum": 3,
                 "out_of_range_count_sum": 0,
                 "depleted_count_sum": 0,
-                "rung_value_sum": 50831.173910000005,
+                "rung_value_sum": 47880.867710000006,
                 "fees_sum": 1.292999
             }
         },
@@ -644,7 +644,7 @@
                 }
             },
             "portfolio": {
-                "portfolio_value": 50831.173910000005,
+                "portfolio_value": 47880.867710000006,
                 "total_fees": 83.52266100000001,
                 "borrowed_usdt": 34426.1,
                 "borrowed_usdc": 18856.04,
@@ -669,7 +669,7 @@
                     "filled_volume_usd": 86524.50339866367,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0017594121766599724,
-                    "apy_gross": 0.6421854444808899,
+                    "apr_gross": 0.6421854444808899,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -689,7 +689,7 @@
                     "filled_volume_usd": 41081.029506412284,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0019489935584707252,
-                    "apy_gross": 0.7113826488418147,
+                    "apr_gross": 0.7113826488418147,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -707,9 +707,9 @@
                     "fees": 10.472936000000002,
                     "fee_share_pct": 12.539035364306702,
                     "filled_volume_usd": 20932.378960510094,
-                    "rung_value": 8852.006261,
-                    "capital_efficiency": 0.0011831143913828284,
-                    "apy_gross": 0.43183675285473233,
+                    "rung_value": 5901.25,
+                    "capital_efficiency": 0.0017746979029866557,
+                    "apr_gross": 0.6477647345901293,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -729,7 +729,7 @@
                     "filled_volume_usd": 3099.9802396589007,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.001878555072869263,
-                    "apy_gross": 0.6856726015972809,
+                    "apr_gross": 0.6856726015972809,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -747,10 +747,10 @@
                     "fees": 2.630338,
                     "fee_share_pct": 3.1492507165211125,
                     "filled_volume_usd": 5255.2969151584,
-                    "rung_value": 2002.303159,
-                    "capital_efficiency": 0.0013136562204265094,
-                    "apy_gross": 0.4794845204556759,
-                    "target_allocation_pct": 33.3
+                    "rung_value": 2103.682495,
+                    "capital_efficiency": 0.0012503493308765685,
+                    "apr_gross": 0.4563775057699475,
+                    "target_allocation_pct": 35
                 },
                 {
                     "rung": "S2",
@@ -767,10 +767,10 @@
                     "fees": 2.628837,
                     "fee_share_pct": 3.147453599448897,
                     "filled_volume_usd": 5252.2416493644,
-                    "rung_value": 2001.551475,
-                    "capital_efficiency": 0.0013133996466416133,
-                    "apy_gross": 0.47939087102418887,
-                    "target_allocation_pct": 33.3
+                    "rung_value": 2102.102654,
+                    "capital_efficiency": 0.0012505749873811824,
+                    "apr_gross": 0.4564598703941316,
+                    "target_allocation_pct": 35
                 },
                 {
                     "rung": "S3",
@@ -787,10 +787,10 @@
                     "fees": 2.4028229999999997,
                     "fee_share_pct": 2.8768515888161175,
                     "filled_volume_usd": 4801.100217061,
-                    "rung_value": 2002.831798,
-                    "capital_efficiency": 0.001199712827806821,
-                    "apy_gross": 0.4378951821494897,
-                    "target_allocation_pct": 33.3
+                    "rung_value": 1801.351344,
+                    "capital_efficiency": 0.0013339002455036888,
+                    "apr_gross": 0.4868735896088464,
+                    "target_allocation_pct": 30
                 }
             ],
             "trade_buckets": [
@@ -1301,7 +1301,7 @@
                 "skipped_count_sum": 5,
                 "out_of_range_count_sum": 355,
                 "depleted_count_sum": 0,
-                "rung_value_sum": 50831.173910000005,
+                "rung_value_sum": 47880.867710000006,
                 "fees_sum": 83.522661
             }
         },
@@ -1315,7 +1315,7 @@
                 }
             },
             "portfolio": {
-                "portfolio_value": 50831.173910000005,
+                "portfolio_value": 47880.417649,
                 "total_fees": 0.949456,
                 "borrowed_usdt": 34426.1,
                 "borrowed_usdc": 18856.04,
@@ -1340,7 +1340,7 @@
                     "filled_volume_usd": 912.6125887028,
                     "rung_value": 24602.97,
                     "capital_efficiency": 1.8561905330941752e-5,
-                    "apy_gross": 0.00677509544579374,
+                    "apr_gross": 0.00677509544579374,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -1360,7 +1360,7 @@
                     "filled_volume_usd": 325.9764624004,
                     "rung_value": 10544.08,
                     "capital_efficiency": 1.5470387174604137e-5,
-                    "apy_gross": 0.00564669131873051,
+                    "apr_gross": 0.00564669131873051,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -1378,9 +1378,9 @@
                     "fees": 0.17111200000000001,
                     "fee_share_pct": 18.02210950270471,
                     "filled_volume_usd": 341.9454533285,
-                    "rung_value": 8852.006261,
-                    "capital_efficiency": 1.933030715916707e-5,
-                    "apy_gross": 0.00705556211309598,
+                    "rung_value": 5901.25,
+                    "capital_efficiency": 2.8995890701122646e-5,
+                    "apr_gross": 0.010583500105909766,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -1400,7 +1400,7 @@
                     "filled_volume_usd": 17.018137752199998,
                     "rung_value": 825.431217,
                     "capital_efficiency": 1.0317031661282567e-5,
-                    "apy_gross": 0.003765716556368137,
+                    "apr_gross": 0.003765716556368137,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -1420,7 +1420,7 @@
                     "filled_volume_usd": 0,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
+                    "apr_gross": 0,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -1440,7 +1440,7 @@
                     "filled_volume_usd": 0,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
+                    "apr_gross": 0,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -1460,7 +1460,7 @@
                     "filled_volume_usd": 299.7264957627,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 7.490843721865055e-5,
-                    "apy_gross": 0.02734157958480745,
+                    "apr_gross": 0.02734157958480745,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -1522,7 +1522,7 @@
                 "skipped_count_sum": 2,
                 "out_of_range_count_sum": 14,
                 "depleted_count_sum": 0,
-                "rung_value_sum": 50831.173910000005,
+                "rung_value_sum": 47880.417649,
                 "fees_sum": 0.949456
             }
         },
@@ -1561,7 +1561,7 @@
                     "filled_volume_usd": 56321.17507665839,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0011451084564180663,
-                    "apy_gross": 0.41796458659259417,
+                    "apr_gross": 0.41796458659259417,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -1581,7 +1581,7 @@
                     "filled_volume_usd": 21523.87652736739,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0010211091911290504,
-                    "apy_gross": 0.3727048547621034,
+                    "apr_gross": 0.3727048547621034,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -1601,7 +1601,7 @@
                     "filled_volume_usd": 14108.433001246001,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.0007972497750134612,
-                    "apy_gross": 0.29099616787991334,
+                    "apr_gross": 0.29099616787991334,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -1621,7 +1621,7 @@
                     "filled_volume_usd": 1123.8112470822,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0006810403924909952,
-                    "apy_gross": 0.24857974325921323,
+                    "apr_gross": 0.24857974325921323,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -1641,7 +1641,7 @@
                     "filled_volume_usd": 1833.8842101916002,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.0004584585485339086,
-                    "apy_gross": 0.16733737021487663,
+                    "apr_gross": 0.16733737021487663,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -1661,7 +1661,7 @@
                     "filled_volume_usd": 4114.996733285299,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0010285401228564458,
-                    "apy_gross": 0.37541714484260275,
+                    "apr_gross": 0.37541714484260275,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -1681,7 +1681,7 @@
                     "filled_volume_usd": 5362.4871145396,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0013394344960364964,
-                    "apy_gross": 0.4888935910533212,
+                    "apr_gross": 0.4888935910533212,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -2032,7 +2032,7 @@
                     "filled_volume_usd": 20493.6079481144,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.00041711886816916813,
-                    "apy_gross": 0.15224838688174636,
+                    "apr_gross": 0.15224838688174636,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -2052,7 +2052,7 @@
                     "filled_volume_usd": 12380.5321173201,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0005876898695761031,
-                    "apy_gross": 0.21450680239527764,
+                    "apr_gross": 0.21450680239527764,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -2072,7 +2072,7 @@
                     "filled_volume_usd": 8494.9412599595,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.0004804448703044134,
-                    "apy_gross": 0.1753623776611109,
+                    "apr_gross": 0.1753623776611109,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -2092,7 +2092,7 @@
                     "filled_volume_usd": 1105.5552340858003,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0006701575959417585,
-                    "apy_gross": 0.24460752251874185,
+                    "apr_gross": 0.24460752251874185,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -2112,7 +2112,7 @@
                     "filled_volume_usd": 1319.4593644644,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.00032988361279412035,
-                    "apy_gross": 0.12040751866985393,
+                    "apr_gross": 0.12040751866985393,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -2132,7 +2132,7 @@
                     "filled_volume_usd": 2160.0912296413,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0005402439125378976,
-                    "apy_gross": 0.19718902807633262,
+                    "apr_gross": 0.19718902807633262,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -2152,7 +2152,7 @@
                     "filled_volume_usd": 2442.2320501824,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0006103972391594715,
-                    "apy_gross": 0.2227949922932071,
+                    "apr_gross": 0.2227949922932071,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -2603,7 +2603,7 @@
                     "filled_volume_usd": 44261.67261749361,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0008996257362424129,
-                    "apy_gross": 0.3283633937284807,
+                    "apr_gross": 0.3283633937284807,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -2623,7 +2623,7 @@
                     "filled_volume_usd": 23053.5382481151,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0010934285399959024,
-                    "apy_gross": 0.3991014170985044,
+                    "apr_gross": 0.3991014170985044,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -2643,7 +2643,7 @@
                     "filled_volume_usd": 16791.404603749703,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.0009488221937894537,
-                    "apy_gross": 0.34632010073315056,
+                    "apr_gross": 0.34632010073315056,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -2663,7 +2663,7 @@
                     "filled_volume_usd": 1791.4399892828003,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0010854823291714688,
-                    "apy_gross": 0.3962010501475861,
+                    "apr_gross": 0.3962010501475861,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -2683,7 +2683,7 @@
                     "filled_volume_usd": 7004.3831681104,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.0017503862910301685,
-                    "apy_gross": 0.6388909962260115,
+                    "apr_gross": 0.6388909962260115,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -2703,7 +2703,7 @@
                     "filled_volume_usd": 7502.8681462417,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0018754571375687453,
-                    "apy_gross": 0.684541855212592,
+                    "apr_gross": 0.684541855212592,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -2723,7 +2723,7 @@
                     "filled_volume_usd": 6674.153068919099,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0016672508412011939,
-                    "apy_gross": 0.6085465570384357,
+                    "apr_gross": 0.6085465570384357,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -3224,7 +3224,7 @@
                     "filled_volume_usd": 33344.0881949548,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0006780443174137104,
-                    "apy_gross": 0.2474861758560043,
+                    "apr_gross": 0.2474861758560043,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -3244,7 +3244,7 @@
                     "filled_volume_usd": 14371.8607346671,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0006818962868263518,
-                    "apy_gross": 0.2488921446916184,
+                    "apr_gross": 0.2488921446916184,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -3264,7 +3264,7 @@
                     "filled_volume_usd": 9585.419021792699,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.0005418468829074408,
-                    "apy_gross": 0.19777411226121588,
+                    "apr_gross": 0.19777411226121588,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -3284,7 +3284,7 @@
                     "filled_volume_usd": 878.9235964428999,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0005326912660246529,
-                    "apy_gross": 0.1944323120989983,
+                    "apr_gross": 0.1944323120989983,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -3304,7 +3304,7 @@
                     "filled_volume_usd": 2501.1054648169,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.0006253863179366835,
-                    "apy_gross": 0.22826600604688949,
+                    "apr_gross": 0.22826600604688949,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -3324,7 +3324,7 @@
                     "filled_volume_usd": 2750.6160093604003,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0006878708927533328,
-                    "apy_gross": 0.25107287585496646,
+                    "apr_gross": 0.25107287585496646,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -3344,7 +3344,7 @@
                     "filled_volume_usd": 2502.5814158827,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0006253785271687604,
-                    "apy_gross": 0.22826316241659753,
+                    "apr_gross": 0.22826316241659753,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -3795,7 +3795,7 @@
                     "filled_volume_usd": 23562.980356055294,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0004791097578869543,
-                    "apy_gross": 0.1748750616287383,
+                    "apr_gross": 0.1748750616287383,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -3815,7 +3815,7 @@
                     "filled_volume_usd": 10175.2463457616,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.00048274624244125613,
-                    "apy_gross": 0.1762023784910585,
+                    "apr_gross": 0.1762023784910585,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -3835,7 +3835,7 @@
                     "filled_volume_usd": 8549.178296438002,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.00048312652227122064,
-                    "apy_gross": 0.17634118062899554,
+                    "apr_gross": 0.17634118062899554,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -3855,7 +3855,7 @@
                     "filled_volume_usd": 586.3738795996,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.00035534517469067324,
-                    "apy_gross": 0.12970098876209574,
+                    "apr_gross": 0.12970098876209574,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -3875,7 +3875,7 @@
                     "filled_volume_usd": 2502.7919569918,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.0006251036434588175,
-                    "apy_gross": 0.22816282986246839,
+                    "apr_gross": 0.22816282986246839,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -3895,7 +3895,7 @@
                     "filled_volume_usd": 2752.2410451272003,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0006877614776307464,
-                    "apy_gross": 0.25103293933522247,
+                    "apr_gross": 0.25103293933522247,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -3915,7 +3915,7 @@
                     "filled_volume_usd": 2981.6477626565,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0007446586385782957,
-                    "apy_gross": 0.27180040308107795,
+                    "apr_gross": 0.27180040308107795,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -4216,7 +4216,7 @@
                     "filled_volume_usd": 84.8738883851,
                     "rung_value": 24602.97,
                     "capital_efficiency": 1.725848545927585e-6,
-                    "apy_gross": 0.0006299347192635685,
+                    "apr_gross": 0.0006299347192635685,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -4236,7 +4236,7 @@
                     "filled_volume_usd": 30.3148162741,
                     "rung_value": 10544.08,
                     "capital_efficiency": 1.4383426529389004e-6,
-                    "apy_gross": 0.0005249950683226986,
+                    "apr_gross": 0.0005249950683226986,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -4256,7 +4256,7 @@
                     "filled_volume_usd": 46.25577945,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 2.6142096286074917e-6,
-                    "apy_gross": 0.0009541865144417344,
+                    "apr_gross": 0.0009541865144417344,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -4276,7 +4276,7 @@
                     "filled_volume_usd": 1.5831017571,
                     "rung_value": 825.431217,
                     "capital_efficiency": 9.59498482355072e-7,
-                    "apy_gross": 0.0003502169460596013,
+                    "apr_gross": 0.0003502169460596013,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -4296,7 +4296,7 @@
                     "filled_volume_usd": 0,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
+                    "apr_gross": 0,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -4316,7 +4316,7 @@
                     "filled_volume_usd": 0,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0,
-                    "apy_gross": 0,
+                    "apr_gross": 0,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -4336,7 +4336,7 @@
                     "filled_volume_usd": 28.775688565499998,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 7.1878227689292955e-6,
-                    "apy_gross": 0.002623555310659193,
+                    "apr_gross": 0.002623555310659193,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -4437,7 +4437,7 @@
                     "filled_volume_usd": 25580.519502459803,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0005201589482895765,
-                    "apy_gross": 0.18985801612569542,
+                    "apr_gross": 0.18985801612569542,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -4457,7 +4457,7 @@
                     "filled_volume_usd": 9488.500118202901,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0004501867398578159,
-                    "apy_gross": 0.1643181600481028,
+                    "apr_gross": 0.1643181600481028,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -4477,7 +4477,7 @@
                     "filled_volume_usd": 9646.7689756667,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.0005453071154351728,
-                    "apy_gross": 0.19903709713383808,
+                    "apr_gross": 0.19903709713383808,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -4497,7 +4497,7 @@
                     "filled_volume_usd": 495.4171983926,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0003002576046260679,
-                    "apy_gross": 0.10959402568851478,
+                    "apr_gross": 0.10959402568851478,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -4517,7 +4517,7 @@
                     "filled_volume_usd": 4002.9932703084996,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.0010005502868010007,
-                    "apy_gross": 0.36520085468236524,
+                    "apr_gross": 0.36520085468236524,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -4537,7 +4537,7 @@
                     "filled_volume_usd": 4001.6646062625,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0010006002968272398,
-                    "apy_gross": 0.36521910834194254,
+                    "apr_gross": 0.36521910834194254,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -4557,7 +4557,7 @@
                     "filled_volume_usd": 3664.3001237484,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0009156260659688209,
-                    "apy_gross": 0.33420351407861965,
+                    "apr_gross": 0.33420351407861965,
                     "target_allocation_pct": 33.3
                 }
             ],
@@ -4908,7 +4908,7 @@
                     "filled_volume_usd": 24713.990962735803,
                     "rung_value": 24602.97,
                     "capital_efficiency": 0.0005025727788149156,
-                    "apy_gross": 0.1834390642674442,
+                    "apr_gross": 0.1834390642674442,
                     "target_allocation_pct": 54.89
                 },
                 {
@@ -4928,7 +4928,7 @@
                     "filled_volume_usd": 8827.590750317202,
                     "rung_value": 10544.08,
                     "capital_efficiency": 0.0004188679334754668,
-                    "apy_gross": 0.15288679571854538,
+                    "apr_gross": 0.15288679571854538,
                     "target_allocation_pct": 23.52
                 },
                 {
@@ -4948,7 +4948,7 @@
                     "filled_volume_usd": 7956.047123431698,
                     "rung_value": 8852.006261,
                     "capital_efficiency": 0.0004497030258031355,
-                    "apy_gross": 0.16414160441814446,
+                    "apr_gross": 0.16414160441814446,
                     "target_allocation_pct": 19.75
                 },
                 {
@@ -4968,7 +4968,7 @@
                     "filled_volume_usd": 460.90952315630005,
                     "rung_value": 825.431217,
                     "capital_efficiency": 0.0002793691288271207,
-                    "apy_gross": 0.10196973202189906,
+                    "apr_gross": 0.10196973202189906,
                     "target_allocation_pct": 1.84
                 },
                 {
@@ -4988,7 +4988,7 @@
                     "filled_volume_usd": 2001.7801344973,
                     "rung_value": 2002.303159,
                     "capital_efficiency": 0.0005004751630619587,
-                    "apy_gross": 0.18267343451761492,
+                    "apr_gross": 0.18267343451761492,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -5008,7 +5008,7 @@
                     "filled_volume_usd": 2001.2069479051002,
                     "rung_value": 2001.551475,
                     "capital_efficiency": 0.0005005002431925965,
-                    "apy_gross": 0.1826825887652977,
+                    "apr_gross": 0.1826825887652977,
                     "target_allocation_pct": 33.3
                 },
                 {
@@ -5028,7 +5028,7 @@
                     "filled_volume_usd": 2169.4515982186,
                     "rung_value": 2002.831798,
                     "capital_efficiency": 0.0005420904546673271,
-                    "apy_gross": 0.1978630159535744,
+                    "apr_gross": 0.1978630159535744,
                     "target_allocation_pct": 33.3
                 }
             ],

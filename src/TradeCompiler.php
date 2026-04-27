@@ -11,7 +11,7 @@ final class TradeCompiler
         $pair = $config['pair']['symbol'];
         $base = strtoupper($config['pair']['base']);
         $quote = strtoupper($config['pair']['quote']);
-        $activeRungs = array_filter($config['rungs'] ?? [], fn(array $r) => !empty($r['active']));
+        $activeRungs = array_filter($config['rungs'] ?? [], fn(array $r) => !empty($r['revisions']));
         $analysisWindowStart = $config['processing']['analysis_window_start'] ?? '2026-04-15T00:00:00Z';
 
         $existingCompactTrades = $existingCompact['trades'] ?? [];
@@ -242,12 +242,16 @@ final class TradeCompiler
             $code = $rung['rung'];
             $rev = get_rung_revision_at($rung, $timestamp);
             $createdAt = get_rung_created_at($rung);
-            $eligible = !empty($rung['active']) && $rev !== null && $createdAt !== null && strcmp($timestamp, $createdAt) >= 0;
+            $eligible = $rev !== null;
 
             if (!$eligible) {
+                $status = ($createdAt !== null && strcmp($timestamp, $createdAt) < 0)
+                    ? 'not_started'
+                    : 'inactive_for_period';
+
                 $byRung[$code] = [
                     'eligible' => false,
-                    'status' => 'not_started',
+                    'status' => $status,
                     'fees_usd' => 0.0,
                     'filled_volume_usd' => 0.0,
                 ];

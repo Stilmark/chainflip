@@ -257,3 +257,40 @@ function get_rung_created_at(array $rung): ?string
 
     return $earliest;
 }
+
+function get_rung_value_at(array $rung, string $timestamp): float
+{
+    $rev = get_rung_revision_at($rung, $timestamp);
+    if ($rev === null) {
+        return 0.0;
+    }
+
+    return (float) ($rev['initial_value']['total_usd'] ?? 0.0);
+}
+
+function annualized_simple_return(float $fees, float $capital, float $days): float
+{
+    if ($fees <= 0 || $capital <= 0 || $days <= 0) {
+        return 0.0;
+    }
+
+    return ($fees / $capital) * (365 / $days);
+}
+
+function annualized_simple_income(float $fees, float $days): float
+{
+    if ($fees <= 0 || $days <= 0) {
+        return 0.0;
+    }
+
+    return ($fees / $days) * 365;
+}
+
+function annualized_return_from_capital_days(float $fees, float $capitalDays): float
+{
+    if ($fees <= 0 || $capitalDays <= 0) {
+        return 0.0;
+    }
+
+    return ($fees / $capitalDays) * 365;
+}
