@@ -39,6 +39,32 @@
     ],
     "data": [
         {
+            "timestamp": "2026-04-27 13:54:54",
+            "price": "1.0011",
+            "price_raw": 1.0011006266242246,
+            "volume": "2,724.18",
+            "volume_raw": 2724.1758301689,
+            "fees": "1.36",
+            "fees_raw": 1.3615340000000002,
+            "participating": "A, B, C, D, S2, S3",
+            "skipped": "—",
+            "out_of_range": "S1",
+            "depleted": "—"
+        },
+        {
+            "timestamp": "2026-04-27 13:40:24",
+            "price": "1.0012",
+            "price_raw": 1.0011672502918125,
+            "volume": "0.76",
+            "volume_raw": 0.7603932318,
+            "fees": "0.00",
+            "fees_raw": 0.00038,
+            "participating": "A, B, C, D, S2, S3",
+            "skipped": "—",
+            "out_of_range": "S1",
+            "depleted": "—"
+        },
+        {
             "timestamp": "2026-04-27 13:24:24",
             "price": "1.0013",
             "price_raw": 1.0012506253126563,
@@ -660,32 +686,6 @@
             "participating": "A, B, C",
             "skipped": "D",
             "out_of_range": "S1, S2, S3",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-04-27 05:06:48",
-            "price": "1.0014",
-            "price_raw": 1.0013538413082694,
-            "volume": "2,467.40",
-            "volume_raw": 2467.4007381211,
-            "fees": "1.24",
-            "fees_raw": 1.235846,
-            "participating": "A, B, C, D, S3",
-            "skipped": "—",
-            "out_of_range": "S1, S2",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-04-27 04:46:00",
-            "price": "1.0012",
-            "price_raw": 1.0012006003001501,
-            "volume": "0.06",
-            "volume_raw": 0.0640378822,
-            "fees": "0.00",
-            "fees_raw": 3.2e-5,
-            "participating": "A, B, C, S3",
-            "skipped": "D, S2",
-            "out_of_range": "S1",
             "depleted": "—"
         }
     ]
