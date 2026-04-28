@@ -41,6 +41,7 @@ $dailyMetricsFile = resolve_project_path($projectRoot, (string) ($paths['daily_m
 $digestFile = resolve_project_path($projectRoot, (string) ($paths['digest_file'] ?? './data/digest.json'));
 $balancesOrdersInputFile = resolve_project_path($projectRoot, (string) ($paths['balances_orders_input_file'] ?? './data/balances-orders.json'));
 $balancesOrdersSummaryFile = resolve_project_path($projectRoot, (string) ($paths['balances_orders_summary_file'] ?? './data/balances_orders_summary.json'));
+$balancesOrdersCurlCommandFile = resolve_project_path($projectRoot, (string) ($paths['balances_orders_curl_command_file'] ?? './txt/curl-balances-orders.txt'));
 $lockFile = resolve_project_path($projectRoot, (string) ($paths['run_lock_file'] ?? './data/run.lock'));
 $fileGlob = (string) ($processing['file_glob'] ?? '*.csv');
 $archiveOnSuccess = (bool) ($processing['archive_on_success'] ?? true);
@@ -216,18 +217,45 @@ save_json_file($dailyMetricsFile, $dailyMetrics);
 save_json_file($digestFile, $digest);
 
 $balancesOrdersSummaryWritten = false;
-if (is_file($balancesOrdersInputFile)) {
-    try {
-        $balancesOrdersPayload = load_json_file($balancesOrdersInputFile);
-        if ($balancesOrdersPayload !== []) {
-            $balancesOrdersExtractor = new BalancesOrdersExtractor();
-            $balancesOrdersSummary = $balancesOrdersExtractor->extract($balancesOrdersPayload);
-            save_json_file($balancesOrdersSummaryFile, $balancesOrdersSummary);
-            $balancesOrdersSummaryWritten = true;
-        }
-    } catch (Throwable $e) {
-        fwrite(STDERR, "Warning: balances/orders extraction failed: {$e->getMessage()}\n");
+try {
+    $extractScript = resolve_project_path($projectRoot, './bin/extract-balances-orders.php');
+    $phpBinary = PHP_BINARY !== '' ? PHP_BINARY : 'php';
+    $command = sprintf(
+        '%s %s --input=%s --output=%s --curl-command=%s',
+        escapeshellarg($phpBinary),
+        escapeshellarg($extractScript),
+        escapeshellarg($balancesOrdersInputFile),
+        escapeshellarg($balancesOrdersSummaryFile),
+        escapeshellarg($balancesOrdersCurlCommandFile)
+    );
+
+    $process = proc_open(
+        ['/bin/sh', '-c', $command],
+        [
+            1 => ['pipe', 'w'],
+            2 => ['pipe', 'w'],
+        ],
+        $pipes
+    );
+
+    if (!is_resource($process)) {
+        throw new RuntimeException('Failed to start balances/orders refresh process');
     }
+
+    $refreshStdout = stream_get_contents($pipes[1]);
+    $refreshStderr = stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+
+    $refreshExitCode = proc_close($process);
+    if ($refreshExitCode !== 0) {
+        $details = trim($refreshStderr) !== '' ? trim($refreshStderr) : trim($refreshStdout);
+        throw new RuntimeException($details !== '' ? $details : 'Unknown error');
+    }
+
+    $balancesOrdersSummaryWritten = is_file($balancesOrdersSummaryFile);
+} catch (Throwable $e) {
+    fwrite(STDERR, "Warning: balances/orders refresh failed: {$e->getMessage()}\n");
 }
 
 $dataDir = resolve_project_path($projectRoot, (string) ($paths['data_dir'] ?? './data'));

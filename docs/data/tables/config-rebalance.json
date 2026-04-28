@@ -1,92 +1,92 @@
 {
     "title": "Re-balance Calculator",
-    "footnote": "Re-balance uses current range ratio derived from live liquidity at pool price 1.000800.",
-    "pool_ratio": 1.0008001298959,
-    "total_current": 50830.39453159045,
+    "footnote": "Re-balance uses current range ratio derived from live liquidity at pool price 1.002824.",
+    "pool_ratio": 1.0028244506247,
+    "total_current": 50863.23461575819,
     "rows": [
         {
             "rung": "A",
             "name": "Core",
             "range_lower": "0.9979023082300623",
             "range_upper": "1.002904063656376",
-            "current_usdt": 10330.214981017793,
-            "current_usdc": 14272.33763335116,
-            "current_ratio": 0.7237927833824827,
-            "live_ratio": 0.7237927833824828,
-            "current_total": 24602.552614368953,
-            "share_pct": 48.40126235707019
+            "current_usdt": 390.3043110401654,
+            "current_usdc": 24230.257224271387,
+            "current_ratio": 0.016108137335289072,
+            "live_ratio": 0.016108137335380763,
+            "current_total": 24620.561535311554,
+            "share_pct": 48.40541841529625
         },
         {
             "rung": "B",
             "name": "Buffer",
             "range_lower": "0.997403506726374",
             "range_upper": "1.00340561598864",
-            "current_usdt": 4567.75196748338,
-            "current_usdc": 5976.190130845048,
-            "current_ratio": 0.7643250745835104,
-            "live_ratio": 0.7643250745835104,
-            "current_total": 10543.942098328429,
-            "share_pct": 20.74338040358019
+            "current_usdt": 1017.314872664713,
+            "current_usdc": 9533.059832864641,
+            "current_ratio": 0.10671441179428225,
+            "live_ratio": 0.1067144117943729,
+            "current_total": 10550.374705529353,
+            "share_pct": 20.74263421355568
         },
         {
             "rung": "C",
             "name": "Scalp",
             "range_lower": "0.9988007796361366",
             "range_upper": "1.0021021013305984",
-            "current_usdt": 3486.145698483986,
-            "current_usdc": 5365.631810046181,
-            "current_ratio": 0.6497176515087756,
-            "live_ratio": 0.6497176515087757,
-            "current_total": 8851.777508530167,
-            "share_pct": 17.414339570055667
+            "current_usdt": 0,
+            "current_usdc": 8856.835571370359,
+            "current_ratio": 0,
+            "live_ratio": 0,
+            "current_total": 8856.835571370359,
+            "share_pct": 17.413040358676636
         },
         {
             "rung": "D",
             "name": "Catch-all",
             "range_lower": "0.996406651572219",
             "range_upper": "1.0054143348356561",
-            "current_usdt": 421.7290447121696,
-            "current_usdc": 403.70903739271506,
-            "current_ratio": 1.0446361256508716,
-            "live_ratio": 1.0446361256508738,
-            "current_total": 825.4380821048846,
-            "share_pct": 1.623906502618006
+            "current_usdt": 236.35185016380248,
+            "current_usdc": 589.4220944404572,
+            "current_ratio": 0.4009891254384147,
+            "live_ratio": 0.40098912543849086,
+            "current_total": 825.7739446042597,
+            "share_pct": 1.6235183445223174
         },
         {
             "rung": "S1",
             "name": "Tick",
             "range_lower": "1.0006001500200015",
             "range_upper": "1.0010004501200209",
-            "current_usdt": 1001.5016770108222,
-            "current_usdc": 1000.8002799137123,
-            "current_ratio": 1.0007008362319507,
-            "live_ratio": 1.0007008362319507,
-            "current_total": 2002.3019569245344,
-            "share_pct": 3.9391824033160496
+            "current_usdt": 0,
+            "current_usdc": 2003.2035938585095,
+            "current_ratio": 0,
+            "live_ratio": 0,
+            "current_total": 2003.2035938585095,
+            "share_pct": 3.9384117211410836
         },
         {
             "rung": "S2",
             "name": "Flow",
             "range_lower": "1.0004000600039999",
             "range_upper": "1.0012006602200494",
-            "current_usdt": 1000.75059427159,
-            "current_usdc": 1000.8002799845264,
-            "current_ratio": 0.9999503540177496,
-            "live_ratio": 0.9999503540177496,
-            "current_total": 2001.5508742561165,
-            "share_pct": 3.937704778215282
+            "current_usdt": 0,
+            "current_usdc": 2002.5520001573577,
+            "current_ratio": 0,
+            "live_ratio": 0,
+            "current_total": 2002.5520001573577,
+            "share_pct": 3.93713065102025
         },
         {
             "rung": "S3",
             "name": "Sweep",
             "range_lower": "1.0002000099999999",
             "range_upper": "1.0014009103640999",
-            "current_usdt": 1001.2656231377282,
-            "current_usdc": 1001.5657739396298,
-            "current_ratio": 0.9997003184320583,
-            "live_ratio": 0.9997003184316883,
-            "current_total": 2002.831397077358,
-            "share_pct": 3.9402239851446037
+            "current_usdt": 0,
+            "current_usdc": 2003.9332649267963,
+            "current_ratio": 0,
+            "live_ratio": 0,
+            "current_total": 2003.9332649267963,
+            "share_pct": 3.9398462957877785
         }
     ]
 }
