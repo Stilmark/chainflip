@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "generated_at": "2026-04-28T13:36:45+00:00",
+    "generated_at": "2026-04-28T17:27:54+00:00",
     "source": {
         "query": "GetFilteredLpAccountsWithBalances",
         "contains": [
@@ -17,7 +17,7 @@
             {
                 "base_asset": "Eth",
                 "quote_asset": "Usdc",
-                "range_order_price": 2266.3287366735
+                "range_order_price": 2285.4444328479
             },
             {
                 "base_asset": "Wbtc",
@@ -37,12 +37,12 @@
             {
                 "base_asset": "Flip",
                 "quote_asset": "Usdc",
-                "range_order_price": 0.20713051207641
+                "range_order_price": 0.20853910000702
             },
             {
                 "base_asset": "ArbEth",
                 "quote_asset": "Usdc",
-                "range_order_price": 2277.0050175385
+                "range_order_price": 99940094.074149
             },
             {
                 "base_asset": "HubUsdc",
@@ -52,7 +52,7 @@
             {
                 "base_asset": "Btc",
                 "quote_asset": "Usdc",
-                "range_order_price": 76117.866892765
+                "range_order_price": 76079.819374336
             },
             {
                 "base_asset": "HubUsdt",
@@ -62,12 +62,12 @@
             {
                 "base_asset": "Sol",
                 "quote_asset": "Usdc",
-                "range_order_price": 83.486027344721
+                "range_order_price": 83.54448509885
             },
             {
                 "base_asset": "Usdt",
                 "quote_asset": "Usdc",
-                "range_order_price": 1.000300180086
+                "range_order_price": 0.99799446019542
             },
             {
                 "base_asset": "HubDot",
@@ -91,28 +91,28 @@
             "id_ss58": "cFKjwyEakP247hHUXMpRhsvdQHKr2MRJH87EqvVZ4L1NjCAwF",
             "alias": null,
             "flip_balance": "9996747963402580000",
-            "earned_fees_usd": 594.6276109158,
-            "borrow_amount_usd_total": 62327.92591387661,
+            "earned_fees_usd": 607.9542839,
+            "borrow_amount_usd_total": 62328.944008274804,
             "balances": {
-                "total_balance_value_usd_total": 581564.7042375808,
-                "orders_value_usd_total": 58296.10060783599,
-                "wallet_value_usd_estimate_total": 523268.6036297448,
+                "total_balance_value_usd_total": 580693.7002727981,
+                "orders_value_usd_total": 58309.116860533,
+                "wallet_value_usd_estimate_total": 522384.58341226506,
                 "key_assets": {
                     "usdt": {
                         "chain": "Ethereum",
                         "asset": "Usdt",
-                        "total_balance": 34836217027,
-                        "total_balance_value_usd": 34833.6660564116,
-                        "orders_value_usd": 33898.3228103155,
-                        "wallet_value_usd_estimate": 935.3432460961048
+                        "total_balance": 56887575609,
+                        "total_balance_value_usd": 56877.290217205,
+                        "orders_value_usd": 55929.8315306804,
+                        "wallet_value_usd_estimate": 947.458686524602
                     },
                     "usdc": {
                         "chain": "Ethereum",
                         "asset": "Usdc",
-                        "total_balance": 25368561972,
-                        "total_balance_value_usd": 25364.9193787119,
-                        "orders_value_usd": 24397.7777975205,
-                        "wallet_value_usd_estimate": 967.1415811914012
+                        "total_balance": 3348178753,
+                        "total_balance_value_usd": 3347.5843021229,
+                        "orders_value_usd": 2379.2853298526,
+                        "wallet_value_usd_estimate": 968.2989722703
                     }
                 },
                 "assets": [
@@ -192,68 +192,68 @@
                         "chain": "Solana",
                         "asset": "SolUsdc",
                         "total_balance": 1040,
-                        "total_balance_value_usd": 0.0010398507,
+                        "total_balance_value_usd": 0.0010398154,
                         "orders_value_usd": 0,
-                        "wallet_value_usd_estimate": 0.0010398507
+                        "wallet_value_usd_estimate": 0.0010398154
                     },
                     {
                         "chain": "Ethereum",
                         "asset": "Flip",
                         "total_balance": 9.311418063606658e+19,
-                        "total_balance_value_usd": 19.2423545968,
+                        "total_balance_value_usd": 19.6699853893,
                         "orders_value_usd": 0,
-                        "wallet_value_usd_estimate": 19.2423545968
+                        "wallet_value_usd_estimate": 19.6699853893
                     },
                     {
                         "chain": "Ethereum",
                         "asset": "Usdt",
-                        "total_balance": 34836217027,
-                        "total_balance_value_usd": 34833.6660564116,
-                        "orders_value_usd": 33898.3228103155,
-                        "wallet_value_usd_estimate": 935.3432460961048
+                        "total_balance": 56887575609,
+                        "total_balance_value_usd": 56877.290217205,
+                        "orders_value_usd": 55929.8315306804,
+                        "wallet_value_usd_estimate": 947.458686524602
                     },
                     {
                         "chain": "Ethereum",
                         "asset": "Usdc",
-                        "total_balance": 25368561972,
-                        "total_balance_value_usd": 25364.9193787119,
-                        "orders_value_usd": 24397.7777975205,
-                        "wallet_value_usd_estimate": 967.1415811914012
+                        "total_balance": 3348178753,
+                        "total_balance_value_usd": 3347.5843021229,
+                        "orders_value_usd": 2379.2853298526,
+                        "wallet_value_usd_estimate": 968.2989722703
                     },
                     {
                         "chain": "Solana",
                         "asset": "SolUsdt",
                         "total_balance": 7358,
-                        "total_balance_value_usd": 0.0073574612,
+                        "total_balance_value_usd": 0.0073566697,
                         "orders_value_usd": 0,
-                        "wallet_value_usd_estimate": 0.0073574612
+                        "wallet_value_usd_estimate": 0.0073566697
                     },
                     {
                         "chain": "Bitcoin",
                         "asset": "Btc",
-                        "total_balance": 684399149,
-                        "total_balance_value_usd": 521346.8680505486,
+                        "total_balance": 684408156,
+                        "total_balance_value_usd": 520449.1473715958,
                         "orders_value_usd": 0,
-                        "wallet_value_usd_estimate": 521346.8680505486
+                        "wallet_value_usd_estimate": 520449.1473715958
                     }
                 ]
             },
             "open_orders": {
                 "pairs_count": 14,
                 "pairs_with_active_range_orders_count": 1,
-                "current_usdt_usdc_pool_ratio": 1.000300180086,
+                "current_usdt_usdc_pool_ratio": 0.99799446019542,
                 "range_orders_count": 7,
                 "range_order_liquidity_total": 41349124023928,
                 "range_fees_earned_total": {
-                    "base": 20283605,
-                    "quote": 18639128
+                    "base": 32501881,
+                    "quote": 19829577
                 },
                 "pairs": [
                     {
                         "base_asset": "Eth",
                         "quote_asset": "Usdc",
-                        "pool_range_order_price": 2266.3287366735,
-                        "pool_range_order_price_from_pools_query": 2266.3287366735,
+                        "pool_range_order_price": 2285.4444328479,
+                        "pool_range_order_price_from_pools_query": 2285.4444328479,
                         "price_delta_vs_pools_query": 0,
                         "has_active_range_orders": false,
                         "range_orders_count": 0,
@@ -292,8 +292,8 @@
                     {
                         "base_asset": "Flip",
                         "quote_asset": "Usdc",
-                        "pool_range_order_price": 0.20713051207641,
-                        "pool_range_order_price_from_pools_query": 0.20713051207641,
+                        "pool_range_order_price": 0.20853910000702,
+                        "pool_range_order_price_from_pools_query": 0.20853910000702,
                         "price_delta_vs_pools_query": 0,
                         "has_active_range_orders": false,
                         "range_orders_count": 0,
@@ -302,8 +302,8 @@
                     {
                         "base_asset": "ArbEth",
                         "quote_asset": "Usdc",
-                        "pool_range_order_price": 2277.0050175385,
-                        "pool_range_order_price_from_pools_query": 2277.0050175385,
+                        "pool_range_order_price": 99940094.074149,
+                        "pool_range_order_price_from_pools_query": 99940094.074149,
                         "price_delta_vs_pools_query": 0,
                         "has_active_range_orders": false,
                         "range_orders_count": 0,
@@ -322,8 +322,8 @@
                     {
                         "base_asset": "Btc",
                         "quote_asset": "Usdc",
-                        "pool_range_order_price": 76117.866892765,
-                        "pool_range_order_price_from_pools_query": 76117.866892765,
+                        "pool_range_order_price": 76079.819374336,
+                        "pool_range_order_price_from_pools_query": 76079.819374336,
                         "price_delta_vs_pools_query": 0,
                         "has_active_range_orders": false,
                         "range_orders_count": 0,
@@ -342,8 +342,8 @@
                     {
                         "base_asset": "Sol",
                         "quote_asset": "Usdc",
-                        "pool_range_order_price": 83.486027344721,
-                        "pool_range_order_price_from_pools_query": 83.486027344721,
+                        "pool_range_order_price": 83.54448509885,
+                        "pool_range_order_price_from_pools_query": 83.54448509885,
                         "price_delta_vs_pools_query": 0,
                         "has_active_range_orders": false,
                         "range_orders_count": 0,
@@ -352,8 +352,8 @@
                     {
                         "base_asset": "Usdt",
                         "quote_asset": "Usdc",
-                        "pool_range_order_price": 1.000300180086,
-                        "pool_range_order_price_from_pools_query": 1.000300180086,
+                        "pool_range_order_price": 0.99799446019542,
+                        "pool_range_order_price_from_pools_query": 0.99799446019542,
                         "price_delta_vs_pools_query": 0,
                         "has_active_range_orders": true,
                         "range_orders_count": 7,
@@ -387,8 +387,8 @@
                                 "range_width_ticks": 50,
                                 "liquidity": 11047451986959,
                                 "fees_earned": {
-                                    "base": 276262,
-                                    "quote": 0
+                                    "base": 6911122,
+                                    "quote": 254900
                                 }
                             },
                             {
@@ -398,8 +398,8 @@
                                 "range_width_ticks": 60,
                                 "liquidity": 5604481120128,
                                 "fees_earned": {
-                                    "base": 140150,
-                                    "quote": 0
+                                    "base": 4207780,
+                                    "quote": 829366
                                 }
                             },
                             {
@@ -409,7 +409,7 @@
                                 "range_width_ticks": 33,
                                 "liquidity": 2910455826398,
                                 "fees_earned": {
-                                    "base": 72781,
+                                    "base": 1165049,
                                     "quote": 0
                                 }
                             },
@@ -420,8 +420,8 @@
                                 "range_width_ticks": 90,
                                 "liquidity": 266988102821,
                                 "fees_earned": {
-                                    "base": 6676,
-                                    "quote": 0
+                                    "base": 267332,
+                                    "quote": 106183
                                 }
                             },
                             {
@@ -431,7 +431,7 @@
                                 "range_width_ticks": 12,
                                 "liquidity": 6502605718223,
                                 "fees_earned": {
-                                    "base": 162610,
+                                    "base": 325472,
                                     "quote": 0
                                 }
                             }
@@ -481,19 +481,19 @@
                 "assethub": null
             },
             "health": {
-                "borrow_to_total_balance_ratio": 0.10717281406475178,
-                "orders_to_total_balance_ratio": 0.10024009397932938
+                "borrow_to_total_balance_ratio": 0.10733531977184174,
+                "orders_to_total_balance_ratio": 0.1004128628107048
             }
         }
     ],
     "totals": {
         "lp_count": 1,
-        "earned_fees_usd_total": 594.6276109158,
-        "borrow_amount_usd_total": 62327.92591387661,
-        "orders_value_usd_total": 58296.10060783599,
-        "total_balance_value_usd_total": 581564.7042375808,
-        "usdt_total_balance_usd_total": 34833.6660564116,
-        "usdc_total_balance_usd_total": 25364.9193787119,
+        "earned_fees_usd_total": 607.9542839,
+        "borrow_amount_usd_total": 62328.944008274804,
+        "orders_value_usd_total": 58309.116860533,
+        "total_balance_value_usd_total": 580693.7002727981,
+        "usdt_total_balance_usd_total": 56877.290217205,
+        "usdc_total_balance_usd_total": 3347.5843021229,
         "range_orders_count_total": 7,
         "range_order_liquidity_total": 41349124023928
     }
