@@ -25,7 +25,7 @@
   <div class="container">
     <div class="sub-nav">
       <a href="#current" class="active">Current</a>
-      <a href="#latest-day">Latest Day</a>
+      <a href="#by-day">By Day</a>
     </div>
 
     <section id="current" class="card">
@@ -38,8 +38,8 @@
       </div>
     </section>
 
-    <section id="latest-day" class="card">
-      <div class="table-container" id="prediction-latest-day">
+    <section id="by-day" class="card">
+      <div class="table-container" id="prediction-rung-by-day">
         <p>Loading...</p>
       </div>
     </section>
@@ -55,7 +55,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       LPTables.loadTable('prediction-current', 'prediction-current.json');
       LPTables.loadTable('prediction-by-day', 'prediction-by-day.json', { order: [[0, 'desc']] });
-      LPTables.loadTable('prediction-latest-day', 'prediction-latest-day.json');
+      LPTables.loadDaySelector('prediction-rung-by-day', 'prediction-rung-by-day.json', { defaultToToday: true });
     });
   </script>
 </body>

@@ -22,6 +22,7 @@ final class TableDataBuilder
         $files['prediction-current.json'] = $this->buildPredictionCurrent($digest, $config);
         $files['prediction-latest-day.json'] = $this->buildPredictionLatestDay($dailyMetrics, $config);
         $files['prediction-by-day.json'] = $this->buildPredictionByDay($dailyMetrics, $config);
+        $files['prediction-rung-by-day.json'] = $this->buildPredictionRungByDay($dailyMetrics, $config);
         $files['status-daily-breakdown.json'] = $this->buildStatusDailyBreakdown($dailyMetrics, $config);
 
         // Performance tables
@@ -535,6 +536,119 @@ final class TableDataBuilder
             'title' => 'Daily Breakdown',
             'columns' => $columns,
             'data' => $data,
+        ];
+    }
+
+    private function buildPredictionRungByDay(array $dailyMetrics, array $config): array
+    {
+        $days = $dailyMetrics['days'] ?? [];
+        if (empty($days)) {
+            return ['title' => 'LP Prediction — By Day', 'days' => [], 'error' => 'No data available'];
+        }
+
+        $dayTables = [];
+        foreach ($days as $day) {
+            if (!is_array($day)) {
+                continue;
+            }
+            $dayTables[] = $this->buildPredictionDayTable($day, 'LP Prediction — By Day');
+        }
+
+        return [
+            'title' => 'LP Prediction — By Day',
+            'days' => $dayTables,
+        ];
+    }
+
+    private function buildPredictionDayTable(array $day, string $title): array
+    {
+        $portfolio = $day['portfolio'] ?? [];
+        $rungs = $day['rung_metrics'] ?? [];
+
+        $totalFees = (float) ($portfolio['total_fees'] ?? 0);
+        $portfolioValue = (float) ($portfolio['portfolio_value'] ?? 0);
+        $weekly = $totalFees * 7;
+        $monthly = $totalFees * 30;
+        $yearly = $totalFees * 365;
+        $apr = $portfolioValue > 0 ? ($yearly / $portfolioValue) * 100 : 0;
+
+        $summary = [
+            ['label' => 'Date', 'value' => $day['date'] ?? ''],
+            ['label' => 'Daily Income', 'value' => $this->money($totalFees)],
+            ['label' => 'Weekly Income', 'value' => $this->money($weekly)],
+            ['label' => 'Monthly Income', 'value' => $this->money($monthly)],
+            ['label' => 'Yearly Income', 'value' => $this->money($yearly)],
+            ['label' => 'APR', 'value' => $this->pct($apr)],
+        ];
+
+        $columns = [
+            ['data' => 'rung', 'title' => 'Rung'],
+            ['data' => 'name', 'title' => 'Name'],
+            ['data' => 'value', 'title' => 'Value', 'className' => 'dt-right'],
+            ['data' => 'fees_today', 'title' => 'Fees Today', 'className' => 'dt-right'],
+            ['data' => 'daily_income', 'title' => 'Daily Income', 'className' => 'dt-right'],
+            ['data' => 'weekly_income', 'title' => 'Weekly Income', 'className' => 'dt-right'],
+            ['data' => 'monthly_income', 'title' => 'Monthly Income', 'className' => 'dt-right'],
+            ['data' => 'yearly_income', 'title' => 'Yearly Income', 'className' => 'dt-right'],
+            ['data' => 'apr', 'title' => 'APR', 'className' => 'dt-right'],
+        ];
+
+        $data = [];
+        $totals = ['value' => 0, 'fees' => 0, 'weekly' => 0, 'monthly' => 0, 'yearly' => 0];
+
+        foreach ($rungs as $r) {
+            $fees = (float) ($r['fees'] ?? 0);
+            $value = (float) ($r['rung_value'] ?? 0);
+            $wk = $fees * 7;
+            $mo = $fees * 30;
+            $yr = $fees * 365;
+            $rungApr = $value > 0 ? ($yr / $value) * 100 : 0;
+
+            $data[] = [
+                'rung' => $r['rung'] ?? '',
+                'name' => $r['name'] ?? '',
+                'value' => $this->money($value),
+                'value_raw' => $value,
+                'fees_today' => $this->money($fees),
+                'fees_raw' => $fees,
+                'daily_income' => $this->money($fees),
+                'weekly_income' => $this->money($wk),
+                'monthly_income' => $this->money($mo),
+                'yearly_income' => $this->money($yr),
+                'apr' => $this->pct($rungApr),
+                'apr_raw' => $rungApr,
+            ];
+
+            $totals['value'] += $value;
+            $totals['fees'] += $fees;
+            $totals['weekly'] += $wk;
+            $totals['monthly'] += $mo;
+            $totals['yearly'] += $yr;
+        }
+
+        $totalApr = $totals['value'] > 0 ? ($totals['yearly'] / $totals['value']) * 100 : 0;
+
+        $footer = [
+            'rung' => 'Total',
+            'name' => '',
+            'value' => $this->money($totals['value']),
+            'fees_today' => $this->money($totals['fees']),
+            'daily_income' => $this->money($totals['fees']),
+            'weekly_income' => $this->money($totals['weekly']),
+            'monthly_income' => $this->money($totals['monthly']),
+            'yearly_income' => $this->money($totals['yearly']),
+            'apr' => $this->pct($totalApr),
+        ];
+
+        return [
+            'date' => $day['date'] ?? '',
+            'title' => $title . ' — ' . ($day['date'] ?? ''),
+            'subtitle' => 'Portfolio Forecast',
+            'summary' => $summary,
+            'table_title' => 'Rung Forecast',
+            'columns' => $columns,
+            'data' => $data,
+            'footer' => $footer,
         ];
     }
 

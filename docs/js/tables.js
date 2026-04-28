@@ -275,13 +275,22 @@ const LPTables = {
         return dateB.localeCompare(dateA);
       });
 
+      const getDayDate = (day) => {
+        if (!day || typeof day !== 'object') return '';
+        if (typeof day.date === 'string' && day.date) return day.date;
+        if (typeof day.title === 'string') {
+          const match = day.title.match(/\d{4}-\d{2}-\d{2}/);
+          return match ? match[0] : '';
+        }
+        return '';
+      };
+
       // Build dropdown
       let html = '<div class="day-selector">';
       html += '<label for="' + containerId + '-select">Select Date: </label>';
       html += '<select id="' + containerId + '-select" class="date-dropdown">';
       days.forEach((day, index) => {
-        const dateMatch = day.title.match(/\d{4}-\d{2}-\d{2}/);
-        const dateValue = dateMatch ? dateMatch[0] : day.title;
+        const dateValue = getDayDate(day) || day.title || String(index + 1);
         html += `<option value="${index}">${dateValue}</option>`;
       });
       html += '</select></div>';
@@ -298,8 +307,16 @@ const LPTables = {
         self.renderTable(contentDiv, days[index], options);
       }
 
-      // Show first (most recent) day
-      showDay(0);
+      // Show first day by default, or today's date when requested
+      let selectedIndex = 0;
+      if (options.defaultToToday === true) {
+        const today = new Date().toISOString().slice(0, 10);
+        const foundIndex = days.findIndex((day) => getDayDate(day) === today);
+        if (foundIndex >= 0) selectedIndex = foundIndex;
+      }
+
+      select.value = String(selectedIndex);
+      showDay(selectedIndex);
 
       // Handle dropdown change
       select.addEventListener('change', function() {
