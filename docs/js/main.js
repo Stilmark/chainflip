@@ -89,12 +89,13 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   if (subNavLinks.length > 0 && sections.length > 0) {
-    // Get initial section from hash or first sub-nav link
+    // Get initial section from hash, or active sub-nav link, or first sub-nav link
     let initialTarget = window.location.hash.replace('#', '') || '';
     if (!initialTarget) {
-      const firstLink = subNavLinks[0];
-      if (firstLink) {
-        initialTarget = firstLink.getAttribute('href').replace('#', '');
+      const activeLink = Array.from(subNavLinks).find(function(l) { return l.classList.contains('active'); });
+      const fallbackLink = activeLink || subNavLinks[0];
+      if (fallbackLink) {
+        initialTarget = fallbackLink.getAttribute('href').replace('#', '');
       }
     }
     if (initialTarget) {
