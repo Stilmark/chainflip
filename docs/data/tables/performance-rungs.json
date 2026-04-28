@@ -1,213 +1,1314 @@
 {
     "title": "Rung Performance",
-    "columns": [
+    "days": [
         {
-            "data": "rung",
-            "title": "Rung"
+            "date": "2026-04-28",
+            "period_start": "2026-04-28",
+            "period_end": "2026-04-29",
+            "label": "2026-04-28 13:29 UTC to 2026-04-28 23:59 UTC",
+            "title": "Rung Performance — 2026-04-28 13:29 UTC to 2026-04-28 23:59 UTC",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "value_pct",
+                    "title": "Value %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fee_pct",
+                    "title": "Fee %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "cap_eff",
+                    "title": "Cap Eff",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "days",
+                    "title": "Days",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "utilization",
+                    "title": "Util %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "vol_per_day",
+                    "title": "Vol\/Day",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "4,800.00",
+                    "value_raw": 4800,
+                    "fees": "14.84",
+                    "fees_raw": 14.839056000000003,
+                    "cap_eff": "0.31%",
+                    "cap_eff_raw": 0.30914700000000006,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "112.84%",
+                    "apr_raw": 112.83865500000002,
+                    "utilization": "26.40%",
+                    "utilization_raw": 26.400000000000002,
+                    "volume": "29,653.14",
+                    "volume_raw": 29653.137469383695,
+                    "vol_per_day": "29,653.14",
+                    "value_pct": "8.23%",
+                    "value_pct_raw": 8.232731832452242,
+                    "fee_pct": "12.89%",
+                    "fee_pct_raw": 12.885784240075834
+                },
+                {
+                    "rung": "S1",
+                    "name": "Tick",
+                    "value": "2,002.30",
+                    "value_raw": 2002.303159,
+                    "fees": "6.01",
+                    "fees_raw": 6.010215,
+                    "cap_eff": "0.30%",
+                    "cap_eff_raw": 0.30016508604030023,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "109.56%",
+                    "apr_raw": 109.56025640470959,
+                    "utilization": "8.00%",
+                    "utilization_raw": 8,
+                    "volume": "12,006.69",
+                    "volume_raw": 12006.6896610154,
+                    "vol_per_day": "12,006.69",
+                    "value_pct": "3.43%",
+                    "value_pct_raw": 3.434255199024788,
+                    "fee_pct": "5.22%",
+                    "fee_pct_raw": 5.219087637816541
+                },
+                {
+                    "rung": "S2",
+                    "name": "Flow",
+                    "value": "2,001.55",
+                    "value_raw": 2001.551475,
+                    "fees": "5.38",
+                    "fees_raw": 5.381434,
+                    "cap_eff": "0.27%",
+                    "cap_eff_raw": 0.26886313278553076,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "98.14%",
+                    "apr_raw": 98.13504346671873,
+                    "utilization": "15.20%",
+                    "utilization_raw": 15.2,
+                    "volume": "10,751.07",
+                    "volume_raw": 10751.0672819464,
+                    "vol_per_day": "10,751.07",
+                    "value_pct": "3.43%",
+                    "value_pct_raw": 3.432965946359216,
+                    "fee_pct": "4.67%",
+                    "fee_pct_raw": 4.67307336977556
+                },
+                {
+                    "rung": "D",
+                    "name": "Catch-all",
+                    "value": "1,200.00",
+                    "value_raw": 1200,
+                    "fees": "2.95",
+                    "fees_raw": 2.9546789999999996,
+                    "cap_eff": "0.25%",
+                    "cap_eff_raw": 0.24622324999999998,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "89.87%",
+                    "apr_raw": 89.87148625,
+                    "utilization": "96.80%",
+                    "utilization_raw": 96.8,
+                    "volume": "5,905.67",
+                    "volume_raw": 5905.668246675,
+                    "vol_per_day": "5,905.67",
+                    "value_pct": "2.06%",
+                    "value_pct_raw": 2.0581829581130604,
+                    "fee_pct": "2.57%",
+                    "fee_pct_raw": 2.5657532455354986
+                },
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "27,600.00",
+                    "value_raw": 27600,
+                    "fees": "50.68",
+                    "fees_raw": 50.683066000000025,
+                    "cap_eff": "0.18%",
+                    "cap_eff_raw": 0.18363429710144935,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "67.03%",
+                    "apr_raw": 67.02651844202902,
+                    "utilization": "44.00%",
+                    "utilization_raw": 44,
+                    "volume": "101,298.92",
+                    "volume_raw": 101298.91716640921,
+                    "vol_per_day": "101,298.92",
+                    "value_pct": "47.34%",
+                    "value_pct_raw": 47.33820803660039,
+                    "fee_pct": "44.01%",
+                    "fee_pct_raw": 44.01163073321669
+                },
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "16,800.00",
+                    "value_raw": 16800,
+                    "fees": "30.37",
+                    "fees_raw": 30.372384,
+                    "cap_eff": "0.18%",
+                    "cap_eff_raw": 0.180788,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "65.99%",
+                    "apr_raw": 65.98762,
+                    "utilization": "56.00%",
+                    "utilization_raw": 56.00000000000001,
+                    "volume": "60,706.20",
+                    "volume_raw": 60706.197934996315,
+                    "vol_per_day": "60,706.20",
+                    "value_pct": "28.81%",
+                    "value_pct_raw": 28.814561413582844,
+                    "fee_pct": "26.37%",
+                    "fee_pct_raw": 26.3744531377691
+                },
+                {
+                    "rung": "S3",
+                    "name": "Sweep",
+                    "value": "3,900.00",
+                    "value_raw": 3900,
+                    "fees": "4.92",
+                    "fees_raw": 4.917511999999999,
+                    "cap_eff": "0.13%",
+                    "cap_eff_raw": 0.12609005128205128,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "46.02%",
+                    "apr_raw": 46.02286871794872,
+                    "utilization": "21.60%",
+                    "utilization_raw": 21.6,
+                    "volume": "9,824.96",
+                    "volume_raw": 9824.958363605301,
+                    "vol_per_day": "9,824.96",
+                    "value_pct": "6.69%",
+                    "value_pct_raw": 6.6890946138674465,
+                    "fee_pct": "4.27%",
+                    "fee_pct_raw": 4.270217635810781
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "58,303.85",
+                "value_pct": "100.00%",
+                "fees": "115.16",
+                "fee_pct": "100.00%",
+                "cap_eff": "0.20%",
+                "days": "",
+                "apr": "",
+                "utilization": "",
+                "volume": "",
+                "vol_per_day": ""
+            },
+            "note": "Filtered by revision period. Cap Eff = Fees\/Value %. APR annualized from fees over period days."
         },
         {
-            "data": "name",
-            "title": "Name"
+            "date": "2026-04-19",
+            "period_start": "2026-04-19",
+            "period_end": "2026-04-28",
+            "label": "2026-04-19 15:23 UTC to 2026-04-28 13:29 UTC",
+            "title": "Rung Performance — 2026-04-19 15:23 UTC to 2026-04-28 13:29 UTC",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "value_pct",
+                    "title": "Value %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fee_pct",
+                    "title": "Fee %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "cap_eff",
+                    "title": "Cap Eff",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "days",
+                    "title": "Days",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "utilization",
+                    "title": "Util %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "vol_per_day",
+                    "title": "Vol\/Day",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "S2",
+                    "name": "Flow",
+                    "value": "2,001.55",
+                    "value_raw": 2001.551475,
+                    "fees": "19.66",
+                    "fees_raw": 19.659114,
+                    "cap_eff": "0.98%",
+                    "cap_eff_raw": 0.9821937754561121,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "40.19%",
+                    "apr_raw": 40.187848726012014,
+                    "utilization": "24.52%",
+                    "utilization_raw": 24.523809523809522,
+                    "volume": "39,285.98",
+                    "volume_raw": 39285.9845863808,
+                    "vol_per_day": "4,403.95",
+                    "value_pct": "3.94%",
+                    "value_pct_raw": 3.9376455844672815,
+                    "fee_pct": "5.35%",
+                    "fee_pct_raw": 5.353581910181969
+                },
+                {
+                    "rung": "S3",
+                    "name": "Sweep",
+                    "value": "2,002.83",
+                    "value_raw": 2002.831798,
+                    "fees": "18.92",
+                    "fees_raw": 18.924552,
+                    "cap_eff": "0.94%",
+                    "cap_eff_raw": 0.9448897315739542,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "38.66%",
+                    "apr_raw": 38.661500962599966,
+                    "utilization": "30.48%",
+                    "utilization_raw": 30.476190476190478,
+                    "volume": "37,819.62",
+                    "volume_raw": 37819.617318016695,
+                    "vol_per_day": "4,239.57",
+                    "value_pct": "3.94%",
+                    "value_pct_raw": 3.940164359662729,
+                    "fee_pct": "5.15%",
+                    "fee_pct_raw": 5.153545538496699
+                },
+                {
+                    "rung": "S1",
+                    "name": "Tick",
+                    "value": "2,002.30",
+                    "value_raw": 2002.303159,
+                    "fees": "18.61",
+                    "fees_raw": 18.60514,
+                    "cap_eff": "0.93%",
+                    "cap_eff_raw": 0.9291869673367478,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "38.02%",
+                    "apr_raw": 38.019000134846266,
+                    "utilization": "15.71%",
+                    "utilization_raw": 15.714285714285714,
+                    "volume": "37,176.69",
+                    "volume_raw": 37176.6878381688,
+                    "vol_per_day": "4,167.50",
+                    "value_pct": "3.94%",
+                    "value_pct_raw": 3.9391243699097167,
+                    "fee_pct": "5.07%",
+                    "fee_pct_raw": 5.066563067918674
+                },
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "10,544.08",
+                    "value_raw": 10544.08,
+                    "fees": "81.47",
+                    "fees_raw": 81.46626699999999,
+                    "cap_eff": "0.77%",
+                    "cap_eff_raw": 0.7726256534472423,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "31.61%",
+                    "apr_raw": 31.613072347312375,
+                    "utilization": "81.43%",
+                    "utilization_raw": 81.42857142857143,
+                    "volume": "162,842.72",
+                    "volume_raw": 162842.7176894641,
+                    "vol_per_day": "18,254.63",
+                    "value_pct": "20.74%",
+                    "value_pct_raw": 20.743333645351175,
+                    "fee_pct": "22.18%",
+                    "fee_pct_raw": 22.184943497517448
+                },
+                {
+                    "rung": "D",
+                    "name": "Catch-all",
+                    "value": "825.43",
+                    "value_raw": 825.431217,
+                    "fees": "6.24",
+                    "fees_raw": 6.237902999999999,
+                    "cap_eff": "0.76%",
+                    "cap_eff_raw": 0.7557144522194633,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "30.92%",
+                    "apr_raw": 30.92112660941404,
+                    "utilization": "95.71%",
+                    "utilization_raw": 95.71428571428572,
+                    "volume": "12,468.99",
+                    "volume_raw": 12468.9893629974,
+                    "vol_per_day": "1,397.77",
+                    "value_pct": "1.62%",
+                    "value_pct_raw": 1.623868098072024,
+                    "fee_pct": "1.70%",
+                    "fee_pct_raw": 1.698709548063551
+                },
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "24,602.97",
+                    "value_raw": 24602.97,
+                    "fees": "168.13",
+                    "fees_raw": 168.125358,
+                    "cap_eff": "0.68%",
+                    "cap_eff_raw": 0.6833539121496307,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "27.96%",
+                    "apr_raw": 27.960392678160467,
+                    "utilization": "68.57%",
+                    "utilization_raw": 68.57142857142857,
+                    "volume": "336,059.15",
+                    "volume_raw": 336059.14894672716,
+                    "vol_per_day": "37,672.15",
+                    "value_pct": "48.40%",
+                    "value_pct_raw": 48.4013413570995,
+                    "fee_pct": "45.78%",
+                    "fee_pct_raw": 45.78399999265824
+                },
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "8,852.01",
+                    "value_raw": 8852.006261,
+                    "fees": "54.20",
+                    "fees_raw": 54.195885000000004,
+                    "cap_eff": "0.61%",
+                    "cap_eff_raw": 0.6122440879733129,
+                    "days": "8.9",
+                    "days_raw": 8.920625,
+                    "apr": "25.05%",
+                    "apr_raw": 25.050833558215846,
+                    "utilization": "49.29%",
+                    "utilization_raw": 49.28571428571429,
+                    "volume": "108,318.20",
+                    "volume_raw": 108318.2034690367,
+                    "vol_per_day": "12,142.45",
+                    "value_pct": "17.41%",
+                    "value_pct_raw": 17.41452258543757,
+                    "fee_pct": "14.76%",
+                    "fee_pct_raw": 14.758656445163416
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "50,831.17",
+                "value_pct": "100.00%",
+                "fees": "367.21",
+                "fee_pct": "100.00%",
+                "cap_eff": "0.72%",
+                "days": "",
+                "apr": "",
+                "utilization": "",
+                "volume": "",
+                "vol_per_day": ""
+            },
+            "note": "Filtered by revision period. Cap Eff = Fees\/Value %. APR annualized from fees over period days."
         },
         {
-            "data": "value",
-            "title": "Value",
-            "className": "dt-right"
+            "date": "2026-04-18",
+            "period_start": "2026-04-18",
+            "period_end": "2026-04-19",
+            "label": "2026-04-18 17:27 UTC to 2026-04-19 15:23 UTC",
+            "title": "Rung Performance — 2026-04-18 17:27 UTC to 2026-04-19 15:23 UTC",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "value_pct",
+                    "title": "Value %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fee_pct",
+                    "title": "Fee %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "cap_eff",
+                    "title": "Cap Eff",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "days",
+                    "title": "Days",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "utilization",
+                    "title": "Util %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "vol_per_day",
+                    "title": "Vol\/Day",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "S3",
+                    "name": "Sweep",
+                    "value": "2,002.83",
+                    "value_raw": 2002.831798,
+                    "fees": "2.83",
+                    "fees_raw": 2.832691,
+                    "cap_eff": "0.14%",
+                    "cap_eff_raw": 0.14143429332551472,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "51.62%",
+                    "apr_raw": 51.62351706381286,
+                    "utilization": "31.58%",
+                    "utilization_raw": 31.57894736842105,
+                    "volume": "5,662.21",
+                    "volume_raw": 5662.2136103023,
+                    "vol_per_day": "5,662.21",
+                    "value_pct": "4.18%",
+                    "value_pct_raw": 4.182987317868205,
+                    "fee_pct": "5.33%",
+                    "fee_pct_raw": 5.3278213614021475
+                },
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "5,901.25",
+                    "value_raw": 5901.25,
+                    "fees": "7.23",
+                    "fees_raw": 7.228372,
+                    "cap_eff": "0.12%",
+                    "cap_eff_raw": 0.12248882863800042,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "44.71%",
+                    "apr_raw": 44.70842245287015,
+                    "utilization": "63.16%",
+                    "utilization_raw": 63.1578947368421,
+                    "volume": "14,450.38",
+                    "volume_raw": 14450.378454574502,
+                    "vol_per_day": "14,450.38",
+                    "value_pct": "12.32%",
+                    "value_pct_raw": 12.324976033543953,
+                    "fee_pct": "13.60%",
+                    "fee_pct_raw": 13.59536735555031
+                },
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "24,602.97",
+                    "value_raw": 24602.97,
+                    "fees": "28.63",
+                    "fees_raw": 28.629746999999995,
+                    "cap_eff": "0.12%",
+                    "cap_eff_raw": 0.11636703617490081,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "42.47%",
+                    "apr_raw": 42.473968203838794,
+                    "utilization": "96.49%",
+                    "utilization_raw": 96.49122807017544,
+                    "volume": "57,233.79",
+                    "volume_raw": 57233.78766536119,
+                    "vol_per_day": "57,233.79",
+                    "value_pct": "51.38%",
+                    "value_pct_raw": 51.384200907265566,
+                    "fee_pct": "53.85%",
+                    "fee_pct_raw": 53.84779972052689
+                },
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "10,544.08",
+                    "value_raw": 10544.08,
+                    "fees": "10.93",
+                    "fees_raw": 10.929777999999999,
+                    "cap_eff": "0.10%",
+                    "cap_eff_raw": 0.10365795783036547,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "37.84%",
+                    "apr_raw": 37.83515460808339,
+                    "utilization": "96.49%",
+                    "utilization_raw": 96.49122807017544,
+                    "volume": "21,849.85",
+                    "volume_raw": 21849.852989767787,
+                    "vol_per_day": "21,849.85",
+                    "value_pct": "22.02%",
+                    "value_pct_raw": 22.021695962002987,
+                    "fee_pct": "20.56%",
+                    "fee_pct_raw": 20.55709736917413
+                },
+                {
+                    "rung": "S2",
+                    "name": "Flow",
+                    "value": "2,001.55",
+                    "value_raw": 2001.551475,
+                    "fees": "2.06",
+                    "fees_raw": 2.058676,
+                    "cap_eff": "0.10%",
+                    "cap_eff_raw": 0.10285401228564459,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "37.54%",
+                    "apr_raw": 37.541714484260275,
+                    "utilization": "22.81%",
+                    "utilization_raw": 22.807017543859647,
+                    "volume": "4,115.00",
+                    "volume_raw": 4114.996733285299,
+                    "vol_per_day": "4,115.00",
+                    "value_pct": "4.18%",
+                    "value_pct_raw": 4.180313316548113,
+                    "fee_pct": "3.87%",
+                    "fee_pct_raw": 3.872027682866196
+                },
+                {
+                    "rung": "D",
+                    "name": "Catch-all",
+                    "value": "825.43",
+                    "value_raw": 825.431217,
+                    "fees": "0.57",
+                    "fees_raw": 0.5706679999999997,
+                    "cap_eff": "0.07%",
+                    "cap_eff_raw": 0.06913574241522777,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "25.23%",
+                    "apr_raw": 25.23454598155814,
+                    "utilization": "91.23%",
+                    "utilization_raw": 91.22807017543859,
+                    "volume": "1,140.83",
+                    "volume_raw": 1140.8293848344,
+                    "vol_per_day": "1,140.83",
+                    "value_pct": "1.72%",
+                    "value_pct_raw": 1.7239432267509458,
+                    "fee_pct": "1.07%",
+                    "fee_pct_raw": 1.0733317402669897
+                },
+                {
+                    "rung": "S1",
+                    "name": "Tick",
+                    "value": "2,002.30",
+                    "value_raw": 2002.303159,
+                    "fees": "0.92",
+                    "fees_raw": 0.917973,
+                    "cap_eff": "0.05%",
+                    "cap_eff_raw": 0.045845854853390856,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "16.73%",
+                    "apr_raw": 16.733737021487666,
+                    "utilization": "12.28%",
+                    "utilization_raw": 12.280701754385964,
+                    "volume": "1,833.88",
+                    "volume_raw": 1833.8842101916002,
+                    "vol_per_day": "1,833.88",
+                    "value_pct": "4.18%",
+                    "value_pct_raw": 4.181883236020225,
+                    "fee_pct": "1.73%",
+                    "fee_pct_raw": 1.7265547702133461
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "47,880.42",
+                "value_pct": "100.00%",
+                "fees": "53.17",
+                "fee_pct": "100.00%",
+                "cap_eff": "0.11%",
+                "days": "",
+                "apr": "",
+                "utilization": "",
+                "volume": "",
+                "vol_per_day": ""
+            },
+            "note": "Filtered by revision period. Cap Eff = Fees\/Value %. APR annualized from fees over period days."
         },
         {
-            "data": "value_pct",
-            "title": "Value %",
-            "className": "dt-right"
+            "date": "2026-04-16",
+            "period_start": "2026-04-16",
+            "period_end": "2026-04-18",
+            "label": "2026-04-16 19:58 UTC to 2026-04-18 17:26 UTC",
+            "title": "Rung Performance — 2026-04-16 19:58 UTC to 2026-04-18 17:26 UTC",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "value_pct",
+                    "title": "Value %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fee_pct",
+                    "title": "Fee %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "cap_eff",
+                    "title": "Cap Eff",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "days",
+                    "title": "Days",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "utilization",
+                    "title": "Util %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "vol_per_day",
+                    "title": "Vol\/Day",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "10,544.08",
+                    "value_raw": 10544.08,
+                    "fees": "20.98",
+                    "fees_raw": 20.977298,
+                    "cap_eff": "0.20%",
+                    "cap_eff_raw": 0.1989485853673341,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "38.33%",
+                    "apr_raw": 38.32833973648223,
+                    "utilization": "71.13%",
+                    "utilization_raw": 71.1340206185567,
+                    "volume": "41,934.64",
+                    "volume_raw": 41934.64252022569,
+                    "vol_per_day": "22,133.97",
+                    "value_pct": "22.02%",
+                    "value_pct_raw": 22.021488966871523,
+                    "fee_pct": "24.46%",
+                    "fee_pct_raw": 24.45900965142985
+                },
+                {
+                    "rung": "D",
+                    "name": "Catch-all",
+                    "value": "825.43",
+                    "value_raw": 825.431217,
+                    "fees": "1.57",
+                    "fees_raw": 1.5729099999999994,
+                    "cap_eff": "0.19%",
+                    "cap_eff_raw": 0.19055615629812067,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "36.71%",
+                    "apr_raw": 36.711500531593074,
+                    "utilization": "92.78%",
+                    "utilization_raw": 92.78350515463917,
+                    "volume": "3,144.55",
+                    "volume_raw": 3144.5488408585006,
+                    "vol_per_day": "1,659.76",
+                    "value_pct": "1.72%",
+                    "value_pct_raw": 1.72392702237434,
+                    "fee_pct": "1.83%",
+                    "fee_pct_raw": 1.8339740833557545
+                },
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "5,901.25",
+                    "value_raw": 5901.25,
+                    "fees": "10.92",
+                    "fees_raw": 10.920805000000003,
+                    "cap_eff": "0.19%",
+                    "cap_eff_raw": 0.18505918237661517,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "35.65%",
+                    "apr_raw": 35.65248378313501,
+                    "utilization": "41.24%",
+                    "utilization_raw": 41.23711340206185,
+                    "volume": "21,827.81",
+                    "volume_raw": 21827.807522462692,
+                    "vol_per_day": "11,521.17",
+                    "value_pct": "12.32%",
+                    "value_pct_raw": 12.324860183700292,
+                    "fee_pct": "12.73%",
+                    "fee_pct_raw": 12.733388012907257
+                },
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "24,602.97",
+                    "value_raw": 24602.97,
+                    "fees": "44.48",
+                    "fees_raw": 44.482076,
+                    "cap_eff": "0.18%",
+                    "cap_eff_raw": 0.1807996189077985,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "34.83%",
+                    "apr_raw": 34.8318597236049,
+                    "utilization": "55.67%",
+                    "utilization_raw": 55.670103092783506,
+                    "volume": "88,914.30",
+                    "volume_raw": 88914.29954265717,
+                    "vol_per_day": "46,930.79",
+                    "value_pct": "51.38%",
+                    "value_pct_raw": 51.38371791633515,
+                    "fee_pct": "51.86%",
+                    "fee_pct_raw": 51.86499835201063
+                },
+                {
+                    "rung": "S3",
+                    "name": "Sweep",
+                    "value": "1,801.35",
+                    "value_raw": 1801.351344,
+                    "fees": "2.55",
+                    "fees_raw": 2.5528519999999997,
+                    "cap_eff": "0.14%",
+                    "cap_eff_raw": 0.14171871625727667,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "27.30%",
+                    "apr_raw": 27.302748062761022,
+                    "utilization": "14.44%",
+                    "utilization_raw": 14.444444444444443,
+                    "volume": "5,100.83",
+                    "volume_raw": 5100.8267128237,
+                    "vol_per_day": "2,692.32",
+                    "value_pct": "3.76%",
+                    "value_pct_raw": 3.7621526721492238,
+                    "fee_pct": "2.98%",
+                    "fee_pct_raw": 2.9765621724338365
+                },
+                {
+                    "rung": "S2",
+                    "name": "Flow",
+                    "value": "2,102.10",
+                    "value_raw": 2102.102654,
+                    "fees": "2.63",
+                    "fees_raw": 2.628837,
+                    "cap_eff": "0.13%",
+                    "cap_eff_raw": 0.12505749873811825,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "24.09%",
+                    "apr_raw": 24.092889574354867,
+                    "utilization": "8.89%",
+                    "utilization_raw": 8.88888888888889,
+                    "volume": "5,252.24",
+                    "volume_raw": 5252.2416493644,
+                    "vol_per_day": "2,772.24",
+                    "value_pct": "4.39%",
+                    "value_pct_raw": 4.390276856993909,
+                    "fee_pct": "3.07%",
+                    "fee_pct_raw": 3.065158799528704
+                },
+                {
+                    "rung": "S1",
+                    "name": "Tick",
+                    "value": "2,103.68",
+                    "value_raw": 2103.682495,
+                    "fees": "2.63",
+                    "fees_raw": 2.630338,
+                    "cap_eff": "0.13%",
+                    "cap_eff_raw": 0.12503493308765684,
+                    "days": "1.9",
+                    "days_raw": 1.8945833333333333,
+                    "apr": "24.09%",
+                    "apr_raw": 24.088542200305124,
+                    "utilization": "5.56%",
+                    "utilization_raw": 5.555555555555555,
+                    "volume": "5,255.30",
+                    "volume_raw": 5255.2969151584,
+                    "vol_per_day": "2,773.85",
+                    "value_pct": "4.39%",
+                    "value_pct_raw": 4.393576381575563,
+                    "fee_pct": "3.07%",
+                    "fee_pct_raw": 3.0669089283339868
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "47,880.87",
+                "value_pct": "100.00%",
+                "fees": "85.77",
+                "fee_pct": "100.00%",
+                "cap_eff": "0.18%",
+                "days": "",
+                "apr": "",
+                "utilization": "",
+                "volume": "",
+                "vol_per_day": ""
+            },
+            "note": "Filtered by revision period. Cap Eff = Fees\/Value %. APR annualized from fees over period days."
         },
         {
-            "data": "fees",
-            "title": "Fees",
-            "className": "dt-right"
+            "date": "2026-04-15",
+            "period_start": "2026-04-15",
+            "period_end": "2026-04-16",
+            "label": "2026-04-15 16:17 UTC to 2026-04-16 19:58 UTC",
+            "title": "Rung Performance — 2026-04-15 16:17 UTC to 2026-04-16 19:58 UTC",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "value_pct",
+                    "title": "Value %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fee_pct",
+                    "title": "Fee %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "cap_eff",
+                    "title": "Cap Eff",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "days",
+                    "title": "Days",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "utilization",
+                    "title": "Util %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "vol_per_day",
+                    "title": "Vol\/Day",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "5,901.25",
+                    "value_raw": 5901.25,
+                    "fees": "5.22",
+                    "fees_raw": 5.2207989999999995,
+                    "cap_eff": "0.09%",
+                    "cap_eff_raw": 0.0884693751323872,
+                    "days": "1.2",
+                    "days_raw": 1.1536805555555556,
+                    "apr": "27.99%",
+                    "apr_raw": 27.989829392393133,
+                    "utilization": "79.41%",
+                    "utilization_raw": 79.41176470588235,
+                    "volume": "10,434.64",
+                    "volume_raw": 10434.641308266302,
+                    "vol_per_day": "9,044.65",
+                    "value_pct": "14.09%",
+                    "value_pct_raw": 14.092964320323563,
+                    "fee_pct": "16.99%",
+                    "fee_pct_raw": 16.985832144886622
+                },
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "24,602.97",
+                    "value_raw": 24602.97,
+                    "fees": "17.87",
+                    "fees_raw": 17.874372000000005,
+                    "cap_eff": "0.07%",
+                    "cap_eff_raw": 0.07265127746772038,
+                    "days": "1.2",
+                    "days_raw": 1.1536805555555556,
+                    "apr": "22.99%",
+                    "apr_raw": 22.985319591304297,
+                    "utilization": "80.88%",
+                    "utilization_raw": 80.88235294117648,
+                    "volume": "35,729.97",
+                    "volume_raw": 35729.971993414605,
+                    "vol_per_day": "30,970.42",
+                    "value_pct": "58.76%",
+                    "value_pct_raw": 58.75514143342361,
+                    "fee_pct": "58.15%",
+                    "fee_pct_raw": 58.15414125065177
+                },
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "10,544.08",
+                    "value_raw": 10544.08,
+                    "fees": "7.26",
+                    "fees_raw": 7.264271999999999,
+                    "cap_eff": "0.07%",
+                    "cap_eff_raw": 0.06889431794902921,
+                    "days": "1.2",
+                    "days_raw": 1.1536805555555556,
+                    "apr": "21.80%",
+                    "apr_raw": 21.79669747427301,
+                    "utilization": "80.88%",
+                    "utilization_raw": 80.88235294117648,
+                    "volume": "14,521.79",
+                    "volume_raw": 14521.791421752898,
+                    "vol_per_day": "12,587.36",
+                    "value_pct": "25.18%",
+                    "value_pct_raw": 25.180655493435676,
+                    "fee_pct": "23.63%",
+                    "fee_pct_raw": 23.634256911020675
+                },
+                {
+                    "rung": "D",
+                    "name": "Catch-all",
+                    "value": "825.43",
+                    "value_raw": 825.431217,
+                    "fees": "0.38",
+                    "fees_raw": 0.3767550000000002,
+                    "cap_eff": "0.05%",
+                    "cap_eff_raw": 0.04564341549490976,
+                    "days": "1.2",
+                    "days_raw": 1.1536805555555556,
+                    "apr": "14.44%",
+                    "apr_raw": 14.440606262640445,
+                    "utilization": "95.83%",
+                    "utilization_raw": 95.83333333333334,
+                    "volume": "753.15",
+                    "volume_raw": 753.1521353446001,
+                    "vol_per_day": "652.83",
+                    "value_pct": "1.97%",
+                    "value_pct_raw": 1.9712387528171584,
+                    "fee_pct": "1.23%",
+                    "fee_pct_raw": 1.2257696934409394
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "41,873.73",
+                "value_pct": "100.00%",
+                "fees": "30.74",
+                "fee_pct": "100.00%",
+                "cap_eff": "0.07%",
+                "days": "",
+                "apr": "",
+                "utilization": "",
+                "volume": "",
+                "vol_per_day": ""
+            },
+            "note": "Filtered by revision period. Cap Eff = Fees\/Value %. APR annualized from fees over period days."
         },
         {
-            "data": "fee_pct",
-            "title": "Fee %",
-            "className": "dt-right"
-        },
-        {
-            "data": "cap_eff",
-            "title": "Cap Eff",
-            "className": "dt-right"
-        },
-        {
-            "data": "days",
-            "title": "Days",
-            "className": "dt-right"
-        },
-        {
-            "data": "apr",
-            "title": "APR",
-            "className": "dt-right"
-        },
-        {
-            "data": "utilization",
-            "title": "Util %",
-            "className": "dt-right"
-        },
-        {
-            "data": "volume",
-            "title": "Volume",
-            "className": "dt-right"
-        },
-        {
-            "data": "vol_per_day",
-            "title": "Vol\/Day",
-            "className": "dt-right"
+            "date": "2026-04-15",
+            "period_start": "2026-04-15",
+            "period_end": "2026-04-15",
+            "label": "2026-04-15 00:00 UTC to 2026-04-15 16:17 UTC",
+            "title": "Rung Performance — 2026-04-15 00:00 UTC to 2026-04-15 16:17 UTC",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "value_pct",
+                    "title": "Value %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fee_pct",
+                    "title": "Fee %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "cap_eff",
+                    "title": "Cap Eff",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "days",
+                    "title": "Days",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "utilization",
+                    "title": "Util %",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "vol_per_day",
+                    "title": "Vol\/Day",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "5,901.25",
+                    "value_raw": 5901.25,
+                    "fees": "4.94",
+                    "fees_raw": 4.944042,
+                    "cap_eff": "0.08%",
+                    "cap_eff_raw": 0.08377957212454988,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "30.58%",
+                    "apr_raw": 30.579543825460703,
+                    "utilization": "78.69%",
+                    "utilization_raw": 78.68852459016394,
+                    "volume": "9,881.16",
+                    "volume_raw": 9881.158199642203,
+                    "vol_per_day": "9,881.16",
+                    "value_pct": "14.38%",
+                    "value_pct_raw": 14.376356633526843,
+                    "fee_pct": "17.00%",
+                    "fee_pct_raw": 17.00139132372451
+                },
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "24,602.97",
+                    "value_raw": 24602.97,
+                    "fees": "17.14",
+                    "fees_raw": 17.135739000000004,
+                    "cap_eff": "0.07%",
+                    "cap_eff_raw": 0.06964906675901326,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "25.42%",
+                    "apr_raw": 25.421909367039834,
+                    "utilization": "80.33%",
+                    "utilization_raw": 80.32786885245902,
+                    "volume": "34,252.79",
+                    "volume_raw": 34252.788438123906,
+                    "vol_per_day": "34,252.79",
+                    "value_pct": "59.94%",
+                    "value_pct_raw": 59.93663562193806,
+                    "fee_pct": "58.93%",
+                    "fee_pct_raw": 58.92575434436191
+                },
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "10,544.08",
+                    "value_raw": 10544.08,
+                    "fees": "7.00",
+                    "fees_raw": 7.000438999999999,
+                    "cap_eff": "0.07%",
+                    "cap_eff_raw": 0.06639212714622802,
+                    "days": "1.0",
+                    "days_raw": 1,
+                    "apr": "24.23%",
+                    "apr_raw": 24.23312640837323,
+                    "utilization": "78.69%",
+                    "utilization_raw": 78.68852459016394,
+                    "volume": "13,994.15",
+                    "volume_raw": 13994.154870339898,
+                    "vol_per_day": "13,994.15",
+                    "value_pct": "25.69%",
+                    "value_pct_raw": 25.687007744535094,
+                    "fee_pct": "24.07%",
+                    "fee_pct_raw": 24.072854331913575
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "41,048.30",
+                "value_pct": "100.00%",
+                "fees": "29.08",
+                "fee_pct": "100.00%",
+                "cap_eff": "0.07%",
+                "days": "",
+                "apr": "",
+                "utilization": "",
+                "volume": "",
+                "vol_per_day": ""
+            },
+            "note": "Filtered by revision period. Cap Eff = Fees\/Value %. APR annualized from fees over period days."
         }
-    ],
-    "data": [
-        {
-            "rung": "C",
-            "name": "Scalp",
-            "value": "4,800.00",
-            "value_raw": 4800,
-            "value_pct": "8.23%",
-            "fees": "70.06",
-            "fees_raw": 70.06073200000002,
-            "fee_pct": "14.52%",
-            "cap_eff": "1.46%",
-            "days": "13.0",
-            "days_raw": 13,
-            "apr": "40.98%",
-            "apr_raw": 40.981037147435906,
-            "utilization": "51.04%",
-            "volume": "140,027.17",
-            "volume_raw": 140027.16919114155,
-            "vol_per_day": "10,771.32"
-        },
-        {
-            "rung": "S2",
-            "name": "Flow",
-            "value": "2,001.55",
-            "value_raw": 2001.551475,
-            "value_pct": "3.43%",
-            "fees": "22.29",
-            "fees_raw": 22.287951,
-            "fee_pct": "4.62%",
-            "cap_eff": "1.11%",
-            "days": "12.0",
-            "days_raw": 12,
-            "apr": "33.87%",
-            "apr_raw": 33.869984595324986,
-            "utilization": "21.76%",
-            "volume": "44,538.23",
-            "volume_raw": 44538.226235745205,
-            "vol_per_day": "3,711.52"
-        },
-        {
-            "rung": "S1",
-            "name": "Tick",
-            "value": "2,002.30",
-            "value_raw": 2002.303159,
-            "value_pct": "3.43%",
-            "fees": "21.24",
-            "fees_raw": 21.235478,
-            "fee_pct": "4.40%",
-            "cap_eff": "1.06%",
-            "days": "12.0",
-            "days_raw": 12,
-            "apr": "32.26%",
-            "apr_raw": 32.258474593623376,
-            "utilization": "13.92%",
-            "volume": "42,431.98",
-            "volume_raw": 42431.9847533272,
-            "vol_per_day": "3,536.00"
-        },
-        {
-            "rung": "A",
-            "name": "Core",
-            "value": "27,600.00",
-            "value_raw": 27600,
-            "value_pct": "47.34%",
-            "fees": "229.74",
-            "fees_raw": 229.74317300000004,
-            "fee_pct": "47.62%",
-            "cap_eff": "0.83%",
-            "days": "13.0",
-            "days_raw": 13,
-            "apr": "23.37%",
-            "apr_raw": 23.371309404960982,
-            "utilization": "67.65%",
-            "volume": "459,226.24",
-            "volume_raw": 459226.23692750826,
-            "vol_per_day": "35,325.10"
-        },
-        {
-            "rung": "D",
-            "name": "Catch-all",
-            "value": "1,200.00",
-            "value_raw": 1200,
-            "value_pct": "2.06%",
-            "fees": "8.17",
-            "fees_raw": 8.173791999999999,
-            "fee_pct": "1.69%",
-            "cap_eff": "0.68%",
-            "days": "13.0",
-            "days_raw": 13,
-            "apr": "19.12%",
-            "apr_raw": 19.124577435897436,
-            "utilization": "95.32%",
-            "volume": "16,339.14",
-            "volume_raw": 16339.139875753102,
-            "vol_per_day": "1,256.86"
-        },
-        {
-            "rung": "B",
-            "name": "Buffer",
-            "value": "16,800.00",
-            "value_raw": 16800,
-            "value_pct": "28.81%",
-            "fees": "109.44",
-            "fees_raw": 109.44400399999998,
-            "fee_pct": "22.69%",
-            "cap_eff": "0.65%",
-            "days": "13.0",
-            "days_raw": 13,
-            "apr": "18.29%",
-            "apr_raw": 18.29077905677655,
-            "utilization": "79.41%",
-            "volume": "218,771.52",
-            "volume_raw": 218771.5150800297,
-            "vol_per_day": "16,828.58"
-        },
-        {
-            "rung": "S3",
-            "name": "Sweep",
-            "value": "3,900.00",
-            "value_raw": 3900,
-            "value_pct": "6.69%",
-            "fees": "21.48",
-            "fees_raw": 21.477404,
-            "fee_pct": "4.45%",
-            "cap_eff": "0.55%",
-            "days": "12.0",
-            "days_raw": 12,
-            "apr": "16.75%",
-            "apr_raw": 16.750539444444442,
-            "utilization": "27.65%",
-            "volume": "42,920.44",
-            "volume_raw": 42920.4440308404,
-            "vol_per_day": "3,576.70"
-        }
-    ],
-    "footer": {
-        "rung": "Total",
-        "name": "",
-        "value": "58,303.85",
-        "value_pct": "100.00%",
-        "fees": "482.42",
-        "fee_pct": "100.00%",
-        "cap_eff": "0.83%",
-        "days": "",
-        "apr": "",
-        "utilization": "",
-        "volume": "",
-        "vol_per_day": ""
-    },
-    "note": "Sorted by APR descending. Cap Eff = Fees\/Value %. APR based on actual active days."
+    ]
 }

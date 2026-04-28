@@ -285,12 +285,22 @@ const LPTables = {
         return '';
       };
 
+      const getDayLabel = (day, index) => {
+        if (day && typeof day === 'object') {
+          if (typeof day.label === 'string' && day.label) return day.label;
+          const date = getDayDate(day);
+          if (date) return date;
+          if (typeof day.title === 'string' && day.title) return day.title;
+        }
+        return String(index + 1);
+      };
+
       // Build dropdown
       let html = '<div class="day-selector">';
       html += '<label for="' + containerId + '-select">Select Date: </label>';
       html += '<select id="' + containerId + '-select" class="date-dropdown">';
       days.forEach((day, index) => {
-        const dateValue = getDayDate(day) || day.title || String(index + 1);
+        const dateValue = getDayLabel(day, index);
         html += `<option value="${index}">${dateValue}</option>`;
       });
       html += '</select></div>';
@@ -311,7 +321,14 @@ const LPTables = {
       let selectedIndex = 0;
       if (options.defaultToToday === true) {
         const today = new Date().toISOString().slice(0, 10);
-        const foundIndex = days.findIndex((day) => getDayDate(day) === today);
+        const foundIndex = days.findIndex((day) => {
+          if (day && typeof day === 'object' && typeof day.period_start === 'string') {
+            const start = day.period_start;
+            const endExclusive = typeof day.period_end === 'string' && day.period_end ? day.period_end : '9999-12-31';
+            return today >= start && today < endExclusive;
+          }
+          return getDayDate(day) === today;
+        });
         if (foundIndex >= 0) selectedIndex = foundIndex;
       }
 

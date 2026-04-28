@@ -26,7 +26,7 @@ final class TableDataBuilder
         $files['status-daily-breakdown.json'] = $this->buildStatusDailyBreakdown($dailyMetrics, $config);
 
         // Performance tables
-        $files['performance-rungs.json'] = $this->buildRungPerformance($digest, $config);
+        $files['performance-rungs.json'] = $this->buildRungPerformance($digest, $dailyMetrics, $config);
         $files['performance-scalp.json'] = $this->buildScalpPerformance($digest, $config);
         $files['performance-strategy.json'] = $this->buildStrategySummary($digest, $config);
 
@@ -1253,23 +1253,14 @@ final class TableDataBuilder
         ];
     }
 
-    private function buildRungPerformance(array $digest, array $config): array
+    private function buildRungPerformance(array $digest, array $dailyMetrics, array $config): array
     {
         $rungs = $digest['active_rungs'] ?? [];
-        $configRungs = [];
-        foreach ($config['rungs'] ?? [] as $cr) {
-            $configRungs[$cr['rung']] = $cr;
-        }
+        $days = $dailyMetrics['days'] ?? [];
+        $activeConfigRungs = array_values(array_filter($config['rungs'] ?? [], fn($r) => !empty($r['active'])));
 
-        if (empty($rungs)) {
+        if (empty($rungs) || empty($activeConfigRungs)) {
             return ['title' => 'Rung Performance', 'columns' => [], 'data' => [], 'error' => 'No active rungs found'];
-        }
-
-        $totalValue = 0;
-        $totalFees = 0;
-        foreach ($rungs as $r) {
-            $totalValue += (float) $r['rung_value'];
-            $totalFees += (float) $r['fees_to_date'];
         }
 
         $asOfTimestamp = strtotime($digest['meta']['source_window']['end'] ?? '');
@@ -1277,6 +1268,51 @@ final class TableDataBuilder
             $asOfDate = $digest['meta']['as_of_date'] ?? null;
             $asOfTimestamp = $asOfDate !== null ? strtotime($asOfDate . 'T23:59:59Z') : time();
         }
+        $analysisWindowStart = (string) ($config['processing']['analysis_window_start'] ?? '');
+        $windowStartTs = strtotime($analysisWindowStart);
+        if ($windowStartTs === false) {
+            $windowStartTs = strtotime(($digest['meta']['source_window']['start'] ?? '') ?: '');
+        }
+        if ($windowStartTs === false) {
+            $windowStartTs = $asOfTimestamp;
+        }
+
+        $dayMetricsByDate = [];
+        foreach ($days as $day) {
+            if (!isset($day['date'])) {
+                continue;
+            }
+            $dayMetricsByDate[(string) $day['date']] = $day;
+        }
+
+        $boundaries = [$windowStartTs, $asOfTimestamp + 1];
+        foreach ($activeConfigRungs as $configRung) {
+            foreach (($configRung['revisions'] ?? []) as $revision) {
+                $effectiveFrom = (string) ($revision['effective_from'] ?? '');
+                if ($effectiveFrom === '') {
+                    continue;
+                }
+                $startTs = strtotime($effectiveFrom);
+                if ($startTs === false) {
+                    continue;
+                }
+                $effectiveTo = $revision['effective_to'] ?? null;
+                $endTs = $effectiveTo !== null ? strtotime((string) $effectiveTo) : $asOfTimestamp + 1;
+                if ($endTs === false) {
+                    continue;
+                }
+
+                $clippedStart = max($startTs, $windowStartTs);
+                $clippedEnd = min($endTs, $asOfTimestamp + 1);
+                if ($clippedStart < $clippedEnd) {
+                    $boundaries[] = $clippedStart;
+                    $boundaries[] = $clippedEnd;
+                }
+            }
+        }
+
+        $boundaries = array_values(array_unique($boundaries));
+        sort($boundaries);
 
         $columns = [
             ['data' => 'rung', 'title' => 'Rung'],
@@ -1293,79 +1329,142 @@ final class TableDataBuilder
             ['data' => 'vol_per_day', 'title' => 'Vol/Day', 'className' => 'dt-right'],
         ];
 
-        $rows = [];
-        foreach ($rungs as $r) {
-            $code = $r['rung'];
-            $cr = $configRungs[$code] ?? [];
-            $value = (float) $r['rung_value'];
-            $fees = (float) $r['fees_to_date'];
-            $volume = (float) $r['filled_volume_usd'];
-
-            $valueShare = $totalValue > 0 ? ($value / $totalValue) * 100 : 0;
-            $feeShare = $totalFees > 0 ? ($fees / $totalFees) * 100 : 0;
-            $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
-
-            $createdAt = $r['created_at'] ?? null;
-            $activeDays = (float) ($r['active_days'] ?? 0);
-            if ($activeDays <= 0 && $createdAt) {
-                $createdTs = strtotime($createdAt);
-                if ($createdTs !== false) {
-                    $activeDays = max(1, ($asOfTimestamp - $createdTs) / 86400);
-                }
+        $periodTables = [];
+        for ($i = count($boundaries) - 2; $i >= 0; $i--) {
+            $periodStartTs = (int) $boundaries[$i];
+            $periodEndTs = (int) $boundaries[$i + 1];
+            if ($periodStartTs >= $periodEndTs) {
+                continue;
             }
 
-            $annualizedFees = $activeDays > 0 ? ($fees / $activeDays) * 365 : 0;
-            $apr = $value > 0 ? ($annualizedFees / $value) * 100 : 0;
+            $periodDays = max(1.0, ($periodEndTs - $periodStartTs) / 86400.0);
+            $periodStartIso = gmdate('Y-m-d\TH:i:s\Z', $periodStartTs);
+            $periodStartDate = gmdate('Y-m-d', $periodStartTs);
+            $periodEndDateExclusive = gmdate('Y-m-d', $periodEndTs);
+            $periodStartDateForDaily = gmdate('Y-m-d', $periodStartTs);
+            $periodEndDateForDaily = gmdate('Y-m-d', $periodEndTs - 1);
 
-            $utilization = (float) ($r['utilization_pct'] ?? 0);
-            $volPerDay = $activeDays > 0 ? $volume / $activeDays : 0;
+            $rows = [];
+            foreach ($activeConfigRungs as $configRung) {
+                $revision = get_rung_revision_at($configRung, $periodStartIso);
+                if ($revision === null) {
+                    continue;
+                }
 
-            $rows[] = [
-                'rung' => $code,
-                'name' => $r['name'] ?? '',
-                'value' => $this->money($value),
-                'value_raw' => $value,
-                'value_pct' => $this->pct($valueShare),
-                'fees' => $this->money($fees),
-                'fees_raw' => $fees,
-                'fee_pct' => $this->pct($feeShare),
-                'cap_eff' => $this->pct($capEff),
-                'days' => number_format($activeDays, 1),
-                'days_raw' => $activeDays,
-                'apr' => $this->pct($apr),
-                'apr_raw' => $apr,
-                'utilization' => $this->pct($utilization),
-                'volume' => $this->money($volume),
-                'volume_raw' => $volume,
-                'vol_per_day' => $this->money($volPerDay),
+                $code = (string) ($configRung['rung'] ?? '');
+                $name = (string) ($configRung['name'] ?? '');
+                $value = (float) ($revision['initial_value']['total_usd'] ?? 0);
+                $fees = 0.0;
+                $eligible = 0;
+                $tradesCount = 0;
+                $volume = 0.0;
+
+                $cursor = $periodStartDateForDaily;
+                while ($cursor <= $periodEndDateForDaily) {
+                    $day = $dayMetricsByDate[$cursor] ?? null;
+                    if (is_array($day)) {
+                        foreach (($day['rung_metrics'] ?? []) as $metric) {
+                            if ((string) ($metric['rung'] ?? '') !== $code) {
+                                continue;
+                            }
+                            $fees += (float) ($metric['fees'] ?? 0);
+                            $eligible += (int) ($metric['eligible_trs'] ?? 0);
+                            $tradesCount += (int) ($metric['trades'] ?? 0);
+                            $volume += (float) ($metric['filled_volume_usd'] ?? 0);
+                            break;
+                        }
+                    }
+                    $nextTs = strtotime($cursor . ' +1 day');
+                    if ($nextTs === false) {
+                        break;
+                    }
+                    $cursor = gmdate('Y-m-d', $nextTs);
+                }
+
+                $annualizedFees = $periodDays > 0 ? ($fees / $periodDays) * 365 : 0;
+                $apr = $value > 0 ? ($annualizedFees / $value) * 100 : 0;
+                $capEff = $value > 0 ? ($fees / $value) * 100 : 0;
+                $utilization = $eligible > 0 ? ($tradesCount / $eligible) * 100 : 0;
+                $volPerDay = $periodDays > 0 ? $volume / $periodDays : 0;
+
+                $rows[] = [
+                    'rung' => $code,
+                    'name' => $name,
+                    'value' => $this->money($value),
+                    'value_raw' => $value,
+                    'fees' => $this->money($fees),
+                    'fees_raw' => $fees,
+                    'cap_eff' => $this->pct($capEff),
+                    'cap_eff_raw' => $capEff,
+                    'days' => number_format($periodDays, 1),
+                    'days_raw' => $periodDays,
+                    'apr' => $this->pct($apr),
+                    'apr_raw' => $apr,
+                    'utilization' => $this->pct($utilization),
+                    'utilization_raw' => $utilization,
+                    'volume' => $this->money($volume),
+                    'volume_raw' => $volume,
+                    'vol_per_day' => $this->money($volPerDay),
+                ];
+            }
+
+            if (empty($rows)) {
+                continue;
+            }
+
+            $totalValue = array_sum(array_map(fn($row) => (float) $row['value_raw'], $rows));
+            $totalFees = array_sum(array_map(fn($row) => (float) $row['fees_raw'], $rows));
+
+            foreach ($rows as &$row) {
+                $valueShare = $totalValue > 0 ? (((float) $row['value_raw'] / $totalValue) * 100) : 0;
+                $feeShare = $totalFees > 0 ? (((float) $row['fees_raw'] / $totalFees) * 100) : 0;
+                $row['value_pct'] = $this->pct($valueShare);
+                $row['value_pct_raw'] = $valueShare;
+                $row['fee_pct'] = $this->pct($feeShare);
+                $row['fee_pct_raw'] = $feeShare;
+            }
+            unset($row);
+
+            usort($rows, fn($a, $b) => $b['apr_raw'] <=> $a['apr_raw']);
+            $totalCapEff = $totalValue > 0 ? ($totalFees / $totalValue) * 100 : 0;
+
+            $periodStartLabel = gmdate('Y-m-d H:i', $periodStartTs) . ' UTC';
+            $periodEndLabel = gmdate('Y-m-d H:i', $periodEndTs - 1) . ' UTC';
+            $label = $periodStartLabel . ' to ' . $periodEndLabel;
+
+            $periodTables[] = [
+                'date' => $periodStartDate,
+                'period_start' => $periodStartDate,
+                'period_end' => $periodEndDateExclusive,
+                'label' => $label,
+                'title' => 'Rung Performance — ' . $label,
+                'columns' => $columns,
+                'data' => $rows,
+                'footer' => [
+                    'rung' => 'Total',
+                    'name' => '',
+                    'value' => $this->money($totalValue),
+                    'value_pct' => '100.00%',
+                    'fees' => $this->money($totalFees),
+                    'fee_pct' => '100.00%',
+                    'cap_eff' => $this->pct($totalCapEff),
+                    'days' => '',
+                    'apr' => '',
+                    'utilization' => '',
+                    'volume' => '',
+                    'vol_per_day' => '',
+                ],
+                'note' => 'Filtered by revision period. Cap Eff = Fees/Value %. APR annualized from fees over period days.',
             ];
         }
 
-        usort($rows, fn($a, $b) => $b['apr_raw'] <=> $a['apr_raw']);
-
-        $totalCapEff = $totalValue > 0 ? ($totalFees / $totalValue) * 100 : 0;
-
-        $footer = [
-            'rung' => 'Total',
-            'name' => '',
-            'value' => $this->money($totalValue),
-            'value_pct' => '100.00%',
-            'fees' => $this->money($totalFees),
-            'fee_pct' => '100.00%',
-            'cap_eff' => $this->pct($totalCapEff),
-            'days' => '',
-            'apr' => '',
-            'utilization' => '',
-            'volume' => '',
-            'vol_per_day' => '',
-        ];
+        if (empty($periodTables)) {
+            return ['title' => 'Rung Performance', 'days' => [], 'error' => 'No revision periods found in analysis window'];
+        }
 
         return [
             'title' => 'Rung Performance',
-            'columns' => $columns,
-            'data' => $rows,
-            'footer' => $footer,
-            'note' => 'Sorted by APR descending. Cap Eff = Fees/Value %. APR based on actual active days.',
+            'days' => $periodTables,
         ];
     }
 

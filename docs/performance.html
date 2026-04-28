@@ -56,7 +56,7 @@
   <script src="js/main.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      LPTables.loadTable('performance-rungs', 'performance-rungs.json');
+      LPTables.loadDaySelector('performance-rungs', 'performance-rungs.json', { defaultToToday: true });
       LPTables.loadTable('performance-scalp', 'performance-scalp.json');
       LPTables.loadTable('performance-strategy', 'performance-strategy.json');
     });
