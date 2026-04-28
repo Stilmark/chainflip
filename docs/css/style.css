@@ -289,6 +289,61 @@ table tfoot td {
   min-width: 280px;
 }
 
+.rebalance-action-btn {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.rebalance-action-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+}
+
+.rebalance-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.rebalance-modal {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 16px;
+  width: min(420px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rebalance-modal h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.rebalance-modal-input {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.rebalance-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .rebalance-pct-input {
   width: 90px;
   text-align: right;

@@ -339,6 +339,7 @@ const LPTables = {
 
     const fmtMoney = (v) => Number(v || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const fmtPct = (v) => `${Number(v || 0).toFixed(2)}%`;
+    const presetStorageKey = 'lp-parser:rebalance-presets:v1';
     const deltaClass = (d) => (d > 0 ? 'delta-pos' : (d < 0 ? 'delta-neg' : 'delta-flat'));
     const formatAssetWithDiff = (value, baseline) => {
       let diff = Number(value || 0) - Number(baseline || 0);
@@ -377,6 +378,10 @@ const LPTables = {
     html += '<option value="live">Live Split (current holdings)</option>';
     html += '<option value="linear">Linear Range Distance (experimental)</option>';
     html += '</select>';
+    html += '<label for="rebalance-preset-select">Saved View</label>';
+    html += '<select id="rebalance-preset-select"><option value="">Current</option></select>';
+    html += '<button type="button" id="rebalance-save-preset" class="rebalance-action-btn">Save View</button>';
+    html += '<button type="button" id="rebalance-export-md" class="rebalance-action-btn">Export Markdown</button>';
     html += '</div>';
 
     html += '<table class="data-table display rebalance-table">';
@@ -414,7 +419,12 @@ const LPTables = {
 
     const totalInput = container.querySelector('#rebalance-total-input');
     const modeInput = container.querySelector('#rebalance-ratio-mode');
+    const presetSelect = container.querySelector('#rebalance-preset-select');
+    const savePresetButton = container.querySelector('#rebalance-save-preset');
+    const exportMarkdownButton = container.querySelector('#rebalance-export-md');
     const pctInputs = container.querySelectorAll('input[data-role="pct-input"]');
+    let lastComputedRows = [];
+    let lastComputedTotals = { usdt: 0, usdc: 0, pct: 0 };
 
     // Range curve should always be the default mode on initial load.
     if (modeInput) {
@@ -454,6 +464,137 @@ const LPTables = {
       return usdt / usdc;
     };
 
+    const loadPresets = () => {
+      try {
+        const raw = localStorage.getItem(presetStorageKey);
+        const parsed = raw ? JSON.parse(raw) : {};
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (error) {
+        return {};
+      }
+    };
+
+    const savePresets = (presets) => {
+      localStorage.setItem(presetStorageKey, JSON.stringify(presets));
+    };
+
+    const getCurrentSettings = () => ({
+      total: Number(totalInput?.value || 0),
+      mode: modeInput?.value || 'curve',
+      percentages: rows.map((row, idx) => {
+        const pctInput = container.querySelector(`input[data-role="pct-input"][data-index="${idx}"]`);
+        return {
+          rung: row.rung,
+          pct: Number(pctInput?.value || 0)
+        };
+      })
+    });
+
+    const renderPresetOptions = (selectedName = '') => {
+      if (!presetSelect) return;
+      const presets = loadPresets();
+      const names = Object.keys(presets).sort((a, b) => a.localeCompare(b));
+      let options = '<option value="">Current</option>';
+      names.forEach((name) => {
+        const selected = name === selectedName ? ' selected' : '';
+        options += `<option value="${this.escapeHtml(name)}"${selected}>${this.escapeHtml(name)}</option>`;
+      });
+      presetSelect.innerHTML = options;
+    };
+
+    const applyPreset = (name) => {
+      if (!name) return;
+      const presets = loadPresets();
+      const preset = presets[name];
+      if (!preset) return;
+
+      if (totalInput && typeof preset.total === 'number') {
+        totalInput.value = preset.total.toFixed(2);
+      }
+      if (modeInput && typeof preset.mode === 'string') {
+        modeInput.value = preset.mode;
+      }
+      (preset.percentages || []).forEach((entry) => {
+        const idx = rows.findIndex((row) => row.rung === entry.rung);
+        if (idx >= 0) {
+          const pctInput = container.querySelector(`input[data-role="pct-input"][data-index="${idx}"]`);
+          if (pctInput) {
+            pctInput.value = Number(entry.pct || 0).toFixed(4);
+          }
+        }
+      });
+      recalc();
+    };
+
+    const exportMarkdown = async () => {
+      const modeLabel = modeInput ? modeInput.options[modeInput.selectedIndex].text : 'Range Curve';
+      const lines = [];
+      lines.push('## Re-balance');
+      lines.push('');
+      lines.push(`- Total Amount: ${fmtMoney(Number(totalInput?.value || 0))}`);
+      lines.push(`- Ratio Mode: ${modeLabel}`);
+      lines.push('');
+      lines.push('| Rung | Name | USDT | USDC | Range | % of total |');
+      lines.push('| --- | --- | ---: | ---: | --- | ---: |');
+      lastComputedRows.forEach((row) => {
+        lines.push(`| ${row.rung} | ${row.name} | ${fmtMoney(row.usdt)} | ${fmtMoney(row.usdc)} | ${row.rangeLower} to ${row.rangeUpper} | ${row.pct.toFixed(4)} |`);
+      });
+      lines.push(`| **Total** |  | **${fmtMoney(lastComputedTotals.usdt)}** | **${fmtMoney(lastComputedTotals.usdc)}** |  | **${lastComputedTotals.pct.toFixed(2)}%** |`);
+      const markdown = lines.join('\n');
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(markdown);
+      }
+
+      if (exportMarkdownButton) {
+        const originalText = exportMarkdownButton.textContent;
+        exportMarkdownButton.textContent = 'Copied';
+        setTimeout(() => {
+          exportMarkdownButton.textContent = originalText;
+        }, 1200);
+      }
+    };
+
+    const promptForPresetName = () => new Promise((resolve) => {
+      const existing = container.querySelector('.rebalance-modal-backdrop');
+      if (existing) existing.remove();
+
+      const modal = document.createElement('div');
+      modal.className = 'rebalance-modal-backdrop';
+      modal.innerHTML = `
+        <div class="rebalance-modal" role="dialog" aria-modal="true" aria-labelledby="rebalance-save-title">
+          <h3 id="rebalance-save-title">Save current settings</h3>
+          <input type="text" class="rebalance-modal-input" placeholder="Preset name" />
+          <div class="rebalance-modal-actions">
+            <button type="button" class="rebalance-action-btn" data-role="cancel">Cancel</button>
+            <button type="button" class="rebalance-action-btn" data-role="save">Save</button>
+          </div>
+        </div>
+      `;
+
+      const cleanup = (value) => {
+        modal.remove();
+        resolve(value);
+      };
+
+      const input = modal.querySelector('.rebalance-modal-input');
+      const cancel = modal.querySelector('[data-role="cancel"]');
+      const save = modal.querySelector('[data-role="save"]');
+
+      cancel.addEventListener('click', () => cleanup(''));
+      save.addEventListener('click', () => cleanup((input.value || '').trim()));
+      input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') cleanup((input.value || '').trim());
+        if (event.key === 'Escape') cleanup('');
+      });
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) cleanup('');
+      });
+
+      container.appendChild(modal);
+      input.focus();
+    });
+
     const getModeRatio = (row) => {
       const mode = modeInput?.value || 'curve';
       if (mode === 'gui') {
@@ -481,6 +622,7 @@ const LPTables = {
       let sumUsdt = 0;
       let sumUsdc = 0;
       let sumPct = 0;
+      lastComputedRows = [];
 
       rows.forEach((row, idx) => {
         const pctInput = container.querySelector(`input[data-role="pct-input"][data-index="${idx}"]`);
@@ -499,7 +641,19 @@ const LPTables = {
         const usdcCell = container.querySelector(`td[data-role="usdc"][data-index="${idx}"]`);
         if (usdtCell) usdtCell.innerHTML = formatAssetWithDiff(usdt, row.baseUsdt);
         if (usdcCell) usdcCell.innerHTML = formatAssetWithDiff(usdc, row.baseUsdc);
+
+        lastComputedRows.push({
+          rung: row.rung,
+          name: row.name,
+          usdt,
+          usdc,
+          rangeLower: row.rangeLower,
+          rangeUpper: row.rangeUpper,
+          pct
+        });
       });
+
+      lastComputedTotals = { usdt: sumUsdt, usdc: sumUsdc, pct: sumPct };
 
       const totalUsdtEl = container.querySelector('#rebalance-total-usdt strong');
       const totalUsdcEl = container.querySelector('#rebalance-total-usdc strong');
@@ -512,7 +666,33 @@ const LPTables = {
     totalInput.addEventListener('input', recalc);
     modeInput.addEventListener('change', recalc);
     pctInputs.forEach((input) => input.addEventListener('input', recalc));
+    if (presetSelect) {
+      presetSelect.addEventListener('change', function() {
+        applyPreset(this.value);
+      });
+    }
+    if (savePresetButton) {
+      savePresetButton.addEventListener('click', async () => {
+        const trimmed = await promptForPresetName();
+        if (!trimmed) return;
+        const presets = loadPresets();
+        presets[trimmed] = getCurrentSettings();
+        savePresets(presets);
+        renderPresetOptions(trimmed);
+      });
+    }
+    if (exportMarkdownButton) {
+      exportMarkdownButton.addEventListener('click', () => {
+        exportMarkdown().catch(() => {
+          exportMarkdownButton.textContent = 'Export failed';
+          setTimeout(() => {
+            exportMarkdownButton.textContent = 'Export Markdown';
+          }, 1200);
+        });
+      });
+    }
 
+    renderPresetOptions();
     recalc();
   },
 
