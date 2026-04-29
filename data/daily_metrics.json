@@ -1,7 +1,7 @@
 {
     "version": 2,
     "pair": "USDT/USDC",
-    "updated_at": "2026-04-29T08:31:08+00:00",
+    "updated_at": "2026-04-29T09:33:35+00:00",
     "analysis_window_start": "2026-04-15T00:00:00Z",
     "days": [
         {
@@ -6325,7 +6325,7 @@
                 }
             },
             "portfolio": {
-                "portfolio_value": 58303.854634,
+                "portfolio_value": 61088.05,
                 "total_fees": 47.49006799999999,
                 "borrowed_usdt": 34426.1,
                 "borrowed_usdc": 18856.04,
@@ -6428,10 +6428,10 @@
                     "fees": 2.503904,
                     "fee_share_pct": 5.272479289774864,
                     "filled_volume_usd": 5002.8734408985,
-                    "rung_value": 2002.303159,
-                    "capital_efficiency": 0.0012505119360898935,
-                    "apr_gross": 0.45643685667281114,
-                    "target_allocation_pct": 3.94
+                    "rung_value": 2888.05,
+                    "capital_efficiency": 0.0008669877599072037,
+                    "apr_gross": 0.31645053236612936,
+                    "target_allocation_pct": 3
                 },
                 {
                     "rung": "S2",
@@ -6448,10 +6448,10 @@
                     "fees": 2.253122,
                     "fee_share_pct": 4.74440676732659,
                     "filled_volume_usd": 4501.469388580101,
-                    "rung_value": 2001.551475,
-                    "capital_efficiency": 0.0011256877617898885,
-                    "apr_gross": 0.41087603305330933,
-                    "target_allocation_pct": 3.94
+                    "rung_value": 3900,
+                    "capital_efficiency": 0.0005777235897435897,
+                    "apr_gross": 0.21086911025641025,
+                    "target_allocation_pct": 6.5
                 },
                 {
                     "rung": "S3",
@@ -6982,7 +6982,7 @@
                 "skipped_count_sum": 1,
                 "out_of_range_count_sum": 297,
                 "depleted_count_sum": 0,
-                "rung_value_sum": 58303.854634,
+                "rung_value_sum": 61088.05,
                 "fees_sum": 47.490068
             }
         }
