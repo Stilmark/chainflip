@@ -1,0 +1,44 @@
+{
+    "title": "Ranges",
+    "columns": [
+        {
+            "data": "name",
+            "title": "Rung"
+        },
+        {
+            "data": "range_bar",
+            "title": "Range",
+            "render_as_html": true
+        }
+    ],
+    "data": [
+        {
+            "name": "A Core",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:16.6042%;width:55.5277%;\"><span class=\"range-bar-lo\">0.9979<\/span><span class=\"range-bar-hi\">1.0029<\/span><\/div><\/div>"
+        },
+        {
+            "name": "B Buffer",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:11.0667%;width:66.6332%;\"><span class=\"range-bar-lo\">0.9974<\/span><span class=\"range-bar-hi\">1.0034<\/span><\/div><\/div>"
+        },
+        {
+            "name": "C Scalp",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:26.5787%;width:36.6501%;\"><span class=\"range-bar-lo\">0.9988<\/span><span class=\"range-bar-hi\">1.0021<\/span><\/div><\/div>"
+        },
+        {
+            "name": "D Catch-all",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:0%;width:100%;\"><span class=\"range-bar-lo\">0.9964<\/span><span class=\"range-bar-hi\">1.0054<\/span><\/div><\/div>"
+        },
+        {
+            "name": "S1 Tick",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:46.5547%;width:4.444%;\"><span class=\"range-bar-lo\">1.0006<\/span><span class=\"range-bar-hi\">1.0010<\/span><\/div><\/div>"
+        },
+        {
+            "name": "S2 Flow",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:44.3334%;width:8.888%;\"><span class=\"range-bar-lo\">1.0004<\/span><span class=\"range-bar-hi\">1.0012<\/span><\/div><\/div>"
+        },
+        {
+            "name": "S3 Sweep",
+            "range_bar": "<div class=\"range-bar-wrap\"><div class=\"range-bar-fill\" style=\"margin-left:42.1125%;width:13.332%;\"><span class=\"range-bar-lo\">1.0002<\/span><span class=\"range-bar-hi\">1.0014<\/span><\/div><\/div>"
+        }
+    ]
+}

@@ -39,6 +39,7 @@ final class TableDataBuilder
 
         // Config tables
         $files['config-rungs.json'] = $this->buildRungs($config);
+        $files['config-ranges.json'] = $this->buildConfigRanges($config);
         $files['config-balances.json'] = $this->buildConfigBalances($digest, $config);
         $files['config-rebalance.json'] = $this->buildConfigRebalance($config);
 
@@ -1536,6 +1537,64 @@ final class TableDataBuilder
             'columns' => $columns,
             'data' => $data,
             'footer' => $footer,
+        ];
+    }
+
+    private function buildConfigRanges(array $config): array
+    {
+        $rungs = $config['rungs'] ?? [];
+        $activeRungs = array_filter($rungs, fn($r) => !empty($r['active']));
+
+        if (empty($activeRungs)) {
+            return ['title' => 'Ranges', 'columns' => [], 'data' => []];
+        }
+
+        // Compute full range boundaries across all active rungs
+        $allLowers = [];
+        $allUppers = [];
+        foreach ($activeRungs as $r) {
+            $rev = get_current_revision($r);
+            if ($rev !== null) {
+                $allLowers[] = (float) $rev['range_lower'];
+                $allUppers[] = (float) $rev['range_upper'];
+            }
+        }
+        $fullMin = min($allLowers);
+        $fullMax = max($allUppers);
+        $fullSpan = $fullMax - $fullMin;
+
+        $columns = [
+            ['data' => 'name', 'title' => 'Rung'],
+            ['data' => 'range_bar', 'title' => 'Range', 'render_as_html' => true],
+        ];
+
+        $data = [];
+        foreach ($activeRungs as $r) {
+            $rev = get_current_revision($r);
+            $lower = $rev !== null ? (float) $rev['range_lower'] : $fullMin;
+            $upper = $rev !== null ? (float) $rev['range_upper'] : $fullMax;
+            $leftPct  = $fullSpan > 0 ? round(($lower - $fullMin) / $fullSpan * 100, 4) : 0;
+            $widthPct = $fullSpan > 0 ? round(($upper  - $lower)  / $fullSpan * 100, 4) : 100;
+
+            $loLabel = number_format($lower, 4);
+            $hiLabel = number_format($upper, 4);
+
+            $bar = '<div class="range-bar-wrap">'
+                . '<div class="range-bar-fill" style="margin-left:' . $leftPct . '%;width:' . $widthPct . '%;">'
+                . '<span class="range-bar-lo">' . htmlspecialchars($loLabel) . '</span>'
+                . '<span class="range-bar-hi">' . htmlspecialchars($hiLabel) . '</span>'
+                . '</div></div>';
+
+            $data[] = [
+                'name'      => $r['rung'] . ' ' . $r['name'],
+                'range_bar' => $bar,
+            ];
+        }
+
+        return [
+            'title'   => 'Ranges',
+            'columns' => $columns,
+            'data'    => $data,
         ];
     }
 
