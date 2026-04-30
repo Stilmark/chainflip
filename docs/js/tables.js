@@ -5,6 +5,7 @@
 
 const LPTables = {
   dataPath: 'data/tables/',
+  charts: {},
 
   /**
    * Load JSON data and initialize a DataTable
@@ -342,6 +343,150 @@ const LPTables = {
 
     } catch (error) {
       console.error(`Error loading day selector ${jsonFile}:`, error);
+      container.innerHTML = '<p class="error">Failed to load data</p>';
+    }
+  },
+
+  /**
+   * Render Prediction weekday fee distribution chart.
+   * Uses Monday-first weekday order and computes:
+   * - total fees per weekday
+   * - average fees per weekday
+   * - current week weekday fees
+   */
+  async loadPredictionWeekdayDistribution(containerId, jsonFile) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    try {
+      const response = await fetch(this.dataPath + jsonFile);
+      if (!response.ok) throw new Error(`Failed to load ${jsonFile}`);
+
+      const payload = await response.json();
+      const rows = Array.isArray(payload.data) ? payload.data : [];
+      if (rows.length === 0) {
+        container.innerHTML = '<p>No data available</p>';
+        return;
+      }
+
+      const parseDateUtc = (dateStr) => {
+        if (typeof dateStr !== 'string' || !dateStr) return null;
+        const d = new Date(dateStr + 'T00:00:00Z');
+        return Number.isNaN(d.getTime()) ? null : d;
+      };
+
+      const parseFee = (row) => {
+        if (typeof row.daily_raw === 'number') return row.daily_raw;
+        if (typeof row.daily_income === 'string') {
+          const cleaned = row.daily_income.replace(/,/g, '');
+          const value = Number(cleaned);
+          return Number.isFinite(value) ? value : 0;
+        }
+        return 0;
+      };
+
+      const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+      const totalFees = [0, 0, 0, 0, 0, 0, 0];
+      const counts = [0, 0, 0, 0, 0, 0, 0];
+      const currentWeekFees = [0, 0, 0, 0, 0, 0, 0];
+
+      const datedRows = rows
+        .map((row) => ({ row, date: parseDateUtc(row.date) }))
+        .filter((entry) => entry.date !== null);
+
+      if (datedRows.length === 0) {
+        container.innerHTML = '<p>No data available</p>';
+        return;
+      }
+
+      const latestDate = datedRows.reduce((latest, entry) => {
+        if (!latest || entry.date > latest) return entry.date;
+        return latest;
+      }, null);
+
+      const latestDay = latestDate.getUTCDay();
+      const daysSinceMonday = (latestDay + 6) % 7;
+      const weekStart = new Date(Date.UTC(
+        latestDate.getUTCFullYear(),
+        latestDate.getUTCMonth(),
+        latestDate.getUTCDate() - daysSinceMonday
+      ));
+      const weekEnd = new Date(weekStart.getTime() + (7 * 24 * 60 * 60 * 1000));
+
+      datedRows.forEach(({ row, date }) => {
+        const fee = parseFee(row);
+        const weekdayIndex = (date.getUTCDay() + 6) % 7;
+
+        totalFees[weekdayIndex] += fee;
+        counts[weekdayIndex] += 1;
+
+        if (date >= weekStart && date < weekEnd) {
+          currentWeekFees[weekdayIndex] += fee;
+        }
+      });
+
+      const avgFees = totalFees.map((total, idx) => (counts[idx] > 0 ? total / counts[idx] : 0));
+
+      const chartId = `${containerId}-chart`;
+      container.innerHTML = '<h3>Weekday Fee Distribution</h3>' +
+        '<div class="prediction-chart-wrap"><canvas id="' + chartId + '"></canvas></div>';
+
+      if (this.charts[chartId]) {
+        this.charts[chartId].destroy();
+      }
+
+      const ctx = document.getElementById(chartId);
+      this.charts[chartId] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: weekdays,
+          datasets: [
+            {
+              label: 'Avg fees',
+              data: avgFees,
+              backgroundColor: 'rgba(34, 197, 94, 0.8)',
+              borderColor: 'rgba(22, 163, 74, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Current weekday fees',
+              data: currentWeekFees,
+              backgroundColor: 'rgba(245, 158, 11, 0.85)',
+              borderColor: 'rgba(217, 119, 6, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = Number(context.raw || 0);
+                  return `${context.dataset.label}: ${value.toFixed(2)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return Number(value).toFixed(0);
+                }
+              }
+            }
+          }
+        }
+      });
+    } catch (error) {
+      console.error(`Error loading prediction distribution ${jsonFile}:`, error);
       container.innerHTML = '<p class="error">Failed to load data</p>';
     }
   },

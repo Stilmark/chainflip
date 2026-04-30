@@ -26,6 +26,7 @@
     <div class="sub-nav">
       <a href="#current" class="active">Current</a>
       <a href="#by-day">By Day</a>
+      <a href="#distribution">Distribution</a>
     </div>
 
     <section id="current" class="card">
@@ -43,12 +44,19 @@
         <p>Loading...</p>
       </div>
     </section>
+
+    <section id="distribution" class="card">
+      <div class="table-container" id="prediction-distribution">
+        <p>Loading...</p>
+      </div>
+    </section>
   </div>
 
   <footer>LP Parser &copy; 2026 &mdash; Updated <span id="footer-updated">...</span></footer>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/tables.js"></script>
   <script src="js/main.js"></script>
   <script>
@@ -56,6 +64,7 @@
       LPTables.loadTable('prediction-current', 'prediction-current.json');
       LPTables.loadTable('prediction-by-day', 'prediction-by-day.json', { order: [[0, 'desc']] });
       LPTables.loadDaySelector('prediction-rung-by-day', 'prediction-rung-by-day.json', { defaultToToday: true });
+      LPTables.loadPredictionWeekdayDistribution('prediction-distribution', 'prediction-by-day.json');
     });
   </script>
 </body>
