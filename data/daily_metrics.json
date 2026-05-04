@@ -1,7 +1,7 @@
 {
     "version": 2,
     "pair": "USDT/USDC",
-    "updated_at": "2026-05-04T16:35:39+00:00",
+    "updated_at": "2026-05-04T16:57:11+00:00",
     "analysis_window_start": "2026-04-15T00:00:00Z",
     "days": [
         {
@@ -7660,7 +7660,7 @@
         {
             "date": "2026-05-04",
             "meta": {
-                "trs": 16,
+                "trs": 28,
                 "source_window": {
                     "start": "2026-05-04T00:00:00Z",
                     "end": "2026-05-04T23:59:59Z"
@@ -7668,7 +7668,7 @@
             },
             "portfolio": {
                 "portfolio_value": 61088.05,
-                "total_fees": 26.080584,
+                "total_fees": 34.76028200000001,
                 "borrowed_usdt": 34426.1,
                 "borrowed_usdc": 18856.04,
                 "borrow_rate_usdt": 0.038,
@@ -7678,68 +7678,68 @@
                 {
                     "rung": "A",
                     "name": "Core",
-                    "eligible_trs": 16,
-                    "trades": 14,
+                    "eligible_trs": 28,
+                    "trades": 18,
                     "skipped_count": 0,
-                    "out_of_range_count": 2,
+                    "out_of_range_count": 10,
                     "depleted_count": 0,
-                    "utilization_pct": 87.5,
+                    "utilization_pct": 64.28571428571429,
                     "skipped_pct": 0,
-                    "out_of_range_pct": 12.5,
+                    "out_of_range_pct": 35.714285714285715,
                     "depleted_pct": 0,
-                    "fees": 12.003658999999999,
-                    "fee_share_pct": 46.025269219431586,
-                    "filled_volume_usd": 23972.811729250403,
+                    "fees": 16.461548999999998,
+                    "fee_share_pct": 47.35735170387858,
+                    "filled_volume_usd": 32891.646406787404,
                     "rung_value": 27600,
-                    "capital_efficiency": 0.0004349151811594203,
-                    "apr_gross": 0.1587440411231884,
+                    "capital_efficiency": 0.0005964329347826087,
+                    "apr_gross": 0.21769802119565215,
                     "target_allocation_pct": 46
                 },
                 {
                     "rung": "B",
                     "name": "Buffer",
-                    "eligible_trs": 16,
-                    "trades": 14,
+                    "eligible_trs": 28,
+                    "trades": 20,
                     "skipped_count": 0,
-                    "out_of_range_count": 2,
+                    "out_of_range_count": 8,
                     "depleted_count": 0,
-                    "utilization_pct": 87.5,
+                    "utilization_pct": 71.42857142857143,
                     "skipped_pct": 0,
-                    "out_of_range_pct": 12.5,
+                    "out_of_range_pct": 28.57142857142857,
                     "depleted_pct": 0,
-                    "fees": 7.4913300000000005,
-                    "fee_share_pct": 28.723781645380335,
-                    "filled_volume_usd": 14963.4574087079,
+                    "fees": 11.154616999999998,
+                    "fee_share_pct": 32.09012228381806,
+                    "filled_volume_usd": 22289.7146750377,
                     "rung_value": 16800,
-                    "capital_efficiency": 0.00044591250000000003,
-                    "apr_gross": 0.16275806250000002,
+                    "capital_efficiency": 0.0006639652976190475,
+                    "apr_gross": 0.24234733363095234,
                     "target_allocation_pct": 28
                 },
                 {
                     "rung": "C",
                     "name": "Scalp",
-                    "eligible_trs": 16,
-                    "trades": 2,
+                    "eligible_trs": 28,
+                    "trades": 4,
                     "skipped_count": 0,
-                    "out_of_range_count": 14,
+                    "out_of_range_count": 24,
                     "depleted_count": 0,
-                    "utilization_pct": 12.5,
+                    "utilization_pct": 14.285714285714285,
                     "skipped_pct": 0,
-                    "out_of_range_pct": 87.5,
+                    "out_of_range_pct": 85.71428571428571,
                     "depleted_pct": 0,
-                    "fees": 1.383753,
-                    "fee_share_pct": 5.305682572138722,
-                    "filled_volume_usd": 2761.6328817074,
+                    "fees": 1.687231,
+                    "fee_share_pct": 4.853904810093313,
+                    "filled_volume_usd": 3369.4156685617,
                     "rung_value": 4800,
-                    "capital_efficiency": 0.000288281875,
-                    "apr_gross": 0.105222884375,
+                    "capital_efficiency": 0.00035150645833333333,
+                    "apr_gross": 0.12829985729166665,
                     "target_allocation_pct": 8
                 },
                 {
                     "rung": "D",
                     "name": "Catch-all",
-                    "eligible_trs": 16,
-                    "trades": 16,
+                    "eligible_trs": 28,
+                    "trades": 28,
                     "skipped_count": 0,
                     "out_of_range_count": 0,
                     "depleted_count": 0,
@@ -7747,28 +7747,28 @@
                     "skipped_pct": 0,
                     "out_of_range_pct": 0,
                     "depleted_pct": 0,
-                    "fees": 0.39692099999999997,
-                    "fee_share_pct": 1.5219022702865856,
-                    "filled_volume_usd": 792.8790133213,
+                    "fees": 0.651964,
+                    "fee_share_pct": 1.8756004338514862,
+                    "filled_volume_usd": 1302.8351403860001,
                     "rung_value": 1200,
-                    "capital_efficiency": 0.0003307675,
-                    "apr_gross": 0.1207301375,
+                    "capital_efficiency": 0.0005433033333333333,
+                    "apr_gross": 0.19830571666666666,
                     "target_allocation_pct": 2
                 },
                 {
                     "rung": "S1",
                     "name": "Tick",
-                    "eligible_trs": 16,
+                    "eligible_trs": 28,
                     "trades": 1,
                     "skipped_count": 0,
-                    "out_of_range_count": 15,
+                    "out_of_range_count": 27,
                     "depleted_count": 0,
-                    "utilization_pct": 6.25,
+                    "utilization_pct": 3.571428571428571,
                     "skipped_pct": 0,
-                    "out_of_range_pct": 93.75,
+                    "out_of_range_pct": 96.42857142857143,
                     "depleted_pct": 0,
                     "fees": 0.900667,
-                    "fee_share_pct": 3.453400429990371,
+                    "fee_share_pct": 2.591080820345474,
                     "filled_volume_usd": 1797.3243872126,
                     "rung_value": 2888.05,
                     "capital_efficiency": 0.00031185990547255067,
@@ -7778,17 +7778,17 @@
                 {
                     "rung": "S2",
                     "name": "Flow",
-                    "eligible_trs": 16,
+                    "eligible_trs": 28,
                     "trades": 2,
                     "skipped_count": 0,
-                    "out_of_range_count": 14,
+                    "out_of_range_count": 26,
                     "depleted_count": 0,
-                    "utilization_pct": 12.5,
+                    "utilization_pct": 7.142857142857142,
                     "skipped_pct": 0,
-                    "out_of_range_pct": 87.5,
+                    "out_of_range_pct": 92.85714285714286,
                     "depleted_pct": 0,
                     "fees": 1.952106,
-                    "fee_share_pct": 7.484901411716854,
+                    "fee_share_pct": 5.615909560227388,
                     "filled_volume_usd": 3895.5230055842,
                     "rung_value": 3900,
                     "capital_efficiency": 0.00050054,
@@ -7798,17 +7798,17 @@
                 {
                     "rung": "S3",
                     "name": "Sweep",
-                    "eligible_trs": 16,
+                    "eligible_trs": 28,
                     "trades": 2,
                     "skipped_count": 0,
-                    "out_of_range_count": 14,
+                    "out_of_range_count": 26,
                     "depleted_count": 0,
-                    "utilization_pct": 12.5,
+                    "utilization_pct": 7.142857142857142,
                     "skipped_pct": 0,
-                    "out_of_range_pct": 87.5,
+                    "out_of_range_pct": 92.85714285714286,
                     "depleted_pct": 0,
                     "fees": 1.952148,
-                    "fee_share_pct": 7.485062451055545,
+                    "fee_share_pct": 5.616030387785692,
                     "filled_volume_usd": 3896.2468445506,
                     "rung_value": 3900,
                     "capital_efficiency": 0.0005005507692307692,
@@ -7870,29 +7870,29 @@
                 {
                     "price_bucket_low": 1.0015,
                     "price_bucket_high": 1.002,
-                    "tr_count": 1,
-                    "total_volume_usd": 32644.3404435528,
+                    "tr_count": 2,
+                    "total_volume_usd": 35357.7925370432,
                     "rung_counts": {
                         "A": {
-                            "participating": 1,
+                            "participating": 2,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
                         },
                         "B": {
-                            "participating": 1,
+                            "participating": 2,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
                         },
                         "C": {
-                            "participating": 1,
+                            "participating": 2,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
                         },
                         "D": {
-                            "participating": 1,
+                            "participating": 2,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
@@ -7901,48 +7901,48 @@
                             "participating": 1,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 0
+                            "out_of_range": 1
                         },
                         "S2": {
                             "participating": 1,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 0
+                            "out_of_range": 1
                         },
                         "S3": {
                             "participating": 1,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 0
+                            "out_of_range": 1
                         }
                     }
                 },
                 {
                     "price_bucket_low": 1.0025,
                     "price_bucket_high": 1.003,
-                    "tr_count": 8,
-                    "total_volume_usd": 9928.2703499597,
+                    "tr_count": 10,
+                    "total_volume_usd": 18855.352985680496,
                     "rung_counts": {
                         "A": {
-                            "participating": 8,
+                            "participating": 10,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
                         },
                         "B": {
-                            "participating": 8,
+                            "participating": 10,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
                         },
                         "C": {
-                            "participating": 0,
+                            "participating": 1,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 8
+                            "out_of_range": 9
                         },
                         "D": {
-                            "participating": 8,
+                            "participating": 10,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
@@ -7951,19 +7951,19 @@
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 8
+                            "out_of_range": 10
                         },
                         "S2": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 8
+                            "out_of_range": 10
                         },
                         "S3": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 8
+                            "out_of_range": 10
                         }
                     }
                 },
@@ -8020,29 +8020,29 @@
                 {
                     "price_bucket_low": 1.0035,
                     "price_bucket_high": 1.004,
-                    "tr_count": 2,
-                    "total_volume_usd": 0.6117901582,
+                    "tr_count": 6,
+                    "total_volume_usd": 891.9670115138,
                     "rung_counts": {
                         "A": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 2
+                            "out_of_range": 6
                         },
                         "B": {
-                            "participating": 0,
+                            "participating": 1,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 2
+                            "out_of_range": 5
                         },
                         "C": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 2
+                            "out_of_range": 6
                         },
                         "D": {
-                            "participating": 2,
+                            "participating": 6,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
@@ -8051,36 +8051,36 @@
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 2
+                            "out_of_range": 6
                         },
                         "S2": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 2
+                            "out_of_range": 6
                         },
                         "S3": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 2
+                            "out_of_range": 6
                         }
                     }
                 },
                 {
                     "price_bucket_low": 1.0030000000000001,
                     "price_bucket_high": 1.0035,
-                    "tr_count": 1,
-                    "total_volume_usd": 4870.4069934586005,
+                    "tr_count": 3,
+                    "total_volume_usd": 9700.50307317,
                     "rung_counts": {
                         "A": {
-                            "participating": 1,
+                            "participating": 2,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 0
+                            "out_of_range": 1
                         },
                         "B": {
-                            "participating": 1,
+                            "participating": 3,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
@@ -8089,10 +8089,10 @@
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 1
+                            "out_of_range": 3
                         },
                         "D": {
-                            "participating": 1,
+                            "participating": 3,
                             "skipped": 0,
                             "depleted": 0,
                             "out_of_range": 0
@@ -8101,31 +8101,81 @@
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 1
+                            "out_of_range": 3
                         },
                         "S2": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 1
+                            "out_of_range": 3
                         },
                         "S3": {
                             "participating": 0,
                             "skipped": 0,
                             "depleted": 0,
-                            "out_of_range": 1
+                            "out_of_range": 3
+                        }
+                    }
+                },
+                {
+                    "price_bucket_low": 1.004,
+                    "price_bucket_high": 1.0045,
+                    "tr_count": 3,
+                    "total_volume_usd": 0.8448275076,
+                    "rung_counts": {
+                        "A": {
+                            "participating": 0,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 3
+                        },
+                        "B": {
+                            "participating": 0,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 3
+                        },
+                        "C": {
+                            "participating": 0,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 3
+                        },
+                        "D": {
+                            "participating": 3,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 0
+                        },
+                        "S1": {
+                            "participating": 0,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 3
+                        },
+                        "S2": {
+                            "participating": 0,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 3
+                        },
+                        "S3": {
+                            "participating": 0,
+                            "skipped": 0,
+                            "depleted": 0,
+                            "out_of_range": 3
                         }
                     }
                 }
             ],
             "totals": {
-                "eligible_trs_sum": 112,
-                "trades_sum": 51,
+                "eligible_trs_sum": 196,
+                "trades_sum": 75,
                 "skipped_count_sum": 0,
-                "out_of_range_count_sum": 61,
+                "out_of_range_count_sum": 121,
                 "depleted_count_sum": 0,
                 "rung_value_sum": 61088.05,
-                "fees_sum": 26.080583999999998
+                "fees_sum": 34.760282
             }
         }
     ]
