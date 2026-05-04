@@ -2820,6 +2820,194 @@
                 "yearly_income": "12,749.97",
                 "apr": "20.87%"
             }
+        },
+        {
+            "date": "2026-05-04",
+            "title": "LP Prediction — By Day — 2026-05-04",
+            "subtitle": "Portfolio Forecast",
+            "summary": [
+                {
+                    "label": "Date",
+                    "value": "2026-05-04"
+                },
+                {
+                    "label": "Daily Income",
+                    "value": "0.66"
+                },
+                {
+                    "label": "Weekly Income",
+                    "value": "4.61"
+                },
+                {
+                    "label": "Monthly Income",
+                    "value": "19.77"
+                },
+                {
+                    "label": "Yearly Income",
+                    "value": "240.48"
+                },
+                {
+                    "label": "APR",
+                    "value": "0.39%"
+                }
+            ],
+            "table_title": "Rung Forecast",
+            "columns": [
+                {
+                    "data": "rung",
+                    "title": "Rung"
+                },
+                {
+                    "data": "name",
+                    "title": "Name"
+                },
+                {
+                    "data": "value",
+                    "title": "Value",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees_today",
+                    "title": "Fees Today",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "daily_income",
+                    "title": "Daily Income",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "weekly_income",
+                    "title": "Weekly Income",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "monthly_income",
+                    "title": "Monthly Income",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "yearly_income",
+                    "title": "Yearly Income",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "apr",
+                    "title": "APR",
+                    "className": "dt-right"
+                }
+            ],
+            "data": [
+                {
+                    "rung": "A",
+                    "name": "Core",
+                    "value": "27,600.00",
+                    "value_raw": 27600,
+                    "fees_today": "0.28",
+                    "fees_raw": 0.276262,
+                    "daily_income": "0.28",
+                    "weekly_income": "1.93",
+                    "monthly_income": "8.29",
+                    "yearly_income": "100.84",
+                    "apr": "0.37%",
+                    "apr_raw": 0.3653464855072464
+                },
+                {
+                    "rung": "B",
+                    "name": "Buffer",
+                    "value": "16,800.00",
+                    "value_raw": 16800,
+                    "fees_today": "0.14",
+                    "fees_raw": 0.14015,
+                    "daily_income": "0.14",
+                    "weekly_income": "0.98",
+                    "monthly_income": "4.20",
+                    "yearly_income": "51.15",
+                    "apr": "0.30%",
+                    "apr_raw": 0.30449255952380955
+                },
+                {
+                    "rung": "C",
+                    "name": "Scalp",
+                    "value": "4,800.00",
+                    "value_raw": 4800,
+                    "fees_today": "0.07",
+                    "fees_raw": 0.072781,
+                    "daily_income": "0.07",
+                    "weekly_income": "0.51",
+                    "monthly_income": "2.18",
+                    "yearly_income": "26.57",
+                    "apr": "0.55%",
+                    "apr_raw": 0.5534388541666667
+                },
+                {
+                    "rung": "D",
+                    "name": "Catch-all",
+                    "value": "1,200.00",
+                    "value_raw": 1200,
+                    "fees_today": "0.01",
+                    "fees_raw": 0.006676,
+                    "daily_income": "0.01",
+                    "weekly_income": "0.05",
+                    "monthly_income": "0.20",
+                    "yearly_income": "2.44",
+                    "apr": "0.20%",
+                    "apr_raw": 0.20306166666666667
+                },
+                {
+                    "rung": "S1",
+                    "name": "Tick",
+                    "value": "2,888.05",
+                    "value_raw": 2888.05,
+                    "fees_today": "0.00",
+                    "fees_raw": 0,
+                    "daily_income": "0.00",
+                    "weekly_income": "0.00",
+                    "monthly_income": "0.00",
+                    "yearly_income": "0.00",
+                    "apr": "0.00%",
+                    "apr_raw": 0
+                },
+                {
+                    "rung": "S2",
+                    "name": "Flow",
+                    "value": "3,900.00",
+                    "value_raw": 3900,
+                    "fees_today": "0.00",
+                    "fees_raw": 0.000365,
+                    "daily_income": "0.00",
+                    "weekly_income": "0.00",
+                    "monthly_income": "0.01",
+                    "yearly_income": "0.13",
+                    "apr": "0.00%",
+                    "apr_raw": 0.003416025641025641
+                },
+                {
+                    "rung": "S3",
+                    "name": "Sweep",
+                    "value": "3,900.00",
+                    "value_raw": 3900,
+                    "fees_today": "0.16",
+                    "fees_raw": 0.16261,
+                    "daily_income": "0.16",
+                    "weekly_income": "1.14",
+                    "monthly_income": "4.88",
+                    "yearly_income": "59.35",
+                    "apr": "1.52%",
+                    "apr_raw": 1.5218628205128206
+                }
+            ],
+            "footer": {
+                "rung": "Total",
+                "name": "",
+                "value": "61,088.05",
+                "fees_today": "0.66",
+                "daily_income": "0.66",
+                "weekly_income": "4.61",
+                "monthly_income": "19.77",
+                "yearly_income": "240.48",
+                "apr": "0.39%"
+            }
         }
     ]
 }
