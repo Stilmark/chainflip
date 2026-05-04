@@ -1,6 +1,6 @@
 {
     "title": "Balances",
-    "footnote": "Current USDT\/USDC amounts computed from on-chain liquidity at pool price 1.002761. Orig = inception values from config revisions.",
+    "footnote": "Current USDT\/USDC amounts computed from on-chain liquidity at pool price 1.002506. Orig = inception values from config revisions.",
     "columns": [
         {
             "data": "rung",
@@ -42,22 +42,22 @@
         {
             "rung": "A",
             "name": "Core",
-            "cur_usdt": "788.38 <span class=\"delta-tail delta-neg\">(-13,008.03)<\/span>",
-            "cur_usdc": "26,832.16 <span class=\"delta-tail delta-pos\">(+13,028.57)<\/span>",
-            "current_total": "27,620.55",
+            "cur_usdt": "2,188.76 <span class=\"delta-tail delta-neg\">(-11,607.65)<\/span>",
+            "cur_usdc": "25,428.10 <span class=\"delta-tail delta-pos\">(+11,624.51)<\/span>",
+            "current_total": "27,616.86",
             "share_pct": "46.00%",
-            "share_pct_raw": 46.00399864528076,
-            "current_ratio": "0.0294"
+            "share_pct_raw": 46.00218365521862,
+            "current_ratio": "0.0861"
         },
         {
             "rung": "B",
             "name": "Buffer",
-            "cur_usdt": "1,798.80 <span class=\"delta-tail delta-neg\">(-6,599.10)<\/span>",
-            "cur_usdc": "15,011.63 <span class=\"delta-tail delta-pos\">(+6,609.53)<\/span>",
-            "current_total": "16,810.43",
+            "cur_usdt": "2,509.23 <span class=\"delta-tail delta-neg\">(-5,888.67)<\/span>",
+            "cur_usdc": "14,299.33 <span class=\"delta-tail delta-pos\">(+5,897.23)<\/span>",
+            "current_total": "16,808.55",
             "share_pct": "28.00%",
-            "share_pct_raw": 27.99896778588833,
-            "current_ratio": "0.1198"
+            "share_pct_raw": 27.998485490777025,
+            "current_ratio": "0.1755"
         },
         {
             "rung": "C",
@@ -66,18 +66,18 @@
             "cur_usdc": "4,803.09 <span class=\"delta-tail delta-pos\">(+2,475.09)<\/span>",
             "current_total": "4,803.09",
             "share_pct": "8.00%",
-            "share_pct_raw": 7.9998954173478065,
+            "share_pct_raw": 8.00064803004062,
             "current_ratio": "0.0000"
         },
         {
             "rung": "D",
             "name": "Catch-all",
-            "cur_usdt": "352.08 <span class=\"delta-tail delta-neg\">(-314.37)<\/span>",
-            "cur_usdc": "848.41 <span class=\"delta-tail delta-pos\">(+314.86)<\/span>",
-            "current_total": "1,200.49",
+            "cur_usdt": "385.92 <span class=\"delta-tail delta-neg\">(-280.53)<\/span>",
+            "cur_usdc": "814.48 <span class=\"delta-tail delta-pos\">(+280.93)<\/span>",
+            "current_total": "1,200.40",
             "share_pct": "2.00%",
-            "share_pct_raw": 1.999500876825571,
-            "current_ratio": "0.4150"
+            "share_pct_raw": 1.99954052652279,
+            "current_ratio": "0.4738"
         },
         {
             "rung": "S1",
@@ -86,7 +86,7 @@
             "cur_usdc": "1,800.43 <span class=\"delta-tail delta-neg\">(-638.58)<\/span>",
             "current_total": "1,800.43",
             "share_pct": "3.00%",
-            "share_pct_raw": 2.9987514431259172,
+            "share_pct_raw": 2.9990335591138084,
             "current_ratio": "0.0000"
         },
         {
@@ -96,7 +96,7 @@
             "cur_usdc": "3,901.53 <span class=\"delta-tail delta-pos\">(+1,462.52)<\/span>",
             "current_total": "3,901.53",
             "share_pct": "6.50%",
-            "share_pct_raw": 6.498277799512646,
+            "share_pct_raw": 6.4988891432988085,
             "current_ratio": "0.0000"
         },
         {
@@ -106,16 +106,16 @@
             "cur_usdc": "3,902.93 <span class=\"delta-tail delta-pos\">(+3,252.12)<\/span>",
             "current_total": "3,902.93",
             "share_pct": "6.50%",
-            "share_pct_raw": 6.500608032018998,
+            "share_pct_raw": 6.501219595028347,
             "current_ratio": "0.0000"
         }
     ],
     "footer": {
         "rung": "Total",
         "name": "",
-        "cur_usdt": "2,939.26",
-        "cur_usdc": "57,100.18",
-        "current_total": "60,039.45",
+        "cur_usdt": "5,083.91",
+        "cur_usdc": "54,949.89",
+        "current_total": "60,033.80",
         "current_ratio": "",
         "share_pct": "100.00%"
     }
