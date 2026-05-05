@@ -2,6 +2,131 @@
     "title": "Trades by Day",
     "days": [
         {
+            "title": "Date: 2026-05-05",
+            "date": "2026-05-05",
+            "summary": [
+                {
+                    "label": "Date",
+                    "value": "2026-05-05"
+                },
+                {
+                    "label": "Trades",
+                    "value": "1"
+                },
+                {
+                    "label": "Volume",
+                    "value": "25,690.39"
+                },
+                {
+                    "label": "Fees",
+                    "value": "12.88"
+                },
+                {
+                    "label": "Price Range",
+                    "value": "0.9982 – 0.9982"
+                },
+                {
+                    "label": "VWAP",
+                    "value": "0.9982"
+                }
+            ],
+            "hide_summary_title": true,
+            "trade_count": 1,
+            "total_volume": "25,690.39",
+            "total_fees": "12.88",
+            "columns": [
+                {
+                    "data": "timestamp",
+                    "title": "Timestamp"
+                },
+                {
+                    "data": "price",
+                    "title": "Price",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "participating",
+                    "title": "Participating"
+                },
+                {
+                    "data": "skipped",
+                    "title": "Skipped"
+                },
+                {
+                    "data": "out_of_range",
+                    "title": "Out of Range"
+                },
+                {
+                    "data": "depleted",
+                    "title": "Depleted"
+                }
+            ],
+            "data": [
+                {
+                    "timestamp": "12:55:24",
+                    "price": "0.9982",
+                    "price_raw": 0.9982030670146319,
+                    "volume": "25,690.39",
+                    "volume_raw": 25690.3856432387,
+                    "fees": "12.88",
+                    "fees_raw": 12.877114,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                }
+            ],
+            "distribution_columns": [
+                {
+                    "data": "price",
+                    "title": "Price"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume_pct",
+                    "title": "% Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees_pct",
+                    "title": "% Fees",
+                    "className": "dt-right"
+                }
+            ],
+            "distribution_data": [
+                {
+                    "price": "0.9982",
+                    "volume": "25,690.39",
+                    "volume_raw": 25690.3856432387,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 400.0px;\"><\/div><span class=\"pct-bar-value\">100.00%<\/span><\/div>",
+                    "volume_pct_raw": 100,
+                    "fees": "12.88",
+                    "fees_raw": 12.877114,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 400.0px;\"><\/div><span class=\"pct-bar-value\">100.00%<\/span><\/div>",
+                    "fees_pct_raw": 100
+                }
+            ]
+        },
+        {
             "title": "Date: 2026-05-04",
             "date": "2026-05-04",
             "summary": [
