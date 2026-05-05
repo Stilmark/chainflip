@@ -7,11 +7,11 @@
         },
         {
             "label": "Volume",
-            "value": "44,843.44"
+            "value": "66,409.28"
         },
         {
             "label": "TRs",
-            "value": "3"
+            "value": "6"
         }
     ],
     "columns": [
@@ -120,6 +120,34 @@
             "rung_S1": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 1\">1<\/span><\/div>",
             "rung_S2": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 1\">1<\/span><\/div>",
             "rung_S3": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 1\">1<\/span><\/div>"
+        },
+        {
+            "price_low": "1.0000",
+            "price_high": "1.0005",
+            "trs": 2,
+            "volume": "17,203.93",
+            "volume_raw": 17203.933526838297,
+            "rung_A": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><\/div>",
+            "rung_B": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><\/div>",
+            "rung_C": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><\/div>",
+            "rung_D": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><\/div>",
+            "rung_S1": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><span class=\"rung-status-badge rung-status-badge--out-of-range\" title=\"Out of range\" aria-label=\"Out of range 1\">1<\/span><\/div>",
+            "rung_S2": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><\/div>",
+            "rung_S3": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 2\">2<\/span><\/div>"
+        },
+        {
+            "price_low": "1.0005",
+            "price_high": "1.0010",
+            "trs": 1,
+            "volume": "4,361.90",
+            "volume_raw": 4361.9046983457,
+            "rung_A": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_B": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_C": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_D": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_S1": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_S2": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>",
+            "rung_S3": "<div class=\"rung-status-badges\"><span class=\"rung-status-badge rung-status-badge--participating\" title=\"Participated\" aria-label=\"Participated 1\">1<\/span><\/div>"
         }
     ]
 }
