@@ -1,6 +1,6 @@
 {
     "title": "Balances",
-    "footnote": "Current USDT\/USDC amounts computed from on-chain liquidity at pool price 1.000100. Orig = inception values from config revisions.",
+    "footnote": "Current USDT\/USDC amounts computed from on-chain liquidity at pool price 1.001165. Orig = inception values from config revisions.",
     "columns": [
         {
             "data": "rung",
@@ -42,80 +42,80 @@
         {
             "rung": "A",
             "name": "Core",
-            "cur_usdt": "15,453.24 <span class=\"delta-tail delta-pos\">(+1,656.83)<\/span>",
-            "cur_usdc": "12,146.35 <span class=\"delta-tail delta-neg\">(-1,657.24)<\/span>",
-            "current_total": "27,599.58",
+            "cur_usdt": "9,579.03 <span class=\"delta-tail delta-neg\">(-4,217.38)<\/span>",
+            "cur_usdc": "18,024.26 <span class=\"delta-tail delta-pos\">(+4,220.67)<\/span>",
+            "current_total": "27,603.30",
             "share_pct": "46.00%",
-            "share_pct_raw": 46.0020183647317,
-            "current_ratio": "1.2723"
+            "share_pct_raw": 45.99812248302233,
+            "current_ratio": "0.5315"
         },
         {
             "rung": "B",
             "name": "Buffer",
-            "cur_usdt": "9,238.43 <span class=\"delta-tail delta-pos\">(+840.53)<\/span>",
-            "cur_usdc": "7,561.37 <span class=\"delta-tail delta-neg\">(-840.73)<\/span>",
-            "current_total": "16,799.79",
+            "cur_usdt": "6,258.38 <span class=\"delta-tail delta-neg\">(-2,139.52)<\/span>",
+            "cur_usdc": "10,543.29 <span class=\"delta-tail delta-pos\">(+2,141.19)<\/span>",
+            "current_total": "16,801.67",
             "share_pct": "28.00%",
-            "share_pct_raw": 28.00130258348153,
-            "current_ratio": "1.2218"
+            "share_pct_raw": 27.998303701620486,
+            "current_ratio": "0.5936"
         },
         {
             "rung": "C",
             "name": "Scalp",
-            "cur_usdt": "2,908.49 <span class=\"delta-tail delta-pos\">(+436.49)<\/span>",
-            "cur_usdc": "1,891.40 <span class=\"delta-tail delta-neg\">(-436.60)<\/span>",
-            "current_total": "4,799.89",
+            "cur_usdt": "1,360.93 <span class=\"delta-tail delta-neg\">(-1,111.07)<\/span>",
+            "cur_usdc": "3,439.94 <span class=\"delta-tail delta-pos\">(+1,111.94)<\/span>",
+            "current_total": "4,800.87",
             "share_pct": "8.00%",
-            "share_pct_raw": 8.000291815545657,
-            "current_ratio": "1.5377"
+            "share_pct_raw": 8.000168415311885,
+            "current_ratio": "0.3956"
         },
         {
             "rung": "D",
             "name": "Catch-all",
-            "cur_usdt": "706.49 <span class=\"delta-tail delta-pos\">(+40.04)<\/span>",
-            "cur_usdc": "493.49 <span class=\"delta-tail delta-neg\">(-40.06)<\/span>",
-            "current_total": "1,199.98",
+            "cur_usdt": "564.53 <span class=\"delta-tail delta-neg\">(-101.92)<\/span>",
+            "cur_usdc": "635.55 <span class=\"delta-tail delta-pos\">(+102.00)<\/span>",
+            "current_total": "1,200.07",
             "share_pct": "2.00%",
-            "share_pct_raw": 2.0000890646778706,
-            "current_ratio": "1.4316"
+            "share_pct_raw": 1.9998001665767242,
+            "current_ratio": "0.8883"
         },
         {
             "rung": "S1",
             "name": "Tick",
-            "cur_usdt": "1,798.99 <span class=\"delta-tail delta-pos\">(+1,349.95)<\/span>",
-            "cur_usdc": "0.00 <span class=\"delta-tail delta-neg\">(-2,439.01)<\/span>",
-            "current_total": "1,798.99",
+            "cur_usdt": "0.00 <span class=\"delta-tail delta-neg\">(-449.04)<\/span>",
+            "cur_usdc": "1,800.43 <span class=\"delta-tail delta-neg\">(-638.58)<\/span>",
+            "current_total": "1,800.43",
             "share_pct": "3.00%",
-            "share_pct_raw": 2.9985004287260724,
-            "current_ratio": "N\/A"
+            "share_pct_raw": 3.0002422018746873,
+            "current_ratio": "0.0000"
         },
         {
             "rung": "S2",
             "name": "Flow",
-            "cur_usdt": "3,898.41 <span class=\"delta-tail delta-pos\">(+2,437.42)<\/span>",
-            "cur_usdc": "0.00 <span class=\"delta-tail delta-neg\">(-2,439.01)<\/span>",
-            "current_total": "3,898.41",
+            "cur_usdt": "175.45 <span class=\"delta-tail delta-neg\">(-1,285.54)<\/span>",
+            "cur_usdc": "3,725.87 <span class=\"delta-tail delta-pos\">(+1,286.86)<\/span>",
+            "current_total": "3,901.32",
             "share_pct": "6.50%",
-            "share_pct_raw": 6.4977338526929715,
-            "current_ratio": "N\/A"
+            "share_pct_raw": 6.5011624997307935,
+            "current_ratio": "0.0471"
         },
         {
             "rung": "S3",
             "name": "Sweep",
-            "cur_usdt": "3,899.81 <span class=\"delta-tail delta-pos\">(+650.62)<\/span>",
-            "cur_usdc": "0.00 <span class=\"delta-tail delta-neg\">(-650.81)<\/span>",
-            "current_total": "3,899.81",
+            "cur_usdt": "766.81 <span class=\"delta-tail delta-neg\">(-2,482.38)<\/span>",
+            "cur_usdc": "3,135.13 <span class=\"delta-tail delta-pos\">(+2,484.32)<\/span>",
+            "current_total": "3,901.95",
             "share_pct": "6.50%",
-            "share_pct_raw": 6.5000638901441965,
-            "current_ratio": "N\/A"
+            "share_pct_raw": 6.502200531863093,
+            "current_ratio": "0.2446"
         }
     ],
     "footer": {
         "rung": "Total",
         "name": "",
-        "cur_usdt": "37,903.86",
-        "cur_usdc": "22,092.60",
-        "current_total": "59,996.46",
+        "cur_usdt": "18,705.14",
+        "cur_usdc": "41,304.48",
+        "current_total": "60,009.62",
         "current_ratio": "",
         "share_pct": "100.00%"
     }
