@@ -2,6 +2,902 @@
     "title": "Trades by Day",
     "days": [
         {
+            "title": "Date: 2026-05-09",
+            "date": "2026-05-09",
+            "summary": [
+                {
+                    "label": "Date",
+                    "value": "2026-05-09"
+                },
+                {
+                    "label": "Trades",
+                    "value": "51"
+                },
+                {
+                    "label": "Volume",
+                    "value": "47,443.50"
+                },
+                {
+                    "label": "Fees",
+                    "value": "23.74"
+                },
+                {
+                    "label": "Price Range",
+                    "value": "1.0004 – 1.0018"
+                },
+                {
+                    "label": "VWAP",
+                    "value": "1.0009"
+                }
+            ],
+            "hide_summary_title": true,
+            "trade_count": 51,
+            "total_volume": "47,443.50",
+            "total_fees": "23.74",
+            "columns": [
+                {
+                    "data": "timestamp",
+                    "title": "Timestamp"
+                },
+                {
+                    "data": "price",
+                    "title": "Price",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "participating",
+                    "title": "Participating"
+                },
+                {
+                    "data": "skipped",
+                    "title": "Skipped"
+                },
+                {
+                    "data": "out_of_range",
+                    "title": "Out of Range"
+                },
+                {
+                    "data": "depleted",
+                    "title": "Depleted"
+                }
+            ],
+            "data": [
+                {
+                    "timestamp": "09:51:36",
+                    "price": "1.0004",
+                    "price_raw": 1.000350182579683,
+                    "volume": "1,317.29",
+                    "volume_raw": 1317.2888600507,
+                    "fees": "0.66",
+                    "fees_raw": 0.6588479999999999,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:47:24",
+                    "price": "1.0005",
+                    "price_raw": 1.000450195139511,
+                    "volume": "1,804.12",
+                    "volume_raw": 1804.1201361906,
+                    "fees": "0.90",
+                    "fees_raw": 0.902263,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:37:18",
+                    "price": "1.0005",
+                    "price_raw": 1.0005039420079043,
+                    "volume": "146.67",
+                    "volume_raw": 146.6692353353,
+                    "fees": "0.07",
+                    "fees_raw": 0.07333999999999999,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:36:42",
+                    "price": "1.0005",
+                    "price_raw": 1.0005126457033828,
+                    "volume": "152.63",
+                    "volume_raw": 152.6271215606,
+                    "fees": "0.08",
+                    "fees_raw": 0.07631800000000001,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:33:48",
+                    "price": "1.0005",
+                    "price_raw": 1.000521499687897,
+                    "volume": "152.63",
+                    "volume_raw": 152.6292259635,
+                    "fees": "0.08",
+                    "fees_raw": 0.07631900000000001,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:33:42",
+                    "price": "1.0005",
+                    "price_raw": 1.00052946827396,
+                    "volume": "152.63",
+                    "volume_raw": 152.6264553958,
+                    "fees": "0.08",
+                    "fees_raw": 0.07631800000000001,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:33:06",
+                    "price": "1.0005",
+                    "price_raw": 1.0005383897622568,
+                    "volume": "152.63",
+                    "volume_raw": 152.6257474608,
+                    "fees": "0.08",
+                    "fees_raw": 0.07631700000000001,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:31:42",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "0.39",
+                    "volume_raw": 0.3859299656,
+                    "fees": "0.00",
+                    "fees_raw": 0.00019299999999999997,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:30:54",
+                    "price": "1.0005",
+                    "price_raw": 1.0005460176896959,
+                    "volume": "127.18",
+                    "volume_raw": 127.17529847790001,
+                    "fees": "0.06",
+                    "fees_raw": 0.063598,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:30:18",
+                    "price": "1.0006",
+                    "price_raw": 1.0005533552338803,
+                    "volume": "127.18",
+                    "volume_raw": 127.17866386530001,
+                    "fees": "0.06",
+                    "fees_raw": 0.0636,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:27:42",
+                    "price": "1.0006",
+                    "price_raw": 1.0005783928799323,
+                    "volume": "793.13",
+                    "volume_raw": 793.127042185,
+                    "fees": "0.40",
+                    "fees_raw": 0.396555,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:13:36",
+                    "price": "1.0006",
+                    "price_raw": 1.0005973135821642,
+                    "volume": "22.90",
+                    "volume_raw": 22.9001185336,
+                    "fees": "0.01",
+                    "fees_raw": 0.011451000000000001,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:13:00",
+                    "price": "1.0006",
+                    "price_raw": 1.0006039055563818,
+                    "volume": "112.16",
+                    "volume_raw": 112.16287743529999,
+                    "fees": "0.06",
+                    "fees_raw": 0.056086,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:06:24",
+                    "price": "1.0006",
+                    "price_raw": 1.0006087381039916,
+                    "volume": "112.12",
+                    "volume_raw": 112.11760535990001,
+                    "fees": "0.06",
+                    "fees_raw": 0.05606499999999999,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:06:18",
+                    "price": "1.0006",
+                    "price_raw": 1.000613258436447,
+                    "volume": "112.15",
+                    "volume_raw": 112.1521577913,
+                    "fees": "0.06",
+                    "fees_raw": 0.056082,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "09:03:12",
+                    "price": "1.0007",
+                    "price_raw": 1.0006670001667501,
+                    "volume": "0.05",
+                    "volume_raw": 0.047995895799999994,
+                    "fees": "0.00",
+                    "fees_raw": 2.4e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "08:26:18",
+                    "price": "1.0006",
+                    "price_raw": 1.0006114168195208,
+                    "volume": "0.15",
+                    "volume_raw": 0.1459908532,
+                    "fees": "0.00",
+                    "fees_raw": 7.3e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "08:04:42",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "0.07",
+                    "volume_raw": 0.0659925147,
+                    "fees": "0.00",
+                    "fees_raw": 3.3e-5,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "07:56:12",
+                    "price": "1.0007",
+                    "price_raw": 1.0006670001667501,
+                    "volume": "0.06",
+                    "volume_raw": 0.0559980959,
+                    "fees": "0.00",
+                    "fees_raw": 2.7999999999999996e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "07:46:06",
+                    "price": "1.0006",
+                    "price_raw": 1.000625312656328,
+                    "volume": "0.05",
+                    "volume_raw": 0.049996716200000006,
+                    "fees": "0.00",
+                    "fees_raw": 2.4999999999999998e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "07:40:06",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "0.03",
+                    "volume_raw": 0.0339997445,
+                    "fees": "0.00",
+                    "fees_raw": 1.7e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "07:35:36",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "0.03",
+                    "volume_raw": 0.0339980459,
+                    "fees": "0.00",
+                    "fees_raw": 1.7e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "07:35:06",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "0.03",
+                    "volume_raw": 0.0319993372,
+                    "fees": "0.00",
+                    "fees_raw": 1.6e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "07:24:00",
+                    "price": "1.0006",
+                    "price_raw": 1.0006148907787227,
+                    "volume": "16.02",
+                    "volume_raw": 16.0215037697,
+                    "fees": "0.01",
+                    "fees_raw": 0.008011,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "06:42:18",
+                    "price": "1.0006",
+                    "price_raw": 1.0006458152432933,
+                    "volume": "1,299.99",
+                    "volume_raw": 1299.9944601715,
+                    "fees": "0.65",
+                    "fees_raw": 0.650026,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "06:16:36",
+                    "price": "1.0007",
+                    "price_raw": 1.0006754432068354,
+                    "volume": "80.11",
+                    "volume_raw": 80.1074877719,
+                    "fees": "0.04",
+                    "fees_raw": 0.040053,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "05:59:06",
+                    "price": "1.0005",
+                    "price_raw": 1.0005002501250626,
+                    "volume": "0.02",
+                    "volume_raw": 0.024001240799999997,
+                    "fees": "0.00",
+                    "fees_raw": 1.1999999999999999e-5,
+                    "participating": "A, B, D, S1, S2, S3",
+                    "skipped": "C",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "05:44:42",
+                    "price": "1.0008",
+                    "price_raw": 1.000750375187594,
+                    "volume": "0.03",
+                    "volume_raw": 0.0320006363,
+                    "fees": "0.00",
+                    "fees_raw": 1.6e-5,
+                    "participating": "A, B, C, S1, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "05:37:36",
+                    "price": "1.0007",
+                    "price_raw": 1.0006763945352959,
+                    "volume": "24.03",
+                    "volume_raw": 24.033766738000004,
+                    "fees": "0.01",
+                    "fees_raw": 0.012017,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "05:19:24",
+                    "price": "1.0012",
+                    "price_raw": 1.0011629816768994,
+                    "volume": "15,913.64",
+                    "volume_raw": 15913.642942977702,
+                    "fees": "7.95",
+                    "fees_raw": 7.953536000000001,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "04:42:18",
+                    "price": "1.0016",
+                    "price_raw": 1.0016258129064533,
+                    "volume": "0.03",
+                    "volume_raw": 0.0260246303,
+                    "fees": "0.00",
+                    "fees_raw": 1.3e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "04:39:24",
+                    "price": "1.0017",
+                    "price_raw": 1.0016675004168751,
+                    "volume": "0.03",
+                    "volume_raw": 0.0260258677,
+                    "fees": "0.00",
+                    "fees_raw": 1.3e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "03:16:18",
+                    "price": "1.0016",
+                    "price_raw": 1.0016258129064533,
+                    "volume": "0.03",
+                    "volume_raw": 0.0260246599,
+                    "fees": "0.00",
+                    "fees_raw": 1.3e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "02:54:06",
+                    "price": "1.0016",
+                    "price_raw": 1.0016258129064533,
+                    "volume": "0.03",
+                    "volume_raw": 0.0280266098,
+                    "fees": "0.00",
+                    "fees_raw": 1.4e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "02:52:30",
+                    "price": "1.0015",
+                    "price_raw": 1.0015007503751876,
+                    "volume": "0.04",
+                    "volume_raw": 0.0400382631,
+                    "fees": "0.00",
+                    "fees_raw": 2.0e-5,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "02:51:06",
+                    "price": "1.0017",
+                    "price_raw": 1.0016695847923962,
+                    "volume": "452.02",
+                    "volume_raw": 452.0188731295,
+                    "fees": "0.23",
+                    "fees_raw": 0.22579,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "02:46:24",
+                    "price": "1.0018",
+                    "price_raw": 1.001750875437719,
+                    "volume": "0.03",
+                    "volume_raw": 0.0320322415,
+                    "fees": "0.00",
+                    "fees_raw": 1.6000000000000003e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "02:40:30",
+                    "price": "1.0017",
+                    "price_raw": 1.0017008504252125,
+                    "volume": "0.03",
+                    "volume_raw": 0.032032218599999995,
+                    "fees": "0.00",
+                    "fees_raw": 1.6000000000000003e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:43:12",
+                    "price": "1.0015",
+                    "price_raw": 1.0015007503751876,
+                    "volume": "0.06",
+                    "volume_raw": 0.0620703444,
+                    "fees": "0.00",
+                    "fees_raw": 3.0999999999999995e-5,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:40:30",
+                    "price": "1.0017",
+                    "price_raw": 1.0017008504252125,
+                    "volume": "0.07",
+                    "volume_raw": 0.0680735591,
+                    "fees": "0.00",
+                    "fees_raw": 3.4e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:39:24",
+                    "price": "1.0017",
+                    "price_raw": 1.0016675004168751,
+                    "volume": "0.06",
+                    "volume_raw": 0.06206774150000001,
+                    "fees": "0.00",
+                    "fees_raw": 3.1e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:38:24",
+                    "price": "1.0015",
+                    "price_raw": 1.0015007503751876,
+                    "volume": "0.08",
+                    "volume_raw": 0.08008773609999999,
+                    "fees": "0.00",
+                    "fees_raw": 3.9999999999999996e-5,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:37:36",
+                    "price": "1.0017",
+                    "price_raw": 1.0017008504252125,
+                    "volume": "0.07",
+                    "volume_raw": 0.0680760149,
+                    "fees": "0.00",
+                    "fees_raw": 3.4e-5,
+                    "participating": "A, B, C",
+                    "skipped": "D",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:32:18",
+                    "price": "1.0014",
+                    "price_raw": 1.001350472241087,
+                    "volume": "8,974.60",
+                    "volume_raw": 8974.6022901431,
+                    "fees": "4.50",
+                    "fees_raw": 4.495882,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:32:12",
+                    "price": "1.0010",
+                    "price_raw": 1.0010005002501252,
+                    "volume": "0.08",
+                    "volume_raw": 0.0780327047,
+                    "fees": "0.00",
+                    "fees_raw": 3.9000000000000006e-5,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:30:36",
+                    "price": "1.0010",
+                    "price_raw": 1.001000500250125,
+                    "volume": "0.08",
+                    "volume_raw": 0.0840326078,
+                    "fees": "0.00",
+                    "fees_raw": 4.2e-5,
+                    "participating": "A, B, C, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:29:42",
+                    "price": "1.0010",
+                    "price_raw": 1.001000500250125,
+                    "volume": "0.08",
+                    "volume_raw": 0.08202956880000001,
+                    "fees": "0.00",
+                    "fees_raw": 4.1e-5,
+                    "participating": "A, B, C, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:28:24",
+                    "price": "1.0010",
+                    "price_raw": 1.0010005002501252,
+                    "volume": "0.08",
+                    "volume_raw": 0.0760274242,
+                    "fees": "0.00",
+                    "fees_raw": 3.8e-5,
+                    "participating": "A, B, C, D, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:24:12",
+                    "price": "1.0010",
+                    "price_raw": 1.001000500250125,
+                    "volume": "0.07",
+                    "volume_raw": 0.0660303314,
+                    "fees": "0.00",
+                    "fees_raw": 3.3e-5,
+                    "participating": "A, B, C, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:23:36",
+                    "price": "1.0010",
+                    "price_raw": 1.001000500250125,
+                    "volume": "0.06",
+                    "volume_raw": 0.0640280401,
+                    "fees": "0.00",
+                    "fees_raw": 3.2000000000000005e-5,
+                    "participating": "A, B, C, S2, S3",
+                    "skipped": "D",
+                    "out_of_range": "S1",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "00:21:06",
+                    "price": "1.0006",
+                    "price_raw": 1.0006043190545655,
+                    "volume": "15,395.77",
+                    "volume_raw": 15395.772077014399,
+                    "fees": "7.71",
+                    "fees_raw": 7.706988,
+                    "participating": "A, B, C, D, S1, S2, S3",
+                    "skipped": "—",
+                    "out_of_range": "—",
+                    "depleted": "—"
+                }
+            ],
+            "distribution_columns": [
+                {
+                    "data": "price",
+                    "title": "Price"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume_pct",
+                    "title": "% Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees_pct",
+                    "title": "% Fees",
+                    "className": "dt-right"
+                }
+            ],
+            "distribution_data": [
+                {
+                    "price": "1.0018",
+                    "volume": "0.03",
+                    "volume_raw": 0.0320322415,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "volume_pct_raw": 6.751660340655265e-5,
+                    "fees": "0.00",
+                    "fees_raw": 1.6000000000000003e-5,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "fees_pct_raw": 6.740697216433299e-5
+                },
+                {
+                    "price": "1.0017",
+                    "volume": "452.28",
+                    "volume_raw": 452.27514853130003,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 3.8px;\"><\/div><span class=\"pct-bar-value\">0.95%<\/span><\/div>",
+                    "volume_pct_raw": 0.9532920708663949,
+                    "fees": "0.23",
+                    "fees_raw": 0.225918,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 3.8px;\"><\/div><span class=\"pct-bar-value\">0.95%<\/span><\/div>",
+                    "fees_pct_raw": 0.951778021088861
+                },
+                {
+                    "price": "1.0016",
+                    "volume": "0.08",
+                    "volume_raw": 0.0800759,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "volume_pct_raw": 0.0001687815940924012,
+                    "fees": "0.00",
+                    "fees_raw": 3.9999999999999996e-5,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "fees_pct_raw": 0.00016851743041083244
+                },
+                {
+                    "price": "1.0015",
+                    "volume": "0.18",
+                    "volume_raw": 0.18219634359999998,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "volume_pct_raw": 0.00038402801979890147,
+                    "fees": "0.00",
+                    "fees_raw": 9.099999999999999e-5,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "fees_pct_raw": 0.0003833771541846438
+                },
+                {
+                    "price": "1.0014",
+                    "volume": "8,974.60",
+                    "volume_raw": 8974.6022901431,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 75.7px;\"><\/div><span class=\"pct-bar-value\">18.92%<\/span><\/div>",
+                    "volume_pct_raw": 18.91639907732123,
+                    "fees": "4.50",
+                    "fees_raw": 4.495882,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 75.8px;\"><\/div><span class=\"pct-bar-value\">18.94%<\/span><\/div>",
+                    "fees_pct_raw": 18.940862051757854
+                },
+                {
+                    "price": "1.0012",
+                    "volume": "15,913.64",
+                    "volume_raw": 15913.642942977702,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 134.2px;\"><\/div><span class=\"pct-bar-value\">33.54%<\/span><\/div>",
+                    "volume_pct_raw": 33.54230203760517,
+                    "fees": "7.95",
+                    "fees_raw": 7.953536000000001,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 134.0px;\"><\/div><span class=\"pct-bar-value\">33.51%<\/span><\/div>",
+                    "fees_pct_raw": 33.50773623500127
+                },
+                {
+                    "price": "1.0010",
+                    "volume": "0.45",
+                    "volume_raw": 0.45018067700000003,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "volume_pct_raw": 0.0009488774062315426,
+                    "fees": "0.00",
+                    "fees_raw": 0.00022500000000000005,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "fees_pct_raw": 0.0009479105460609326
+                },
+                {
+                    "price": "1.0008",
+                    "volume": "0.03",
+                    "volume_raw": 0.0320006363,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "volume_pct_raw": 6.744998690848508e-5,
+                    "fees": "0.00",
+                    "fees_raw": 1.6e-5,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.0px;\"><\/div><span class=\"pct-bar-value\">0.00%<\/span><\/div>",
+                    "fees_pct_raw": 6.740697216433297e-5
+                },
+                {
+                    "price": "1.0007",
+                    "volume": "104.25",
+                    "volume_raw": 104.2452485016,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 0.9px;\"><\/div><span class=\"pct-bar-value\">0.22%<\/span><\/div>",
+                    "volume_pct_raw": 0.21972502611470549,
+                    "fees": "0.05",
+                    "fees_raw": 0.052122,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 0.9px;\"><\/div><span class=\"pct-bar-value\">0.22%<\/span><\/div>",
+                    "fees_pct_raw": 0.21958663769683523
+                },
+                {
+                    "price": "1.0006",
+                    "volume": "17,991.62",
+                    "volume_raw": 17991.6224936954,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 151.7px;\"><\/div><span class=\"pct-bar-value\">37.92%<\/span><\/div>",
+                    "volume_pct_raw": 37.922205367590145,
+                    "fees": "9.00",
+                    "fees_raw": 9.004961999999999,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 151.7px;\"><\/div><span class=\"pct-bar-value\">37.94%<\/span><\/div>",
+                    "fees_pct_raw": 37.93732642967976
+                },
+                {
+                    "price": "1.0005",
+                    "volume": "2,689.05",
+                    "volume_raw": 2689.0491412332,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 22.7px;\"><\/div><span class=\"pct-bar-value\">5.67%<\/span><\/div>",
+                    "volume_pct_raw": 5.667897590287989,
+                    "fees": "1.34",
+                    "fees_raw": 1.344761,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 22.7px;\"><\/div><span class=\"pct-bar-value\">5.67%<\/span><\/div>",
+                    "fees_pct_raw": 5.6653917059175365
+                },
+                {
+                    "price": "1.0004",
+                    "volume": "1,317.29",
+                    "volume_raw": 1317.2888600507,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 11.1px;\"><\/div><span class=\"pct-bar-value\">2.78%<\/span><\/div>",
+                    "volume_pct_raw": 2.7765421766039364,
+                    "fees": "0.66",
+                    "fees_raw": 0.6588479999999999,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 11.1px;\"><\/div><span class=\"pct-bar-value\">2.78%<\/span><\/div>",
+                    "fees_pct_raw": 2.775684299782903
+                }
+            ]
+        },
+        {
             "title": "Date: 2026-05-08",
             "date": "2026-05-08",
             "summary": [
