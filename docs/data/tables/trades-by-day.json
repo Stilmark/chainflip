@@ -2,6 +2,155 @@
     "title": "Trades by Day",
     "days": [
         {
+            "title": "Date: 2026-05-13",
+            "date": "2026-05-13",
+            "summary": [
+                {
+                    "label": "Date",
+                    "value": "2026-05-13"
+                },
+                {
+                    "label": "Trades",
+                    "value": "2"
+                },
+                {
+                    "label": "Volume",
+                    "value": "1,980.50"
+                },
+                {
+                    "label": "Fees",
+                    "value": "0.99"
+                },
+                {
+                    "label": "Price Range",
+                    "value": "1.0001 – 1.0002"
+                },
+                {
+                    "label": "VWAP",
+                    "value": "1.0001"
+                }
+            ],
+            "hide_summary_title": true,
+            "trade_count": 2,
+            "total_volume": "1,980.50",
+            "total_fees": "0.99",
+            "columns": [
+                {
+                    "data": "timestamp",
+                    "title": "Timestamp"
+                },
+                {
+                    "data": "price",
+                    "title": "Price",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "participating",
+                    "title": "Participating"
+                },
+                {
+                    "data": "skipped",
+                    "title": "Skipped"
+                },
+                {
+                    "data": "out_of_range",
+                    "title": "Out of Range"
+                },
+                {
+                    "data": "depleted",
+                    "title": "Depleted"
+                }
+            ],
+            "data": [
+                {
+                    "timestamp": "16:15:42",
+                    "price": "1.0001",
+                    "price_raw": 1.0000501149047119,
+                    "volume": "990.15",
+                    "volume_raw": 990.1536695636999,
+                    "fees": "0.50",
+                    "fees_raw": 0.495945,
+                    "participating": "A, B, C, D",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2, S3",
+                    "depleted": "—"
+                },
+                {
+                    "timestamp": "13:29:48",
+                    "price": "1.0002",
+                    "price_raw": 1.0001501424667705,
+                    "volume": "990.35",
+                    "volume_raw": 990.3512405866002,
+                    "fees": "0.50",
+                    "fees_raw": 0.496165,
+                    "participating": "A, B, C, D, S3",
+                    "skipped": "—",
+                    "out_of_range": "S1, S2",
+                    "depleted": "—"
+                }
+            ],
+            "distribution_columns": [
+                {
+                    "data": "price",
+                    "title": "Price"
+                },
+                {
+                    "data": "volume",
+                    "title": "Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "volume_pct",
+                    "title": "% Volume",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees",
+                    "title": "Fees",
+                    "className": "dt-right"
+                },
+                {
+                    "data": "fees_pct",
+                    "title": "% Fees",
+                    "className": "dt-right"
+                }
+            ],
+            "distribution_data": [
+                {
+                    "price": "1.0002",
+                    "volume": "990.35",
+                    "volume_raw": 990.3512405866002,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 200.0px;\"><\/div><span class=\"pct-bar-value\">50.00%<\/span><\/div>",
+                    "volume_pct_raw": 50.00498789530609,
+                    "fees": "0.50",
+                    "fees_raw": 0.496165,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 200.0px;\"><\/div><span class=\"pct-bar-value\">50.01%<\/span><\/div>",
+                    "fees_pct_raw": 50.01108748021893
+                },
+                {
+                    "price": "1.0001",
+                    "volume": "990.15",
+                    "volume_raw": 990.1536695636999,
+                    "volume_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill volume\" style=\"width: 200.0px;\"><\/div><span class=\"pct-bar-value\">50.00%<\/span><\/div>",
+                    "volume_pct_raw": 49.99501210469391,
+                    "fees": "0.50",
+                    "fees_raw": 0.495945,
+                    "fees_pct": "<div class=\"pct-bar\"><div class=\"pct-bar-fill fees\" style=\"width: 200.0px;\"><\/div><span class=\"pct-bar-value\">49.99%<\/span><\/div>",
+                    "fees_pct_raw": 49.98891251978107
+                }
+            ]
+        },
+        {
             "title": "Date: 2026-05-11",
             "date": "2026-05-11",
             "summary": [
