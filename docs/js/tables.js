@@ -348,11 +348,10 @@ const LPTables = {
   },
 
   /**
-   * Render Prediction weekday fee distribution chart.
-   * Uses Monday-first weekday order and computes:
-   * - total fees per weekday
-   * - average fees per weekday
-   * - current week weekday fees
+   * Render Prediction distribution charts.
+   * - weekday fee distribution
+   * - weekday trading days (fees > 0)
+   * - fees per day, rolling avg, and capital per day
    */
   async loadPredictionWeekdayDistribution(containerId, jsonFile) {
     const container = document.getElementById(containerId);
@@ -375,6 +374,8 @@ const LPTables = {
         return Number.isNaN(d.getTime()) ? null : d;
       };
 
+      const formatDateUtc = (date) => date.toISOString().slice(0, 10);
+
       const parseFee = (row) => {
         if (typeof row.daily_raw === 'number') return row.daily_raw;
         if (typeof row.daily_income === 'string') {
@@ -385,25 +386,49 @@ const LPTables = {
         return 0;
       };
 
+      const parseCapital = (row) => {
+        if (typeof row.portfolio_value_raw === 'number') return row.portfolio_value_raw;
+        return 0;
+      };
+
+      const formatMoney = (value) => Number(value || 0).toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+
+      const rollingAverage = (values, windowSize) => values.map((_, index) => {
+        const start = Math.max(0, index - windowSize + 1);
+        const slice = values.slice(start, index + 1);
+        if (slice.length === 0) return 0;
+        const total = slice.reduce((sum, value) => sum + value, 0);
+        return total / slice.length;
+      });
+
+      const utcDayMs = 24 * 60 * 60 * 1000;
+
       const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
       const totalFees = [0, 0, 0, 0, 0, 0, 0];
       const counts = [0, 0, 0, 0, 0, 0, 0];
       const currentWeekFees = [0, 0, 0, 0, 0, 0, 0];
+      const tradingDayCounts = [0, 0, 0, 0, 0, 0, 0];
+      const zeroFeeDayCounts = [0, 0, 0, 0, 0, 0, 0];
 
       const datedRows = rows
         .map((row) => ({ row, date: parseDateUtc(row.date) }))
-        .filter((entry) => entry.date !== null);
+        .filter((entry) => entry.date !== null)
+        .sort((a, b) => a.date - b.date);
 
       if (datedRows.length === 0) {
         container.innerHTML = '<p>No data available</p>';
         return;
       }
 
-      const latestDate = datedRows.reduce((latest, entry) => {
-        if (!latest || entry.date > latest) return entry.date;
-        return latest;
-      }, null);
+      const rowByDate = new Map(
+        datedRows.map(({ row, date }) => [formatDateUtc(date), { row, date }])
+      );
 
+      const firstDate = datedRows[0].date;
+      const latestDate = datedRows[datedRows.length - 1].date;
       const latestDay = latestDate.getUTCDay();
       const daysSinceMonday = (latestDay + 6) % 7;
       const weekStart = new Date(Date.UTC(
@@ -413,30 +438,79 @@ const LPTables = {
       ));
       const weekEnd = new Date(weekStart.getTime() + (7 * 24 * 60 * 60 * 1000));
 
-      datedRows.forEach(({ row, date }) => {
-        const fee = parseFee(row);
+      const timelineEntries = [];
+      let lastCapital = parseCapital(datedRows[0].row);
+
+      for (let time = firstDate.getTime(); time <= latestDate.getTime(); time += utcDayMs) {
+        const date = new Date(time);
+        const dateKey = formatDateUtc(date);
+        const existingEntry = rowByDate.get(dateKey);
+        const fee = existingEntry ? parseFee(existingEntry.row) : 0;
+
+        if (existingEntry) {
+          lastCapital = parseCapital(existingEntry.row);
+        }
+
+        timelineEntries.push({
+          date,
+          dateKey,
+          fee,
+          capital: lastCapital,
+        });
+      }
+
+      const labels = [];
+      const feesByDay = [];
+      const capitalByDay = [];
+
+      timelineEntries.forEach(({ date, dateKey, fee, capital }) => {
         const weekdayIndex = (date.getUTCDay() + 6) % 7;
 
         totalFees[weekdayIndex] += fee;
         counts[weekdayIndex] += 1;
 
+        if (fee > 0) {
+          tradingDayCounts[weekdayIndex] += 1;
+        } else if (fee === 0) {
+          zeroFeeDayCounts[weekdayIndex] += 1;
+        }
+
         if (date >= weekStart && date < weekEnd) {
           currentWeekFees[weekdayIndex] += fee;
         }
+
+        labels.push(dateKey);
+        feesByDay.push(fee);
+        capitalByDay.push(capital);
       });
 
       const avgFees = totalFees.map((total, idx) => (counts[idx] > 0 ? total / counts[idx] : 0));
+      const rollingFeeAvg = rollingAverage(feesByDay, 7);
 
-      const chartId = `${containerId}-chart`;
+      const feeDistributionChartId = `${containerId}-fee-distribution-chart`;
+      const weekdayChartId = `${containerId}-weekday-chart`;
+      const feesChartId = `${containerId}-fees-chart`;
       container.innerHTML = '<h3>Weekday Fee Distribution</h3>' +
-        '<div class="prediction-chart-wrap"><canvas id="' + chartId + '"></canvas></div>';
+        '<div class="prediction-chart-wrap"><canvas id="' + feeDistributionChartId + '"></canvas></div>' +
+        '<h3>Weekday Trading Days</h3>' +
+        '<div class="prediction-chart-wrap"><canvas id="' + weekdayChartId + '"></canvas></div>' +
+        '<h3>Fees Per Day</h3>' +
+        '<div class="prediction-chart-wrap"><canvas id="' + feesChartId + '"></canvas></div>';
 
-      if (this.charts[chartId]) {
-        this.charts[chartId].destroy();
+      if (this.charts[feeDistributionChartId]) {
+        this.charts[feeDistributionChartId].destroy();
       }
 
-      const ctx = document.getElementById(chartId);
-      this.charts[chartId] = new Chart(ctx, {
+      if (this.charts[weekdayChartId]) {
+        this.charts[weekdayChartId].destroy();
+      }
+
+      if (this.charts[feesChartId]) {
+        this.charts[feesChartId].destroy();
+      }
+
+      const feeDistributionCtx = document.getElementById(feeDistributionChartId);
+      this.charts[feeDistributionChartId] = new Chart(feeDistributionCtx, {
         type: 'bar',
         data: {
           labels: weekdays,
@@ -479,6 +553,172 @@ const LPTables = {
               ticks: {
                 callback: function(value) {
                   return Number(value).toFixed(0);
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const weekdayCtx = document.getElementById(weekdayChartId);
+      this.charts[weekdayChartId] = new Chart(weekdayCtx, {
+        type: 'bar',
+        data: {
+          labels: weekdays,
+          datasets: [
+            {
+              label: 'Trading days with fees > 0',
+              data: tradingDayCounts,
+              backgroundColor: 'rgba(34, 197, 94, 0.8)',
+              borderColor: 'rgba(22, 163, 74, 1)',
+              borderWidth: 1,
+              borderRadius: 6,
+              borderSkipped: false,
+              categoryPercentage: 0.58,
+              barPercentage: 0.82,
+              maxBarThickness: 24
+            },
+            {
+              label: 'Trading days with fees = 0',
+              data: zeroFeeDayCounts,
+              backgroundColor: 'rgba(239, 68, 68, 0.8)',
+              borderColor: 'rgba(220, 38, 38, 1)',
+              borderWidth: 1,
+              borderRadius: 6,
+              borderSkipped: false,
+              categoryPercentage: 0.58,
+              barPercentage: 0.82,
+              maxBarThickness: 24
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 12,
+              bottom: 10
+            }
+          },
+          plugins: {
+            legend: {
+              position: 'top'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: ${Number(context.raw || 0).toFixed(0)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grace: '10%',
+              ticks: {
+                precision: 0
+              }
+            }
+          }
+        }
+      });
+
+      const feesCtx = document.getElementById(feesChartId);
+      this.charts[feesChartId] = new Chart(feesCtx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Fees per day',
+              data: feesByDay,
+              yAxisID: 'yFees',
+              borderColor: 'rgba(37, 99, 235, 1)',
+              backgroundColor: 'rgba(37, 99, 235, 0.18)',
+              borderWidth: 2,
+              pointRadius: 2,
+              tension: 0.25,
+              fill: false
+            },
+            {
+              label: 'Rolling fee avg (7d)',
+              data: rollingFeeAvg,
+              yAxisID: 'yFees',
+              borderColor: 'rgba(249, 115, 22, 1)',
+              backgroundColor: 'rgba(249, 115, 22, 0)',
+              borderWidth: 2,
+              borderDash: [6, 6],
+              pointRadius: 0,
+              tension: 0.25,
+              fill: false
+            },
+            {
+              label: 'Capital per day',
+              data: capitalByDay,
+              yAxisID: 'yCapital',
+              borderColor: 'rgba(34, 197, 94, 1)',
+              backgroundColor: 'rgba(34, 197, 94, 0)',
+              borderWidth: 2,
+              borderDash: [8, 6],
+              pointRadius: 0,
+              tension: 0.2,
+              fill: false
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'top'
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const value = Number(context.raw || 0);
+                  return `${context.dataset.label}: ${formatMoney(value)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                maxRotation: 45,
+                minRotation: 45
+              }
+            },
+            yFees: {
+              type: 'linear',
+              position: 'left',
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Fees'
+              },
+              ticks: {
+                callback: function(value) {
+                  return formatMoney(value);
+                }
+              }
+            },
+            yCapital: {
+              type: 'linear',
+              position: 'right',
+              beginAtZero: true,
+              grid: {
+                drawOnChartArea: false
+              },
+              title: {
+                display: true,
+                text: 'Capital'
+              },
+              ticks: {
+                callback: function(value) {
+                  return formatMoney(value);
                 }
               }
             }

@@ -525,6 +525,7 @@ final class TableDataBuilder
                 'date' => $day['date'],
                 'daily_income' => $this->money($totalFees),
                 'daily_raw' => $totalFees,
+                'portfolio_value_raw' => $pv,
                 'weekly_income' => $this->money($wk),
                 'monthly_income' => $this->money($mo),
                 'yearly_income' => $this->money($yr),
