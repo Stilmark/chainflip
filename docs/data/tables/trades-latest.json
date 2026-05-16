@@ -39,6 +39,19 @@
     ],
     "data": [
         {
+            "timestamp": "2026-05-16 12:23:54",
+            "price": "0.9996",
+            "price_raw": 0.9995503066700291,
+            "volume": "991.00",
+            "volume_raw": 990.9981738838001,
+            "fees": "0.50",
+            "fees_raw": 0.496071,
+            "participating": "A, B, C, D",
+            "skipped": "—",
+            "out_of_range": "S1, S2, S3",
+            "depleted": "—"
+        },
+        {
             "timestamp": "2026-05-16 09:54:48",
             "price": "0.9998",
             "price_raw": 0.9998001845979704,
@@ -673,19 +686,6 @@
             "participating": "A, B, C, D, S1, S2, S3",
             "skipped": "—",
             "out_of_range": "—",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-05-10 06:48:54",
-            "price": "1.0013",
-            "price_raw": 1.0013188412388012,
-            "volume": "0.10",
-            "volume_raw": 0.0960661622,
-            "fees": "0.00",
-            "fees_raw": 4.8e-5,
-            "participating": "A, B, C, S3",
-            "skipped": "D",
-            "out_of_range": "S1, S2",
             "depleted": "—"
         }
     ]
