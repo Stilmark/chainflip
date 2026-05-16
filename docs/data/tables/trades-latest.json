@@ -39,6 +39,32 @@
     ],
     "data": [
         {
+            "timestamp": "2026-05-16 14:17:24",
+            "price": "0.9993",
+            "price_raw": 0.9993004361462169,
+            "volume": "1,981.76",
+            "volume_raw": 1981.7635956311,
+            "fees": "0.99",
+            "fees_raw": 0.992262,
+            "participating": "A, B, C, D",
+            "skipped": "—",
+            "out_of_range": "S1, S2, S3",
+            "depleted": "—"
+        },
+        {
+            "timestamp": "2026-05-16 13:45:24",
+            "price": "0.9995",
+            "price_raw": 0.9994503239643775,
+            "volume": "990.96",
+            "volume_raw": 990.9552580679,
+            "fees": "0.50",
+            "fees_raw": 0.496095,
+            "participating": "A, B, C, D",
+            "skipped": "—",
+            "out_of_range": "S1, S2, S3",
+            "depleted": "—"
+        },
+        {
             "timestamp": "2026-05-16 12:23:54",
             "price": "0.9996",
             "price_raw": 0.9995503066700291,
@@ -660,32 +686,6 @@
             "participating": "A, B, C, D, S2, S3",
             "skipped": "—",
             "out_of_range": "S1",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-05-10 07:31:48",
-            "price": "1.0007",
-            "price_raw": 1.0007030699815926,
-            "volume": "5,942.55",
-            "volume_raw": 5942.5459090599,
-            "fees": "2.97",
-            "fees_raw": 2.971319,
-            "participating": "A, B, C, D, S1, S2, S3",
-            "skipped": "—",
-            "out_of_range": "—",
-            "depleted": "—"
-        },
-        {
-            "timestamp": "2026-05-10 07:03:54",
-            "price": "1.0011",
-            "price_raw": 1.001078370036381,
-            "volume": "8,816.61",
-            "volume_raw": 8816.614302078899,
-            "fees": "4.41",
-            "fees_raw": 4.406458,
-            "participating": "A, B, C, D, S1, S2, S3",
-            "skipped": "—",
-            "out_of_range": "—",
             "depleted": "—"
         }
     ]

@@ -1,7 +1,7 @@
 {
     "version": 2,
     "pair": "USDT/USDC",
-    "updated_at": "2026-05-16T12:31:12+00:00",
+    "updated_at": "2026-05-16T14:24:15+00:00",
     "trades": [
         {
             "tr_id": "2026-04-12T13:09:42.001Z|USDT/USDC",
@@ -83772,6 +83772,158 @@
                     "range_upper": 1.0021021013305984,
                     "raw_range": "0.9988007796361366 - 1.0021021013305984",
                     "matched_rung": "C"
+                }
+            ]
+        },
+        {
+            "tr_id": "2026-05-16T13:45:24.000Z|USDT/USDC",
+            "timestamp": "2026-05-16T13:45:24.000Z",
+            "date": "2026-05-16",
+            "pair": "USDT/USDC",
+            "fills": [
+                {
+                    "fill_id": "2198006bc3d030da27d4024777a98281b9d93857",
+                    "timestamp": "2026-05-16T13:45:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 552.193921,
+                    "filled_value_usd": 552.0860939226,
+                    "received_asset": "USDT",
+                    "received_amount": 552.497613,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.276387,
+                    "range_lower": 0.9979023082300623,
+                    "range_upper": 1.002904063656376,
+                    "raw_range": "0.9979023082300623 - 1.002904063656376",
+                    "matched_rung": "A"
+                },
+                {
+                    "fill_id": "744212f448e225010cf389107786f40cbcd04b8f",
+                    "timestamp": "2026-05-16T13:45:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 280.13372,
+                    "filled_value_usd": 280.079018202,
+                    "received_asset": "USDT",
+                    "received_amount": 280.287786,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.140214,
+                    "range_lower": 0.997403506726374,
+                    "range_upper": 1.00340561598864,
+                    "raw_range": "0.997403506726374 - 1.00340561598864",
+                    "matched_rung": "B"
+                },
+                {
+                    "fill_id": "b044874bc3cc76872db5761ef999c9f289a72baa",
+                    "timestamp": "2026-05-16T13:45:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 145.475179,
+                    "filled_value_usd": 145.4467720169,
+                    "received_asset": "USDT",
+                    "received_amount": 145.555186,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.072814,
+                    "range_lower": 0.9988007796361366,
+                    "range_upper": 1.0021021013305984,
+                    "raw_range": "0.9988007796361366 - 1.0021021013305984",
+                    "matched_rung": "C"
+                },
+                {
+                    "fill_id": "e56ee92a2aceeeb141575509ed217a8777de8a32",
+                    "timestamp": "2026-05-16T13:45:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 13.34598,
+                    "filled_value_usd": 13.3433739264,
+                    "received_asset": "USDT",
+                    "received_amount": 13.35332,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.00668,
+                    "range_lower": 0.996406651572219,
+                    "range_upper": 1.0054143348356561,
+                    "raw_range": "0.996406651572219 - 1.0054143348356561",
+                    "matched_rung": "D"
+                }
+            ]
+        },
+        {
+            "tr_id": "2026-05-16T14:17:24.000Z|USDT/USDC",
+            "timestamp": "2026-05-16T14:17:24.000Z",
+            "date": "2026-05-16",
+            "pair": "USDT/USDC",
+            "fills": [
+                {
+                    "fill_id": "0e7baab6984724c01a94e48ead1ea405014fe04e",
+                    "timestamp": "2026-05-16T14:17:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 1104.302111,
+                    "filled_value_usd": 1104.0901096768,
+                    "received_asset": "USDT",
+                    "received_amount": 1105.075186,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.552814,
+                    "range_lower": 0.9979023082300623,
+                    "range_upper": 1.002904063656376,
+                    "raw_range": "0.9979023082300623 - 1.002904063656376",
+                    "matched_rung": "A"
+                },
+                {
+                    "fill_id": "32dee87160566276f4fdf0b42d772e95414de379",
+                    "timestamp": "2026-05-16T14:17:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 26.687957,
+                    "filled_value_usd": 26.6828335088,
+                    "received_asset": "USDT",
+                    "received_amount": 26.70664,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.01336,
+                    "range_lower": 0.996406651572219,
+                    "range_upper": 1.0054143348356561,
+                    "raw_range": "0.996406651572219 - 1.0054143348356561",
+                    "matched_rung": "D"
+                },
+                {
+                    "fill_id": "bab7b679204a5798aee8f98e1869fc0a4f04b408",
+                    "timestamp": "2026-05-16T14:17:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 290.930692,
+                    "filled_value_usd": 290.8748398097,
+                    "received_asset": "USDT",
+                    "received_amount": 291.13436,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.14564,
+                    "range_lower": 0.9988007796361366,
+                    "range_upper": 1.0021021013305984,
+                    "raw_range": "0.9988007796361366 - 1.0021021013305984",
+                    "matched_rung": "C"
+                },
+                {
+                    "fill_id": "d0e477dde6ea766a2685be9f737078d6b5765f2b",
+                    "timestamp": "2026-05-16T14:17:24.000Z",
+                    "date": "2026-05-16",
+                    "type": "RANGE",
+                    "filled_asset": "USDC",
+                    "filled_amount": 560.223363,
+                    "filled_value_usd": 560.1158126358,
+                    "received_asset": "USDT",
+                    "received_amount": 560.615552,
+                    "fee_asset": "USDT",
+                    "fee_amount": 0.280448,
+                    "range_lower": 0.997403506726374,
+                    "range_upper": 1.00340561598864,
+                    "raw_range": "0.997403506726374 - 1.00340561598864",
+                    "matched_rung": "B"
                 }
             ]
         }
