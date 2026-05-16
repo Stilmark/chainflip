@@ -3,7 +3,7 @@
     "summary": [
         {
             "label": "Date",
-            "value": "2026-05-13"
+            "value": "2026-05-16"
         },
         {
             "label": "Portfolio Value",
@@ -11,11 +11,11 @@
         },
         {
             "label": "Total Fees",
-            "value": "0.99"
+            "value": "1.98"
         },
         {
             "label": "TRs",
-            "value": "2"
+            "value": "1"
         }
     ],
     "columns": [
@@ -79,11 +79,11 @@
             "name": "Core",
             "value": "27,600.00",
             "value_raw": 27600,
-            "fees": "0.55",
-            "fees_raw": 0.552594,
-            "fee_share": "55.70%",
-            "eligible_trs": 2,
-            "trades": 2,
+            "fees": "1.11",
+            "fees_raw": 1.105353,
+            "fee_share": "55.71%",
+            "eligible_trs": 1,
+            "trades": 1,
             "skipped": 0,
             "out_of_range": 0,
             "depleted": 0,
@@ -94,11 +94,11 @@
             "name": "Buffer",
             "value": "16,800.00",
             "value_raw": 16800,
-            "fees": "0.28",
-            "fees_raw": 0.28033600000000003,
+            "fees": "0.56",
+            "fees_raw": 0.560756,
             "fee_share": "28.26%",
-            "eligible_trs": 2,
-            "trades": 2,
+            "eligible_trs": 1,
+            "trades": 1,
             "skipped": 0,
             "out_of_range": 0,
             "depleted": 0,
@@ -109,11 +109,11 @@
             "name": "Scalp",
             "value": "4,800.00",
             "value_raw": 4800,
-            "fees": "0.15",
-            "fees_raw": 0.14558100000000002,
-            "fee_share": "14.67%",
-            "eligible_trs": 2,
-            "trades": 2,
+            "fees": "0.29",
+            "fees_raw": 0.291205,
+            "fee_share": "14.68%",
+            "eligible_trs": 1,
+            "trades": 1,
             "skipped": 0,
             "out_of_range": 0,
             "depleted": 0,
@@ -124,11 +124,11 @@
             "name": "Catch-all",
             "value": "1,200.00",
             "value_raw": 1200,
-            "fees": "0.01",
-            "fees_raw": 0.013354999999999999,
+            "fees": "0.03",
+            "fees_raw": 0.026713,
             "fee_share": "1.35%",
-            "eligible_trs": 2,
-            "trades": 2,
+            "eligible_trs": 1,
+            "trades": 1,
             "skipped": 0,
             "out_of_range": 0,
             "depleted": 0,
@@ -142,10 +142,10 @@
             "fees": "0.00",
             "fees_raw": 0,
             "fee_share": "0.00%",
-            "eligible_trs": 2,
+            "eligible_trs": 1,
             "trades": 0,
             "skipped": 0,
-            "out_of_range": 2,
+            "out_of_range": 1,
             "depleted": 0,
             "utilization": "0.00%"
         },
@@ -157,10 +157,10 @@
             "fees": "0.00",
             "fees_raw": 0,
             "fee_share": "0.00%",
-            "eligible_trs": 2,
+            "eligible_trs": 1,
             "trades": 0,
             "skipped": 0,
-            "out_of_range": 2,
+            "out_of_range": 1,
             "depleted": 0,
             "utilization": "0.00%"
         },
@@ -170,28 +170,28 @@
             "value": "3,900.00",
             "value_raw": 3900,
             "fees": "0.00",
-            "fees_raw": 0.000244,
-            "fee_share": "0.02%",
-            "eligible_trs": 2,
-            "trades": 1,
+            "fees_raw": 0,
+            "fee_share": "0.00%",
+            "eligible_trs": 1,
+            "trades": 0,
             "skipped": 0,
             "out_of_range": 1,
             "depleted": 0,
-            "utilization": "50.00%"
+            "utilization": "0.00%"
         }
     ],
     "footer": {
         "rung": "Total",
         "name": "",
         "value": "61,088.05",
-        "fees": "0.99",
+        "fees": "1.98",
         "fee_share": "100.00%",
-        "eligible_trs": 14,
-        "trades": 9,
+        "eligible_trs": 7,
+        "trades": 4,
         "skipped": 0,
-        "out_of_range": 5,
+        "out_of_range": 3,
         "depleted": 0,
-        "utilization": "64.29%"
+        "utilization": "57.14%"
     },
     "hide_summary_title": true
 }
